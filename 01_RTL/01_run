@@ -1,0 +1,13 @@
+#!/bin/bash
+# use "$sed -i 's/\r//g' 01_run" if it has error
+
+if [ "$1" == "enc" ]; then
+    TB="../00_TESTBED/testbench/FrFT_tb_imag_enc.v"
+elif [ "$1" == "dec" ]; then
+    TB="../00_TESTBED/testbench/FrFT_tb_imag_dec.v"
+elif [ "$1" == "crypto" ]; then
+    TB="../00_TESTBED/testbench/FrFT_tb_crypto.v"
+else
+    TB="../00_TESTBED/testbench/FrFT_tb.v"
+fi
+vcs $TB -f rtl.f -full64 -R +v2k -debug_access+all | tee vcs_sim.log
