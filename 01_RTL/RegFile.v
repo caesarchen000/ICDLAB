@@ -41,6 +41,7 @@ module RegFile #(
     end
 
     always @(posedge clk) begin
+        // dual port
         if(wen1) reg_array[write_addr_1] <= write_data_1;
         if(wen2) reg_array[write_addr_2] <= write_data_2;
     end
