@@ -3,7 +3,7 @@ import math
 from datetime import datetime
 
 # ==========================================
-# 參數設定
+# Parameter Config
 # ==========================================
 FILENAME = "LUT_chirp.v"
 AUTHOR = "Guan-Yi Tsen"
