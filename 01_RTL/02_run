@@ -1,0 +1,7 @@
+#!/bin/bash
+# use "$sed -i 's/\r//g' 01_run" if it has error
+# test LUT
+
+TB="../00_TESTBED/testbench/tb_Chirp_Generator.v"
+
+vcs $TB -f lut_rtl.f -full64 -R +v2k -debug_access+all | tee vcs_sim.log
