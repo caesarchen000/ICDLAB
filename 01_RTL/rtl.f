@@ -3,3 +3,13 @@
 ../01_RTL/LUT_chirp.v
 ../01_RTL/Modular_Mul.v
 ../01_RTL/RegFile.v
+../01_RTL/Chirp_Generator.v
+../01_RTL/LUT_chirp_new.v
+../01_RTL/MUL1.v
+../01_RTL/MUL2.v
+../01_RTL/MUL3.v
+../01_RTL/FNT_butterfly.v
+../01_RTL/IFNT_butterfly.v
+../01_RTL/DEC.v
+../01_RTL/FrFT_pipeline_2path.v
+../01_RTL/FrFT_stream_2path.v

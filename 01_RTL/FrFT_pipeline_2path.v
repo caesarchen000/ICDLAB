@@ -40,7 +40,7 @@ module FrFT_pipeline_2path #(
 
     // readback final 32-bit output words
     input      [ADDRW-1:0]   out_addr,
-    output reg [31:0]        out_data
+    output      [31:0]       out_data
 );
     localparam S_IDLE      = 4'd0;
     localparam S_MUL1      = 4'd1;
@@ -62,6 +62,7 @@ module FrFT_pipeline_2path #(
     reg [32:0] p1_buf [0:N-1];
     reg [32:0] p2_buf [0:N-1];
     reg [31:0] out_mem [0:N-1];
+    assign out_data = out_mem[out_addr];
 
     // ---- Stage module wires ----
     wire [32:0] mul1_p1, mul1_p2;
@@ -193,7 +194,6 @@ module FrFT_pipeline_2path #(
             state_r       <= S_IDLE;
             idx_r         <= 6'd0;
             done          <= 1'b0;
-            out_data      <= 32'd0;
             fnt_we_r      <= 1'b0;
             fnt_addr_r    <= 5'd0;
             fnt1_din_r    <= 33'd0;
@@ -222,9 +222,6 @@ module FrFT_pipeline_2path #(
             // preload samples allowed in IDLE
             if (state_r == S_IDLE && in_we)
                 sample_mem[in_addr] <= in_data;
-
-            // always-available readback
-            out_data <= out_mem[out_addr];
 
             case (state_r)
                 S_IDLE: begin
@@ -262,7 +259,9 @@ module FrFT_pipeline_2path #(
                 end
 
                 S_FNT_READ: begin
-                    if (fnt1_done && fnt2_done) begin
+                    // `done` is a one-cycle pulse from each engine, so gate
+                    // readback by stable !busy condition and drain all 32 words.
+                    if (!fnt1_busy && !fnt2_busy) begin
                         fnt_out_addr_r <= idx_r[4:0];
                         p1_buf[idx_r[4:0]] <= fnt1_dout;
                         p2_buf[idx_r[4:0]] <= fnt2_dout;
@@ -305,7 +304,9 @@ module FrFT_pipeline_2path #(
                 end
 
                 S_IFNT_READ: begin
-                    if (ifnt1_done && ifnt2_done) begin
+                    // `done` is a one-cycle pulse from each engine, so gate
+                    // readback by stable !busy condition and drain all 32 words.
+                    if (!ifnt1_busy && !ifnt2_busy) begin
                         ifnt_out_addr_r <= idx_r[4:0];
                         p1_buf[idx_r[4:0]] <= ifnt1_dout;
                         p2_buf[idx_r[4:0]] <= ifnt2_dout;

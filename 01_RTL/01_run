@@ -7,6 +7,8 @@ elif [ "$1" == "dec" ]; then
     TB="../00_TESTBED/testbench/FrFT_tb_imag_dec.v"
 elif [ "$1" == "crypto" ]; then
     TB="../00_TESTBED/testbench/FrFT_tb_crypto.v"
+elif [ "$1" == "2path" ]; then
+    TB="../00_TESTBED/testbench/FrFT_tb_2path_check.v"
 else
     TB="../00_TESTBED/testbench/FrFT_tb.v"
 fi

@@ -151,7 +151,6 @@ module FrFT_stream_2path #(
                         endcase
                     end else begin
                         // payload bytes from pipeline readback
-                        pipe_out_addr_r <= out_byte_r[6:2] - 5'd1;
                         case (out_byte_r[1:0])
                             2'd0: o_data <= pipe_out_data[31:24];
                             2'd1: o_data <= pipe_out_data[23:16];
@@ -161,6 +160,11 @@ module FrFT_stream_2path #(
                     end
 
                     if (o_ready) begin
+                        // Advance read address only after emitting byte3 of a payload word.
+                        // This keeps all 4 bytes sourced from the same 32-bit word.
+                        if (out_byte_r >= 8'd7 && out_byte_r[1:0] == 2'd3)
+                            pipe_out_addr_r <= pipe_out_addr_r + 1'b1;
+
                         if (out_byte_r == 8'd131) begin
                             state_r <= S_IDLE;
                         end

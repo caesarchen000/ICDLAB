@@ -23,9 +23,9 @@
 *       o_path1_flag=1, o_path2_flag=0
 *
 * Notes:
-*   - This module assumes `lut_mul1` exists in another file.
-*   - `lut_mul1` interface assumed here:
-*       lut_mul1(path_flag, key_alpha, idx, c_re, c_im)
+*   - Uses `Chirp_Generator` from new LUT flow.
+*   - For MUL1 stage: sel=0.
+*   - path1 uses conj=0, path2 uses conj=1.
 * Review History:
 *   2026.04.26  Yin-Liang Chen
 *********************************************************************/
@@ -50,31 +50,37 @@ module MUL1 #(
     wire signed [7:0] xhat = i_data[7:0];
 
     // ----------------------------------------------------------------
-    // LUT outputs for each path (provided by external module)
+    // Chirp outputs for each path (from Chirp_Generator)
     // ----------------------------------------------------------------
-    wire signed [15:0] c1_re, c1_im; // path1: c + j*chat
-    wire signed [15:0] c2_re, c2_im; // path2: c - j*chat (from LUT by flag)
+    wire [32:0] c1_raw, c2_raw;
+    // Keep stage interface integer-complex by slicing imag/real fields.
+    wire signed [15:0] c1_im = c1_raw[31:16];
+    wire signed [15:0] c1_re = c1_raw[15:0];
+    wire signed [15:0] c2_im = c2_raw[31:16];
+    wire signed [15:0] c2_re = c2_raw[15:0];
 
-    lut_mul1 #(
+    Chirp_Generator #(
+        .REG_ADDRW(IDX_WIDTH),
         .KEY_WIDTH(KEY_WIDTH),
-        .IDX_WIDTH(IDX_WIDTH)
-    ) lut_p1 (
-        .path_flag(1'b1),
-        .key_alpha(key_alpha),
+        .DATA_WIDTH(33)
+    ) chirp_p1 (
+        .sel(1'b0),
+        .conj(1'b0),
         .idx(lut_idx),
-        .c_re(c1_re),
-        .c_im(c1_im)
+        .key(key_alpha),
+        .out(c1_raw)
     );
 
-    lut_mul1 #(
+    Chirp_Generator #(
+        .REG_ADDRW(IDX_WIDTH),
         .KEY_WIDTH(KEY_WIDTH),
-        .IDX_WIDTH(IDX_WIDTH)
-    ) lut_p2 (
-        .path_flag(1'b0),
-        .key_alpha(key_alpha),
+        .DATA_WIDTH(33)
+    ) chirp_p2 (
+        .sel(1'b0),
+        .conj(1'b1),
         .idx(lut_idx),
-        .c_re(c2_re),
-        .c_im(c2_im)
+        .key(key_alpha),
+        .out(c2_raw)
     );
 
     // ----------------------------------------------------------------

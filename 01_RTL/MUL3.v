@@ -16,9 +16,9 @@
 *   o_path*_data[32:0] = {path_flag, imag16, real16}
 *
 * Notes:
-*   - `lut_mul3` is assumed to exist in another file.
-*   - `lut_mul3` interface assumed:
-*       lut_mul3(path_flag, key_alpha, idx, ct_re, ct_im)
+*   - Uses `Chirp_Generator` from new LUT flow.
+*   - For MUL3 stage: sel=0.
+*   - path1 uses conj=0, path2 uses conj=1.
 * Review History:
 *   2026.04.26  Yin-Liang Chen
 *********************************************************************/
@@ -44,33 +44,38 @@ module MUL3 #(
     wire signed [15:0] p2_re = in_path2_data[15:0];
 
     // ------------------------------------------------------------
-    // LUT outputs for both paths
+    // Chirp outputs for both paths
     // path1 -> (Ct + j*Ct_hat)
     // path2 -> (Ct - j*Ct_hat)
     // ------------------------------------------------------------
-    wire signed [15:0] ct1_re, ct1_im;
-    wire signed [15:0] ct2_re, ct2_im;
+    wire [32:0] ct1_raw, ct2_raw;
+    wire signed [15:0] ct1_im = ct1_raw[31:16];
+    wire signed [15:0] ct1_re = ct1_raw[15:0];
+    wire signed [15:0] ct2_im = ct2_raw[31:16];
+    wire signed [15:0] ct2_re = ct2_raw[15:0];
 
-    lut_mul3 #(
+    Chirp_Generator #(
+        .REG_ADDRW(IDX_WIDTH),
         .KEY_WIDTH(KEY_WIDTH),
-        .IDX_WIDTH(IDX_WIDTH)
-    ) lut_path1 (
-        .path_flag(1'b1),
-        .key_alpha(key_alpha),
+        .DATA_WIDTH(33)
+    ) chirp_path1 (
+        .sel(1'b0),
+        .conj(1'b0),
         .idx(lut_idx),
-        .ct_re(ct1_re),
-        .ct_im(ct1_im)
+        .key(key_alpha),
+        .out(ct1_raw)
     );
 
-    lut_mul3 #(
+    Chirp_Generator #(
+        .REG_ADDRW(IDX_WIDTH),
         .KEY_WIDTH(KEY_WIDTH),
-        .IDX_WIDTH(IDX_WIDTH)
-    ) lut_path2 (
-        .path_flag(1'b0),
-        .key_alpha(key_alpha),
+        .DATA_WIDTH(33)
+    ) chirp_path2 (
+        .sel(1'b0),
+        .conj(1'b1),
         .idx(lut_idx),
-        .ct_re(ct2_re),
-        .ct_im(ct2_im)
+        .key(key_alpha),
+        .out(ct2_raw)
     );
 
     // ------------------------------------------------------------
