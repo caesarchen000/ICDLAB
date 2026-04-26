@@ -1,5 +1,7 @@
 /********************************************************************
 * Filename: MUL1.v
+* Authors:
+*   Yin-Liang Chen
 * Description:
 *   MUL1 front-stage for 2-path flow.
 *   All arithmetic is signed integer arithmetic (no floating-point).
@@ -24,6 +26,8 @@
 *   - This module assumes `lut_mul1` exists in another file.
 *   - `lut_mul1` interface assumed here:
 *       lut_mul1(path_flag, key_alpha, idx, c_re, c_im)
+* Review History:
+*   2026.04.26  Yin-Liang Chen
 *********************************************************************/
 
 module MUL1 #(
@@ -103,10 +107,10 @@ module MUL1 #(
 
     // ----------------------------------------------------------------
     // Integer-only packed output (no modular mapping in MUL1)
-    // [32] path bit, [31:16] real16, [15:0] imag16
+    // [32] path bit, [31:16] imag16, [15:0] real16
     // ----------------------------------------------------------------
-    assign o_path1_data = {1'b1, p1_re[15:0], p1_im[15:0]};
-    assign o_path2_data = {1'b0, p2_re[15:0], p2_im[15:0]};
+    assign o_path1_data = {1'b1, p1_im[15:0], p1_re[15:0]};
+    assign o_path2_data = {1'b0, p2_im[15:0], p2_re[15:0]};
 
     // ----------------------------------------------------------------
     // Helper functions
