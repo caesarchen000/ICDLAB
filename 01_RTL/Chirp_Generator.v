@@ -40,9 +40,11 @@ module Chirp_Generator #(
     reg  [LUT_DATA_WIDTH-1:0] out_value;
     reg  [3:0] lut_index;
     reg  [6:0] lut_key0, lut_key1;
+    wire [LUT_VALUE_WIDTH-1:0] neg_img;
     
     assign out = out_value;
     assign lut_output = sel ? lut_output1 : lut_output0;
+    assign neg_img = (~lut_output[LUT_DATA_WIDTH-1:LUT_VALUE_WIDTH])+1'b1;
 
     wire key_sign = key[KEY_WIDTH-1];
     //wire neg_img  = key_sign ^ conj;
@@ -84,7 +86,7 @@ module Chirp_Generator #(
             lut_index = (idx > 5'd16) ? (idx - 5'd17) : (5'd15 - idx);
             
             // 處理最終數值折減
-            out_value = lut_output;
+            out_value = key_sign? {neg_img, lut_output[LUT_VALUE_WIDTH-1:0]} : lut_output;
             /*
             if (val == 33'd0 || val == 33'h1_0000_0001) begin
                 out_value = 33'h1_0000_0000;
