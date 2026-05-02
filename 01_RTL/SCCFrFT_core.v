@@ -16,7 +16,7 @@
 * Note:
 *
 * Review History:
-*     2026.04.28    Guan-Yi Tsen
+*     2026.05.02    Guan-Yi Tsen
 *********************************************************************/
 
 module FrFT_core #(
@@ -34,10 +34,11 @@ module FrFT_core #(
     input                           clk,
     input                           rst_n, // asynchronous reset
 
-    // input control 
+    // input & output control 
     input                           i_mode, // mode = 0 : path1, mode = 1 : path 2
     input                           i_valid,
     input                           o_ready,
+    output reg                      i_data_ready,
     output reg                      i_chirp3_ready,
     output reg                      o_mul3_valid,
 
@@ -48,7 +49,7 @@ module FrFT_core #(
     output reg     [DATA_WIDTH-1:0] o_data
 );
 
-    // state parameter
+    // state parameter for main FSM
     localparam S_IDLE = 4'd00; // wait for i_ready to load data
     localparam S_LDCP = 4'd01; // load chirp2 to chirp reg file
     localparam S_CFNT = 4'd02; // Apply FNT for chirp 2
@@ -59,11 +60,15 @@ module FrFT_core #(
     localparam S_IFNT = 4'd07; // Inverse FNT
     localparam S_MUL3 = 4'd08; // result * chirp 3
     localparam S_DONE = 4'd09; // assert o_valid, wait for o_ready to output preamble
-    localparam S_DOUT = 4'd10; // start output data 64 cycles
 
-    // control & state signal declaration
+    // state parameter for output FSM
+    localparam OUT_IDLE = 1'b0;
+    localparam OUT_BUSY = 1'b1; // start output data 64 cycles
+
+    // counter & state signal declaration
+    reg                [6:0] counter_r, counter_w, out_counter_r, out_counter_w;
     reg                [3:0] state_r, state_w;
-    reg                [6:0] counter_r, counter_w;
+    reg                      out_state_r, out_state_w;
 
     // Data RegFile Signals (V)
     reg      [REG_ADDRW-1:0] read_addr_1,  read_addr_2,  read_addr_3,  read_addr_4;
@@ -139,6 +144,8 @@ module FrFT_core #(
     // 宣告兩組 BFU 需要的 Index 與 Twiddle
     reg [4:0] idxA_1, idxB_1, idxA_reverse_1, idxB_reverse_1;
     reg [4:0] idxA_2, idxB_2, idxA_reverse_2, idxB_reverse_2;
+    reg [4:0] idxA_1_d1, idxB_1_d1, idxA_reverse_1_d1, idxB_reverse_1_d1;
+    reg [4:0] idxA_2_d1, idxB_2_d1, idxA_reverse_2_d1, idxB_reverse_2_d1;
     reg [3:0] twiddle_k_1, twiddle_k_2;
     reg       dual_bfu_en;
 
@@ -150,6 +157,7 @@ module FrFT_core #(
     assign fnt_stage  = dual_bfu_en ? counter_r[5:3] : counter_r[6:4];
     assign fnt_bfly_1 = dual_bfu_en ? {counter_r[2:0], 1'b0} : counter_r[3:0];
     assign fnt_bfly_2 = dual_bfu_en ? {counter_r[2:0], 1'b1} : 4'd0;
+
     always @(*) begin
         // 初始化
         idxA_1 = 0; idxB_1 = 0; twiddle_k_1 = 0;
@@ -230,10 +238,19 @@ module FrFT_core #(
         idxB_reverse_1 = {idxB_1[0], idxB_1[1], idxB_1[2], idxB_1[3], idxB_1[4]};
         idxA_reverse_2 = {idxA_2[0], idxA_2[1], idxA_2[2], idxA_2[3], idxA_2[4]};
         idxB_reverse_2 = {idxB_2[0], idxB_2[1], idxB_2[2], idxB_2[3], idxB_2[4]};
+        idxA_reverse_1_d1 = {idxA_1_d1[0], idxA_1_d1[1], idxA_1_d1[2], idxA_1_d1[3], idxA_1_d1[4]};
+        idxB_reverse_1_d1 = {idxB_1_d1[0], idxB_1_d1[1], idxB_1_d1[2], idxB_1_d1[3], idxB_1_d1[4]};
+        idxA_reverse_2_d1 = {idxA_2_d1[0], idxA_2_d1[1], idxA_2_d1[2], idxA_2_d1[3], idxA_2_d1[4]};
+        idxB_reverse_2_d1 = {idxB_2_d1[0], idxB_2_d1[1], idxB_2_d1[2], idxB_2_d1[3], idxB_2_d1[4]};
+    end
+
+    always @(posedge clk) begin
+        idxA_1_d1 <= idxA_1; idxB_1_d1 <= idxB_1;
+        idxA_2_d1 <= idxA_2; idxB_2_d1 <= idxB_2;
     end
 
     // ====================================================================
-    // FSM datapath
+    // Main FSM
     // ====================================================================
     always @(*) begin
         state_w   = state_r;
@@ -251,7 +268,7 @@ module FrFT_core #(
         bfu_shift_1 = 0; bfu_in_a_1 = 0; bfu_in_b_1 = 0;
         bfu_shift_2 = 0; bfu_in_a_2 = 0; bfu_in_b_2 = 0;
         dual_bfu_en = 0;
-        o_data = 0; i_chirp3_ready = 0; o_mul3_valid = 0;
+        o_data = 0; i_chirp3_ready = 0; o_mul3_valid = 0; i_data_ready = 0;
 
         case(state_r)
             S_IDLE : begin
@@ -273,29 +290,34 @@ module FrFT_core #(
                 end
             end
             S_CFNT : begin
-                chirp_wen1 = 1'b1; chirp_wen2 = 1'b1;
                 dual_bfu_en = 0;
+                if (counter_r < 2*FNT_CYCLE) begin
+                    chirp_read_addr_1  = idxA_1;
+                    chirp_read_addr_2  = idxB_1;
+                    bfu_in_a_1         = chirp_read_data_1;
+                    bfu_in_b_1         = chirp_read_data_2;
+                    bfu_shift_1        = twiddle_k_1;
+                end
 
-                chirp_read_addr_1  = idxA_1;
-                chirp_read_addr_2  = idxB_1;
+                if (counter_r > 0) begin
+                    chirp_wen1 = 1'b1; chirp_wen2 = 1'b1;
+                    chirp_write_addr_1 = idxA_1_d1;
+                    chirp_write_data_1 = bfu_add_out_1;
+                    chirp_write_addr_2 = idxB_1_d1;
+                    chirp_write_data_2 = bfu_sub_out_1;
+                end
 
-                bfu_in_a_1         = chirp_read_data_1;
-                bfu_in_b_1         = chirp_read_data_2;
-                bfu_shift_1        = twiddle_k_1;
-
-                chirp_write_addr_1 = idxA_1;
-                chirp_write_data_1 = bfu_add_out_1;
-                chirp_write_addr_2 = idxB_1;
-                chirp_write_data_2 = bfu_sub_out_1;
-
-                if (counter_r == 2*FNT_CYCLE - 1) begin // 16 * 5 = 80
-                    state_w   = S_LOAD;
-                    counter_w = 0;
+                if (counter_r == 2*FNT_CYCLE) begin // 16 * 5 = 80
+                    state_w      = S_LOAD;
+                    counter_w    = 0;
+                    i_data_ready = 1'b1;
                 end else begin
                     counter_w = counter_r + 1;
                 end
             end
             S_LOAD : begin
+                i_data_ready = 1'b1;
+
                 if (i_valid) begin
                     counter_w = counter_r + 1;
 
@@ -309,21 +331,26 @@ module FrFT_core #(
                 end
             end
             S_MUL1 : begin
-                wen1 = 1'b1; wen2 = 1'b1;
+                if (counter_r < MUL_CYCLE) begin
+                    read_addr_1  = {counter_r[3:0], 1'b0};
+                    mul_in_a_1   = input_transformation(read_data_1[15:0],  i_mode);
+                    mul_in_b_1   = input_transformation(read_data_1[31:16], i_mode);
+                    
+                    read_addr_2  = {counter_r[3:0], 1'b1};
+                    mul_in_a_2   = input_transformation(read_data_2[15:0],  i_mode);
+                    mul_in_b_2   = input_transformation(read_data_2[31:16], i_mode);
+                end
 
-                read_addr_1  = {counter_r[3:0], 1'b0};
-                mul_in_a_1   = input_transformation(read_data_1[15:0],  i_mode); // data
-                mul_in_b_1   = input_transformation(read_data_1[31:16], i_mode); // chirp 1
-                write_addr_1 = {counter_r[3:0], 1'b0};
-                write_data_1 = mul_out_1;
+                if (counter_r > 0) begin
+                    wen1 = 1'b1; wen2 = 1'b1;
+                    write_addr_1 = {(counter_r[3:0] - 4'd1), 1'b0};
+                    write_data_1 = mul_out_1;
 
-                read_addr_2  = {counter_r[3:0], 1'b1};
-                mul_in_a_2   = input_transformation(read_data_2[15:0],  i_mode);
-                mul_in_b_2   = input_transformation(read_data_2[31:16], i_mode);
-                write_addr_2 = {counter_r[3:0], 1'b1};
-                write_data_2 = mul_out_2;
+                    write_addr_2 = {(counter_r[3:0] - 4'd1), 1'b1};
+                    write_data_2 = mul_out_2;
+                end
 
-                if (counter_r == MUL_CYCLE - 1) begin
+                if (counter_r == MUL_CYCLE) begin 
                     state_w   = S_FFNT;
                     counter_w = 0;
                 end else begin
@@ -331,36 +358,38 @@ module FrFT_core #(
                 end
             end
             S_FFNT : begin
-                wen1 = 1'b1; wen2 = 1'b1; wen3 = 1'b1; wen4 = 1'b1;
                 dual_bfu_en = 1;
+                if (counter_r < FNT_CYCLE) begin
+                    // BFU 1
+                    read_addr_1  = idxA_1;
+                    read_addr_2  = idxB_1;
 
-                // BFU 1
-                read_addr_1  = idxA_1;
-                read_addr_2  = idxB_1;
+                    bfu_in_a_1   = read_data_1;
+                    bfu_in_b_1   = read_data_2;
+                    bfu_shift_1  = twiddle_k_1;
 
-                bfu_in_a_1   = read_data_1;
-                bfu_in_b_1   = read_data_2;
-                bfu_shift_1  = twiddle_k_1;
+                    // BFU 2
+                    read_addr_3  = idxA_2;
+                    read_addr_4  = idxB_2;
 
-                write_addr_1 = idxA_1;
-                write_data_1 = bfu_add_out_1;
-                write_addr_2 = idxB_1;
-                write_data_2 = bfu_sub_out_1;
+                    bfu_in_a_2   = read_data_3;
+                    bfu_in_b_2   = read_data_4;
+                    bfu_shift_2  = twiddle_k_2;
+                end
 
-                // BFU 2
-                read_addr_3  = idxA_2;
-                read_addr_4  = idxB_2;
+                if (counter_r > 0) begin
+                    // BFU 1
+                    wen1 = 1'b1; wen2 = 1'b1;
+                    write_addr_1 = idxA_1_d1; write_data_1 = bfu_add_out_1;
+                    write_addr_2 = idxB_1_d1; write_data_2 = bfu_sub_out_1;
 
-                bfu_in_a_2   = read_data_3;
-                bfu_in_b_2   = read_data_4;
-                bfu_shift_2  = twiddle_k_2;
+                    // BFU 2
+                    wen3 = 1'b1; wen4 = 1'b1;
+                    write_addr_3 = idxA_2_d1; write_data_3 = bfu_add_out_2;
+                    write_addr_4 = idxB_2_d1; write_data_4 = bfu_sub_out_2;
+                end
 
-                write_addr_3 = idxA_2;
-                write_data_3 = bfu_add_out_2;
-                write_addr_4 = idxB_2;
-                write_data_4 = bfu_sub_out_2;
-
-                if (counter_r == FNT_CYCLE - 1) begin
+                if (counter_r == FNT_CYCLE) begin
                     state_w   = S_MUL2;
                     counter_w = 0;
                 end else begin
@@ -368,25 +397,27 @@ module FrFT_core #(
                 end
             end
             S_MUL2 : begin
-                wen1 = 1'b1; wen2 = 1'b1;
+                if (counter_r < MUL_CYCLE) begin
+                    read_addr_1       = {counter_r[3:0], 1'b0};
+                    mul_in_a_1        = read_data_1;
+                    chirp_read_addr_1 = {counter_r[3:0], 1'b0};
+                    mul_in_b_1        = chirp_read_data_1;
 
-                // MUL1
-                read_addr_1       = {counter_r[3:0], 1'b0};
-                mul_in_a_1        = read_data_1;
-                chirp_read_addr_1 = {counter_r[3:0], 1'b0};
-                mul_in_b_1        = chirp_read_data_1;
-                write_addr_1      = {counter_r[3:0], 1'b0};
-                write_data_1      = mul_out_1;
+                    read_addr_2       = {counter_r[3:0], 1'b1};
+                    mul_in_a_2        = read_data_2;
+                    chirp_read_addr_2 = {counter_r[3:0], 1'b1};
+                    mul_in_b_2        = chirp_read_data_2;
+                end
 
-                // MUL2
-                read_addr_2       = {counter_r[3:0], 1'b1};
-                mul_in_a_2        = read_data_2;
-                chirp_read_addr_2 = {counter_r[3:0], 1'b1};
-                mul_in_b_2        = chirp_read_data_2;
-                write_addr_2      = {counter_r[3:0], 1'b1};
-                write_data_2      = mul_out_2;
+                if (counter_r > 0) begin
+                    wen1 = 1'b1; wen2 = 1'b1;
+                    write_addr_1 = {counter_r[3:0] - 4'd1, 1'b0};
+                    write_data_1 = mul_out_1;
+                    write_addr_2 = {counter_r[3:0] - 4'd1, 1'b1};
+                    write_data_2 = mul_out_2;
+                end
 
-                if (counter_r == MUL_CYCLE - 1) begin
+                if (counter_r == MUL_CYCLE) begin
                     state_w   = S_IFNT;
                     counter_w = 0;
                 end else begin
@@ -394,55 +425,57 @@ module FrFT_core #(
                 end
             end
             S_IFNT : begin
-                wen1 = 1'b1; wen2 = 1'b1; wen3 = 1'b1; wen4 = 1'b1;
                 dual_bfu_en = 1;
+                if (counter_r < FNT_CYCLE) begin
+                    // BFU 1
+                    read_addr_1 = idxA_reverse_1;
+                    read_addr_2 = idxB_reverse_1;
 
-                // BFU 1
-                read_addr_1 = idxA_reverse_1;
-                read_addr_2 = idxB_reverse_1;
+                    if (twiddle_k_1 == 0) begin
+                        bfu_shift_1 = 5'd0;
+                        bfu_in_a_1  = read_data_1;
+                        bfu_in_b_1  = read_data_2;
+                    end else begin
+                        bfu_shift_1 = 5'd16 - twiddle_k_1;
+                        bfu_in_a_1  = read_data_2;
+                        bfu_in_b_1  = read_data_1;
+                    end
 
-                if (twiddle_k_1 == 0) begin
-                    bfu_shift_1 = 5'd0;
-                    bfu_in_a_1  = read_data_1;
-                    bfu_in_b_1  = read_data_2;
-                end else begin
-                    bfu_shift_1 = 5'd16 - twiddle_k_1;
-                    bfu_in_a_1  = read_data_2;
-                    bfu_in_b_1  = read_data_1;
+                    // BFU 2
+                    read_addr_3 = idxA_reverse_2;
+                    read_addr_4 = idxB_reverse_2;
+
+                    if (twiddle_k_2 == 0) begin
+                        bfu_shift_2 = 5'd0;
+                        bfu_in_a_2  = read_data_3;
+                        bfu_in_b_2  = read_data_4;
+                    end else begin
+                        bfu_shift_2 = 5'd16 - twiddle_k_2;
+                        bfu_in_a_2  = read_data_4;
+                        bfu_in_b_2  = read_data_3;
+                    end
                 end
 
-                write_addr_1 = idxA_reverse_1;
-                write_data_1 = bfu_add_out_1;
-                write_addr_2 = idxB_reverse_1;
-                write_data_2 = bfu_sub_out_1;
+                if (counter_r > 0) begin
+                    // BFU 1
+                    wen1 = 1'b1; wen2 = 1'b1;
+                    write_addr_1 = idxA_reverse_1_d1; write_data_1 = bfu_add_out_1;
+                    write_addr_2 = idxB_reverse_1_d1; write_data_2 = bfu_sub_out_1;
 
-                // BFU 2
-                read_addr_3 = idxA_reverse_2;
-                read_addr_4 = idxB_reverse_2;
-
-                if (twiddle_k_2 == 0) begin
-                    bfu_shift_2 = 5'd0;
-                    bfu_in_a_2  = read_data_3;
-                    bfu_in_b_2  = read_data_4;
-                end else begin
-                    bfu_shift_2 = 5'd16 - twiddle_k_2;
-                    bfu_in_a_2  = read_data_4;
-                    bfu_in_b_2  = read_data_3;
+                    // BFU 2
+                    wen3 = 1'b1; wen4 = 1'b1;
+                    write_addr_3 = idxA_reverse_2_d1; write_data_3 = bfu_add_out_2;
+                    write_addr_4 = idxB_reverse_2_d1; write_data_4 = bfu_sub_out_2;
                 end
 
-                write_addr_3 = idxA_reverse_2;
-                write_data_3 = bfu_add_out_2;
-                write_addr_4 = idxB_reverse_2;
-                write_data_4 = bfu_sub_out_2;
-
-                if (counter_r > FNT_CYCLE - 1 - LOAD_CYCLE) begin
+                if (counter_r > FNT_CYCLE - LOAD_CYCLE) begin
                     i_chirp3_ready = 1;
-                    chirp_write_addr_1 = counter_r - (FNT_CYCLE - LOAD_CYCLE);
+                    chirp_write_addr_1 = counter_r - (FNT_CYCLE - LOAD_CYCLE + 1);
                     chirp_write_data_1 = input_transformation(i_chirp3_data, i_mode);
                     chirp_wen1         = 1'b1;
                 end
 
-                if (counter_r == FNT_CYCLE - 1) begin
+                if (counter_r == FNT_CYCLE) begin
                     state_w   = S_MUL3;
                     counter_w = 0;
                 end else begin
@@ -450,25 +483,27 @@ module FrFT_core #(
                 end
             end
             S_MUL3 : begin
-                wen1 = 1'b1; wen2 = 1'b1;
+                if (counter_r < MUL_CYCLE) begin
+                    read_addr_1       = {counter_r[3:0], 1'b0};
+                    mul_in_a_1        = read_data_1;
+                    chirp_read_addr_1 = {counter_r[3:0], 1'b0};
+                    mul_in_b_1        = chirp_read_data_1;
 
-                // MUL1
-                read_addr_1       = {counter_r[3:0], 1'b0};
-                mul_in_a_1        = read_data_1;
-                chirp_read_addr_1 = {counter_r[3:0], 1'b0};
-                mul_in_b_1        = chirp_read_data_1;
-                write_addr_1      = {counter_r[3:0], 1'b0};
-                write_data_1      = mul_out_1;
+                    read_addr_2       = {counter_r[3:0], 1'b1};
+                    mul_in_a_2        = read_data_2;
+                    chirp_read_addr_2 = {counter_r[3:0], 1'b1};
+                    mul_in_b_2        = chirp_read_data_2;
+                end
 
-                // MUL2
-                read_addr_2       = {counter_r[3:0], 1'b1};
-                mul_in_a_2        = read_data_2;
-                chirp_read_addr_2 = {counter_r[3:0], 1'b1};
-                mul_in_b_2        = chirp_read_data_2;
-                write_addr_2      = {counter_r[3:0], 1'b1};
-                write_data_2      = mul_out_2;
+                if (counter_r > 0) begin
+                    wen1 = 1'b1; wen2 = 1'b1;
+                    write_addr_1 = {counter_r[3:0] - 4'd1, 1'b0};
+                    write_data_1 = mul_out_1;
+                    write_addr_2 = {counter_r[3:0] - 4'd1, 1'b1};
+                    write_data_2 = mul_out_2;
+                end
 
-                if (counter_r == MUL_CYCLE - 1) begin
+                if (counter_r == MUL_CYCLE) begin
                     state_w   = S_DONE;
                     counter_w = 0;
                 end else begin
@@ -477,32 +512,56 @@ module FrFT_core #(
             end
             S_DONE : begin
                 if (o_ready) begin
-                    state_w = S_DOUT;
+                    state_w = S_IDLE;
                     o_mul3_valid = 1;
                 end
             end
-            S_DOUT : begin
-                read_addr_1 = counter_r[5:1];
-                mul_in_a_1  = read_data_1;
-                mul_in_b_1  = counter_r[0] ? IMAG_SCALE : REAL_SCALE;
-                o_data      = mul_out_1;
+        endcase
 
-                if (counter_r == 2*LOAD_CYCLE - 1) begin
-                    state_w   = S_IDLE;
+    // ====================================================================
+    // Output FSM
+    // ====================================================================
+        out_state_w   = out_state_r;
+        out_counter_w = out_counter_r;
+
+        case(out_state_r)
+            OUT_IDLE : begin
+                if (state_r == S_DONE & o_ready) begin
+                    out_state_w   = OUT_BUSY;
+                    out_counter_w = 0;
+                end
+            end
+            OUT_BUSY : begin
+                if (out_counter_r < 2*LOAD_CYCLE) begin
+                    read_addr_1 = out_counter_r[5:1];
+                    mul_in_a_1  = read_data_1;
+                    mul_in_b_1  = out_counter_r[0] ? IMAG_SCALE : REAL_SCALE;
+                end
+                o_data = mul_out_1;
+
+                if (out_counter_r == 2*LOAD_CYCLE) begin
+                    out_state_w   = OUT_IDLE;
                 end else begin
-                    counter_w = counter_r + 1;
+                    out_counter_w = out_counter_r + 1;
                 end
             end
         endcase
     end
 
+    // ====================================================================
+    // Sequential logic
+    // ====================================================================
     always @(posedge clk or negedge rst_n) begin
         if(!rst_n) begin
-            state_r   <= S_IDLE;
-            counter_r <= 7'b0;
+            state_r       <= S_IDLE;
+            out_state_r   <= OUT_IDLE;
+            counter_r     <= 0;
+            out_counter_r <= 0;
         end else begin
-            state_r   <= state_w;
-            counter_r <= counter_w;
+            state_r       <= state_w;
+            out_state_r   <= out_state_w;
+            counter_r     <= counter_w;
+            out_counter_r <= out_counter_w;
         end
     end
 
@@ -515,7 +574,7 @@ module FrFT_core #(
         .REG_DEPTH(REG_DEPTH),
         .REG_ADDRW(REG_ADDRW)
     ) RegFile (
-        .clk(clk),
+        .clk(clk), .rst_n(rst_n),
         // read : input REG_ADDRW bits, output DATA_WIDTH bits
         .read_addr_1(read_addr_1), .read_data_1(read_data_1), 
         .read_addr_2(read_addr_2), .read_data_2(read_data_2),
@@ -545,7 +604,7 @@ module FrFT_core #(
     Dim1_Modular_Mul #(
         .DATA_WIDTH(DATA_WIDTH)
     ) mul1 (
-        .clk(clk), .rst_n(rst_n),
+        .clk(clk),
         .A(mul_in_a_1), // input  DATA_WIDTH bits
         .B(mul_in_b_1), // input  DATA_WIDTH bits
         .O(mul_out_1)   // output DATA_WIDTH bits
@@ -554,7 +613,7 @@ module FrFT_core #(
     Dim1_Modular_Mul #(
         .DATA_WIDTH(DATA_WIDTH)
     ) mul2 (
-        .clk(clk), .rst_n(rst_n),
+        .clk(clk),
         .A(mul_in_a_2), // input  DATA_WIDTH bits
         .B(mul_in_b_2), // input  DATA_WIDTH bits
         .O(mul_out_2)   // output DATA_WIDTH bits
@@ -563,6 +622,7 @@ module FrFT_core #(
     Dim1_BFU #(  // pure combinational circuit
         .DATA_WIDTH(DATA_WIDTH)
     ) bfu1 (
+        .clk(clk),
         .k(bfu_shift_1),       // input  4 bits
         .A(bfu_in_a_1),        // input  DATA_WIDTH bits
         .B(bfu_in_b_1),        // input  DATA_WIDTH bits
@@ -573,6 +633,7 @@ module FrFT_core #(
     Dim1_BFU #(  // pure combinational circuit
         .DATA_WIDTH(DATA_WIDTH)
     ) bfu2 (
+        .clk(clk),
         .k(bfu_shift_2),       // input  4 bits
         .A(bfu_in_a_2),        // input  DATA_WIDTH bits
         .B(bfu_in_b_2),        // input  DATA_WIDTH bits

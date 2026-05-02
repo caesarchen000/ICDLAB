@@ -72,7 +72,7 @@ module FrFT_tb;
         reg signed [7:0] imag8, real8;
         begin
             // 3) wait 79 cycles with i_valid=0
-            repeat (111) @(negedge clk);
+            repeat (112) @(negedge clk);
 
             // 4) i_valid=1 for 32 cycles, output [image(8),real(8)]
             for (k = 0; k < N; k = k + 1) begin

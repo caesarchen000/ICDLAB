@@ -128,7 +128,7 @@ def frft_1d_debug(x_real, x_imag, chirps):
     c1_p1, c1_p2, C2_p1, C2_p2, c1_r, c1_i, c2_r, c2_i = chirps
     x_p1, x_p2 = complex_to_scc(x_real, x_imag)
     
-    # 【新增】取出 Chirp 2 在 FNT 之前的 Fermat Field 映射值
+    # 取出 Chirp 2 在 FNT 之前的 Fermat Field 映射值
     c2_p1_before_fnt, c2_p2_before_fnt = complex_to_scc(c2_r, c2_i)
 
     p1_mul1 = np.array([mod_mul(x_p1[i], c1_p1[i]) for i in range(N)], dtype=np.int64)
@@ -175,7 +175,7 @@ def frft_1d_debug(x_real, x_imag, chirps):
         "raw_c1_r": c1_r, "raw_c1_i": c1_i,
         "raw_c2_r": c2_r, "raw_c2_i": c2_i,
         "chirp1_path1": c1_p1, "chirp1_path2": c1_p2,
-        "chirp2_before_fnt_path1": c2_p1_before_fnt, "chirp2_before_fnt_path2": c2_p2_before_fnt, # 【新增】
+        "chirp2_before_fnt_path1": c2_p1_before_fnt, "chirp2_before_fnt_path2": c2_p2_before_fnt,
         "chirp2_path1": C2_p1, "chirp2_path2": C2_p2,
         "mul1_path1": p1_mul1, "mul1_path2": p2_mul1,
         "fnt_path1": p1_fnt, "fnt_path2": p2_fnt,
@@ -183,7 +183,7 @@ def frft_1d_debug(x_real, x_imag, chirps):
         "ifnt_path1": p1_ifnt, "ifnt_path2": p2_ifnt,
         "chirp3_path1": c1_p1, "chirp3_path2": c1_p2,
         "mul3_path1": p1_mul3, "mul3_path2": p2_mul3,
-        "dout_mul_r_p1": dout_mul_r_p1, "dout_mul_r_p2": dout_mul_r_p2, # 【新增】
+        "dout_mul_r_p1": dout_mul_r_p1, "dout_mul_r_p2": dout_mul_r_p2, 
         "dout_mul_i_p1": dout_mul_i_p1, "dout_mul_i_p2": dout_mul_i_p2,
         "dec_real": dec_real, "dec_imag": dec_imag,
     }
@@ -259,10 +259,7 @@ def write_debug_stages_txt(path, in_words, dbg):
         write_block("Input_Fermat", input_ferm_path1)
         write_block("Chirp1_Fermat", dbg["chirp1_path1"])
         
-        # 【新增】以 Normal Order 列出剛存進 RAM 的狀態 (S_LDCP)
         write_block("S_LDCP (Chirp 2 Before FNT in RAM)", dbg["chirp2_before_fnt_path1"])
-        
-        # 以 Bit-Reversed Order 列出 FNT 結束後的 RAM 狀態 (S_CFNT)
         write_block_br("S_CFNT_BR (Chirp 2 After FNT in RAM)", dbg["chirp2_path1"])
         
         write_block("S_MUL1", dbg["mul1_path1"])
@@ -284,7 +281,6 @@ def write_debug_stages_txt(path, in_words, dbg):
         write_block("Input_Fermat", input_ferm_path2)
         write_block("Chirp1_Fermat", dbg["chirp1_path2"])
         
-        # 【新增】
         write_block("S_LDCP (Chirp 2 Before FNT in RAM)", dbg["chirp2_before_fnt_path2"])
         write_block_br("S_CFNT_BR (Chirp 2 After FNT in RAM)", dbg["chirp2_path2"])
         
@@ -309,80 +305,82 @@ def write_debug_stages_txt(path, in_words, dbg):
         write_block("S_DEC_REAL_SUM", dbg["dec_real"])
         write_block("S_DEC_IMAG_SUM", dbg["dec_imag"])
 
-def gen_tb_gt_from_sim(alpha, outdir, key=None, random_alpha=False, seed=None, dump_stages=False):
-    if random_alpha:
-        if seed is not None:
-            random.seed(seed)
-        margin = 1e-3
-        alpha = random.uniform(margin, math.pi - margin)
-    elif key is not None:
-        alpha = key * math.pi / 128.0
-    else:
-        key = int(round((alpha / math.pi) * 128.0)) & 0xFF
+def gen_tb_gt_from_sim(alpha_arg, outdir, key_arg=None, random_alpha=False, seed=None, dump_stages=False):
+    if seed is not None:
+        random.seed(seed)
 
     outdir = Path(outdir)
     outdir.mkdir(parents=True, exist_ok=True)
 
-    in_words = []
-    for k in range(32):
-        real8 = k & 0xFF
-        imag8 = (0xFF - k) & 0xFF
-        in_words.append((imag8 << 8) | real8) 
+    all_in_words = []
+    all_out_words = []
+    all_keys = []
+    all_out_float = []
 
-    x_real = np.array([((w & 0xFF) if (w & 0x80) == 0 else (w & 0xFF) - 256) for w in in_words], dtype=np.int64)
-    x_imag = np.array([(((w >> 8) & 0xFF) if ((w >> 15) & 1) == 0 else ((w >> 8) & 0xFF) - 256) for w in in_words], dtype=np.int64)
+    NUM_PATTERNS = 100 # 連續測試 5 組
 
-    chirps = generate_chirps(alpha)
-    out_r, out_i = frft_1d(x_real, x_imag, chirps)
-    dbg = frft_1d_debug(x_real, x_imag, chirps) if dump_stages else None
+    for p in range(NUM_PATTERNS):
+        # 每組產生不同的 Key 與 Alpha
+        if random_alpha:
+            margin = 1e-3
+            alpha = random.uniform(margin, math.pi - margin)
+            key = int(round((alpha / math.pi) * 128.0)) & 0xFF
+        else:
+            base_key = key_arg if key_arg is not None else int(round((alpha_arg / math.pi) * 128.0)) & 0xFF
+            key = (base_key + p * 1) % 256 # 刻意錯開 Key
+            if key == 0: key = 1 # 避免 0 產生奇異值
+            alpha = key * math.pi / 128.0
 
-    out_words = []
-    out_float = []
-    for i in range(32):
-        r_raw = int(out_r[i])
-        i_raw = int(out_i[i])
-        
-        r16 = r_raw & 0xFFFF
-        i16 = i_raw & 0xFFFF
-        out_words.append((i16 << 16) | r16)
-        
-        out_float.append((float(r_raw), float(i_raw)))
+        all_keys.append(key)
 
-    pre_hi = 0xA55A
-    pre_lo = 0x5AA5
-    in_frame_bytes = [0x00, key & 0xFF, (pre_hi >> 8) & 0xFF, pre_hi & 0xFF, (pre_lo >> 8) & 0xFF, pre_lo & 0xFF]
-    for w in in_words:
-        in_frame_bytes += [(w >> 8) & 0xFF, w & 0xFF]
+        # 刻意讓每組的輸入資料都不一樣
+        in_words = []
+        for k in range(32):
+            real8 = (k + p * 17) & 0xFF
+            imag8 = (0xFF - k - p * 11) & 0xFF
+            in_words.append((imag8 << 8) | real8) 
 
-    out_frame_bytes = [(pre_hi >> 8) & 0xFF, pre_hi & 0xFF, (pre_lo >> 8) & 0xFF, pre_lo & 0xFF]
-    for w in out_words:
-        out_frame_bytes += [(w >> 24) & 0xFF, (w >> 16) & 0xFF, (w >> 8) & 0xFF, w & 0xFF]
+        all_in_words.extend(in_words)
 
-    write_hex_lines(outdir / "input_words_32.hex", in_words, 4)
-    write_hex_lines(outdir / "output_words_32.hex", out_words, 8)
-    write_hex_lines(outdir / "input_frame_bytes.hex", in_frame_bytes, 2)
-    write_hex_lines(outdir / "output_frame_bytes.hex", out_frame_bytes, 2)
-    write_hex_lines(outdir / "key.hex", [key], 2)
-    with open(outdir / "alpha.txt", "w") as f:
-        f.write(f"{alpha:.18f}\n")
+        x_real = np.array([((w & 0xFF) if (w & 0x80) == 0 else (w & 0xFF) - 256) for w in in_words], dtype=np.int64)
+        x_imag = np.array([(((w >> 8) & 0xFF) if ((w >> 15) & 1) == 0 else ((w >> 8) & 0xFF) - 256) for w in in_words], dtype=np.int64)
+
+        chirps = generate_chirps(alpha)
+        out_r, out_i = frft_1d(x_real, x_imag, chirps)
+
+        # 【重點】只針對第 0 組 (第一組) 產生 Debug Stages
+        if p == 0 and dump_stages:
+            dbg = frft_1d_debug(x_real, x_imag, chirps)
+            stage_dir = outdir / "stages"
+            stage_dir.mkdir(parents=True, exist_ok=True)
+            stage_keys = [k for k in dbg.keys() if "raw" not in k]
+            for name in stage_keys:
+                write_stage_hex(stage_dir / f"{name}.hex", dbg[name])
+            write_debug_stages_txt(outdir / "debug_stages.txt", in_words, dbg)
+
+        out_words = []
+        for i in range(32):
+            r_raw = int(out_r[i])
+            i_raw = int(out_i[i])
+            r16 = r_raw & 0xFFFF
+            i16 = i_raw & 0xFFFF
+            out_words.append((i16 << 16) | r16)
+            all_out_float.append((float(r_raw), float(i_raw)))
+            
+        all_out_words.extend(out_words)
+
+    # 將 5 組資料一次性寫入同一個檔案
+    write_hex_lines(outdir / "input_words_32.hex", all_in_words, 4)
+    write_hex_lines(outdir / "output_words_32.hex", all_out_words, 8)
+    write_hex_lines(outdir / "key.hex", all_keys, 2)
+    
     with open(outdir / "output_float_32.txt", "w") as f:
-        for rr, ii in out_float:
+        for rr, ii in all_out_float:
             f.write(f"{rr:.6f} {ii:.6f}\n")
 
+    print(f"Generated {NUM_PATTERNS} patterns GT at: {outdir}")
     if dump_stages:
-        stage_dir = outdir / "stages"
-        stage_dir.mkdir(parents=True, exist_ok=True)
-        # 只輸出 dim-1 的 stage data
-        stage_keys = [k for k in dbg.keys() if "raw" not in k]
-        for name in stage_keys:
-            write_stage_hex(stage_dir / f"{name}.hex", dbg[name])
-        write_debug_stages_txt(outdir / "debug_stages.txt", in_words, dbg)
-
-    print(f"Generated GT at: {outdir}")
-    print(f"alpha={alpha:.12f}, key=0x{key:02x}")
-    print("Files: input_words_32.hex output_words_32.hex input_frame_bytes.hex output_frame_bytes.hex key.hex alpha.txt output_float_32.txt")
-    if dump_stages:
-        print("Stage files: stages/*.hex and debug_stages.txt")
+        print("Stage files (Only for Pattern 0): stages/*.hex and debug_stages.txt")
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
@@ -400,9 +398,9 @@ if __name__ == "__main__":
 
     if args.gen_gt:
         gen_tb_gt_from_sim(
-            alpha=args.alpha,
+            alpha_arg=args.alpha,
             outdir=args.outdir,
-            key=args.key,
+            key_arg=args.key,
             random_alpha=args.random_alpha,
             seed=args.seed,
             dump_stages=args.dump_stages
