@@ -1,0 +1,158 @@
+ 
+****************************************
+Report : area
+Design : FrFT_top
+Version: U-2022.12
+Date   : Sun May  3 22:46:16 2026
+****************************************
+
+Library(s) Used:
+
+    typical (File: /home/raid7_2/course/cvsd/CBDK_IC_Contest/CIC/SynopsysDC/db/typical.db)
+
+Number of ports:                        10704
+Number of nets:                         83633
+Number of cells:                        71297
+Number of combinational cells:          67955
+Number of sequential cells:              3124
+Number of macros/black boxes:               0
+Number of buf/inv:                      13432
+Number of references:                      68
+
+Combinational area:             622849.053866
+Buf/Inv area:                    66453.209222
+Noncombinational area:           82571.721167
+Macro/Black Box area:                0.000000
+Net Interconnect area:         8558616.219543
+
+Total cell area:                705420.775032
+Total area:                    9264036.994576
+
+Hierarchical area distribution
+------------------------------
+
+                                  Global cell area              Local cell area
+                                  --------------------  ------------------------------- 
+Hierarchical cell                 Absolute     Percent  Combi-       Noncombi-   Black-
+                                  Total        Total    national     national    boxes   Design
+--------------------------------  -----------  -------  -----------  ----------  ------  ---------------------------------------------------------------------------
+FrFT_top                          705420.7750    100.0    3883.6512   3146.9795  0.0000  FrFT_top
+add_100                              648.4068      0.1     648.4068      0.0000  0.0000  FrFT_top_DW01_add_0
+add_115_C98                          553.3524      0.1     553.3524      0.0000  0.0000  FrFT_top_DW01_inc_2
+add_115_C99                          553.3524      0.1     553.3524      0.0000  0.0000  FrFT_top_DW01_inc_1
+add_271                              108.6336      0.0     108.6336      0.0000  0.0000  FrFT_top_DW01_inc_0
+lut_gen1                           75296.6642     10.7    7741.8414      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33
+lut_gen1/add_84                     1629.5040      0.2    1629.5040      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_add_6
+lut_gen1/add_85                     1862.0478      0.3    1862.0478      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_add_8
+lut_gen1/add_95                     1565.0028      0.2    1565.0028      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_add_5
+lut_gen1/add_96                     1709.2818      0.2    1709.2818      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_add_7
+lut_gen1/lut0                      53558.0625      7.6   53558.0625      0.0000  0.0000  LUT_chirp13_REG_ADDRW4_KEY_WIDTH7
+lut_gen1/sub_127                     561.8394      0.1     561.8394      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_dec_3_DW01_dec_5
+lut_gen1/sub_127_I2                  643.3146      0.1     643.3146      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_dec_2_DW01_dec_4
+lut_gen1/sub_127_I3                  629.7354      0.1     629.7354      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_dec_1_DW01_dec_3
+lut_gen1/sub_127_I4                  661.9860      0.1     661.9860      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_dec_0_DW01_dec_2
+lut_gen1/sub_87_aco                 1239.1020      0.2    1239.1020      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_sub_19
+lut_gen1/sub_88_aco                 1279.8396      0.2    1279.8396      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_sub_21
+lut_gen1/sub_98_aco                 1030.3218      0.1    1030.3218      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_sub_18
+lut_gen1/sub_99_aco                 1184.7852      0.2    1184.7852      0.0000  0.0000  Chirp_Generator_13_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_sub_20
+lut_gen2                          228001.5627     32.3    1836.5868      0.0000  0.0000  Chirp_Generator_2_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33
+lut_gen2/lut_neg                  112709.0600     16.0  112709.0600      0.0000  0.0000  LUT_chirp2_neg_REG_ADDRW4_KEY_WIDTH8
+lut_gen2/lut_pos                  113332.0058     16.1  113332.0058      0.0000  0.0000  LUT_chirp2_pos_REG_ADDRW4_KEY_WIDTH8
+lut_gen2/r364                        123.9102      0.0     123.9102      0.0000  0.0000  Chirp_Generator_2_REG_ADDRW4_KEY_WIDTH8_DATA_WIDTH33_DW01_inc_0_DW01_inc_4
+neg_core                          198441.3376     28.1    7195.2786   1826.4024  0.0000  FrFT_core_20_10_28_33_32_32_5_0fc000000_0000003ff
+neg_core/RegFile                   60731.2742      8.6   29587.3787  31143.8955  0.0000  RegFileTetra_DATA_WIDTH33_REG_DEPTH32_REG_ADDRW5_1
+neg_core/add_437                     108.6336      0.0     108.6336      0.0000  0.0000  FrFT_core_20_10_28_33_32_32_5_0fc000000_0000003ff_DW01_inc_0_DW01_inc_5
+neg_core/bfu1                      19784.8944      2.8    5531.8265   1680.4260  0.0000  Dim1_BFU_DATA_WIDTH33_2
+neg_core/bfu1/add_36                1536.1470      0.2    1536.1470      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_add_2_DW01_add_13
+neg_core/bfu1/add_48_aco            1028.6244      0.1    1028.6244      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_add_1_DW01_add_12
+neg_core/bfu1/add_57                 594.0900      0.1     594.0900      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_add_0_DW01_add_11
+neg_core/bfu1/r396                   582.2082      0.1     582.2082      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_inc_1_DW01_inc_11
+neg_core/bfu1/r397                   680.6574      0.1     680.6574      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_inc_0_DW01_inc_10
+neg_core/bfu1/sub_37_aco             731.5794      0.1     731.5794      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_sub_4_DW01_sub_34
+neg_core/bfu1/sub_43                 728.1846      0.1     728.1846      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_sub_3_DW01_sub_33
+neg_core/bfu1/sub_45                1936.7334      0.3    1936.7334      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_sub_2_DW01_sub_32
+neg_core/bfu1/sub_55                2680.1946      0.4    2680.1946      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_sub_1_DW01_sub_31
+neg_core/bfu1/sub_57                 728.1846      0.1     728.1846      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_sub_0_DW01_sub_30
+neg_core/bfu1/sub_60                 471.8772      0.1     471.8772      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_dec_1_DW01_dec_10
+neg_core/bfu1/sub_61                 874.1610      0.1     874.1610      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_2_DW01_dec_0_DW01_dec_9
+neg_core/bfu2                      20195.6652      2.9    6035.9543   1680.4260  0.0000  Dim1_BFU_DATA_WIDTH33_1
+neg_core/bfu2/add_36                1446.1848      0.2    1446.1848      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_add_2_DW01_add_10
+neg_core/bfu2/add_48_aco             977.7024      0.1     977.7024      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_add_1_DW01_add_9
+neg_core/bfu2/add_57                 597.4848      0.1     597.4848      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_add_0_DW01_add_8
+neg_core/bfu2/r396                   582.2082      0.1     582.2082      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_inc_1_DW01_inc_9
+neg_core/bfu2/r397                   741.7638      0.1     741.7638      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_inc_0_DW01_inc_8
+neg_core/bfu2/sub_37_aco             685.7496      0.1     685.7496      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_sub_4_DW01_sub_29
+neg_core/bfu2/sub_43                 728.1846      0.1     728.1846      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_sub_3_DW01_sub_28
+neg_core/bfu2/sub_45                2120.0526      0.3    2120.0526      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_sub_2_DW01_sub_27
+neg_core/bfu2/sub_55                2661.5232      0.4    2661.5232      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_sub_1_DW01_sub_26
+neg_core/bfu2/sub_57                 694.2366      0.1     694.2366      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_sub_0_DW01_sub_25
+neg_core/bfu2/sub_60                 471.8772      0.1     471.8772      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_dec_1_DW01_dec_8
+neg_core/bfu2/sub_61                 772.3170      0.1     772.3170      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_1_DW01_dec_0_DW01_dec_7
+neg_core/mul1                      44475.2756      6.3     960.7284   1680.4260  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_2
+neg_core/mul1/add_22                 595.7874      0.1     595.7874      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_2_DW01_inc_1_DW01_inc_15
+neg_core/mul1/add_23                1067.6646      0.2    1067.6646      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_2_DW01_inc_0_DW01_inc_14
+neg_core/mul1/add_37_aco             689.1444      0.1     689.1444      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_2_DW01_add_0_DW01_add_15
+neg_core/mul1/mult_26              37342.8007      5.3   37342.8007      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_2_DW_mult_uns_J9_0
+neg_core/mul1/sub_34                1558.2132      0.2    1558.2132      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_2_DW01_sub_0_DW01_sub_36
+neg_core/mul1/sub_40                 580.5108      0.1     580.5108      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_2_DW01_dec_0_DW01_dec_12
+neg_core/mul2                      44015.2801      6.2     872.4636   1690.6104  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_1
+neg_core/mul2/add_22                 653.4990      0.1     653.4990      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_1_DW01_inc_1_DW01_inc_13
+neg_core/mul2/add_23                1032.0192      0.1    1032.0192      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_1_DW01_inc_0_DW01_inc_12
+neg_core/mul2/add_37_aco             643.3146      0.1     643.3146      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_1_DW01_add_0_DW01_add_14
+neg_core/mul2/mult_26              36853.9495      5.2   36853.9495      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_1_DW_mult_uns_J7_0
+neg_core/mul2/sub_34                1694.0052      0.2    1694.0052      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_1_DW01_sub_0_DW01_sub_35
+neg_core/mul2/sub_40                 575.4186      0.1     575.4186      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_1_DW01_dec_0_DW01_dec_11
+neg_core/r527                        108.6336      0.0     108.6336      0.0000  0.0000  FrFT_core_20_10_28_33_32_32_5_0fc000000_0000003ff_DW01_inc_2_DW01_inc_7
+pos_core                          192653.2028     27.3    7122.2904   1826.4024  0.0000  FrFT_core_20_10_28_33_32_32_5_0fc000000_0fffffc00
+pos_core/RegFile                   60464.7824      8.6   29320.8868  31143.8955  0.0000  RegFileTetra_DATA_WIDTH33_REG_DEPTH32_REG_ADDRW5_0
+pos_core/add_437                     108.6336      0.0     108.6336      0.0000  0.0000  FrFT_core_20_10_28_33_32_32_5_0fc000000_0fffffc00_DW01_inc_0_DW01_inc_16
+pos_core/bfu1                      20694.7008      2.9    5915.4389   1680.4260  0.0000  Dim1_BFU_DATA_WIDTH33_0
+pos_core/bfu1/add_36                1699.0974      0.2    1699.0974      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_add_2_DW01_add_21
+pos_core/bfu1/add_48_aco            1040.5062      0.1    1040.5062      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_add_1_DW01_add_20
+pos_core/bfu1/add_57                 604.2744      0.1     604.2744      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_add_0_DW01_add_19
+pos_core/bfu1/r396                   582.2082      0.1     582.2082      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_inc_1_DW01_inc_22
+pos_core/bfu1/r397                   706.1184      0.1     706.1184      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_inc_0_DW01_inc_21
+pos_core/bfu1/sub_37_aco             728.1846      0.1     728.1846      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_sub_4_DW01_sub_48
+pos_core/bfu1/sub_43                 743.4612      0.1     743.4612      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_sub_3_DW01_sub_47
+pos_core/bfu1/sub_45                1982.5632      0.3    1982.5632      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_sub_2_DW01_sub_46
+pos_core/bfu1/sub_55                2899.1592      0.4    2899.1592      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_sub_1_DW01_sub_45
+pos_core/bfu1/sub_57                 785.8962      0.1     785.8962      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_sub_0_DW01_sub_44
+pos_core/bfu1/sub_60                 471.8772      0.1     471.8772      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_dec_1_DW01_dec_16
+pos_core/bfu1/sub_61                 855.4896      0.1     855.4896      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_0_DW01_dec_0_DW01_dec_15
+pos_core/bfu2                      20292.4170      2.9    6081.7841   1680.4260  0.0000  Dim1_BFU_DATA_WIDTH33_3
+pos_core/bfu2/add_36                1682.1234      0.2    1682.1234      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_add_2_DW01_add_18
+pos_core/bfu2/add_48_aco             982.7946      0.1     982.7946      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_add_1_DW01_add_17
+pos_core/bfu2/add_57                 616.1562      0.1     616.1562      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_add_0_DW01_add_16
+pos_core/bfu2/r396                   582.2082      0.1     582.2082      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_inc_1_DW01_inc_20
+pos_core/bfu2/r397                   714.6054      0.1     714.6054      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_inc_0_DW01_inc_19
+pos_core/bfu2/sub_37_aco             726.4872      0.1     726.4872      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_sub_4_DW01_sub_43
+pos_core/bfu2/sub_43                 757.0404      0.1     757.0404      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_sub_3_DW01_sub_42
+pos_core/bfu2/sub_45                1766.9934      0.3    1766.9934      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_sub_2_DW01_sub_41
+pos_core/bfu2/sub_55                2698.8660      0.4    2698.8660      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_sub_1_DW01_sub_40
+pos_core/bfu2/sub_57                 709.5132      0.1     709.5132      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_sub_0_DW01_sub_39
+pos_core/bfu2/sub_60                 471.8772      0.1     471.8772      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_dec_1_DW01_dec_14
+pos_core/bfu2/sub_61                 821.5416      0.1     821.5416      0.0000  0.0000  Dim1_BFU_DATA_WIDTH33_3_DW01_dec_0_DW01_dec_13
+pos_core/mul1                      43516.2446      6.2     914.8986   1700.7948  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_0
+pos_core/mul1/add_22                 616.1562      0.1     616.1562      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_0_DW01_inc_1_DW01_inc_26
+pos_core/mul1/add_23                 925.0830      0.1     925.0830      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_0_DW01_inc_0_DW01_inc_25
+pos_core/mul1/add_37_aco             643.3146      0.1     643.3146      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_0_DW01_add_0_DW01_add_23
+pos_core/mul1/mult_26              36522.9565      5.2   36522.9565      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_0_DW_mult_uns_J4_0
+pos_core/mul1/sub_34                1637.9910      0.2    1637.9910      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_0_DW01_sub_0_DW01_sub_50
+pos_core/mul1/sub_40                 555.0498      0.1     555.0498      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_0_DW01_dec_0_DW01_dec_18
+pos_core/mul2                      38519.0981      5.5     840.2130   1690.6104  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_3
+pos_core/mul2/add_22                 582.2082      0.1     582.2082      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_3_DW01_inc_1_DW01_inc_24
+pos_core/mul2/add_23                1147.4424      0.2    1147.4424      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_3_DW01_inc_0_DW01_inc_23
+pos_core/mul2/add_37_aco             643.3146      0.1     643.3146      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_3_DW01_add_0_DW01_add_22
+pos_core/mul2/mult_26              31442.6374      4.5   31442.6374      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_3_DW_mult_uns_J11_0
+pos_core/mul2/sub_34                1585.3716      0.2    1585.3716      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_3_DW01_sub_0_DW01_sub_49
+pos_core/mul2/sub_40                 587.3004      0.1     587.3004      0.0000  0.0000  Dim1_Modular_Mul_DATA_WIDTH33_3_DW01_dec_0_DW01_dec_17
+pos_core/r527                        108.6336      0.0     108.6336      0.0000  0.0000  FrFT_core_20_10_28_33_32_32_5_0fc000000_0fffffc00_DW01_inc_2_DW01_inc_18
+r443                                 108.6336      0.0     108.6336      0.0000  0.0000  FrFT_top_DW01_inc_3
+sub_119_C98_aco                      538.0758      0.1     538.0758      0.0000  0.0000  FrFT_top_DW01_sub_1_DW01_sub_3
+sub_119_C99_aco                      543.1680      0.1     543.1680      0.0000  0.0000  FrFT_top_DW01_sub_0_DW01_sub_2
+sub_165_C197                         471.8772      0.1     471.8772      0.0000  0.0000  FrFT_top_DW01_dec_1
+sub_165_C198                         471.8772      0.1     471.8772      0.0000  0.0000  FrFT_top_DW01_dec_0
+--------------------------------  -----------  -------  -----------  ----------  ------  ---------------------------------------------------------------------------
+Total                                                   622849.0539  82571.7212  0.0000
+
+1
