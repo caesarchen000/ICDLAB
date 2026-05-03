@@ -11,8 +11,9 @@
 * Note:
 *     It contains 32 words with 33 bits
 *     There is 2 banks, each bank supports 1 read & 1 write
+*     synchronous read (read will delay 1 cycle)
 * Review History:
-*     2026.05.02    Guan-Yi Tsen
+*     2026.05.03    Guan-Yi Tsen
 *********************************************************************/
 
 module RegFileDual #(
@@ -84,21 +85,21 @@ module RegFileDual #(
 
     end
 
-    // // Pipeline Register for Read Data (Timing Optimization)
-    // always @(posedge clk or negedge rst_n) begin
-    //     if (!rst_n) begin
-    //         read_data_1 <= 0; read_data_2 <= 0;
-    //     end else begin
-    //         // Fetch the output data based on the original Bank ID mapping
-    //         read_data_1 <= bank_rdata[p_raddr_1[4]];
-    //         read_data_2 <= bank_rdata[p_raddr_2[4]];
-    //     end
-    // end
-
-    always @(*) begin
-        read_data_1 = bank_rdata[p_raddr_1[4]];
-        read_data_2 = bank_rdata[p_raddr_2[4]];
+    // Pipeline Register for Read Data (Timing Optimization)
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            read_data_1 <= 0; read_data_2 <= 0;
+        end else begin
+            // Fetch the output data based on the original Bank ID mapping
+            read_data_1 <= bank_rdata[p_raddr_1[4]];
+            read_data_2 <= bank_rdata[p_raddr_2[4]];
+        end
     end
+
+    // always @(*) begin
+    //     read_data_1 = bank_rdata[p_raddr_1[4]];
+    //     read_data_2 = bank_rdata[p_raddr_2[4]];
+    // end
 
     // ====================================================================
     // 4. Write Crossbar (Dispatching Data and Enables)

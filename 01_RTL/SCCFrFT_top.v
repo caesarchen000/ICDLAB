@@ -18,7 +18,7 @@
 * Note:
 *
 * Review History:
-*     2026.05.02    Guan-Yi Tsen
+*     2026.05.03    Guan-Yi Tsen
 *********************************************************************/
 
 module FrFT_top #(
@@ -118,16 +118,16 @@ module FrFT_top #(
     wire signed [33:0] decoded_pos = decode_dim1(pos_result_r);
     wire signed [33:0] decoded_neg = decode_dim1(neg_result_r);
     wire signed [34:0] final_sum = decoded_pos + decoded_neg;
-    assign o_data  = final_sum[28:17]; // 18 bit with scale = 64^3
+    assign o_data  = final_sum[28:17]; // 17 bit with scale = 64*32*64
 
     // ====================================================================
     // Main FSM
     // ====================================================================
     always @(*) begin
-        key_w          = key_r;
-        state_w        = state_r;
-        counter_w      = counter_r;
-        input_ready_w  = input_ready_r;
+        key_w         = key_r;
+        state_w       = state_r;
+        counter_w     = counter_r;
+        input_ready_w = input_ready_r;
         lut_sel = 0; lut_idx  = 0;
         core_i_data      = 32'd0;
         core_chirp2_data = 16'd0;
@@ -222,7 +222,7 @@ module FrFT_top #(
                 if (o_ready || out_counter_r == 0) begin
                     out_counter_w = out_counter_r + 1'b1;
 
-                    if (out_counter_r == 2 * LOAD_CYCLE - 1) begin
+                    if (out_counter_r == 2 * LOAD_CYCLE) begin
                         out_state_w    = OUT_IDLE;
                         output_valid_w = 1'b0;
                     end

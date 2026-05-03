@@ -16,7 +16,7 @@
 * Note:
 *
 * Review History:
-*     2026.05.02    Guan-Yi Tsen
+*     2026.05.03    Guan-Yi Tsen
 *********************************************************************/
 
 module FrFT_core #(
@@ -144,13 +144,14 @@ module FrFT_core #(
     // 宣告兩組 BFU 需要的 Index 與 Twiddle
     reg [4:0] idxA_1, idxB_1, idxA_reverse_1, idxB_reverse_1;
     reg [4:0] idxA_2, idxB_2, idxA_reverse_2, idxB_reverse_2;
-    reg [4:0] idxA_1_d1, idxB_1_d1, idxA_reverse_1_d1, idxB_reverse_1_d1;
-    reg [4:0] idxA_2_d1, idxB_2_d1, idxA_reverse_2_d1, idxB_reverse_2_d1;
-    reg [3:0] twiddle_k_1, twiddle_k_2;
+    reg [4:0] idxA_1_d1, idxB_1_d1;
+    reg [4:0] idxA_2_d1, idxB_2_d1;
+    reg [4:0] idxA_1_d2, idxB_1_d2, idxA_reverse_1_d2, idxB_reverse_1_d2;
+    reg [4:0] idxA_2_d2, idxB_2_d2, idxA_reverse_2_d2, idxB_reverse_2_d2;
+    reg [3:0] twiddle_k_1_d1, twiddle_k_2_d1;
     reg       dual_bfu_en;
 
     wire [2:0] fnt_stage;
-    wire [2:0] fnt_bfly_half; // 變成 3-bit (0~7)，因為每週期做 2 個
     wire [3:0] fnt_bfly_1, fnt_bfly_2;
 
     // 假設你的 counter_r 在 FFNT/IFNT 狀態下，最低 3 位用作 bfly 計數，接下來 3 位用作 stage 計數
@@ -159,22 +160,13 @@ module FrFT_core #(
     assign fnt_bfly_2 = dual_bfu_en ? {counter_r[2:0], 1'b1} : 4'd0;
 
     always @(*) begin
-        // 初始化
-        idxA_1 = 0; idxB_1 = 0; twiddle_k_1 = 0;
-        idxA_2 = 0; idxB_2 = 0; twiddle_k_2 = 0;
+        idxA_1 = 0; idxB_1 = 0;
+        idxA_2 = 0; idxB_2 = 0;
 
         // ==========================================
-        // 第一組 BFU 邏輯 (使用 fnt_bfly_1)
+        // BFU 1
         // ==========================================
-        case(fnt_stage)
-            3'd0 : twiddle_k_1 = fnt_bfly_1;
-            3'd1 : twiddle_k_1 = {fnt_bfly_1[2:0], 1'b0};
-            3'd2 : twiddle_k_1 = {fnt_bfly_1[1:0], 2'b0};
-            3'd3 : twiddle_k_1 = {fnt_bfly_1[0], 3'b0};
-            3'd4 : twiddle_k_1 = 4'b0;
-        endcase
-
-        case(fnt_stage)
+        case(fnt_stage) // synopsys parallel_case
             3'd0 : begin
                 idxA_1 = {1'b0, fnt_bfly_1};
                 idxB_1 = {1'b1, fnt_bfly_1};
@@ -198,17 +190,9 @@ module FrFT_core #(
         endcase
 
         // ==========================================
-        // 第二組 BFU 邏輯 (使用 fnt_bfly_2)
+        // BFU 2
         // ==========================================
-        case(fnt_stage)
-            3'd0 : twiddle_k_2 = fnt_bfly_2;
-            3'd1 : twiddle_k_2 = {fnt_bfly_2[2:0], 1'b0};
-            3'd2 : twiddle_k_2 = {fnt_bfly_2[1:0], 2'b0};
-            3'd3 : twiddle_k_2 = {fnt_bfly_2[0], 3'b0};
-            3'd4 : twiddle_k_2 = 4'b0;
-        endcase
-
-        case(fnt_stage)
+        case(fnt_stage) // synopsys parallel_case
             3'd0 : begin
                 idxA_2 = {1'b0, fnt_bfly_2};
                 idxB_2 = {1'b1, fnt_bfly_2};
@@ -232,21 +216,40 @@ module FrFT_core #(
         endcase
 
         // ==========================================
-        // 位元反轉 (供 S_IFNT 讀取時使用)
+        // Bit reverse (for IFNT)
         // ==========================================
         idxA_reverse_1 = {idxA_1[0], idxA_1[1], idxA_1[2], idxA_1[3], idxA_1[4]};
         idxB_reverse_1 = {idxB_1[0], idxB_1[1], idxB_1[2], idxB_1[3], idxB_1[4]};
         idxA_reverse_2 = {idxA_2[0], idxA_2[1], idxA_2[2], idxA_2[3], idxA_2[4]};
         idxB_reverse_2 = {idxB_2[0], idxB_2[1], idxB_2[2], idxB_2[3], idxB_2[4]};
-        idxA_reverse_1_d1 = {idxA_1_d1[0], idxA_1_d1[1], idxA_1_d1[2], idxA_1_d1[3], idxA_1_d1[4]};
-        idxB_reverse_1_d1 = {idxB_1_d1[0], idxB_1_d1[1], idxB_1_d1[2], idxB_1_d1[3], idxB_1_d1[4]};
-        idxA_reverse_2_d1 = {idxA_2_d1[0], idxA_2_d1[1], idxA_2_d1[2], idxA_2_d1[3], idxA_2_d1[4]};
-        idxB_reverse_2_d1 = {idxB_2_d1[0], idxB_2_d1[1], idxB_2_d1[2], idxB_2_d1[3], idxB_2_d1[4]};
+
+        idxA_reverse_1_d2 = {idxA_1_d2[0], idxA_1_d2[1], idxA_1_d2[2], idxA_1_d2[3], idxA_1_d2[4]};
+        idxB_reverse_1_d2 = {idxB_1_d2[0], idxB_1_d2[1], idxB_1_d2[2], idxB_1_d2[3], idxB_1_d2[4]};
+        idxA_reverse_2_d2 = {idxA_2_d2[0], idxA_2_d2[1], idxA_2_d2[2], idxA_2_d2[3], idxA_2_d2[4]};
+        idxB_reverse_2_d2 = {idxB_2_d2[0], idxB_2_d2[1], idxB_2_d2[2], idxB_2_d2[3], idxB_2_d2[4]};
     end
 
     always @(posedge clk) begin
-        idxA_1_d1 <= idxA_1; idxB_1_d1 <= idxB_1;
-        idxA_2_d1 <= idxA_2; idxB_2_d1 <= idxB_2;
+        idxA_1_d1 <= idxA_1;    idxB_1_d1 <= idxB_1;
+        idxA_2_d1 <= idxA_2;    idxB_2_d1 <= idxB_2;
+        idxA_1_d2 <= idxA_1_d1; idxB_1_d2 <= idxB_1_d1;
+        idxA_2_d2 <= idxA_2_d1; idxB_2_d2 <= idxB_2_d1;
+
+        case(fnt_stage) // synopsys parallel_case full_case
+            3'd0 : twiddle_k_1_d1 <= fnt_bfly_1;
+            3'd1 : twiddle_k_1_d1 <= {fnt_bfly_1[2:0], 1'b0};
+            3'd2 : twiddle_k_1_d1 <= {fnt_bfly_1[1:0], 2'b0};
+            3'd3 : twiddle_k_1_d1 <= {fnt_bfly_1[0], 3'b0};
+            3'd4 : twiddle_k_1_d1 <= 4'b0;
+        endcase
+
+        case(fnt_stage) // synopsys parallel_case full_case
+            3'd0 : twiddle_k_2_d1 <= fnt_bfly_2;
+            3'd1 : twiddle_k_2_d1 <= {fnt_bfly_2[2:0], 1'b0};
+            3'd2 : twiddle_k_2_d1 <= {fnt_bfly_2[1:0], 2'b0};
+            3'd3 : twiddle_k_2_d1 <= {fnt_bfly_2[0], 3'b0};
+            3'd4 : twiddle_k_2_d1 <= 4'b0;
+        endcase
     end
 
     // ====================================================================
@@ -267,7 +270,7 @@ module FrFT_core #(
         mul_in_a_1 = 0;  mul_in_b_1 = 0; mul_in_a_2 = 0; mul_in_b_2 = 0;
         bfu_shift_1 = 0; bfu_in_a_1 = 0; bfu_in_b_1 = 0;
         bfu_shift_2 = 0; bfu_in_a_2 = 0; bfu_in_b_2 = 0;
-        dual_bfu_en = 0;
+        dual_bfu_en = 1;
         o_data = 0; i_chirp3_ready = 0; o_mul3_valid = 0; i_data_ready = 0;
 
         case(state_r)
@@ -291,23 +294,26 @@ module FrFT_core #(
             end
             S_CFNT : begin
                 dual_bfu_en = 0;
-                if (counter_r < 2*FNT_CYCLE) begin
-                    chirp_read_addr_1  = idxA_1;
-                    chirp_read_addr_2  = idxB_1;
-                    bfu_in_a_1         = chirp_read_data_1;
-                    bfu_in_b_1         = chirp_read_data_2;
-                    bfu_shift_1        = twiddle_k_1;
-                end
 
-                if (counter_r > 0) begin
+                // delay 0 cycle
+                chirp_read_addr_1 = idxA_1;
+                chirp_read_addr_2 = idxB_1;
+
+                // delay 1 cycle
+                bfu_in_a_1  = chirp_read_data_1;
+                bfu_in_b_1  = chirp_read_data_2;
+                bfu_shift_1 = twiddle_k_1_d1;
+
+                if (counter_r > 1) begin
+                    // delay 2 cycle
                     chirp_wen1 = 1'b1; chirp_wen2 = 1'b1;
-                    chirp_write_addr_1 = idxA_1_d1;
+                    chirp_write_addr_1 = idxA_1_d2;
                     chirp_write_data_1 = bfu_add_out_1;
-                    chirp_write_addr_2 = idxB_1_d1;
+                    chirp_write_addr_2 = idxB_1_d2;
                     chirp_write_data_2 = bfu_sub_out_1;
                 end
 
-                if (counter_r == 2*FNT_CYCLE) begin // 16 * 5 = 80
+                if (counter_r == 2*FNT_CYCLE + 1) begin
                     state_w      = S_LOAD;
                     counter_w    = 0;
                     i_data_ready = 1'b1;
@@ -331,26 +337,27 @@ module FrFT_core #(
                 end
             end
             S_MUL1 : begin
-                if (counter_r < MUL_CYCLE) begin
-                    read_addr_1  = {counter_r[3:0], 1'b0};
-                    mul_in_a_1   = input_transformation(read_data_1[15:0],  i_mode);
-                    mul_in_b_1   = input_transformation(read_data_1[31:16], i_mode);
-                    
-                    read_addr_2  = {counter_r[3:0], 1'b1};
-                    mul_in_a_2   = input_transformation(read_data_2[15:0],  i_mode);
-                    mul_in_b_2   = input_transformation(read_data_2[31:16], i_mode);
-                end
+                // delay 0 cycle
+                read_addr_1 = {counter_r[3:0], 1'b0};
+                read_addr_2 = {counter_r[3:0], 1'b1};
 
-                if (counter_r > 0) begin
+                // delay 1 cycle
+                mul_in_a_1 = input_transformation(read_data_1[15:0],  i_mode);
+                mul_in_b_1 = input_transformation(read_data_1[31:16], i_mode);
+                mul_in_a_2 = input_transformation(read_data_2[15:0],  i_mode);
+                mul_in_b_2 = input_transformation(read_data_2[31:16], i_mode);
+
+                if (counter_r > 1) begin
+                    // delay 2 cycle
                     wen1 = 1'b1; wen2 = 1'b1;
-                    write_addr_1 = {(counter_r[3:0] - 4'd1), 1'b0};
+                    write_addr_1 = {(counter_r[3:0] - 4'd2), 1'b0};
                     write_data_1 = mul_out_1;
 
-                    write_addr_2 = {(counter_r[3:0] - 4'd1), 1'b1};
+                    write_addr_2 = {(counter_r[3:0] - 4'd2), 1'b1};
                     write_data_2 = mul_out_2;
                 end
 
-                if (counter_r == MUL_CYCLE) begin 
+                if (counter_r == MUL_CYCLE + 1) begin 
                     state_w   = S_FFNT;
                     counter_w = 0;
                 end else begin
@@ -358,38 +365,32 @@ module FrFT_core #(
                 end
             end
             S_FFNT : begin
-                dual_bfu_en = 1;
-                if (counter_r < FNT_CYCLE) begin
-                    // BFU 1
-                    read_addr_1  = idxA_1;
-                    read_addr_2  = idxB_1;
+                // delay 0 cycle
+                read_addr_1 = idxA_1;
+                read_addr_2 = idxB_1;
+                read_addr_3 = idxA_2;
+                read_addr_4 = idxB_2;
 
-                    bfu_in_a_1   = read_data_1;
-                    bfu_in_b_1   = read_data_2;
-                    bfu_shift_1  = twiddle_k_1;
+                // delay 1 cycle
+                bfu_in_a_1  = read_data_1;
+                bfu_in_b_1  = read_data_2;
+                bfu_shift_1 = twiddle_k_1_d1;
+                bfu_in_a_2  = read_data_3;
+                bfu_in_b_2  = read_data_4;
+                bfu_shift_2 = twiddle_k_2_d1;
 
-                    // BFU 2
-                    read_addr_3  = idxA_2;
-                    read_addr_4  = idxB_2;
-
-                    bfu_in_a_2   = read_data_3;
-                    bfu_in_b_2   = read_data_4;
-                    bfu_shift_2  = twiddle_k_2;
-                end
-
-                if (counter_r > 0) begin
-                    // BFU 1
+                if (counter_r > 1) begin
+                    // delay 2 cycle
                     wen1 = 1'b1; wen2 = 1'b1;
-                    write_addr_1 = idxA_1_d1; write_data_1 = bfu_add_out_1;
-                    write_addr_2 = idxB_1_d1; write_data_2 = bfu_sub_out_1;
+                    write_addr_1 = idxA_1_d2; write_data_1 = bfu_add_out_1;
+                    write_addr_2 = idxB_1_d2; write_data_2 = bfu_sub_out_1;
 
-                    // BFU 2
                     wen3 = 1'b1; wen4 = 1'b1;
-                    write_addr_3 = idxA_2_d1; write_data_3 = bfu_add_out_2;
-                    write_addr_4 = idxB_2_d1; write_data_4 = bfu_sub_out_2;
+                    write_addr_3 = idxA_2_d2; write_data_3 = bfu_add_out_2;
+                    write_addr_4 = idxB_2_d2; write_data_4 = bfu_sub_out_2;
                 end
 
-                if (counter_r == FNT_CYCLE) begin
+                if (counter_r == FNT_CYCLE + 1) begin
                     state_w   = S_MUL2;
                     counter_w = 0;
                 end else begin
@@ -397,27 +398,28 @@ module FrFT_core #(
                 end
             end
             S_MUL2 : begin
-                if (counter_r < MUL_CYCLE) begin
-                    read_addr_1       = {counter_r[3:0], 1'b0};
-                    mul_in_a_1        = read_data_1;
-                    chirp_read_addr_1 = {counter_r[3:0], 1'b0};
-                    mul_in_b_1        = chirp_read_data_1;
+                // delay 0 cycle
+                read_addr_1       = {counter_r[3:0], 1'b0};
+                chirp_read_addr_1 = {counter_r[3:0], 1'b0};
+                read_addr_2       = {counter_r[3:0], 1'b1};
+                chirp_read_addr_2 = {counter_r[3:0], 1'b1};
 
-                    read_addr_2       = {counter_r[3:0], 1'b1};
-                    mul_in_a_2        = read_data_2;
-                    chirp_read_addr_2 = {counter_r[3:0], 1'b1};
-                    mul_in_b_2        = chirp_read_data_2;
-                end
+                // delay 1 cycle
+                mul_in_a_1 = read_data_1;
+                mul_in_b_1 = chirp_read_data_1;
+                mul_in_a_2 = read_data_2;
+                mul_in_b_2 = chirp_read_data_2;
 
-                if (counter_r > 0) begin
+                if (counter_r > 1) begin
+                    // delay 2 cycle
                     wen1 = 1'b1; wen2 = 1'b1;
-                    write_addr_1 = {counter_r[3:0] - 4'd1, 1'b0};
+                    write_addr_1 = {counter_r[3:0] - 4'd2, 1'b0};
                     write_data_1 = mul_out_1;
-                    write_addr_2 = {counter_r[3:0] - 4'd1, 1'b1};
+                    write_addr_2 = {counter_r[3:0] - 4'd2, 1'b1};
                     write_data_2 = mul_out_2;
                 end
 
-                if (counter_r == MUL_CYCLE) begin
+                if (counter_r == MUL_CYCLE + 1) begin
                     state_w   = S_IFNT;
                     counter_w = 0;
                 end else begin
@@ -425,57 +427,47 @@ module FrFT_core #(
                 end
             end
             S_IFNT : begin
-                dual_bfu_en = 1;
-                if (counter_r < FNT_CYCLE) begin
-                    // BFU 1
-                    read_addr_1 = idxA_reverse_1;
-                    read_addr_2 = idxB_reverse_1;
+                // delay 0 cycle
+                read_addr_1 = idxA_reverse_1;
+                read_addr_2 = idxB_reverse_1;
+                read_addr_3 = idxA_reverse_2;
+                read_addr_4 = idxB_reverse_2;
 
-                    if (twiddle_k_1 == 0) begin
-                        bfu_shift_1 = 5'd0;
-                        bfu_in_a_1  = read_data_1;
-                        bfu_in_b_1  = read_data_2;
-                    end else begin
-                        bfu_shift_1 = 5'd16 - twiddle_k_1;
-                        bfu_in_a_1  = read_data_2;
-                        bfu_in_b_1  = read_data_1;
-                    end
-
-                    // BFU 2
-                    read_addr_3 = idxA_reverse_2;
-                    read_addr_4 = idxB_reverse_2;
-
-                    if (twiddle_k_2 == 0) begin
-                        bfu_shift_2 = 5'd0;
-                        bfu_in_a_2  = read_data_3;
-                        bfu_in_b_2  = read_data_4;
-                    end else begin
-                        bfu_shift_2 = 5'd16 - twiddle_k_2;
-                        bfu_in_a_2  = read_data_4;
-                        bfu_in_b_2  = read_data_3;
-                    end
+                // delay 1 cycle
+                if (twiddle_k_1_d1 == 0) begin
+                    bfu_shift_1 = 5'd0;
+                    bfu_in_a_1  = read_data_1;
+                    bfu_in_b_1  = read_data_2;
+                end else begin
+                    bfu_shift_1 = 5'd16 - twiddle_k_1_d1;
+                    bfu_in_a_1  = read_data_2;
+                    bfu_in_b_1  = read_data_1;
                 end
 
-                if (counter_r > 0) begin
-                    // BFU 1
+                // twiddle_k_2_d1 will never be 0!
+                bfu_shift_2 = 5'd16 - twiddle_k_2_d1;
+                bfu_in_a_2  = read_data_4;
+                bfu_in_b_2  = read_data_3;
+
+                if (counter_r > 1) begin
+                    // delay 2 cycle
                     wen1 = 1'b1; wen2 = 1'b1;
-                    write_addr_1 = idxA_reverse_1_d1; write_data_1 = bfu_add_out_1;
-                    write_addr_2 = idxB_reverse_1_d1; write_data_2 = bfu_sub_out_1;
+                    write_addr_1 = idxA_reverse_1_d2; write_data_1 = bfu_add_out_1;
+                    write_addr_2 = idxB_reverse_1_d2; write_data_2 = bfu_sub_out_1;
 
-                    // BFU 2
                     wen3 = 1'b1; wen4 = 1'b1;
-                    write_addr_3 = idxA_reverse_2_d1; write_data_3 = bfu_add_out_2;
-                    write_addr_4 = idxB_reverse_2_d1; write_data_4 = bfu_sub_out_2;
+                    write_addr_3 = idxA_reverse_2_d2; write_data_3 = bfu_add_out_2;
+                    write_addr_4 = idxB_reverse_2_d2; write_data_4 = bfu_sub_out_2;
                 end
 
-                if (counter_r > FNT_CYCLE - LOAD_CYCLE) begin
-                    i_chirp3_ready = 1;
-                    chirp_write_addr_1 = counter_r - (FNT_CYCLE - LOAD_CYCLE + 1);
-                    chirp_write_data_1 = input_transformation(i_chirp3_data, i_mode);
+                if (counter_r < LOAD_CYCLE) begin
+                    i_chirp3_ready     = 1;
                     chirp_wen1         = 1'b1;
+                    chirp_write_addr_1 = counter_r;
+                    chirp_write_data_1 = input_transformation(i_chirp3_data, i_mode);
                 end
 
-                if (counter_r == FNT_CYCLE) begin
+                if (counter_r == FNT_CYCLE + 1) begin
                     state_w   = S_MUL3;
                     counter_w = 0;
                 end else begin
@@ -483,27 +475,28 @@ module FrFT_core #(
                 end
             end
             S_MUL3 : begin
-                if (counter_r < MUL_CYCLE) begin
-                    read_addr_1       = {counter_r[3:0], 1'b0};
-                    mul_in_a_1        = read_data_1;
-                    chirp_read_addr_1 = {counter_r[3:0], 1'b0};
-                    mul_in_b_1        = chirp_read_data_1;
+                // delay 0 cycle
+                read_addr_1       = {counter_r[3:0], 1'b0};
+                chirp_read_addr_1 = {counter_r[3:0], 1'b0};
+                read_addr_2       = {counter_r[3:0], 1'b1};
+                chirp_read_addr_2 = {counter_r[3:0], 1'b1};
 
-                    read_addr_2       = {counter_r[3:0], 1'b1};
-                    mul_in_a_2        = read_data_2;
-                    chirp_read_addr_2 = {counter_r[3:0], 1'b1};
-                    mul_in_b_2        = chirp_read_data_2;
-                end
+                // delay 1 cycle
+                mul_in_a_1 = read_data_1;
+                mul_in_b_1 = chirp_read_data_1;
+                mul_in_a_2 = read_data_2;
+                mul_in_b_2 = chirp_read_data_2;
 
-                if (counter_r > 0) begin
+                if (counter_r > 1) begin
+                    // delay 2 cycle
                     wen1 = 1'b1; wen2 = 1'b1;
-                    write_addr_1 = {counter_r[3:0] - 4'd1, 1'b0};
+                    write_addr_1 = {counter_r[3:0] - 4'd2, 1'b0};
                     write_data_1 = mul_out_1;
-                    write_addr_2 = {counter_r[3:0] - 4'd1, 1'b1};
+                    write_addr_2 = {counter_r[3:0] - 4'd2, 1'b1};
                     write_data_2 = mul_out_2;
                 end
 
-                if (counter_r == MUL_CYCLE) begin
+                if (counter_r == MUL_CYCLE + 1) begin
                     state_w   = S_DONE;
                     counter_w = 0;
                 end else begin
@@ -529,11 +522,14 @@ module FrFT_core #(
                 if (state_r == S_DONE & o_ready) begin
                     out_state_w   = OUT_BUSY;
                     out_counter_w = 0;
+                    read_addr_1   = 0;
                 end
             end
             OUT_BUSY : begin
                 if (out_counter_r < 2*LOAD_CYCLE) begin
-                    read_addr_1 = out_counter_r[5:1];
+                    // delay 0 cycle
+                    read_addr_1 = (out_counter_r + 1) >> 1;
+                    // delay 1 cycle
                     mul_in_a_1  = read_data_1;
                     mul_in_b_1  = out_counter_r[0] ? IMAG_SCALE : REAL_SCALE;
                 end
@@ -592,7 +588,7 @@ module FrFT_core #(
         .REG_DEPTH(REG_DEPTH),
         .REG_ADDRW(REG_ADDRW)
     ) ChirpRegFile (
-        .clk(clk),
+        .clk(clk), .rst_n(rst_n),
         // read : input REG_ADDRW bits, output DATA_WIDTH bits
         .read_addr_1(chirp_read_addr_1), .read_data_1(chirp_read_data_1), 
         .read_addr_2(chirp_read_addr_2), .read_data_2(chirp_read_data_2),
@@ -601,7 +597,7 @@ module FrFT_core #(
         .wen2(chirp_wen2), .write_addr_2(chirp_write_addr_2), .write_data_2(chirp_write_data_2)
     );
 
-    Dim1_Modular_Mul #(
+    Dim1_Modular_Mul #( // delay 1 cycle
         .DATA_WIDTH(DATA_WIDTH)
     ) mul1 (
         .clk(clk),
@@ -610,7 +606,7 @@ module FrFT_core #(
         .O(mul_out_1)   // output DATA_WIDTH bits
     );
 
-    Dim1_Modular_Mul #(
+    Dim1_Modular_Mul #( // delay 1 cycle
         .DATA_WIDTH(DATA_WIDTH)
     ) mul2 (
         .clk(clk),
@@ -619,7 +615,7 @@ module FrFT_core #(
         .O(mul_out_2)   // output DATA_WIDTH bits
     );
 
-    Dim1_BFU #(  // pure combinational circuit
+    Dim1_BFU #(  // delay 1 cycle
         .DATA_WIDTH(DATA_WIDTH)
     ) bfu1 (
         .clk(clk),
@@ -630,7 +626,7 @@ module FrFT_core #(
         .O_sub(bfu_sub_out_1)  // output DATA_WIDTH bits
     );
 
-    Dim1_BFU #(  // pure combinational circuit
+    Dim1_BFU #(  // delay 1 cycle
         .DATA_WIDTH(DATA_WIDTH)
     ) bfu2 (
         .clk(clk),

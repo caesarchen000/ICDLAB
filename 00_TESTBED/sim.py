@@ -17,6 +17,8 @@ J = 2**16
 N = 32
 Q_SCALE_1 = 64.0
 Q_SCALE_2 = 32.0  
+NUM_PATTERNS = 5
+KEY_INC = 10     # base key + KEY_INC * n
 
 def mod_add(a, b): return (a + b) % M
 def mod_sub(a, b): return (a - b) % M
@@ -317,8 +319,6 @@ def gen_tb_gt_from_sim(alpha_arg, outdir, key_arg=None, random_alpha=False, seed
     all_keys = []
     all_out_float = []
 
-    NUM_PATTERNS = 100 # 連續測試 5 組
-
     for p in range(NUM_PATTERNS):
         # 每組產生不同的 Key 與 Alpha
         if random_alpha:
@@ -327,7 +327,7 @@ def gen_tb_gt_from_sim(alpha_arg, outdir, key_arg=None, random_alpha=False, seed
             key = int(round((alpha / math.pi) * 128.0)) & 0xFF
         else:
             base_key = key_arg if key_arg is not None else int(round((alpha_arg / math.pi) * 128.0)) & 0xFF
-            key = (base_key + p * 1) % 256 # 刻意錯開 Key
+            key = (base_key + p * KEY_INC) % 256 # 刻意錯開 Key
             if key == 0: key = 1 # 避免 0 產生奇異值
             alpha = key * math.pi / 128.0
 
@@ -351,11 +351,11 @@ def gen_tb_gt_from_sim(alpha_arg, outdir, key_arg=None, random_alpha=False, seed
         # 【重點】只針對第 0 組 (第一組) 產生 Debug Stages
         if p == 0 and dump_stages:
             dbg = frft_1d_debug(x_real, x_imag, chirps)
-            stage_dir = outdir / "stages"
-            stage_dir.mkdir(parents=True, exist_ok=True)
-            stage_keys = [k for k in dbg.keys() if "raw" not in k]
-            for name in stage_keys:
-                write_stage_hex(stage_dir / f"{name}.hex", dbg[name])
+            # stage_dir = outdir / "stages"
+            # stage_dir.mkdir(parents=True, exist_ok=True)
+            # stage_keys = [k for k in dbg.keys() if "raw" not in k]
+            # for name in stage_keys:
+            #     write_stage_hex(stage_dir / f"{name}.hex", dbg[name])
             write_debug_stages_txt(outdir / "debug_stages.txt", in_words, dbg)
 
         out_words = []
@@ -380,7 +380,7 @@ def gen_tb_gt_from_sim(alpha_arg, outdir, key_arg=None, random_alpha=False, seed
 
     print(f"Generated {NUM_PATTERNS} patterns GT at: {outdir}")
     if dump_stages:
-        print("Stage files (Only for Pattern 0): stages/*.hex and debug_stages.txt")
+        print("Generated debug_stages.txt for Pattern 0")
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()

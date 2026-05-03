@@ -2,14 +2,21 @@ sh mkdir -p Netlist
 sh mkdir -p Report
 
 read_verilog ../01_RTL/SCCFrFT_top.v
+read_verilog ../01_RTL/SCCFrFT_core.v
+read_verilog ../01_RTL/BFU.v
+read_verilog ../01_RTL/Chirp_Generator.v
+read_verilog ../01_RTL/LUT_chirp.v
+read_verilog ../01_RTL/Modular_Mul.v
+read_verilog ../01_RTL/RegFileDual.v
+read_verilog ../01_RTL/RegFileTetra.v
 
-set DESIGN "FrFT"
+set DESIGN "FrFT_top"
 current_design [get_designs $DESIGN]
 
 #You may modified the clock constraints 
 #or add more constraints for your design
 ####################################################
-set cycle  50
+set cycle  20
 ####################################################
 
 #The following are design spec. for synthesis
@@ -38,8 +45,10 @@ set_input_delay  $t_in  -clock CLK [get_ports rst_n]
 
 #Compile and save files
 #You may modified setting of compile 
-
+set_host_options -max_cores 8
+set_max_area 0
 compile
+compile_ultra -retime
 
 #####################################################
 set bus_inference_style {%s[%d]}
@@ -54,8 +63,8 @@ change_names    -hierarchy  -rules name_rule
 set verilogout_no_tri   true
 
 report_area         -hierarchy
-report_timing       -delay min  -max_path 5
-report_timing       -delay max  -max_path 5
+#report_timing       -delay min  -max_path 5
+#report_timing       -delay max  -max_path 5
 report_area         -hierarchy              > ./Report/${DESIGN}_syn.area
 report_timing       -delay min  -max_path 5 > ./Report/${DESIGN}_syn.timing_min
 report_timing       -delay max  -max_path 5 > ./Report/${DESIGN}_syn.timing_max
@@ -76,7 +85,7 @@ write   -f verilog  -hierarchy  -output ./Netlist/${DESIGN}_syn.v
 #####################################################  
 
 # restore the memory design for further improvement if needed (remember to remove the memory design before writing verilog)
-read_ddc ./Netlist/${DESIGN}_syn.ddc
+#read_ddc ./Netlist/${DESIGN}_syn.ddc
 
 
 

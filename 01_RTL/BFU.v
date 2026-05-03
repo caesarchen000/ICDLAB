@@ -21,7 +21,8 @@ module Dim1_BFU #(
 );         
     wire                   [5:0] shift_base;
     wire          [DATA_WIDTH:0] true_A, true_B, mod_sum;
-    wire signed [DATA_WIDTH+1:0] sum, temp_sub, folded_sub;
+    reg  signed   [DATA_WIDTH:0] temp_sub;
+    wire signed [DATA_WIDTH+1:0] sum, folded_sub;
     wire        [DATA_WIDTH-1:0] diff_val, mod_sub, add_result, sub_result;
     wire      [2*DATA_WIDTH-3:0] shifted_diff;
     reg         [DATA_WIDTH-1:0] O_add_reg, O_sub_reg;
@@ -36,8 +37,15 @@ module Dim1_BFU #(
     assign mod_sum = (sum >= 35'h1_0000_0001) ? (sum - 35'h1_0000_0001) : sum[33:0];
 
     // Sub
-    assign temp_sub = $signed({1'b0, true_A}) - $signed({1'b0, true_B});
-    assign diff_val = temp_sub[34] ? (temp_sub[32:0] + 33'h1_0000_0001) : temp_sub[32:0];
+    always @(*) begin
+        case ({A[32], B[32]}) // synopsys parallel_case
+            2'b11: temp_sub = 34'sd0; // 0 - 0 = 0
+            2'b10: temp_sub = - $signed({2'b0, B[31:0]} + 34'sd1); // 0 - (B_val + 1)
+            2'b01: temp_sub =   $signed({2'b0, A[31:0]} + 34'sd1); // (A_val + 1) - 0
+            2'b00: temp_sub =   $signed({2'b0, A[31:0]}) - $signed({3'b0, B[31:0]});
+        endcase
+    end
+    assign diff_val = temp_sub[33] ? (temp_sub[32:0] + 33'h1_0000_0001) : temp_sub[32:0];
 
     assign shifted_diff = diff_val << shift_base;
 
