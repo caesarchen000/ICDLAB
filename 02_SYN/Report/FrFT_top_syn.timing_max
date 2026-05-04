@@ -1,0 +1,990 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 5
+Design : FrFT_top
+Version: U-2022.12
+Date   : Sun May  3 12:18:12 2026
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: slow   Library: slow
+Wire Load Model Mode: top
+
+  Startpoint: pos_core/state_r_reg_1_
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: pos_core/bfu1/O_sub_reg_reg_31_
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FrFT_top           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  pos_core/state_r_reg_1_/CK (DFFRX4)                     0.00 #     0.50 r
+  pos_core/state_r_reg_1_/Q (DFFRX4)                      0.34       0.84 f
+  pos_core/U36/Y (NAND2X6)                                0.07       0.91 r
+  pos_core/U38/Y (INVX8)                                  0.03       0.95 f
+  pos_core/U37/Y (NAND2X8)                                0.12       1.07 r
+  pos_core/U111/Y (OA21X4)                                0.15       1.21 r
+  pos_core/U26/Y (INVX16)                                 0.04       1.26 f
+  pos_core/U69/Y (INVX8)                                  0.05       1.30 r
+  pos_core/U67/Y (BUFX6)                                  0.07       1.38 r
+  pos_core/U375/Y (OR2XL)                                 0.20       1.58 r
+  pos_core/U140/Y (NAND3X2)                               0.12       1.70 f
+  pos_core/bfu1/B[0] (Dim1_BFU_DATA_WIDTH33_0)            0.00       1.70 f
+  pos_core/bfu1/add_32/A[0] (Dim1_BFU_DATA_WIDTH33_0_DW01_inc_0_DW01_inc_20)
+                                                          0.00       1.70 f
+  pos_core/bfu1/add_32/U1_1_1/CO (ADDHX1)                 0.18       1.89 f
+  pos_core/bfu1/add_32/U1_1_2/CO (ADDHX2)                 0.14       2.03 f
+  pos_core/bfu1/add_32/U1_1_3/CO (ADDHX2)                 0.13       2.15 f
+  pos_core/bfu1/add_32/U1_1_4/CO (ADDHX2)                 0.13       2.28 f
+  pos_core/bfu1/add_32/U1_1_5/S (ADDHX2)                  0.07       2.35 r
+  pos_core/bfu1/add_32/SUM[5] (Dim1_BFU_DATA_WIDTH33_0_DW01_inc_0_DW01_inc_20)
+                                                          0.00       2.35 r
+  pos_core/bfu1/U132/Y (NOR2BX1)                          0.37       2.72 r
+  pos_core/bfu1/sub_39/B[5] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_2_DW01_sub_37)
+                                                          0.00       2.72 r
+  pos_core/bfu1/sub_39/U34/Y (INVX1)                      0.18       2.90 f
+  pos_core/bfu1/sub_39/U2_5/CO (ADDFHX2)                  0.22       3.11 f
+  pos_core/bfu1/sub_39/U2_6/CO (ADDFHX2)                  0.15       3.27 f
+  pos_core/bfu1/sub_39/U2_7/CO (ADDFHX4)                  0.13       3.40 f
+  pos_core/bfu1/sub_39/U2_8/CO (ADDFHX4)                  0.15       3.56 f
+  pos_core/bfu1/sub_39/U7/Y (NAND2X2)                     0.08       3.64 r
+  pos_core/bfu1/sub_39/U9/Y (NAND3X2)                     0.07       3.71 f
+  pos_core/bfu1/sub_39/U2_10/CO (ADDFHX2)                 0.16       3.87 f
+  pos_core/bfu1/sub_39/U2_11/CO (ADDFHX4)                 0.13       4.00 f
+  pos_core/bfu1/sub_39/U2_12/CO (ADDFHX4)                 0.13       4.13 f
+  pos_core/bfu1/sub_39/U2_13/CO (ADDFHX4)                 0.12       4.25 f
+  pos_core/bfu1/sub_39/U2_14/CO (ADDFHX2)                 0.14       4.39 f
+  pos_core/bfu1/sub_39/U2_15/CO (ADDFHX2)                 0.15       4.54 f
+  pos_core/bfu1/sub_39/U2_16/CO (ADDFHX2)                 0.15       4.69 f
+  pos_core/bfu1/sub_39/U2_17/CO (ADDFHX4)                 0.13       4.83 f
+  pos_core/bfu1/sub_39/U2_18/CO (ADDFHX4)                 0.13       4.95 f
+  pos_core/bfu1/sub_39/U2_19/CO (ADDFHX4)                 0.12       5.08 f
+  pos_core/bfu1/sub_39/U2_20/CO (ADDFHX2)                 0.15       5.23 f
+  pos_core/bfu1/sub_39/U2_21/CO (ADDFHX4)                 0.17       5.39 f
+  pos_core/bfu1/sub_39/U40/Y (NAND2X4)                    0.07       5.46 r
+  pos_core/bfu1/sub_39/U1/Y (NAND3X4)                     0.06       5.52 f
+  pos_core/bfu1/sub_39/U2_23/CO (ADDFHX4)                 0.17       5.69 f
+  pos_core/bfu1/sub_39/U43/Y (NAND2X4)                    0.07       5.76 r
+  pos_core/bfu1/sub_39/U31/Y (NAND3X4)                    0.06       5.83 f
+  pos_core/bfu1/sub_39/U2_25/CO (ADDFHX4)                 0.13       5.96 f
+  pos_core/bfu1/sub_39/U2_26/CO (ADDFHX4)                 0.13       6.09 f
+  pos_core/bfu1/sub_39/U2_27/CO (ADDFHX4)                 0.16       6.24 f
+  pos_core/bfu1/sub_39/U24/Y (NAND2X2)                    0.12       6.36 r
+  pos_core/bfu1/sub_39/U33/Y (NAND3X8)                    0.05       6.42 f
+  pos_core/bfu1/sub_39/U2_29/CO (ADDFHX4)                 0.16       6.57 f
+  pos_core/bfu1/sub_39/U27/Y (NAND2X1)                    0.15       6.72 r
+  pos_core/bfu1/sub_39/U3/Y (NAND2X4)                     0.06       6.78 f
+  pos_core/bfu1/sub_39/U2_31/CO (ADDFHX4)                 0.13       6.91 f
+  pos_core/bfu1/sub_39/U2_32/CO (ADDFHX4)                 0.12       7.04 f
+  pos_core/bfu1/sub_39/U29/Y (INVX3)                      0.05       7.09 r
+  pos_core/bfu1/sub_39/DIFF[34] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_2_DW01_sub_37)
+                                                          0.00       7.09 r
+  pos_core/bfu1/U5/Y (BUFX12)                             0.08       7.17 r
+  pos_core/bfu1/add_40_aco/B[0] (Dim1_BFU_DATA_WIDTH33_0_DW01_add_1_DW01_add_37)
+                                                          0.00       7.17 r
+  pos_core/bfu1/add_40_aco/U9/Y (AND2X6)                  0.08       7.25 r
+  pos_core/bfu1/add_40_aco/U35/Y (AND2X8)                 0.09       7.34 r
+  pos_core/bfu1/add_40_aco/U7/Y (CLKAND2X12)              0.09       7.43 r
+  pos_core/bfu1/add_40_aco/U6/Y (AND2X8)                  0.08       7.51 r
+  pos_core/bfu1/add_40_aco/U21/Y (CLKAND2X6)              0.11       7.62 r
+  pos_core/bfu1/add_40_aco/U33/Y (AND2X8)                 0.08       7.70 r
+  pos_core/bfu1/add_40_aco/U20/Y (CLKAND2X8)              0.10       7.80 r
+  pos_core/bfu1/add_40_aco/U17/Y (AND2X2)                 0.13       7.94 r
+  pos_core/bfu1/add_40_aco/U19/Y (CLKAND2X6)              0.12       8.06 r
+  pos_core/bfu1/add_40_aco/U32/Y (AND2X8)                 0.08       8.14 r
+  pos_core/bfu1/add_40_aco/U11/Y (AND2X8)                 0.08       8.22 r
+  pos_core/bfu1/add_40_aco/U10/Y (AND2X8)                 0.08       8.30 r
+  pos_core/bfu1/add_40_aco/U18/Y (CLKAND2X6)              0.11       8.41 r
+  pos_core/bfu1/add_40_aco/U5/Y (AND2X8)                  0.08       8.49 r
+  pos_core/bfu1/add_40_aco/U2/Y (AND2X8)                  0.08       8.57 r
+  pos_core/bfu1/add_40_aco/U1/Y (AND2X8)                  0.08       8.65 r
+  pos_core/bfu1/add_40_aco/U22/Y (AND2X2)                 0.14       8.78 r
+  pos_core/bfu1/add_40_aco/U26/Y (CLKAND2X8)              0.12       8.91 r
+  pos_core/bfu1/add_40_aco/U15/Y (AND2X6)                 0.09       9.00 r
+  pos_core/bfu1/add_40_aco/U13/Y (AND2X8)                 0.08       9.08 r
+  pos_core/bfu1/add_40_aco/U12/Y (AND2X8)                 0.08       9.16 r
+  pos_core/bfu1/add_40_aco/U25/Y (CLKAND2X8)              0.11       9.26 r
+  pos_core/bfu1/add_40_aco/U23/Y (AND2X2)                 0.14       9.41 r
+  pos_core/bfu1/add_40_aco/U8/Y (AND2X8)                  0.10       9.51 r
+  pos_core/bfu1/add_40_aco/U4/Y (CLKAND2X12)              0.10       9.60 r
+  pos_core/bfu1/add_40_aco/U3/Y (CLKAND2X12)              0.10       9.70 r
+  pos_core/bfu1/add_40_aco/U34/Y (AND2X8)                 0.08       9.78 r
+  pos_core/bfu1/add_40_aco/U28/Y (CLKAND2X8)              0.10       9.88 r
+  pos_core/bfu1/add_40_aco/U24/Y (AND2X2)                 0.13      10.01 r
+  pos_core/bfu1/add_40_aco/U27/Y (AND2X2)                 0.14      10.15 r
+  pos_core/bfu1/add_40_aco/U29/Y (CLKAND2X3)              0.14      10.29 r
+  pos_core/bfu1/add_40_aco/U31/Y (XOR2X1)                 0.23      10.52 r
+  pos_core/bfu1/add_40_aco/SUM[31] (Dim1_BFU_DATA_WIDTH33_0_DW01_add_1_DW01_add_37)
+                                                          0.00      10.52 r
+  pos_core/bfu1/U94/Y (NAND2X1)                           0.19      10.71 f
+  pos_core/bfu1/U99/Y (MXI2X2)                            0.19      10.90 r
+  pos_core/bfu1/U327/Y (CLKMX2X4)                         0.16      11.06 r
+  pos_core/bfu1/U326/Y (MX3X2)                            0.16      11.22 r
+  pos_core/bfu1/sub_47/B[1] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_1_DW01_sub_36)
+                                                          0.00      11.22 r
+  pos_core/bfu1/sub_47/U39/Y (INVX3)                      0.07      11.29 f
+  pos_core/bfu1/sub_47/U2_1/CO (ADDFHX4)                  0.16      11.45 f
+  pos_core/bfu1/sub_47/U2_2/CO (ADDFHX4)                  0.13      11.58 f
+  pos_core/bfu1/sub_47/U2_3/CO (ADDFHX4)                  0.13      11.71 f
+  pos_core/bfu1/sub_47/U2_4/CO (ADDFHX4)                  0.13      11.84 f
+  pos_core/bfu1/sub_47/U2_5/CO (ADDFHX4)                  0.13      11.97 f
+  pos_core/bfu1/sub_47/U2_6/CO (ADDFHX4)                  0.16      12.13 f
+  pos_core/bfu1/sub_47/U6/Y (NAND2X4)                     0.07      12.20 r
+  pos_core/bfu1/sub_47/U8/Y (NAND3X4)                     0.06      12.26 f
+  pos_core/bfu1/sub_47/U2_8/CO (ADDFHX4)                  0.13      12.39 f
+  pos_core/bfu1/sub_47/U2_9/CO (ADDFHX4)                  0.13      12.52 f
+  pos_core/bfu1/sub_47/U2_10/CO (ADDFHX4)                 0.13      12.64 f
+  pos_core/bfu1/sub_47/U2_11/CO (ADDFHX4)                 0.13      12.77 f
+  pos_core/bfu1/sub_47/U2_12/CO (ADDFHX4)                 0.13      12.90 f
+  pos_core/bfu1/sub_47/U2_13/CO (ADDFHX4)                 0.13      13.03 f
+  pos_core/bfu1/sub_47/U2_14/CO (ADDFHX4)                 0.12      13.15 f
+  pos_core/bfu1/sub_47/U2_15/CO (ADDFX2)                  0.22      13.37 f
+  pos_core/bfu1/sub_47/U2_16/CO (ADDFHX4)                 0.14      13.51 f
+  pos_core/bfu1/sub_47/U2_17/CO (ADDFHX4)                 0.12      13.63 f
+  pos_core/bfu1/sub_47/U2_18/CO (ADDFX2)                  0.22      13.85 f
+  pos_core/bfu1/sub_47/U2_19/CO (ADDFHX4)                 0.14      14.00 f
+  pos_core/bfu1/sub_47/U2_20/CO (ADDFHX4)                 0.13      14.13 f
+  pos_core/bfu1/sub_47/U2_21/CO (ADDFHX4)                 0.16      14.29 f
+  pos_core/bfu1/sub_47/U29/Y (NAND2X4)                    0.07      14.36 r
+  pos_core/bfu1/sub_47/U16/Y (NAND3X4)                    0.06      14.42 f
+  pos_core/bfu1/sub_47/U2_23/CO (ADDFHX4)                 0.13      14.55 f
+  pos_core/bfu1/sub_47/U2_24/CO (ADDFX2)                  0.22      14.77 f
+  pos_core/bfu1/sub_47/U2_25/CO (ADDFHX4)                 0.14      14.91 f
+  pos_core/bfu1/sub_47/U2_26/CO (ADDFX2)                  0.22      15.13 f
+  pos_core/bfu1/sub_47/U2_27/CO (ADDFHX4)                 0.18      15.31 f
+  pos_core/bfu1/sub_47/U13/Y (NAND2X4)                    0.09      15.39 r
+  pos_core/bfu1/sub_47/U15/Y (NAND3X8)                    0.05      15.45 f
+  pos_core/bfu1/sub_47/U2_29/CO (ADDFHX4)                 0.13      15.57 f
+  pos_core/bfu1/sub_47/U2_30/S (ADDFHX4)                  0.21      15.78 f
+  pos_core/bfu1/sub_47/DIFF[30] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_1_DW01_sub_36)
+                                                          0.00      15.78 f
+  pos_core/bfu1/U108/Y (NOR4X1)                           0.17      15.96 r
+  pos_core/bfu1/U184/Y (AND3X2)                           0.17      16.13 r
+  pos_core/bfu1/U17/Y (NAND2X4)                           0.05      16.18 f
+  pos_core/bfu1/U221/Y (OAI21X4)                          0.09      16.28 r
+  pos_core/bfu1/U265/Y (NAND2BX4)                         0.06      16.34 f
+  pos_core/bfu1/U159/Y (NOR2BX2)                          0.14      16.48 f
+  pos_core/bfu1/U66/Y (BUFX20)                            0.14      16.62 f
+  pos_core/bfu1/U65/Y (AOI222X4)                          0.38      17.00 r
+  pos_core/bfu1/U162/Y (CLKINVX1)                         0.12      17.12 f
+  pos_core/bfu1/sub_53/A[2] (Dim1_BFU_DATA_WIDTH33_0_DW01_dec_0_DW01_dec_22)
+                                                          0.00      17.12 f
+  pos_core/bfu1/sub_53/U13/Y (OR2X6)                      0.15      17.28 f
+  pos_core/bfu1/sub_53/U12/Y (OR2X4)                      0.14      17.41 f
+  pos_core/bfu1/sub_53/U15/Y (OR2X8)                      0.11      17.53 f
+  pos_core/bfu1/sub_53/U14/Y (OR2X8)                      0.11      17.63 f
+  pos_core/bfu1/sub_53/U17/Y (OR2X8)                      0.11      17.74 f
+  pos_core/bfu1/sub_53/U16/Y (OR2X8)                      0.11      17.85 f
+  pos_core/bfu1/sub_53/U2/Y (OR2X8)                       0.12      17.96 f
+  pos_core/bfu1/sub_53/U41/Y (NOR2X8)                     0.08      18.04 r
+  pos_core/bfu1/sub_53/U39/Y (NAND2X6)                    0.06      18.11 f
+  pos_core/bfu1/sub_53/U42/Y (OR2X8)                      0.11      18.22 f
+  pos_core/bfu1/sub_53/U5/Y (OR2X8)                       0.11      18.32 f
+  pos_core/bfu1/sub_53/U4/Y (OR2X8)                       0.11      18.43 f
+  pos_core/bfu1/sub_53/U7/Y (OR2X8)                       0.11      18.54 f
+  pos_core/bfu1/sub_53/U6/Y (OR2X8)                       0.11      18.65 f
+  pos_core/bfu1/sub_53/U9/Y (OR2X8)                       0.11      18.76 f
+  pos_core/bfu1/sub_53/U8/Y (OR2X8)                       0.11      18.87 f
+  pos_core/bfu1/sub_53/U1/Y (OR2X8)                       0.11      18.97 f
+  pos_core/bfu1/sub_53/U33/Y (OR2X8)                      0.11      19.09 f
+  pos_core/bfu1/sub_53/U36/Y (OR2X8)                      0.11      19.20 f
+  pos_core/bfu1/sub_53/U43/Y (OR2X8)                      0.11      19.31 f
+  pos_core/bfu1/sub_53/U44/Y (OR2X8)                      0.11      19.41 f
+  pos_core/bfu1/sub_53/U35/Y (OR2X8)                      0.11      19.52 f
+  pos_core/bfu1/sub_53/U38/Y (OR2X8)                      0.11      19.63 f
+  pos_core/bfu1/sub_53/U20/Y (OR2X8)                      0.12      19.75 f
+  pos_core/bfu1/sub_53/U19/Y (NOR2X8)                     0.08      19.83 r
+  pos_core/bfu1/sub_53/U18/Y (NAND2X6)                    0.06      19.89 f
+  pos_core/bfu1/sub_53/U3/Y (NOR2X2)                      0.11      19.99 r
+  pos_core/bfu1/sub_53/U10/Y (XOR2X2)                     0.14      20.13 f
+  pos_core/bfu1/sub_53/SUM[31] (Dim1_BFU_DATA_WIDTH33_0_DW01_dec_0_DW01_dec_22)
+                                                          0.00      20.13 f
+  pos_core/bfu1/U47/Y (NOR2BX4)                           0.10      20.23 f
+  pos_core/bfu1/O_sub_reg_reg_31_/D (DFFQXL)              0.00      20.23 f
+  data arrival time                                                 20.23
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  pos_core/bfu1/O_sub_reg_reg_31_/CK (DFFQXL)             0.00      20.40 r
+  library setup time                                     -0.13      20.27
+  data required time                                                20.27
+  --------------------------------------------------------------------------
+  data required time                                                20.27
+  data arrival time                                                -20.23
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.04
+
+
+  Startpoint: neg_core/state_r_reg_1_
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: neg_core/bfu1/O_sub_reg_reg_31_
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FrFT_top           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  neg_core/state_r_reg_1_/CK (DFFRX2)                     0.00 #     0.50 r
+  neg_core/state_r_reg_1_/Q (DFFRX2)                      0.41       0.91 f
+  neg_core/U99/Y (NAND3X1)                                0.14       1.05 r
+  neg_core/U270/Y (CLKBUFX3)                              0.16       1.21 r
+  neg_core/U280/Y (INVX3)                                 0.09       1.30 f
+  neg_core/U7/Y (INVX6)                                   0.22       1.52 r
+  neg_core/U6/Y (NOR2X1)                                  0.13       1.65 f
+  neg_core/U102/Y (OR3X8)                                 0.26       1.91 f
+  neg_core/bfu1/B[32] (Dim1_BFU_DATA_WIDTH33_2)           0.00       1.91 f
+  neg_core/bfu1/U52/Y (BUFX20)                            0.14       2.05 f
+  neg_core/bfu1/U36/Y (NOR2BX2)                           0.18       2.23 r
+  neg_core/bfu1/sub_39/B[1] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_2_DW01_sub_19)
+                                                          0.00       2.23 r
+  neg_core/bfu1/sub_39/U30/Y (INVX4)                      0.07       2.30 f
+  neg_core/bfu1/sub_39/U2_1/CO (ADDFHX2)                  0.18       2.48 f
+  neg_core/bfu1/sub_39/U2_2/CO (ADDFX2)                   0.23       2.70 f
+  neg_core/bfu1/sub_39/U2_3/CO (ADDFHX4)                  0.14       2.85 f
+  neg_core/bfu1/sub_39/U2_4/CO (ADDFHX4)                  0.12       2.97 f
+  neg_core/bfu1/sub_39/U2_5/CO (ADDFHX2)                  0.14       3.11 f
+  neg_core/bfu1/sub_39/U2_6/CO (ADDFXL)                   0.29       3.40 f
+  neg_core/bfu1/sub_39/U2_7/CO (ADDFHX2)                  0.17       3.57 f
+  neg_core/bfu1/sub_39/U2_8/CO (ADDFX2)                   0.23       3.80 f
+  neg_core/bfu1/sub_39/U2_9/CO (ADDFHX4)                  0.14       3.94 f
+  neg_core/bfu1/sub_39/U2_10/CO (ADDFX2)                  0.22       4.16 f
+  neg_core/bfu1/sub_39/U2_11/CO (ADDFHX4)                 0.14       4.29 f
+  neg_core/bfu1/sub_39/U2_12/CO (ADDFHX2)                 0.14       4.44 f
+  neg_core/bfu1/sub_39/U2_13/CO (ADDFHX2)                 0.14       4.58 f
+  neg_core/bfu1/sub_39/U2_14/CO (ADDFHX1)                 0.19       4.77 f
+  neg_core/bfu1/sub_39/U2_15/CO (ADDFHX2)                 0.17       4.93 f
+  neg_core/bfu1/sub_39/U2_16/CO (ADDFHX4)                 0.13       5.06 f
+  neg_core/bfu1/sub_39/U2_17/CO (ADDFHX2)                 0.14       5.20 f
+  neg_core/bfu1/sub_39/U2_18/CO (ADDFX2)                  0.23       5.43 f
+  neg_core/bfu1/sub_39/U2_19/CO (ADDFHX4)                 0.17       5.60 f
+  neg_core/bfu1/sub_39/U7/Y (NAND2X2)                     0.10       5.70 r
+  neg_core/bfu1/sub_39/U9/Y (NAND3X6)                     0.09       5.79 f
+  neg_core/bfu1/sub_39/U3/Y (NAND2X4)                     0.08       5.87 r
+  neg_core/bfu1/sub_39/U37/Y (NAND3X4)                    0.06       5.93 f
+  neg_core/bfu1/sub_39/U2_22/CO (ADDFHX4)                 0.13       6.06 f
+  neg_core/bfu1/sub_39/U2_23/CO (ADDFHX4)                 0.12       6.18 f
+  neg_core/bfu1/sub_39/U2_24/CO (ADDFHX2)                 0.15       6.33 f
+  neg_core/bfu1/sub_39/U2_25/CO (ADDFHX4)                 0.13       6.46 f
+  neg_core/bfu1/sub_39/U2_26/CO (ADDFHX2)                 0.15       6.61 f
+  neg_core/bfu1/sub_39/U2_27/CO (ADDFHX4)                 0.13       6.75 f
+  neg_core/bfu1/sub_39/U2_28/CO (ADDFHX4)                 0.13       6.87 f
+  neg_core/bfu1/sub_39/U2_29/CO (ADDFHX4)                 0.16       7.04 f
+  neg_core/bfu1/sub_39/U21/Y (NAND2X8)                    0.07       7.10 r
+  neg_core/bfu1/sub_39/U18/Y (NAND2X8)                    0.04       7.14 f
+  neg_core/bfu1/sub_39/U20/Y (CLKINVX8)                   0.03       7.18 r
+  neg_core/bfu1/sub_39/U19/Y (NAND2X6)                    0.03       7.21 f
+  neg_core/bfu1/sub_39/U2_31/CO (ADDFHX4)                 0.16       7.36 f
+  neg_core/bfu1/sub_39/U14/Y (NAND2X4)                    0.08       7.44 r
+  neg_core/bfu1/sub_39/U1/Y (NAND3X6)                     0.08       7.52 f
+  neg_core/bfu1/sub_39/U17/Y (CLKINVX12)                  0.04       7.56 r
+  neg_core/bfu1/sub_39/DIFF[34] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_2_DW01_sub_19)
+                                                          0.00       7.56 r
+  neg_core/bfu1/add_40_aco/B[0] (Dim1_BFU_DATA_WIDTH33_2_DW01_add_1_DW01_add_17)
+                                                          0.00       7.56 r
+  neg_core/bfu1/add_40_aco/U22/Y (AND2X8)                 0.07       7.63 r
+  neg_core/bfu1/add_40_aco/U24/Y (AND2X4)                 0.10       7.74 r
+  neg_core/bfu1/add_40_aco/U33/Y (AND2X8)                 0.09       7.82 r
+  neg_core/bfu1/add_40_aco/U15/Y (AND2X8)                 0.08       7.90 r
+  neg_core/bfu1/add_40_aco/U11/Y (AND2X8)                 0.08       7.98 r
+  neg_core/bfu1/add_40_aco/U10/Y (AND2X8)                 0.08       8.06 r
+  neg_core/bfu1/add_40_aco/U32/Y (AND2X8)                 0.08       8.15 r
+  neg_core/bfu1/add_40_aco/U6/Y (CLKAND2X12)              0.10       8.24 r
+  neg_core/bfu1/add_40_aco/U5/Y (CLKAND2X12)              0.09       8.34 r
+  neg_core/bfu1/add_40_aco/U4/Y (CLKAND2X12)              0.09       8.43 r
+  neg_core/bfu1/add_40_aco/U35/Y (CLKAND2X12)             0.09       8.52 r
+  neg_core/bfu1/add_40_aco/U19/Y (AND2X8)                 0.08       8.60 r
+  neg_core/bfu1/add_40_aco/U18/Y (AND2X8)                 0.08       8.68 r
+  neg_core/bfu1/add_40_aco/U21/Y (AND2X8)                 0.08       8.76 r
+  neg_core/bfu1/add_40_aco/U20/Y (AND2X8)                 0.08       8.84 r
+  neg_core/bfu1/add_40_aco/U12/Y (AND2X8)                 0.08       8.93 r
+  neg_core/bfu1/add_40_aco/U34/Y (CLKAND2X12)             0.09       9.02 r
+  neg_core/bfu1/add_40_aco/U3/Y (CLKAND2X12)              0.09       9.12 r
+  neg_core/bfu1/add_40_aco/U2/Y (CLKAND2X12)              0.09       9.21 r
+  neg_core/bfu1/add_40_aco/U1/Y (CLKAND2X12)              0.09       9.30 r
+  neg_core/bfu1/add_40_aco/U31/Y (AND2X8)                 0.08       9.38 r
+  neg_core/bfu1/add_40_aco/U17/Y (AND2X8)                 0.08       9.47 r
+  neg_core/bfu1/add_40_aco/U16/Y (AND2X8)                 0.08       9.55 r
+  neg_core/bfu1/add_40_aco/U27/Y (AND2X4)                 0.10       9.65 r
+  neg_core/bfu1/add_40_aco/U14/Y (AND2X8)                 0.09       9.74 r
+  neg_core/bfu1/add_40_aco/U13/Y (AND2X8)                 0.08       9.82 r
+  neg_core/bfu1/add_40_aco/U36/Y (CLKAND2X12)             0.09       9.91 r
+  neg_core/bfu1/add_40_aco/U26/Y (CLKAND2X3)              0.13      10.04 r
+  neg_core/bfu1/add_40_aco/U23/Y (CLKAND2X8)              0.11      10.16 r
+  neg_core/bfu1/add_40_aco/U25/Y (AND2X2)                 0.14      10.30 r
+  neg_core/bfu1/add_40_aco/U9/Y (AND2X8)                  0.10      10.40 r
+  neg_core/bfu1/add_40_aco/U8/Y (NAND2X6)                 0.03      10.43 f
+  neg_core/bfu1/add_40_aco/U7/Y (XNOR3X1)                 0.30      10.73 r
+  neg_core/bfu1/add_40_aco/SUM[32] (Dim1_BFU_DATA_WIDTH33_2_DW01_add_1_DW01_add_17)
+                                                          0.00      10.73 r
+  neg_core/bfu1/U57/Y (MXI2X4)                            0.11      10.84 f
+  neg_core/bfu1/U56/Y (MXI2X4)                            0.13      10.97 r
+  neg_core/bfu1/U178/Y (CLKMX2X4)                         0.15      11.11 r
+  neg_core/bfu1/U98/Y (MX3X2)                             0.22      11.33 r
+  neg_core/bfu1/sub_47/B[0] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_1_DW01_sub_18)
+                                                          0.00      11.33 r
+  neg_core/bfu1/sub_47/U12/Y (NAND2X6)                    0.05      11.38 f
+  neg_core/bfu1/sub_47/U2_1/CO (ADDFHX4)                  0.13      11.51 f
+  neg_core/bfu1/sub_47/U2_2/CO (ADDFHX4)                  0.12      11.63 f
+  neg_core/bfu1/sub_47/U2_3/CO (ADDFHX2)                  0.15      11.78 f
+  neg_core/bfu1/sub_47/U2_4/CO (ADDFHX4)                  0.13      11.92 f
+  neg_core/bfu1/sub_47/U2_5/CO (ADDFHX4)                  0.13      12.04 f
+  neg_core/bfu1/sub_47/U2_6/CO (ADDFHX4)                  0.12      12.17 f
+  neg_core/bfu1/sub_47/U2_7/CO (ADDFHX2)                  0.15      12.32 f
+  neg_core/bfu1/sub_47/U2_8/CO (ADDFHX4)                  0.13      12.45 f
+  neg_core/bfu1/sub_47/U2_9/CO (ADDFHX4)                  0.12      12.57 f
+  neg_core/bfu1/sub_47/U2_10/CO (ADDFHX2)                 0.15      12.72 f
+  neg_core/bfu1/sub_47/U2_11/CO (ADDFHX4)                 0.13      12.86 f
+  neg_core/bfu1/sub_47/U2_12/CO (ADDFHX4)                 0.13      12.98 f
+  neg_core/bfu1/sub_47/U2_13/CO (ADDFHX4)                 0.13      13.11 f
+  neg_core/bfu1/sub_47/U2_14/CO (ADDFHX4)                 0.13      13.24 f
+  neg_core/bfu1/sub_47/U2_15/CO (ADDFHX4)                 0.13      13.37 f
+  neg_core/bfu1/sub_47/U2_16/CO (ADDFHX4)                 0.13      13.49 f
+  neg_core/bfu1/sub_47/U2_17/CO (ADDFHX4)                 0.13      13.62 f
+  neg_core/bfu1/sub_47/U2_18/CO (ADDFHX4)                 0.13      13.75 f
+  neg_core/bfu1/sub_47/U2_19/CO (ADDFHX4)                 0.13      13.88 f
+  neg_core/bfu1/sub_47/U2_20/CO (ADDFHX4)                 0.13      14.00 f
+  neg_core/bfu1/sub_47/U2_21/CO (ADDFHX4)                 0.13      14.13 f
+  neg_core/bfu1/sub_47/U2_22/CO (ADDFHX4)                 0.13      14.26 f
+  neg_core/bfu1/sub_47/U2_23/CO (ADDFHX4)                 0.13      14.39 f
+  neg_core/bfu1/sub_47/U2_24/CO (ADDFHX4)                 0.12      14.51 f
+  neg_core/bfu1/sub_47/U2_25/CO (ADDFHX2)                 0.15      14.66 f
+  neg_core/bfu1/sub_47/U2_26/CO (ADDFHX4)                 0.13      14.79 f
+  neg_core/bfu1/sub_47/U2_27/CO (ADDFHX4)                 0.13      14.92 f
+  neg_core/bfu1/sub_47/U2_28/CO (ADDFHX4)                 0.13      15.05 f
+  neg_core/bfu1/sub_47/U2_29/CO (ADDFHX4)                 0.13      15.18 f
+  neg_core/bfu1/sub_47/U2_30/CO (ADDFHX4)                 0.13      15.30 f
+  neg_core/bfu1/sub_47/U2_31/S (ADDFHX4)                  0.17      15.47 f
+  neg_core/bfu1/sub_47/DIFF[31] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_1_DW01_sub_18)
+                                                          0.00      15.47 f
+  neg_core/bfu1/U30/Y (CLKINVX8)                          0.04      15.52 r
+  neg_core/bfu1/U31/Y (INVX12)                            0.04      15.56 f
+  neg_core/bfu1/U172/Y (NOR4X6)                           0.15      15.71 r
+  neg_core/bfu1/U62/Y (NAND4X4)                           0.08      15.79 f
+  neg_core/bfu1/U527/Y (OAI21X4)                          0.11      15.90 r
+  neg_core/bfu1/U252/Y (NAND2BX4)                         0.07      15.97 f
+  neg_core/bfu1/U180/Y (NOR2BX4)                          0.10      16.07 f
+  neg_core/bfu1/U123/Y (BUFX12)                           0.19      16.26 f
+  neg_core/bfu1/U53/Y (AOI222X4)                          0.40      16.65 r
+  neg_core/bfu1/U126/Y (CLKINVX1)                         0.17      16.83 f
+  neg_core/bfu1/sub_53/A[0] (Dim1_BFU_DATA_WIDTH33_2_DW01_dec_0_DW01_dec_10)
+                                                          0.00      16.83 f
+  neg_core/bfu1/sub_53/U8/Y (OR2X8)                       0.15      16.98 f
+  neg_core/bfu1/sub_53/U7/Y (OR2X8)                       0.11      17.08 f
+  neg_core/bfu1/sub_53/U5/Y (OR2X8)                       0.11      17.19 f
+  neg_core/bfu1/sub_53/U20/Y (OR2X8)                      0.11      17.30 f
+  neg_core/bfu1/sub_53/U19/Y (OR2X8)                      0.11      17.41 f
+  neg_core/bfu1/sub_53/U22/Y (OR2X8)                      0.11      17.52 f
+  neg_core/bfu1/sub_53/U21/Y (OR2X8)                      0.11      17.62 f
+  neg_core/bfu1/sub_53/U4/Y (OR2X8)                       0.12      17.74 f
+  neg_core/bfu1/sub_53/U23/Y (NOR2X8)                     0.08      17.82 r
+  neg_core/bfu1/sub_53/U10/Y (NAND2X8)                    0.06      17.88 f
+  neg_core/bfu1/sub_53/U9/Y (OR2X8)                       0.11      17.99 f
+  neg_core/bfu1/sub_53/U12/Y (OR2X8)                      0.11      18.10 f
+  neg_core/bfu1/sub_53/U11/Y (OR2X8)                      0.11      18.21 f
+  neg_core/bfu1/sub_53/U14/Y (OR2X8)                      0.11      18.32 f
+  neg_core/bfu1/sub_53/U13/Y (OR2X8)                      0.11      18.43 f
+  neg_core/bfu1/sub_53/U16/Y (OR2X8)                      0.11      18.53 f
+  neg_core/bfu1/sub_53/U15/Y (OR2X8)                      0.11      18.64 f
+  neg_core/bfu1/sub_53/U18/Y (OR2X8)                      0.11      18.75 f
+  neg_core/bfu1/sub_53/U17/Y (OR2X8)                      0.11      18.86 f
+  neg_core/bfu1/sub_53/U1/Y (OR2X8)                       0.11      18.97 f
+  neg_core/bfu1/sub_53/U41/Y (OR2X8)                      0.11      19.08 f
+  neg_core/bfu1/sub_53/U42/Y (OR2X8)                      0.11      19.19 f
+  neg_core/bfu1/sub_53/U43/Y (OR2X8)                      0.11      19.29 f
+  neg_core/bfu1/sub_53/U44/Y (OR2X8)                      0.11      19.40 f
+  neg_core/bfu1/sub_53/U32/Y (OR2X8)                      0.11      19.51 f
+  neg_core/bfu1/sub_53/U45/Y (OR2X8)                      0.11      19.62 f
+  neg_core/bfu1/sub_53/U40/Y (OR2X8)                      0.11      19.73 f
+  neg_core/bfu1/sub_53/U39/Y (NOR2X8)                     0.08      19.81 r
+  neg_core/bfu1/sub_53/U25/Y (NAND2X8)                    0.06      19.87 f
+  neg_core/bfu1/sub_53/U6/Y (NOR2X6)                      0.09      19.97 r
+  neg_core/bfu1/sub_53/U3/Y (INVX4)                       0.05      20.01 f
+  neg_core/bfu1/sub_53/U2/Y (NAND2X4)                     0.07      20.08 r
+  neg_core/bfu1/sub_53/U27/Y (NAND2X6)                    0.04      20.12 f
+  neg_core/bfu1/sub_53/SUM[31] (Dim1_BFU_DATA_WIDTH33_2_DW01_dec_0_DW01_dec_10)
+                                                          0.00      20.12 f
+  neg_core/bfu1/U318/Y (NOR2BX4)                          0.08      20.20 f
+  neg_core/bfu1/O_sub_reg_reg_31_/D (DFFQX1)              0.00      20.20 f
+  data arrival time                                                 20.20
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  neg_core/bfu1/O_sub_reg_reg_31_/CK (DFFQX1)             0.00      20.40 r
+  library setup time                                     -0.16      20.24
+  data required time                                                20.24
+  --------------------------------------------------------------------------
+  data required time                                                20.24
+  data arrival time                                                -20.20
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.05
+
+
+  Startpoint: neg_core/state_r_reg_1_
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: neg_core/bfu1/O_sub_reg_reg_30_
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FrFT_top           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  neg_core/state_r_reg_1_/CK (DFFRX2)                     0.00 #     0.50 r
+  neg_core/state_r_reg_1_/Q (DFFRX2)                      0.41       0.91 f
+  neg_core/U99/Y (NAND3X1)                                0.14       1.05 r
+  neg_core/U270/Y (CLKBUFX3)                              0.16       1.21 r
+  neg_core/U280/Y (INVX3)                                 0.09       1.30 f
+  neg_core/U7/Y (INVX6)                                   0.22       1.52 r
+  neg_core/U6/Y (NOR2X1)                                  0.13       1.65 f
+  neg_core/U102/Y (OR3X8)                                 0.26       1.91 f
+  neg_core/bfu1/B[32] (Dim1_BFU_DATA_WIDTH33_2)           0.00       1.91 f
+  neg_core/bfu1/U52/Y (BUFX20)                            0.14       2.05 f
+  neg_core/bfu1/U36/Y (NOR2BX2)                           0.18       2.23 r
+  neg_core/bfu1/sub_39/B[1] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_2_DW01_sub_19)
+                                                          0.00       2.23 r
+  neg_core/bfu1/sub_39/U30/Y (INVX4)                      0.07       2.30 f
+  neg_core/bfu1/sub_39/U2_1/CO (ADDFHX2)                  0.18       2.48 f
+  neg_core/bfu1/sub_39/U2_2/CO (ADDFX2)                   0.23       2.70 f
+  neg_core/bfu1/sub_39/U2_3/CO (ADDFHX4)                  0.14       2.85 f
+  neg_core/bfu1/sub_39/U2_4/CO (ADDFHX4)                  0.12       2.97 f
+  neg_core/bfu1/sub_39/U2_5/CO (ADDFHX2)                  0.14       3.11 f
+  neg_core/bfu1/sub_39/U2_6/CO (ADDFXL)                   0.29       3.40 f
+  neg_core/bfu1/sub_39/U2_7/CO (ADDFHX2)                  0.17       3.57 f
+  neg_core/bfu1/sub_39/U2_8/CO (ADDFX2)                   0.23       3.80 f
+  neg_core/bfu1/sub_39/U2_9/CO (ADDFHX4)                  0.14       3.94 f
+  neg_core/bfu1/sub_39/U2_10/CO (ADDFX2)                  0.22       4.16 f
+  neg_core/bfu1/sub_39/U2_11/CO (ADDFHX4)                 0.14       4.29 f
+  neg_core/bfu1/sub_39/U2_12/CO (ADDFHX2)                 0.14       4.44 f
+  neg_core/bfu1/sub_39/U2_13/CO (ADDFHX2)                 0.14       4.58 f
+  neg_core/bfu1/sub_39/U2_14/CO (ADDFHX1)                 0.19       4.77 f
+  neg_core/bfu1/sub_39/U2_15/CO (ADDFHX2)                 0.17       4.93 f
+  neg_core/bfu1/sub_39/U2_16/CO (ADDFHX4)                 0.13       5.06 f
+  neg_core/bfu1/sub_39/U2_17/CO (ADDFHX2)                 0.14       5.20 f
+  neg_core/bfu1/sub_39/U2_18/CO (ADDFX2)                  0.23       5.43 f
+  neg_core/bfu1/sub_39/U2_19/CO (ADDFHX4)                 0.17       5.60 f
+  neg_core/bfu1/sub_39/U7/Y (NAND2X2)                     0.10       5.70 r
+  neg_core/bfu1/sub_39/U9/Y (NAND3X6)                     0.09       5.79 f
+  neg_core/bfu1/sub_39/U3/Y (NAND2X4)                     0.08       5.87 r
+  neg_core/bfu1/sub_39/U37/Y (NAND3X4)                    0.06       5.93 f
+  neg_core/bfu1/sub_39/U2_22/CO (ADDFHX4)                 0.13       6.06 f
+  neg_core/bfu1/sub_39/U2_23/CO (ADDFHX4)                 0.12       6.18 f
+  neg_core/bfu1/sub_39/U2_24/CO (ADDFHX2)                 0.15       6.33 f
+  neg_core/bfu1/sub_39/U2_25/CO (ADDFHX4)                 0.13       6.46 f
+  neg_core/bfu1/sub_39/U2_26/CO (ADDFHX2)                 0.15       6.61 f
+  neg_core/bfu1/sub_39/U2_27/CO (ADDFHX4)                 0.13       6.75 f
+  neg_core/bfu1/sub_39/U2_28/CO (ADDFHX4)                 0.13       6.87 f
+  neg_core/bfu1/sub_39/U2_29/CO (ADDFHX4)                 0.16       7.04 f
+  neg_core/bfu1/sub_39/U21/Y (NAND2X8)                    0.07       7.10 r
+  neg_core/bfu1/sub_39/U18/Y (NAND2X8)                    0.04       7.14 f
+  neg_core/bfu1/sub_39/U20/Y (CLKINVX8)                   0.03       7.18 r
+  neg_core/bfu1/sub_39/U19/Y (NAND2X6)                    0.03       7.21 f
+  neg_core/bfu1/sub_39/U2_31/CO (ADDFHX4)                 0.16       7.36 f
+  neg_core/bfu1/sub_39/U14/Y (NAND2X4)                    0.08       7.44 r
+  neg_core/bfu1/sub_39/U1/Y (NAND3X6)                     0.08       7.52 f
+  neg_core/bfu1/sub_39/U17/Y (CLKINVX12)                  0.04       7.56 r
+  neg_core/bfu1/sub_39/DIFF[34] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_2_DW01_sub_19)
+                                                          0.00       7.56 r
+  neg_core/bfu1/add_40_aco/B[0] (Dim1_BFU_DATA_WIDTH33_2_DW01_add_1_DW01_add_17)
+                                                          0.00       7.56 r
+  neg_core/bfu1/add_40_aco/U22/Y (AND2X8)                 0.07       7.63 r
+  neg_core/bfu1/add_40_aco/U24/Y (AND2X4)                 0.10       7.74 r
+  neg_core/bfu1/add_40_aco/U33/Y (AND2X8)                 0.09       7.82 r
+  neg_core/bfu1/add_40_aco/U15/Y (AND2X8)                 0.08       7.90 r
+  neg_core/bfu1/add_40_aco/U11/Y (AND2X8)                 0.08       7.98 r
+  neg_core/bfu1/add_40_aco/U10/Y (AND2X8)                 0.08       8.06 r
+  neg_core/bfu1/add_40_aco/U32/Y (AND2X8)                 0.08       8.15 r
+  neg_core/bfu1/add_40_aco/U6/Y (CLKAND2X12)              0.10       8.24 r
+  neg_core/bfu1/add_40_aco/U5/Y (CLKAND2X12)              0.09       8.34 r
+  neg_core/bfu1/add_40_aco/U4/Y (CLKAND2X12)              0.09       8.43 r
+  neg_core/bfu1/add_40_aco/U35/Y (CLKAND2X12)             0.09       8.52 r
+  neg_core/bfu1/add_40_aco/U19/Y (AND2X8)                 0.08       8.60 r
+  neg_core/bfu1/add_40_aco/U18/Y (AND2X8)                 0.08       8.68 r
+  neg_core/bfu1/add_40_aco/U21/Y (AND2X8)                 0.08       8.76 r
+  neg_core/bfu1/add_40_aco/U20/Y (AND2X8)                 0.08       8.84 r
+  neg_core/bfu1/add_40_aco/U12/Y (AND2X8)                 0.08       8.93 r
+  neg_core/bfu1/add_40_aco/U34/Y (CLKAND2X12)             0.09       9.02 r
+  neg_core/bfu1/add_40_aco/U3/Y (CLKAND2X12)              0.09       9.12 r
+  neg_core/bfu1/add_40_aco/U2/Y (CLKAND2X12)              0.09       9.21 r
+  neg_core/bfu1/add_40_aco/U1/Y (CLKAND2X12)              0.09       9.30 r
+  neg_core/bfu1/add_40_aco/U31/Y (AND2X8)                 0.08       9.38 r
+  neg_core/bfu1/add_40_aco/U17/Y (AND2X8)                 0.08       9.47 r
+  neg_core/bfu1/add_40_aco/U16/Y (AND2X8)                 0.08       9.55 r
+  neg_core/bfu1/add_40_aco/U27/Y (AND2X4)                 0.10       9.65 r
+  neg_core/bfu1/add_40_aco/U14/Y (AND2X8)                 0.09       9.74 r
+  neg_core/bfu1/add_40_aco/U13/Y (AND2X8)                 0.08       9.82 r
+  neg_core/bfu1/add_40_aco/U36/Y (CLKAND2X12)             0.09       9.91 r
+  neg_core/bfu1/add_40_aco/U26/Y (CLKAND2X3)              0.13      10.04 r
+  neg_core/bfu1/add_40_aco/U23/Y (CLKAND2X8)              0.11      10.16 r
+  neg_core/bfu1/add_40_aco/U25/Y (AND2X2)                 0.14      10.30 r
+  neg_core/bfu1/add_40_aco/U9/Y (AND2X8)                  0.10      10.40 r
+  neg_core/bfu1/add_40_aco/U8/Y (NAND2X6)                 0.03      10.43 f
+  neg_core/bfu1/add_40_aco/U7/Y (XNOR3X1)                 0.30      10.73 r
+  neg_core/bfu1/add_40_aco/SUM[32] (Dim1_BFU_DATA_WIDTH33_2_DW01_add_1_DW01_add_17)
+                                                          0.00      10.73 r
+  neg_core/bfu1/U57/Y (MXI2X4)                            0.11      10.84 f
+  neg_core/bfu1/U56/Y (MXI2X4)                            0.13      10.97 r
+  neg_core/bfu1/U178/Y (CLKMX2X4)                         0.15      11.11 r
+  neg_core/bfu1/U98/Y (MX3X2)                             0.22      11.33 r
+  neg_core/bfu1/sub_47/B[0] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_1_DW01_sub_18)
+                                                          0.00      11.33 r
+  neg_core/bfu1/sub_47/U12/Y (NAND2X6)                    0.05      11.38 f
+  neg_core/bfu1/sub_47/U2_1/CO (ADDFHX4)                  0.13      11.51 f
+  neg_core/bfu1/sub_47/U2_2/CO (ADDFHX4)                  0.12      11.63 f
+  neg_core/bfu1/sub_47/U2_3/CO (ADDFHX2)                  0.15      11.78 f
+  neg_core/bfu1/sub_47/U2_4/CO (ADDFHX4)                  0.13      11.92 f
+  neg_core/bfu1/sub_47/U2_5/CO (ADDFHX4)                  0.13      12.04 f
+  neg_core/bfu1/sub_47/U2_6/CO (ADDFHX4)                  0.12      12.17 f
+  neg_core/bfu1/sub_47/U2_7/CO (ADDFHX2)                  0.15      12.32 f
+  neg_core/bfu1/sub_47/U2_8/CO (ADDFHX4)                  0.13      12.45 f
+  neg_core/bfu1/sub_47/U2_9/CO (ADDFHX4)                  0.12      12.57 f
+  neg_core/bfu1/sub_47/U2_10/CO (ADDFHX2)                 0.15      12.72 f
+  neg_core/bfu1/sub_47/U2_11/CO (ADDFHX4)                 0.13      12.86 f
+  neg_core/bfu1/sub_47/U2_12/CO (ADDFHX4)                 0.13      12.98 f
+  neg_core/bfu1/sub_47/U2_13/CO (ADDFHX4)                 0.13      13.11 f
+  neg_core/bfu1/sub_47/U2_14/CO (ADDFHX4)                 0.13      13.24 f
+  neg_core/bfu1/sub_47/U2_15/CO (ADDFHX4)                 0.13      13.37 f
+  neg_core/bfu1/sub_47/U2_16/CO (ADDFHX4)                 0.13      13.49 f
+  neg_core/bfu1/sub_47/U2_17/CO (ADDFHX4)                 0.13      13.62 f
+  neg_core/bfu1/sub_47/U2_18/CO (ADDFHX4)                 0.13      13.75 f
+  neg_core/bfu1/sub_47/U2_19/CO (ADDFHX4)                 0.13      13.88 f
+  neg_core/bfu1/sub_47/U2_20/CO (ADDFHX4)                 0.13      14.00 f
+  neg_core/bfu1/sub_47/U2_21/CO (ADDFHX4)                 0.13      14.13 f
+  neg_core/bfu1/sub_47/U2_22/CO (ADDFHX4)                 0.13      14.26 f
+  neg_core/bfu1/sub_47/U2_23/CO (ADDFHX4)                 0.13      14.39 f
+  neg_core/bfu1/sub_47/U2_24/CO (ADDFHX4)                 0.12      14.51 f
+  neg_core/bfu1/sub_47/U2_25/CO (ADDFHX2)                 0.15      14.66 f
+  neg_core/bfu1/sub_47/U2_26/CO (ADDFHX4)                 0.13      14.79 f
+  neg_core/bfu1/sub_47/U2_27/CO (ADDFHX4)                 0.13      14.92 f
+  neg_core/bfu1/sub_47/U2_28/CO (ADDFHX4)                 0.13      15.05 f
+  neg_core/bfu1/sub_47/U2_29/CO (ADDFHX4)                 0.13      15.18 f
+  neg_core/bfu1/sub_47/U2_30/CO (ADDFHX4)                 0.13      15.30 f
+  neg_core/bfu1/sub_47/U2_31/S (ADDFHX4)                  0.17      15.47 f
+  neg_core/bfu1/sub_47/DIFF[31] (Dim1_BFU_DATA_WIDTH33_2_DW01_sub_1_DW01_sub_18)
+                                                          0.00      15.47 f
+  neg_core/bfu1/U30/Y (CLKINVX8)                          0.04      15.52 r
+  neg_core/bfu1/U31/Y (INVX12)                            0.04      15.56 f
+  neg_core/bfu1/U172/Y (NOR4X6)                           0.15      15.71 r
+  neg_core/bfu1/U62/Y (NAND4X4)                           0.08      15.79 f
+  neg_core/bfu1/U527/Y (OAI21X4)                          0.11      15.90 r
+  neg_core/bfu1/U252/Y (NAND2BX4)                         0.07      15.97 f
+  neg_core/bfu1/U180/Y (NOR2BX4)                          0.10      16.07 f
+  neg_core/bfu1/U123/Y (BUFX12)                           0.19      16.26 f
+  neg_core/bfu1/U53/Y (AOI222X4)                          0.40      16.65 r
+  neg_core/bfu1/U126/Y (CLKINVX1)                         0.17      16.83 f
+  neg_core/bfu1/sub_53/A[0] (Dim1_BFU_DATA_WIDTH33_2_DW01_dec_0_DW01_dec_10)
+                                                          0.00      16.83 f
+  neg_core/bfu1/sub_53/U8/Y (OR2X8)                       0.15      16.98 f
+  neg_core/bfu1/sub_53/U7/Y (OR2X8)                       0.11      17.08 f
+  neg_core/bfu1/sub_53/U5/Y (OR2X8)                       0.11      17.19 f
+  neg_core/bfu1/sub_53/U20/Y (OR2X8)                      0.11      17.30 f
+  neg_core/bfu1/sub_53/U19/Y (OR2X8)                      0.11      17.41 f
+  neg_core/bfu1/sub_53/U22/Y (OR2X8)                      0.11      17.52 f
+  neg_core/bfu1/sub_53/U21/Y (OR2X8)                      0.11      17.62 f
+  neg_core/bfu1/sub_53/U4/Y (OR2X8)                       0.12      17.74 f
+  neg_core/bfu1/sub_53/U23/Y (NOR2X8)                     0.08      17.82 r
+  neg_core/bfu1/sub_53/U10/Y (NAND2X8)                    0.06      17.88 f
+  neg_core/bfu1/sub_53/U9/Y (OR2X8)                       0.11      17.99 f
+  neg_core/bfu1/sub_53/U12/Y (OR2X8)                      0.11      18.10 f
+  neg_core/bfu1/sub_53/U11/Y (OR2X8)                      0.11      18.21 f
+  neg_core/bfu1/sub_53/U14/Y (OR2X8)                      0.11      18.32 f
+  neg_core/bfu1/sub_53/U13/Y (OR2X8)                      0.11      18.43 f
+  neg_core/bfu1/sub_53/U16/Y (OR2X8)                      0.11      18.53 f
+  neg_core/bfu1/sub_53/U15/Y (OR2X8)                      0.11      18.64 f
+  neg_core/bfu1/sub_53/U18/Y (OR2X8)                      0.11      18.75 f
+  neg_core/bfu1/sub_53/U17/Y (OR2X8)                      0.11      18.86 f
+  neg_core/bfu1/sub_53/U1/Y (OR2X8)                       0.11      18.97 f
+  neg_core/bfu1/sub_53/U41/Y (OR2X8)                      0.11      19.08 f
+  neg_core/bfu1/sub_53/U42/Y (OR2X8)                      0.11      19.19 f
+  neg_core/bfu1/sub_53/U43/Y (OR2X8)                      0.11      19.29 f
+  neg_core/bfu1/sub_53/U44/Y (OR2X8)                      0.11      19.40 f
+  neg_core/bfu1/sub_53/U32/Y (OR2X8)                      0.11      19.51 f
+  neg_core/bfu1/sub_53/U45/Y (OR2X8)                      0.11      19.62 f
+  neg_core/bfu1/sub_53/U40/Y (OR2X8)                      0.11      19.73 f
+  neg_core/bfu1/sub_53/U39/Y (NOR2X8)                     0.08      19.81 r
+  neg_core/bfu1/sub_53/U25/Y (NAND2X8)                    0.06      19.87 f
+  neg_core/bfu1/sub_53/U63/Y (XNOR2X1)                    0.12      20.00 f
+  neg_core/bfu1/sub_53/SUM[30] (Dim1_BFU_DATA_WIDTH33_2_DW01_dec_0_DW01_dec_10)
+                                                          0.00      20.00 f
+  neg_core/bfu1/U143/Y (NOR2BX1)                          0.16      20.16 f
+  neg_core/bfu1/O_sub_reg_reg_30_/D (DFFQX1)              0.00      20.16 f
+  data arrival time                                                 20.16
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  neg_core/bfu1/O_sub_reg_reg_30_/CK (DFFQX1)             0.00      20.40 r
+  library setup time                                     -0.16      20.24
+  data required time                                                20.24
+  --------------------------------------------------------------------------
+  data required time                                                20.24
+  data arrival time                                                -20.16
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.08
+
+
+  Startpoint: pos_core/state_r_reg_1_
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: pos_core/bfu1/O_sub_reg_reg_30_
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FrFT_top           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  pos_core/state_r_reg_1_/CK (DFFRX4)                     0.00 #     0.50 r
+  pos_core/state_r_reg_1_/Q (DFFRX4)                      0.34       0.84 f
+  pos_core/U36/Y (NAND2X6)                                0.07       0.91 r
+  pos_core/U38/Y (INVX8)                                  0.03       0.95 f
+  pos_core/U37/Y (NAND2X8)                                0.12       1.07 r
+  pos_core/U111/Y (OA21X4)                                0.15       1.21 r
+  pos_core/U26/Y (INVX16)                                 0.04       1.26 f
+  pos_core/U69/Y (INVX8)                                  0.05       1.30 r
+  pos_core/U67/Y (BUFX6)                                  0.07       1.38 r
+  pos_core/U375/Y (OR2XL)                                 0.20       1.58 r
+  pos_core/U140/Y (NAND3X2)                               0.12       1.70 f
+  pos_core/bfu1/B[0] (Dim1_BFU_DATA_WIDTH33_0)            0.00       1.70 f
+  pos_core/bfu1/add_32/A[0] (Dim1_BFU_DATA_WIDTH33_0_DW01_inc_0_DW01_inc_20)
+                                                          0.00       1.70 f
+  pos_core/bfu1/add_32/U1_1_1/CO (ADDHX1)                 0.18       1.89 f
+  pos_core/bfu1/add_32/U1_1_2/CO (ADDHX2)                 0.14       2.03 f
+  pos_core/bfu1/add_32/U1_1_3/CO (ADDHX2)                 0.13       2.15 f
+  pos_core/bfu1/add_32/U1_1_4/CO (ADDHX2)                 0.13       2.28 f
+  pos_core/bfu1/add_32/U1_1_5/S (ADDHX2)                  0.07       2.35 r
+  pos_core/bfu1/add_32/SUM[5] (Dim1_BFU_DATA_WIDTH33_0_DW01_inc_0_DW01_inc_20)
+                                                          0.00       2.35 r
+  pos_core/bfu1/U132/Y (NOR2BX1)                          0.37       2.72 r
+  pos_core/bfu1/sub_39/B[5] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_2_DW01_sub_37)
+                                                          0.00       2.72 r
+  pos_core/bfu1/sub_39/U34/Y (INVX1)                      0.18       2.90 f
+  pos_core/bfu1/sub_39/U2_5/CO (ADDFHX2)                  0.22       3.11 f
+  pos_core/bfu1/sub_39/U2_6/CO (ADDFHX2)                  0.15       3.27 f
+  pos_core/bfu1/sub_39/U2_7/CO (ADDFHX4)                  0.13       3.40 f
+  pos_core/bfu1/sub_39/U2_8/CO (ADDFHX4)                  0.15       3.56 f
+  pos_core/bfu1/sub_39/U7/Y (NAND2X2)                     0.08       3.64 r
+  pos_core/bfu1/sub_39/U9/Y (NAND3X2)                     0.07       3.71 f
+  pos_core/bfu1/sub_39/U2_10/CO (ADDFHX2)                 0.16       3.87 f
+  pos_core/bfu1/sub_39/U2_11/CO (ADDFHX4)                 0.13       4.00 f
+  pos_core/bfu1/sub_39/U2_12/CO (ADDFHX4)                 0.13       4.13 f
+  pos_core/bfu1/sub_39/U2_13/CO (ADDFHX4)                 0.12       4.25 f
+  pos_core/bfu1/sub_39/U2_14/CO (ADDFHX2)                 0.14       4.39 f
+  pos_core/bfu1/sub_39/U2_15/CO (ADDFHX2)                 0.15       4.54 f
+  pos_core/bfu1/sub_39/U2_16/CO (ADDFHX2)                 0.15       4.69 f
+  pos_core/bfu1/sub_39/U2_17/CO (ADDFHX4)                 0.13       4.83 f
+  pos_core/bfu1/sub_39/U2_18/CO (ADDFHX4)                 0.13       4.95 f
+  pos_core/bfu1/sub_39/U2_19/CO (ADDFHX4)                 0.12       5.08 f
+  pos_core/bfu1/sub_39/U2_20/CO (ADDFHX2)                 0.15       5.23 f
+  pos_core/bfu1/sub_39/U2_21/CO (ADDFHX4)                 0.17       5.39 f
+  pos_core/bfu1/sub_39/U40/Y (NAND2X4)                    0.07       5.46 r
+  pos_core/bfu1/sub_39/U1/Y (NAND3X4)                     0.06       5.52 f
+  pos_core/bfu1/sub_39/U2_23/CO (ADDFHX4)                 0.17       5.69 f
+  pos_core/bfu1/sub_39/U43/Y (NAND2X4)                    0.07       5.76 r
+  pos_core/bfu1/sub_39/U31/Y (NAND3X4)                    0.06       5.83 f
+  pos_core/bfu1/sub_39/U2_25/CO (ADDFHX4)                 0.13       5.96 f
+  pos_core/bfu1/sub_39/U2_26/CO (ADDFHX4)                 0.13       6.09 f
+  pos_core/bfu1/sub_39/U2_27/CO (ADDFHX4)                 0.16       6.24 f
+  pos_core/bfu1/sub_39/U24/Y (NAND2X2)                    0.12       6.36 r
+  pos_core/bfu1/sub_39/U33/Y (NAND3X8)                    0.05       6.42 f
+  pos_core/bfu1/sub_39/U2_29/CO (ADDFHX4)                 0.16       6.57 f
+  pos_core/bfu1/sub_39/U27/Y (NAND2X1)                    0.15       6.72 r
+  pos_core/bfu1/sub_39/U3/Y (NAND2X4)                     0.06       6.78 f
+  pos_core/bfu1/sub_39/U2_31/CO (ADDFHX4)                 0.13       6.91 f
+  pos_core/bfu1/sub_39/U2_32/CO (ADDFHX4)                 0.12       7.04 f
+  pos_core/bfu1/sub_39/U29/Y (INVX3)                      0.05       7.09 r
+  pos_core/bfu1/sub_39/DIFF[34] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_2_DW01_sub_37)
+                                                          0.00       7.09 r
+  pos_core/bfu1/U5/Y (BUFX12)                             0.08       7.17 r
+  pos_core/bfu1/add_40_aco/B[0] (Dim1_BFU_DATA_WIDTH33_0_DW01_add_1_DW01_add_37)
+                                                          0.00       7.17 r
+  pos_core/bfu1/add_40_aco/U9/Y (AND2X6)                  0.08       7.25 r
+  pos_core/bfu1/add_40_aco/U35/Y (AND2X8)                 0.09       7.34 r
+  pos_core/bfu1/add_40_aco/U7/Y (CLKAND2X12)              0.09       7.43 r
+  pos_core/bfu1/add_40_aco/U6/Y (AND2X8)                  0.08       7.51 r
+  pos_core/bfu1/add_40_aco/U21/Y (CLKAND2X6)              0.11       7.62 r
+  pos_core/bfu1/add_40_aco/U33/Y (AND2X8)                 0.08       7.70 r
+  pos_core/bfu1/add_40_aco/U20/Y (CLKAND2X8)              0.10       7.80 r
+  pos_core/bfu1/add_40_aco/U17/Y (AND2X2)                 0.13       7.94 r
+  pos_core/bfu1/add_40_aco/U19/Y (CLKAND2X6)              0.12       8.06 r
+  pos_core/bfu1/add_40_aco/U32/Y (AND2X8)                 0.08       8.14 r
+  pos_core/bfu1/add_40_aco/U11/Y (AND2X8)                 0.08       8.22 r
+  pos_core/bfu1/add_40_aco/U10/Y (AND2X8)                 0.08       8.30 r
+  pos_core/bfu1/add_40_aco/U18/Y (CLKAND2X6)              0.11       8.41 r
+  pos_core/bfu1/add_40_aco/U5/Y (AND2X8)                  0.08       8.49 r
+  pos_core/bfu1/add_40_aco/U2/Y (AND2X8)                  0.08       8.57 r
+  pos_core/bfu1/add_40_aco/U1/Y (AND2X8)                  0.08       8.65 r
+  pos_core/bfu1/add_40_aco/U22/Y (AND2X2)                 0.14       8.78 r
+  pos_core/bfu1/add_40_aco/U26/Y (CLKAND2X8)              0.12       8.91 r
+  pos_core/bfu1/add_40_aco/U15/Y (AND2X6)                 0.09       9.00 r
+  pos_core/bfu1/add_40_aco/U13/Y (AND2X8)                 0.08       9.08 r
+  pos_core/bfu1/add_40_aco/U12/Y (AND2X8)                 0.08       9.16 r
+  pos_core/bfu1/add_40_aco/U25/Y (CLKAND2X8)              0.11       9.26 r
+  pos_core/bfu1/add_40_aco/U23/Y (AND2X2)                 0.14       9.41 r
+  pos_core/bfu1/add_40_aco/U8/Y (AND2X8)                  0.10       9.51 r
+  pos_core/bfu1/add_40_aco/U4/Y (CLKAND2X12)              0.10       9.60 r
+  pos_core/bfu1/add_40_aco/U3/Y (CLKAND2X12)              0.10       9.70 r
+  pos_core/bfu1/add_40_aco/U34/Y (AND2X8)                 0.08       9.78 r
+  pos_core/bfu1/add_40_aco/U28/Y (CLKAND2X8)              0.10       9.88 r
+  pos_core/bfu1/add_40_aco/U24/Y (AND2X2)                 0.13      10.01 r
+  pos_core/bfu1/add_40_aco/U27/Y (AND2X2)                 0.14      10.15 r
+  pos_core/bfu1/add_40_aco/U29/Y (CLKAND2X3)              0.14      10.29 r
+  pos_core/bfu1/add_40_aco/U31/Y (XOR2X1)                 0.23      10.52 r
+  pos_core/bfu1/add_40_aco/SUM[31] (Dim1_BFU_DATA_WIDTH33_0_DW01_add_1_DW01_add_37)
+                                                          0.00      10.52 r
+  pos_core/bfu1/U94/Y (NAND2X1)                           0.19      10.71 f
+  pos_core/bfu1/U99/Y (MXI2X2)                            0.19      10.90 r
+  pos_core/bfu1/U327/Y (CLKMX2X4)                         0.16      11.06 r
+  pos_core/bfu1/U326/Y (MX3X2)                            0.16      11.22 r
+  pos_core/bfu1/sub_47/B[1] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_1_DW01_sub_36)
+                                                          0.00      11.22 r
+  pos_core/bfu1/sub_47/U39/Y (INVX3)                      0.07      11.29 f
+  pos_core/bfu1/sub_47/U2_1/CO (ADDFHX4)                  0.16      11.45 f
+  pos_core/bfu1/sub_47/U2_2/CO (ADDFHX4)                  0.13      11.58 f
+  pos_core/bfu1/sub_47/U2_3/CO (ADDFHX4)                  0.13      11.71 f
+  pos_core/bfu1/sub_47/U2_4/CO (ADDFHX4)                  0.13      11.84 f
+  pos_core/bfu1/sub_47/U2_5/CO (ADDFHX4)                  0.13      11.97 f
+  pos_core/bfu1/sub_47/U2_6/CO (ADDFHX4)                  0.16      12.13 f
+  pos_core/bfu1/sub_47/U6/Y (NAND2X4)                     0.07      12.20 r
+  pos_core/bfu1/sub_47/U8/Y (NAND3X4)                     0.06      12.26 f
+  pos_core/bfu1/sub_47/U2_8/CO (ADDFHX4)                  0.13      12.39 f
+  pos_core/bfu1/sub_47/U2_9/CO (ADDFHX4)                  0.13      12.52 f
+  pos_core/bfu1/sub_47/U2_10/CO (ADDFHX4)                 0.13      12.64 f
+  pos_core/bfu1/sub_47/U2_11/CO (ADDFHX4)                 0.13      12.77 f
+  pos_core/bfu1/sub_47/U2_12/CO (ADDFHX4)                 0.13      12.90 f
+  pos_core/bfu1/sub_47/U2_13/CO (ADDFHX4)                 0.13      13.03 f
+  pos_core/bfu1/sub_47/U2_14/CO (ADDFHX4)                 0.12      13.15 f
+  pos_core/bfu1/sub_47/U2_15/CO (ADDFX2)                  0.22      13.37 f
+  pos_core/bfu1/sub_47/U2_16/CO (ADDFHX4)                 0.14      13.51 f
+  pos_core/bfu1/sub_47/U2_17/CO (ADDFHX4)                 0.12      13.63 f
+  pos_core/bfu1/sub_47/U2_18/CO (ADDFX2)                  0.22      13.85 f
+  pos_core/bfu1/sub_47/U2_19/CO (ADDFHX4)                 0.14      14.00 f
+  pos_core/bfu1/sub_47/U2_20/CO (ADDFHX4)                 0.13      14.13 f
+  pos_core/bfu1/sub_47/U2_21/CO (ADDFHX4)                 0.16      14.29 f
+  pos_core/bfu1/sub_47/U29/Y (NAND2X4)                    0.07      14.36 r
+  pos_core/bfu1/sub_47/U16/Y (NAND3X4)                    0.06      14.42 f
+  pos_core/bfu1/sub_47/U2_23/CO (ADDFHX4)                 0.13      14.55 f
+  pos_core/bfu1/sub_47/U2_24/CO (ADDFX2)                  0.22      14.77 f
+  pos_core/bfu1/sub_47/U2_25/CO (ADDFHX4)                 0.14      14.91 f
+  pos_core/bfu1/sub_47/U2_26/CO (ADDFX2)                  0.22      15.13 f
+  pos_core/bfu1/sub_47/U2_27/CO (ADDFHX4)                 0.18      15.31 f
+  pos_core/bfu1/sub_47/U13/Y (NAND2X4)                    0.09      15.39 r
+  pos_core/bfu1/sub_47/U15/Y (NAND3X8)                    0.05      15.45 f
+  pos_core/bfu1/sub_47/U2_29/CO (ADDFHX4)                 0.13      15.57 f
+  pos_core/bfu1/sub_47/U2_30/S (ADDFHX4)                  0.21      15.78 f
+  pos_core/bfu1/sub_47/DIFF[30] (Dim1_BFU_DATA_WIDTH33_0_DW01_sub_1_DW01_sub_36)
+                                                          0.00      15.78 f
+  pos_core/bfu1/U108/Y (NOR4X1)                           0.17      15.96 r
+  pos_core/bfu1/U184/Y (AND3X2)                           0.17      16.13 r
+  pos_core/bfu1/U17/Y (NAND2X4)                           0.05      16.18 f
+  pos_core/bfu1/U221/Y (OAI21X4)                          0.09      16.28 r
+  pos_core/bfu1/U265/Y (NAND2BX4)                         0.06      16.34 f
+  pos_core/bfu1/U159/Y (NOR2BX2)                          0.14      16.48 f
+  pos_core/bfu1/U66/Y (BUFX20)                            0.14      16.62 f
+  pos_core/bfu1/U65/Y (AOI222X4)                          0.38      17.00 r
+  pos_core/bfu1/U162/Y (CLKINVX1)                         0.12      17.12 f
+  pos_core/bfu1/sub_53/A[2] (Dim1_BFU_DATA_WIDTH33_0_DW01_dec_0_DW01_dec_22)
+                                                          0.00      17.12 f
+  pos_core/bfu1/sub_53/U13/Y (OR2X6)                      0.15      17.28 f
+  pos_core/bfu1/sub_53/U12/Y (OR2X4)                      0.14      17.41 f
+  pos_core/bfu1/sub_53/U15/Y (OR2X8)                      0.11      17.53 f
+  pos_core/bfu1/sub_53/U14/Y (OR2X8)                      0.11      17.63 f
+  pos_core/bfu1/sub_53/U17/Y (OR2X8)                      0.11      17.74 f
+  pos_core/bfu1/sub_53/U16/Y (OR2X8)                      0.11      17.85 f
+  pos_core/bfu1/sub_53/U2/Y (OR2X8)                       0.12      17.96 f
+  pos_core/bfu1/sub_53/U41/Y (NOR2X8)                     0.08      18.04 r
+  pos_core/bfu1/sub_53/U39/Y (NAND2X6)                    0.06      18.11 f
+  pos_core/bfu1/sub_53/U42/Y (OR2X8)                      0.11      18.22 f
+  pos_core/bfu1/sub_53/U5/Y (OR2X8)                       0.11      18.32 f
+  pos_core/bfu1/sub_53/U4/Y (OR2X8)                       0.11      18.43 f
+  pos_core/bfu1/sub_53/U7/Y (OR2X8)                       0.11      18.54 f
+  pos_core/bfu1/sub_53/U6/Y (OR2X8)                       0.11      18.65 f
+  pos_core/bfu1/sub_53/U9/Y (OR2X8)                       0.11      18.76 f
+  pos_core/bfu1/sub_53/U8/Y (OR2X8)                       0.11      18.87 f
+  pos_core/bfu1/sub_53/U1/Y (OR2X8)                       0.11      18.97 f
+  pos_core/bfu1/sub_53/U33/Y (OR2X8)                      0.11      19.09 f
+  pos_core/bfu1/sub_53/U36/Y (OR2X8)                      0.11      19.20 f
+  pos_core/bfu1/sub_53/U43/Y (OR2X8)                      0.11      19.31 f
+  pos_core/bfu1/sub_53/U44/Y (OR2X8)                      0.11      19.41 f
+  pos_core/bfu1/sub_53/U35/Y (OR2X8)                      0.11      19.52 f
+  pos_core/bfu1/sub_53/U38/Y (OR2X8)                      0.11      19.63 f
+  pos_core/bfu1/sub_53/U20/Y (OR2X8)                      0.12      19.75 f
+  pos_core/bfu1/sub_53/U19/Y (NOR2X8)                     0.08      19.83 r
+  pos_core/bfu1/sub_53/U18/Y (NAND2X6)                    0.06      19.89 f
+  pos_core/bfu1/sub_53/U48/Y (XNOR2X1)                    0.12      20.01 f
+  pos_core/bfu1/sub_53/SUM[30] (Dim1_BFU_DATA_WIDTH33_0_DW01_dec_0_DW01_dec_22)
+                                                          0.00      20.01 f
+  pos_core/bfu1/U173/Y (NOR2BX1)                          0.16      20.17 f
+  pos_core/bfu1/O_sub_reg_reg_30_/D (DFFQXL)              0.00      20.17 f
+  data arrival time                                                 20.17
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  pos_core/bfu1/O_sub_reg_reg_30_/CK (DFFQXL)             0.00      20.40 r
+  library setup time                                     -0.14      20.26
+  data required time                                                20.26
+  --------------------------------------------------------------------------
+  data required time                                                20.26
+  data arrival time                                                -20.17
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.09
+
+
+  Startpoint: pos_core/RegFile/read_data_1_reg_8_
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: pos_core/mul1/prod_s2_reg_62_
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  FrFT_top           tsmc13_wl10           slow
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  pos_core/RegFile/read_data_1_reg_8_/CK (DFFRX1)         0.00 #     0.50 r
+  pos_core/RegFile/read_data_1_reg_8_/Q (DFFRX1)          0.48       0.98 r
+  pos_core/RegFile/read_data_1[8] (RegFileTetra_DATA_WIDTH33_REG_DEPTH32_REG_ADDRW5_0)
+                                                          0.00       0.98 r
+  pos_core/U553/Y (AND2XL)                                0.32       1.30 r
+  pos_core/U546/Y (AO21XL)                                0.30       1.60 r
+  pos_core/U547/Y (AO21XL)                                0.30       1.90 r
+  pos_core/U545/Y (AO21XL)                                0.30       2.20 r
+  pos_core/U544/Y (AO21XL)                                0.30       2.50 r
+  pos_core/U543/Y (AO21XL)                                0.30       2.80 r
+  pos_core/U542/Y (AO21XL)                                0.32       3.11 r
+  pos_core/U4/Y (AOI21X1)                                 0.12       3.23 f
+  pos_core/U1285/Y (XOR2X1)                               0.18       3.41 r
+  pos_core/U367/Y (MX2X6)                                 0.19       3.60 r
+  pos_core/add_129_C345_aco/B[0] (FrFT_core_20_10_28_33_32_32_5_0fc000000_0fffffc00_DW01_add_18)
+                                                          0.00       3.60 r
+  pos_core/add_129_C345_aco/U53/Y (NAND2XL)               0.16       3.76 f
+  pos_core/add_129_C345_aco/U79/Y (CLKINVX1)              0.14       3.90 r
+  pos_core/add_129_C345_aco/U78/CO (ADDHX1)               0.17       4.06 r
+  pos_core/add_129_C345_aco/U81/CO (ADDHX1)               0.17       4.23 r
+  pos_core/add_129_C345_aco/U82/CO (ADDHX1)               0.17       4.40 r
+  pos_core/add_129_C345_aco/U83/CO (ADDHX1)               0.17       4.57 r
+  pos_core/add_129_C345_aco/U84/CO (ADDHX1)               0.17       4.74 r
+  pos_core/add_129_C345_aco/U85/CO (ADDHX1)               0.17       4.91 r
+  pos_core/add_129_C345_aco/U74/CO (ADDHX1)               0.17       5.07 r
+  pos_core/add_129_C345_aco/U66/CO (ADDHX1)               0.17       5.24 r
+  pos_core/add_129_C345_aco/U67/CO (ADDHX1)               0.16       5.40 r
+  pos_core/add_129_C345_aco/U51/CO (ADDHXL)               0.22       5.63 r
+  pos_core/add_129_C345_aco/U68/CO (ADDHX1)               0.18       5.80 r
+  pos_core/add_129_C345_aco/U69/CO (ADDHX1)               0.17       5.97 r
+  pos_core/add_129_C345_aco/U70/CO (ADDHX1)               0.17       6.14 r
+  pos_core/add_129_C345_aco/U71/CO (ADDHX1)               0.17       6.31 r
+  pos_core/add_129_C345_aco/U72/CO (ADDHX1)               0.17       6.48 r
+  pos_core/add_129_C345_aco/U75/CO (ADDHX1)               0.17       6.64 r
+  pos_core/add_129_C345_aco/U87/CO (ADDHX1)               0.17       6.81 r
+  pos_core/add_129_C345_aco/U88/CO (ADDHX1)               0.17       6.98 r
+  pos_core/add_129_C345_aco/U89/CO (ADDHX1)               0.17       7.15 r
+  pos_core/add_129_C345_aco/U90/CO (ADDHX1)               0.17       7.32 r
+  pos_core/add_129_C345_aco/U91/CO (ADDHX1)               0.17       7.48 r
+  pos_core/add_129_C345_aco/U92/CO (ADDHX1)               0.17       7.65 r
+  pos_core/add_129_C345_aco/U86/CO (ADDHX1)               0.22       7.87 r
+  pos_core/add_129_C345_aco/U50/Y (OR2X2)                 0.29       8.16 r
+  pos_core/add_129_C345_aco/U73/Y (CLKINVX1)              0.26       8.42 f
+  pos_core/add_129_C345_aco/U60/Y (CLKBUFX3)              0.22       8.64 f
+  pos_core/add_129_C345_aco/SUM[27] (FrFT_core_20_10_28_33_32_32_5_0fc000000_0fffffc00_DW01_add_18)
+                                                          0.00       8.64 f
+  pos_core/U702/Y (NOR2X1)                                0.15       8.79 r
+  pos_core/U822/Y (NAND2X1)                               0.09       8.88 f
+  pos_core/U821/Y (NOR2X1)                                0.15       9.03 r
+  pos_core/U817/Y (NAND4BX1)                              0.19       9.22 f
+  pos_core/U816/Y (NAND3BX1)                              0.22       9.44 r
+  pos_core/U319/Y (INVX3)                                 0.29       9.73 f
+  pos_core/U429/Y (CLKBUFX2)                              0.58      10.31 f
+  pos_core/U593/Y (AO22XL)                                0.52      10.83 f
+  pos_core/mul1/A[12] (Dim1_Modular_Mul_DATA_WIDTH33_0)
+                                                          0.00      10.83 f
+  pos_core/mul1/add_22/A[12] (Dim1_Modular_Mul_DATA_WIDTH33_0_DW01_inc_3)
+                                                          0.00      10.83 f
+  pos_core/mul1/add_22/U232/Y (AND2X2)                    0.23      11.05 f
+  pos_core/mul1/add_22/U226/Y (NAND2X1)                   0.18      11.23 r
+  pos_core/mul1/add_22/U221/Y (CLKINVX1)                  0.11      11.34 f
+  pos_core/mul1/add_22/U220/Y (AND2X2)                    0.16      11.50 f
+  pos_core/mul1/add_22/U219/Y (AND2X2)                    0.13      11.63 f
+  pos_core/mul1/add_22/U218/Y (AND2X2)                    0.26      11.88 f
+  pos_core/mul1/add_22/U157/Y (MXI2X1)                    0.20      12.08 r
+  pos_core/mul1/add_22/SUM[17] (Dim1_Modular_Mul_DATA_WIDTH33_0_DW01_inc_3)
+                                                          0.00      12.08 r
+  pos_core/mul1/U52/Y (AND2X2)                            0.48      12.57 r
+  pos_core/mul1/mult_26/a[17] (Dim1_Modular_Mul_DATA_WIDTH33_0_DW_mult_uns_1)
+                                                          0.00      12.57 r
+  pos_core/mul1/mult_26/U5220/Y (CLKINVX1)                0.28      12.84 f
+  pos_core/mul1/mult_26/U3286/Y (INVX4)                   0.48      13.32 r
+  pos_core/mul1/mult_26/U5219/Y (XOR2X1)                  0.41      13.74 r
+  pos_core/mul1/mult_26/U4953/Y (NOR2X1)                  0.18      13.91 f
+  pos_core/mul1/mult_26/U4261/Y (CLKBUFX3)                0.48      14.39 f
+  pos_core/mul1/mult_26/U4936/Y (AOI222XL)                0.44      14.83 r
+  pos_core/mul1/mult_26/U4935/Y (OAI21XL)                 0.18      15.01 f
+  pos_core/mul1/mult_26/U4237/Y (XOR2X1)                  0.19      15.20 r
+  pos_core/mul1/mult_26/U4235/S (ADDHXL)                  0.28      15.48 r
+  pos_core/mul1/mult_26/U4943/CO (ADDFXL)                 0.59      16.06 r
+  pos_core/mul1/mult_26/U4888/CO (CMPR42X1)               0.54      16.61 f
+  pos_core/mul1/mult_26/U4673/CO (CMPR42X1)               0.21      16.81 f
+  pos_core/mul1/mult_26/U4594/ICO (CMPR42X1)              0.22      17.03 f
+  pos_core/mul1/mult_26/U4614/CO (CMPR42X1)               0.41      17.44 r
+  pos_core/mul1/mult_26/U4617/ICO (CMPR42X1)              0.17      17.62 r
+  pos_core/mul1/mult_26/U4573/S (CMPR42X1)                0.45      18.07 r
+  pos_core/mul1/mult_26/U3197/Y (NOR2X1)                  0.17      18.23 f
+  pos_core/mul1/mult_26/U2977/Y (OAI21XL)                 0.31      18.54 r
+  pos_core/mul1/mult_26/U3469/Y (AOI21X1)                 0.17      18.71 f
+  pos_core/mul1/mult_26/U3468/Y (OAI21X1)                 0.28      18.99 r
+  pos_core/mul1/mult_26/U3425/Y (AOI21X1)                 0.22      19.21 f
+  pos_core/mul1/mult_26/U3034/Y (OAI21X4)                 0.16      19.37 r
+  pos_core/mul1/mult_26/U3027/Y (OAI2BB1X4)               0.13      19.49 r
+  pos_core/mul1/mult_26/U2964/Y (INVX8)                   0.11      19.60 f
+  pos_core/mul1/mult_26/U3413/Y (OAI21XL)                 0.29      19.89 r
+  pos_core/mul1/mult_26/U3101/Y (XNOR2XL)                 0.24      20.14 f
+  pos_core/mul1/mult_26/product[62] (Dim1_Modular_Mul_DATA_WIDTH33_0_DW_mult_uns_1)
+                                                          0.00      20.14 f
+  pos_core/mul1/prod_s2_reg_62_/D (DFFQXL)                0.00      20.14 f
+  data arrival time                                                 20.14
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  pos_core/mul1/prod_s2_reg_62_/CK (DFFQXL)               0.00      20.40 r
+  library setup time                                     -0.17      20.23
+  data required time                                                20.23
+  --------------------------------------------------------------------------
+  data required time                                                20.23
+  data arrival time                                                -20.14
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.09
+
+
+1

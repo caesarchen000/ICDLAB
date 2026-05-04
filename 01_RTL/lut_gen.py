@@ -5,14 +5,19 @@ from datetime import datetime
 # ==========================================
 # 參數設定
 # ==========================================
-FILENAME = "LUT_chirp.v"
-AUTHOR = "Guan-Yi Tsen"
-KEY_WIDTH = 8
-NUM_KEYS = 2**KEY_WIDTH
+FILENAME = "LUT_chirp_v3.v"
+AUTHOR = "Yu-Yan Zheng"
+KEY_WIDTH_13 = 7
+NUM_KEYS = 2**KEY_WIDTH_13
+KEY_WIDTH_2 = 7
+NUM_KEYS = 2**KEY_WIDTH_2
+VALUE_WIDTH = 8
+DATA_WIDTH = 2*VALUE_WIDTH
 N = 32
 MODULUS = 4294967297  # F_q = 2^32 + 1
 PSI = 4               # Principal 32nd root of unity
-SCALE = 127           # 8-bit 量化放大倍率 (密碼學中 SCALE 開多大都無損)
+SCALE_1 = 64           # for chirp13
+SCALE_2 = 32           # for chirp2
 
 # ==========================================
 # 輔助函式
@@ -34,6 +39,17 @@ def complex_to_fq(re, im):
     re_mod = int(re) % fq
     im_mod = (int(im) * 65536) % fq
     val = (re_mod + im_mod) % fq
+    return val
+
+def complex_represent(re, im):
+    """ 將複數 A + jB 包裝 """
+    # 2's complement
+    re_p = re if re >= 0 else (2**VALUE_WIDTH+re)
+    im_p = im if im >= 0 else (2**VALUE_WIDTH+im)
+
+    re_mod = int(re_p)
+    im_mod = (int(im_p) * (2**VALUE_WIDTH))
+    val = (re_mod + im_mod)
     return val
 
 def fq_to_dim1(val):
@@ -60,20 +76,19 @@ def mod_inverse(val, fq):
 # 主程式：生成包含加解密的完整 LUT_chirp.v
 # ==========================================
 if __name__ == "__main__":
-    print(f">>> 開始生成 {FILENAME} ... (包含全部 {NUM_KEYS} 把 Key 與模反元素)")
+    print(f">>> 開始生成 {FILENAME} ... (包含全部 {NUM_KEYS})")
     header = f"""/********************************************************************
 * Filename: {FILENAME}
 * Authors:
 *     {AUTHOR}
 * Description:
-*     LUT for Chirp Signals (33-bit F_q mapping, Diminished-1)
+*     LUT for Chirp Signals (without F_q mapping, Diminished-1)
 * Note:
-*     key: 8-bit signed integer (-128 ~ 127). Order a = key / 64.
-*     (Negative keys will fetch modular multiplicative inverses)
-*     out: 33-bit Diminished-1 encoded integer.
+*     key: 7-bit unsigned integer (1 ~ 128). Order a = key / 64, assume angle 0 isn't considered
+*     out: 16-bit
 *     (Complex mapped via: Real + Imag * 2^16 mod 2^32+1)
-*     sel = 0: exp(-j * pi/N * t^2 * tan(alpha/2)) (Chirp I & III)
-*     sel = 1: FNT{{ exp(j * pi/N * t^2 * csc(alpha)) }} (Chirp II FNT)
+*     exp(-j * pi/N * t^2 * tan(alpha/2)) (Chirp I & III)
+*     exp(j * pi/N * t^2 * csc(alpha)) (Chirp II)
 * Review History:
 *     {datetime.now().strftime("%Y.%m.%d")}    {AUTHOR}
 *********************************************************************/\n
@@ -81,68 +96,114 @@ if __name__ == "__main__":
     with open(FILENAME, "w") as f:
         # --- 寫入 Verilog Module 標頭 ---
         f.write(header)
-        f.write(f"module LUT_chirp #(\n")
-        f.write(f"    parameter REG_ADDRW  = {int(np.log2(N))},\n")
-        f.write(f"    parameter KEY_WIDTH  = {KEY_WIDTH},\n")
-        f.write(f"    parameter DATA_WIDTH = 33\n")
+        # exp(-j * pi/N * t^2 * tan(alpha/2)) (Chirp I & III)
+        f.write(f"module LUT_chirp13 #(\n")
+        f.write(f"    parameter REG_ADDRW  = {int(np.log2(N))-1},\n")
+        f.write(f"    parameter KEY_WIDTH  = {KEY_WIDTH_13},\n")
+        f.write(f"    parameter DATA_WIDTH = {DATA_WIDTH}\n")
         f.write(f")(\n")
-        f.write(f"    input                         sel,\n")
         f.write(f"    input         [REG_ADDRW-1:0] idx,\n")
-        f.write(f"    input  signed [KEY_WIDTH-1:0] key,\n")
+        f.write(f"    input         [KEY_WIDTH-1:0] key,\n")
         f.write(f"    output reg   [DATA_WIDTH-1:0] out\n")
         f.write(f");\n")
-        f.write(f"    wire [13:0] concat_sel = {{sel, key, idx}};\n\n")
+        f.write(f"    wire [REG_ADDRW+KEY_WIDTH-1:0] concat_sel = {{key, idx}};\n\n")
         f.write(f"    always @(*) begin\n")
         f.write(f"        case(concat_sel)\n")
 
-        time = np.arange(-N//2, N//2)
+        time = np.arange(1, N//2+1) # 1, 2 ..., 16
         
-        # --- 開始計算所有 Key 與其反元素 ---
-        for sel in [0, 1]:
-            # 遍歷 k = 0 到 128 (正向 Key)
-            for k in range(129):
-                a = k / 64.0
-                if a % 1 == 0:
-                    a += 1e-6
-                
-                alpha = a * (math.pi / 2)
-                
-                c13_ideal = np.exp(-1j * math.pi * (time**2) * np.tan(alpha/2) / N)
-                c2_ideal  = np.exp( 1j * math.pi * (time**2) / np.sin(alpha) / N)
-                
-                c13_r = np.round(c13_ideal.real * SCALE).astype(int)
-                c13_i = np.round(c13_ideal.imag * SCALE).astype(int)
-                c2_r  = np.round(c2_ideal.real * SCALE).astype(int)
-                c2_i  = np.round(c2_ideal.imag * SCALE).astype(int)
-                
-                c13_fq = [complex_to_fq(c13_r[i], c13_i[i]) for i in range(N)]
-                c2_fq  = [complex_to_fq(c2_r[i], c2_i[i]) for i in range(N)]
-                
-                # 計算 Chirp II 的 FNT 頻譜
-                c2_fnt = fnt(c2_fq, N, MODULUS, PSI)
-                
-                for idx in range(N):
-                    # 選擇 Chirp (sel=0: Chirp I/III, sel=1: Chirp II FNT)
-                    val = c13_fq[idx] if sel == 0 else c2_fnt[idx]
-                    
-                    # 保證可逆性，並取得完美的解密反元素！
-                    val = get_invertible_val(val, MODULUS)
-                    inv_val = mod_inverse(val, MODULUS)
-                    
-                    # 1. 寫入正向 (加密) Key = k
-                    concat_fwd = sel * 8192 + k * 32 + idx
-                    f.write(f"            14'd{concat_fwd:<5}: out = 33'h{fq_to_dim1(val):09X};\n")
-                    
-                    # 2. 寫入負向 (解密) Key = -k (在 8-bit 二補數中對應 256 - k)
-                    if k != 0 and k != 128:
-                        neg_k = 256 - k
-                        concat_inv = sel * 8192 + neg_k * 32 + idx
-                        f.write(f"            14'd{concat_inv:<5}: out = 33'h{fq_to_dim1(inv_val):09X};\n")
+        
+        # Traverse from k = 1 to 128 (Store Positive Key)
+        for k in range(1, 129):
+            a = k / 128.0
+            if a % 1 == 0:
+                a -= 1e-6 # since if k = 128, then tan(pi/2)->infty
+            alpha = a * math.pi # alpha = angle
+            
+            c13_ideal = np.exp(-1j * math.pi * (time**2) * np.tan(alpha/2) )
+            
+            c13_r = np.round(c13_ideal.real * SCALE_1).astype(int)
+            c13_i = np.round(c13_ideal.imag * SCALE_1).astype(int)
+            
+            c13_cr = [complex_represent(c13_r[i], c13_i[i]) for i in range(N//2)]
+
+            if k == 128:
+                print(alpha)
+                print(c13_r)
+                print(c13_i)
+                print(c13_cr[0])
+
+            for idx in range(N//2): # idx 0~15
+                val = c13_cr[idx]
+                addr = (k-1) * 16 + idx
+                f.write(f"            {int(np.log2(N))-1+KEY_WIDTH_13}'d{addr:<5}: out = {DATA_WIDTH}'b{val:016b};\n")
                         
         # 兜底保護
-        f.write(f"            default: out = 33'h100000000;\n")
+        f.write(f"            default: out = {DATA_WIDTH}'d0;\n")
+        f.write(f"        endcase\n")
+        f.write(f"    end\n")
+        f.write(f"endmodule\n")
+
+        print(f">>> 已經生成module LUT_chirp13")
+        
+        f.write(f"\n")
+
+        # A_alpha * exp(j * pi/N * t^2 * csc(alpha)) (Chirp II)
+        f.write(f"module LUT_chirp2 #(\n")
+        f.write(f"    parameter REG_ADDRW  = {int(np.log2(N))-1},\n")
+        f.write(f"    parameter KEY_WIDTH  = {KEY_WIDTH_2},\n")
+        f.write(f"    parameter DATA_WIDTH = {DATA_WIDTH}\n")
+        f.write(f")(\n")
+        f.write(f"    input         [REG_ADDRW-1:0] idx,\n")
+        f.write(f"    input         [KEY_WIDTH-1:0] key,\n")
+        f.write(f"    output reg   [DATA_WIDTH-1:0] out\n")
+        f.write(f");\n")
+        f.write(f"    wire [REG_ADDRW+KEY_WIDTH-1:0] concat_sel = {{key, idx}};\n\n")
+        f.write(f"    always @(*) begin\n")
+        f.write(f"        case(concat_sel)\n")
+
+        t = np.arange(-16, 16)
+        time = np.arange(1, N//2+1) # 1, 2 ..., 16
+        
+        # Traverse from k = 1 to 128 (Store Positive Key)
+        for k in range(1, 129):
+            
+            a = k / 128.0 if k != 128 else 127/128
+            alpha = a * math.pi # alpha = angle
+
+            if np.abs(np.sin(alpha)) < 1e-10:
+                alpha += 1e-5
+            
+            c2_ideal = np.exp( 1j * math.pi * (time**2) / np.sin(alpha) )
+            A_alpha = np.sqrt((1 - 1j / np.tan(alpha)) / (2 * np.pi))
+            #A_alpha = 1
+            c2_ideal = c2_ideal*A_alpha
+            c2_r = np.round(c2_ideal.real * SCALE_2).astype(int)
+            c2_i = np.round(c2_ideal.imag * SCALE_2).astype(int)
+            
+            c2_cr = [complex_represent(c2_r[i], c2_i[i]) for i in range(N//2)]
+
+            if k == 15:
+                print(alpha)
+                print(c2_r)
+                print(c2_i)
+                print(c2_cr[0])
+
+            if k == 113:
+                print(alpha)
+                print(c2_r)
+                print(c2_i)
+                print(c2_cr[0])
+
+            for idx in range(N//2): # idx 0~15
+                val = c2_cr[idx]
+                addr = (k-1) * 16 + idx
+                f.write(f"            {int(np.log2(N))-1+KEY_WIDTH_2}'d{addr:<5}: out = {DATA_WIDTH}'b{val:016b};\n")
+                        
+        # 兜底保護
+        f.write(f"            default: out = {DATA_WIDTH}'d0;\n")
         f.write(f"        endcase\n")
         f.write(f"    end\n")
         f.write(f"endmodule\n")
         
-    print(f">>> 產生完畢！已經生成完美的 {FILENAME}，可直接進行合成與驗證！")
+    print(f">>> 產生module LUT_chirp2完畢！已經生成完美的 {FILENAME}，可直接進行合成與驗證！")
