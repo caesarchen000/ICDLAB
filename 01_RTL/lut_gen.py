@@ -1,16 +1,17 @@
 import numpy as np
 import math
-from datetime import datetime
 
 # ==========================================
 # 參數設定
 # ==========================================
-FILENAME = "LUT_chirp_v3.v"
+# Chip v3 chirp LUT; output name matches rtl.f / synthesis (LUT_chirp.v).
+FILENAME = "LUT_chirp.v"
 AUTHOR = "Yu-Yan Zheng"
+# Keep stable across regenerations unless you intentionally change the LUT math.
+REVIEW_DATE = "2026.05.04"
 KEY_WIDTH_13 = 7
-NUM_KEYS = 2**KEY_WIDTH_13
 KEY_WIDTH_2 = 7
-NUM_KEYS = 2**KEY_WIDTH_2
+NUM_KEYS = 2**KEY_WIDTH_13
 VALUE_WIDTH = 8
 DATA_WIDTH = 2*VALUE_WIDTH
 N = 32
@@ -84,19 +85,18 @@ if __name__ == "__main__":
 * Description:
 *     LUT for Chirp Signals (without F_q mapping, Diminished-1)
 * Note:
-*     key: 7-bit unsigned integer (1 ~ 128). Order a = key / 64, assume angle 0 isn't considered
-*     out: 16-bit
-*     (Complex mapped via: Real + Imag * 2^16 mod 2^32+1)
-*     exp(-j * pi/N * t^2 * tan(alpha/2)) (Chirp I & III)
-*     exp(j * pi/N * t^2 * csc(alpha)) (Chirp II)
+*     key: 7-bit unsigned integer (1 ~ 128). Order a = k/128 with k=1..128; angle alpha = a*pi
+*     out: 16-bit packed {{imag[7:0], real[7:0]}} (8-bit two's complement each)
+*     T_r, T_t: exp(-j * (t^2/2) * tan(alpha/2))  (Chirp I & III, t = 1..16)
+*     T_s chirp before A_alpha: exp(+j * (t^2/2) * csc(alpha)); then * A_alpha, A_alpha = sqrt((1-j cot alpha)/(2*pi))
 * Review History:
-*     {datetime.now().strftime("%Y.%m.%d")}    {AUTHOR}
+*     {REVIEW_DATE}    {AUTHOR}
 *********************************************************************/\n
 """
     with open(FILENAME, "w") as f:
         # --- 寫入 Verilog Module 標頭 ---
         f.write(header)
-        # exp(-j * pi/N * t^2 * tan(alpha/2)) (Chirp I & III)
+        # T_r / T_t: exp(-j * (t^2/2) * tan(alpha/2))
         f.write(f"module LUT_chirp13 #(\n")
         f.write(f"    parameter REG_ADDRW  = {int(np.log2(N))-1},\n")
         f.write(f"    parameter KEY_WIDTH  = {KEY_WIDTH_13},\n")
@@ -120,7 +120,7 @@ if __name__ == "__main__":
                 a -= 1e-6 # since if k = 128, then tan(pi/2)->infty
             alpha = a * math.pi # alpha = angle
             
-            c13_ideal = np.exp(-1j * math.pi * (time**2) * np.tan(alpha/2) )
+            c13_ideal = np.exp(-1j * (time**2) / 2.0 * np.tan(alpha / 2.0))
             
             c13_r = np.round(c13_ideal.real * SCALE_1).astype(int)
             c13_i = np.round(c13_ideal.imag * SCALE_1).astype(int)
@@ -148,7 +148,7 @@ if __name__ == "__main__":
         
         f.write(f"\n")
 
-        # A_alpha * exp(j * pi/N * t^2 * csc(alpha)) (Chirp II)
+        # A_alpha * T_s with T_s = exp(+j * (t^2/2) * csc(alpha))
         f.write(f"module LUT_chirp2 #(\n")
         f.write(f"    parameter REG_ADDRW  = {int(np.log2(N))-1},\n")
         f.write(f"    parameter KEY_WIDTH  = {KEY_WIDTH_2},\n")
@@ -162,7 +162,6 @@ if __name__ == "__main__":
         f.write(f"    always @(*) begin\n")
         f.write(f"        case(concat_sel)\n")
 
-        t = np.arange(-16, 16)
         time = np.arange(1, N//2+1) # 1, 2 ..., 16
         
         # Traverse from k = 1 to 128 (Store Positive Key)
@@ -174,7 +173,7 @@ if __name__ == "__main__":
             if np.abs(np.sin(alpha)) < 1e-10:
                 alpha += 1e-5
             
-            c2_ideal = np.exp( 1j * math.pi * (time**2) / np.sin(alpha) )
+            c2_ideal = np.exp(1j * (time**2) / 2.0 / np.sin(alpha))
             A_alpha = np.sqrt((1 - 1j / np.tan(alpha)) / (2 * np.pi))
             #A_alpha = 1
             c2_ideal = c2_ideal*A_alpha

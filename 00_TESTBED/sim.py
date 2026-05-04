@@ -1,16 +1,7 @@
-# -*- coding: utf-8 -*-
-import argparse
-import math
-import random
-import datetime
-from pathlib import Path
-
 import numpy as np
-try:
-    import matplotlib.pyplot as plt
-except ImportError:
-    plt = None
+import matplotlib.pyplot as plt
 from PIL import Image
+import argparse
 
 # --- System Constants ---
 M = 2**32 + 1
@@ -18,11 +9,73 @@ J = 2**16
 N = 32
 # 將量化尺度稍微調降，以確保在軟體模擬中，經過多次乘法後的數值
 # 較不容易產生破壞性的截斷誤差，從而提高解密還原的視覺品質。
-Q_SCALE = 128.0  
+Q_SCALE = 128
+Q_SCALE_1 = 128.0
+Q_SCALE_2 = 32.0  
 
 def mod_add(a, b): return (a + b) % M
 def mod_sub(a, b): return (a - b) % M
 def mod_mul(a, b): return (int(a) * int(b)) % M
+
+
+def _wrap_alpha(alpha):
+    return (float(alpha) + np.pi) % (2 * np.pi) - np.pi
+
+
+def _safe_alpha_terms(alpha, eps=1e-6):
+    """
+    Return numerically safe (alpha, sin(alpha), tan(alpha/2), cot(alpha)).
+    Only guards singular points; does not change the core algorithm.
+    """
+    a = _wrap_alpha(alpha)
+
+    s = np.sin(a)
+    if abs(s) < eps:
+        s = eps if s >= 0 else -eps
+
+    t2 = np.tan(a / 2.0)
+    if abs(t2) < eps:
+        t2 = eps if t2 >= 0 else -eps
+
+    t = np.tan(a)
+    if abs(t) < eps:
+        cot_a = 1.0 / (eps if t >= 0 else -eps)
+    elif abs(t) > (1.0 / eps):
+        # Near +/-pi/2, cot(alpha) -> 0
+        cot_a = 0.0
+    else:
+        cot_a = 1.0 / t
+
+    return a, s, t2, cot_a
+
+
+def _snap_special_alpha(alpha, eps=1e-9):
+    """
+    Snap alpha to mathematically singular / limit orders and label:
+    - alpha == 0  -> identity (FrFT order 0)
+    - alpha == odd*pi -> reversal (FrFT order 2, discrete indexing convention)
+
+    Note: alpha = +/-pi/2 is NOT singular in the chirp kernel; use normal path.
+
+    Important: do NOT use a wide "near-zero" band in key units. That creates a
+    discontinuity between keys that take the identity shortcut vs keys that use
+    the full chirp pipeline (shows up as spikes a few keys away from 0).
+    """
+    a = _wrap_alpha(alpha)
+    if abs(a) < eps:
+        return 0.0, "id"
+    # Wrapped domain is (-pi, pi], so only pi (not 2pi) is reachable here.
+    if abs(abs(a) - np.pi) < eps:
+        return np.pi, "rev"
+    return a, None
+
+
+def _apply_special_operator(x, special):
+    if special == "id":
+        return np.array(x, dtype=np.complex128, copy=True)
+    if special == "rev":
+        return np.array(x[::-1], dtype=np.complex128, copy=True)
+    return None
 
 def complex_to_scc(real, imag):
     r = real.astype(np.int64) % M
@@ -52,26 +105,45 @@ def ifnt_32_unnormalized(X, root=4):
 
 def generate_chirps(alpha):
     t = np.arange(-16, 16)
-    
-    # 防止 alpha 為 0 導致的除以零錯誤
-    if np.abs(np.sin(alpha)) < 1e-10:
-        alpha += 1e-10
 
-    c1 = np.exp(-1j * np.pi * (t**2) * np.tan(alpha / 2))
+    # Always build chirps from the actual wrapped angle. Singular handling
+    # lives in _safe_alpha_terms (cot/csc/tan half), so we do not replace alpha
+    # with a synthetic value here — that would desync FNT chirps from the
+    # float reference just outside the identity snap band.
+    alpha_s = _wrap_alpha(alpha)
+
+    _, sin_a, tan_half_a, cot_a = _safe_alpha_terms(alpha_s)
+
+    # Chirp-form FrFT (matches written definition):
+    # T_r[n]=T_t[n]=exp(-j * n^2/2 * tan(alpha/2))
+    # T_s[n]=exp(+j * n^2/2 * csc(alpha))
+    # A_alpha = sqrt((1 - j cot(alpha)) / (2*pi))
+    c1 = np.exp(-1j * (t**2) / 2.0 * tan_half_a)
+
+    A_alpha = np.sqrt((1 - 1j * cot_a) / (2 * np.pi))
+    #A_alpha = 1
+    c2 = A_alpha * np.exp(1j * (t**2) / 2.0 / sin_a)
     
-    A_alpha = np.sqrt((1 - 1j / np.tan(alpha)) / (2 * np.pi))
-    c2 = A_alpha * np.exp(1j * np.pi * (t**2) / np.sin(alpha))
-    
-    c1_r, c1_i = np.round(c1.real * Q_SCALE), np.round(c1.imag * Q_SCALE)
-    c2_r, c2_i = np.round(c2.real * Q_SCALE), np.round(c2.imag * Q_SCALE)
+    c1_r, c1_i = np.round(c1.real * Q_SCALE_1), np.round(c1.imag * Q_SCALE_1)
+    c2_r, c2_i = np.round(c2.real * Q_SCALE_2), np.round(c2.imag * Q_SCALE_2)
+    # 為了畫面整潔，若在迴圈內掃描，可將列印資訊註解掉
+    # print("Chirp2 real before SCC")
+    # print(c2_r)
+    # print("Chirp2 imag before SCC")
+    # print(c2_i)
     
     c1_p1, c1_p2 = complex_to_scc(c1_r, c1_i)
     c2_p1, c2_p2 = complex_to_scc(c2_r, c2_i)
-    
+
     C2_p1 = fnt_32(c2_p1)
     C2_p2 = fnt_32(c2_p2)
-    
+
     return c1_p1, c1_p2, C2_p1, C2_p2
+
+# --- 2. 有限體數值解碼 ---
+def decode_mod(val, M):
+    """將有限體 M 上的正數映射回實際的正負浮點數"""
+    return val if val < M/2 else val - M
 
 def frft_1d(x_real, x_imag, chirps):
     c1_p1, c1_p2, C2_p1, C2_p2 = chirps
@@ -95,68 +167,31 @@ def frft_1d(x_real, x_imag, chirps):
     
     neg_2_31 = M - 2**31
     neg_2_15 = M - 2**15
+    pos_2_15 = 2**15
     inv_32 = M - 2**27 
-    
+
+    Q3 = int((Q_SCALE_1**2) * Q_SCALE_2)
+    Q3_inv = pow(Q3, -1, M) 
+    # print("Q3_inv:", Q3_inv)
+
+    K_r = (neg_2_31 * inv_32) % M
+    K_i_pos = (neg_2_15 * inv_32) % M
+    K_i_neg = (pos_2_15 * inv_32) % M
+
     real_out = np.zeros(N, dtype=np.int64)
     imag_out = np.zeros(N, dtype=np.int64)
     
     for i in range(N):
-        sum_p = mod_add(out_p1[i], out_p2[i])
-        r = mod_mul(sum_p, neg_2_31)
-        real_out[i] = mod_mul(r, inv_32)
-        
-        diff_p = mod_sub(out_p1[i], out_p2[i])
-        im = mod_mul(diff_p, neg_2_15)
-        imag_out[i] = mod_mul(im, inv_32)
-        
+        shift = int(np.ceil(np.log2(Q_SCALE_1*Q_SCALE_1*Q_SCALE_2)))
+        real_out[i] = mod_add(mod_mul(out_p1[i], K_r), mod_mul(out_p2[i], K_r))
+        real_out[i] = decode_mod(real_out[i], M)
+        real_out[i] = real_out[i] >> shift
+
+        imag_out[i] = mod_add(mod_mul(out_p1[i], K_i_pos), mod_mul(out_p2[i], K_i_neg))
+        imag_out[i] = decode_mod(imag_out[i], M)
+        imag_out[i] = imag_out[i] >> shift
+
     return real_out, imag_out
-
-
-def frft_1d_debug(x_real, x_imag, chirps):
-    """Return all stage intermediates for debug golden dump."""
-    c1_p1, c1_p2, C2_p1, C2_p2 = chirps
-    x_p1, x_p2 = complex_to_scc(x_real, x_imag)
-
-    # MUL1
-    p1_mul1 = np.array([mod_mul(x_p1[i], c1_p1[i]) for i in range(N)], dtype=np.int64)
-    p2_mul1 = np.array([mod_mul(x_p2[i], c1_p2[i]) for i in range(N)], dtype=np.int64)
-
-    # FNT
-    p1_fnt = fnt_32(p1_mul1)
-    p2_fnt = fnt_32(p2_mul1)
-
-    # MUL2
-    p1_mul2 = np.array([mod_mul(p1_fnt[i], C2_p1[i]) for i in range(N)], dtype=np.int64)
-    p2_mul2 = np.array([mod_mul(p2_fnt[i], C2_p2[i]) for i in range(N)], dtype=np.int64)
-
-    # IFNT
-    p1_ifnt = ifnt_32_unnormalized(p1_mul2)
-    p2_ifnt = ifnt_32_unnormalized(p2_mul2)
-
-    # MUL3
-    p1_mul3 = np.array([mod_mul(p1_ifnt[i], c1_p1[i]) for i in range(N)], dtype=np.int64)
-    p2_mul3 = np.array([mod_mul(p2_ifnt[i], c1_p2[i]) for i in range(N)], dtype=np.int64)
-
-    # DEC
-    neg_2_31 = M - 2**31
-    neg_2_15 = M - 2**15
-    inv_32 = M - 2**27
-    dec_real = np.zeros(N, dtype=np.int64)
-    dec_imag = np.zeros(N, dtype=np.int64)
-    for i in range(N):
-        sum_p = mod_add(p1_mul3[i], p2_mul3[i])
-        diff_p = mod_sub(p1_mul3[i], p2_mul3[i])
-        dec_real[i] = mod_mul(mod_mul(sum_p, neg_2_31), inv_32)
-        dec_imag[i] = mod_mul(mod_mul(diff_p, neg_2_15), inv_32)
-
-    return {
-        "mul1_path1": p1_mul1, "mul1_path2": p2_mul1,
-        "fnt_path1": p1_fnt, "fnt_path2": p2_fnt,
-        "mul2_path1": p1_mul2, "mul2_path2": p2_mul2,
-        "ifnt_path1": p1_ifnt, "ifnt_path2": p2_ifnt,
-        "mul3_path1": p1_mul3, "mul3_path2": p2_mul3,
-        "dec_real": dec_real, "dec_imag": dec_imag,
-    }
 
 def frft_2d(image_real, image_imag, alpha):
     img_real = np.copy(image_real).astype(np.int64)
@@ -197,204 +232,60 @@ def theoretical_frft_1d(x, alpha):
     N = len(x)
     t = np.arange(-N//2, N//2) # 對應你程式中的 -16 到 15
     
-    # 防止 alpha 為 0
-    if np.abs(np.sin(alpha)) < 1e-10:
-        alpha += 1e-10
+    alpha_s, special = _snap_special_alpha(alpha)
+    y_sp = _apply_special_operator(x, special)
+    if y_sp is not None:
+        return y_sp
 
-    # 產生未量化的理論 Chirp 訊號
-    c1 = np.exp(-1j * np.pi * (t**2) * np.tan(alpha / 2))
-    A_alpha = np.sqrt((1 - 1j / np.tan(alpha)) / (2 * np.pi))
-    c2 = A_alpha * np.exp(1j * np.pi * (t**2) / np.sin(alpha))
+    _, sin_a, tan_half_a, cot_a = _safe_alpha_terms(_wrap_alpha(alpha))
 
-    # 使用浮點數 FFT 計算循環卷積 (模擬 FNT/IFNT 的行為)
+    c1 = np.exp(-1j * (t**2) / 2.0 * tan_half_a)
+    A_alpha = np.sqrt((1 - 1j * cot_a) / (2 * np.pi))
+    c2 = A_alpha * np.exp(1j * (t**2) / 2.0 / sin_a)
+
     x_c1 = x * c1
     conv_res = np.fft.ifft(np.fft.fft(x_c1) * np.fft.fft(c2))
     
     return conv_res * c1
 
-# --- 2. 有限體數值解碼 ---
-def decode_mod(val, M):
-    """將有限體 M 上的正數映射回實際的正負浮點數"""
-    return val if val < M/2 else val - M
+
+def fnt_or_special_1d(x_real, x_imag, alpha):
+    """
+    For singular/limit alpha orders (0, pi), bypass chirp path.
+    For all other alpha (including +/-pi/2), use the normal chirp pipeline.
+    """
+    _, special = _snap_special_alpha(alpha)
+    x_c = x_real.astype(np.float64) + 1j * x_imag.astype(np.float64)
+    y_sp = _apply_special_operator(x_c, special)
+    if y_sp is not None:
+        return y_sp.real, y_sp.imag
+
+    chirps = generate_chirps(_wrap_alpha(alpha))
+    r_fnt, i_fnt = frft_1d(x_real, x_imag, chirps)
+    return r_fnt, i_fnt
 
 
-def decode_mod_signed_raw(val):
-    x = int(val)
-    return x if x < M // 2 else x - M
-
-
-def write_hex_lines(path, values, width):
-    with open(path, "w") as f:
-        for v in values:
-            f.write(f"{int(v) & ((1 << (4 * width)) - 1):0{width}x}\n")
-
-
-def write_stage_hex(path, values):
-    # F_q range is [0, 2^32], so use 9 hex digits.
-    with open(path, "w") as f:
-        for v in values:
-            f.write(f"{int(v) & 0x1FFFFFFFF:09x}\n")
-
-
-def write_debug_stages_txt(path, in_words, dbg):
-    """Write stage dump in debug_stages.txt-like human-readable format."""
-    with open(path, "w") as f:
-        f.write("// FrFT Debug Stages Log\n")
-        f.write(f"// Generated: {datetime.datetime.now().strftime('%Y.%m.%d')}\n")
-        f.write("// Author: sim.py auto dump\n\n")
-
-        def write_block(title, arr):
-            f.write(f"[{title}]\n")
-            for i, v in enumerate(arr):
-                vv = int(v) & 0x1FFFFFFFF
-                f.write(f"  idx {i:2d}: {vv:09x} ({int(v)})\n")
-            f.write("\n")
-
-        # PATH1 section
-        f.write("=== PATH1 DEBUG ===\n")
-        input_ferm_path1 = []
-        for w in in_words:
-            real8 = w & 0xFF
-            imag8 = (w >> 8) & 0xFF
-            r = real8 if real8 < 0x80 else real8 - 0x100
-            im = imag8 if imag8 < 0x80 else imag8 - 0x100
-            input_ferm_path1.append((r + (J * im)) % M)
-        write_block("Input_Fermat", input_ferm_path1)
-        write_block("S_MUL1", dbg["mul1_path1"])
-        write_block("S_FFNT_BR", dbg["fnt_path1"])
-        write_block("S_MUL2_BR", dbg["mul2_path1"])
-        write_block("S_IFNT", dbg["ifnt_path1"])
-        write_block("S_MUL3", dbg["mul3_path1"])
-        write_block("S_DEC_REAL", dbg["dec_real"])
-        write_block("S_DEC_IMAG", dbg["dec_imag"])
-
-        # PATH2 section
-        f.write("=== PATH2 DEBUG ===\n")
-        input_ferm_path2 = []
-        for w in in_words:
-            real8 = w & 0xFF
-            imag8 = (w >> 8) & 0xFF
-            r = real8 if real8 < 0x80 else real8 - 0x100
-            im = imag8 if imag8 < 0x80 else imag8 - 0x100
-            input_ferm_path2.append((r - (J * im)) % M)
-        write_block("Input_Fermat", input_ferm_path2)
-        write_block("S_MUL1", dbg["mul1_path2"])
-        write_block("S_FFNT_BR", dbg["fnt_path2"])
-        write_block("S_MUL2_BR", dbg["mul2_path2"])
-        write_block("S_IFNT", dbg["ifnt_path2"])
-        write_block("S_MUL3", dbg["mul3_path2"])
-
-
-def gen_tb_gt_from_sim(alpha, outdir, key=None, random_alpha=False, seed=None, dump_stages=False):
-    if random_alpha:
-        if seed is not None:
-            random.seed(seed)
-        margin = 1e-3
-        alpha = random.uniform(margin, math.pi - margin)
-
-    if key is None:
-        key = int(round((alpha / math.pi) * 255.0)) & 0xFF
-
-    outdir = Path(outdir)
-    outdir.mkdir(parents=True, exist_ok=True)
-
-    # same default payload pattern used by TB
-    in_words = []
-    for k in range(32):
-        real8 = k & 0xFF
-        imag8 = (0xFF - k) & 0xFF
-        in_words.append((imag8 << 8) | real8)  # [15:8]=img, [7:0]=real
-
-    x_real = np.array([((w & 0xFF) if (w & 0x80) == 0 else (w & 0xFF) - 256) for w in in_words], dtype=np.int64)
-    x_imag = np.array([(((w >> 8) & 0xFF) if ((w >> 15) & 1) == 0 else ((w >> 8) & 0xFF) - 256) for w in in_words], dtype=np.int64)
-
-    chirps = generate_chirps(alpha)
-    out_r, out_i = frft_1d(x_real, x_imag, chirps)
-    dbg = frft_1d_debug(x_real, x_imag, chirps) if dump_stages else None
-
-    out_words = []
-    out_float = []
-    total_q_scale = Q_SCALE ** 3
-    for i in range(32):
-        r_raw = decode_mod_signed_raw(out_r[i])
-        i_raw = decode_mod_signed_raw(out_i[i])
-        # no clipping: keep raw signed value and wrap to 16-bit two's complement
-        r16 = r_raw & 0xFFFF
-        i16 = i_raw & 0xFFFF
-        out_words.append((i16 << 16) | r16)
-        out_float.append((float(r_raw) / total_q_scale, float(i_raw) / total_q_scale))
-
-    pre_hi = 0xA55A
-    pre_lo = 0x5AA5
-    in_frame_bytes = [0x00, key & 0xFF, (pre_hi >> 8) & 0xFF, pre_hi & 0xFF, (pre_lo >> 8) & 0xFF, pre_lo & 0xFF]
-    for w in in_words:
-        in_frame_bytes += [(w >> 8) & 0xFF, w & 0xFF]
-
-    out_frame_bytes = [(pre_hi >> 8) & 0xFF, pre_hi & 0xFF, (pre_lo >> 8) & 0xFF, pre_lo & 0xFF]
-    for w in out_words:
-        out_frame_bytes += [(w >> 24) & 0xFF, (w >> 16) & 0xFF, (w >> 8) & 0xFF, w & 0xFF]
-
-    write_hex_lines(outdir / "input_words_32.hex", in_words, 4)
-    write_hex_lines(outdir / "output_words_32.hex", out_words, 8)
-    write_hex_lines(outdir / "input_frame_bytes.hex", in_frame_bytes, 2)
-    write_hex_lines(outdir / "output_frame_bytes.hex", out_frame_bytes, 2)
-    write_hex_lines(outdir / "key.hex", [key], 2)
-    with open(outdir / "alpha.txt", "w") as f:
-        f.write(f"{alpha:.18f}\n")
-    with open(outdir / "output_float_32.txt", "w") as f:
-        for rr, ii in out_float:
-            f.write(f"{rr:.6f} {ii:.6f}\n")
-
-    if dump_stages:
-        stage_dir = outdir / "stages"
-        stage_dir.mkdir(parents=True, exist_ok=True)
-        for name, arr in dbg.items():
-            write_stage_hex(stage_dir / f"{name}.hex", arr)
-        write_debug_stages_txt(outdir / "debug_stages.txt", in_words, dbg)
-
-    print(f"Generated GT at: {outdir}")
-    print(f"alpha={alpha:.12f}, key=0x{key:02x}")
-    print("Files: input_words_32.hex output_words_32.hex input_frame_bytes.hex output_frame_bytes.hex key.hex alpha.txt output_float_32.txt")
-    if dump_stages:
-        print("Stage files: stages/*.hex and debug_stages.txt")
-
-
-# --- 執行 1D 比對測試 ---
-# --- 執行 1D 比對測試 (複數輸入) ---
+# --- 執行比對測試 ---
 if __name__ == "__main__":
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--gen-gt", action="store_true", help="Generate TB GT files from sim model and exit.")
-    ap.add_argument("--alpha", type=float, default=np.pi / 4)
-    ap.add_argument("--key", type=int, default=None)
-    ap.add_argument("--random-alpha", action="store_true")
-    ap.add_argument("--seed", type=int, default=None)
-    ap.add_argument("--outdir", type=str, default="pattern/gt_2path")
-    ap.add_argument("--dump-stages", action="store_true")
-    args = ap.parse_args()
+    # 解析命令列參數
+    parser = argparse.ArgumentParser(description="FrFT FNT Verification")
+    parser.add_argument(
+        '-key',
+        type=int,
+        default=1,
+        help="Alpha key: alpha = key * pi / 128. Typical sweep range [-128, 127].",
+    )
+    args = parser.parse_args()
 
-    if args.gen_gt:
-        gen_tb_gt_from_sim(
-            alpha=args.alpha,
-            outdir=args.outdir,
-            key=args.key,
-            random_alpha=args.random_alpha,
-            seed=args.seed,
-            dump_stages=args.dump_stages
-        )
-        raise SystemExit(0)
-
-    if plt is None:
-        print("matplotlib is not installed. Use --gen-gt mode or install matplotlib.")
-        raise SystemExit(1)
-
-    print("--- Starting 1D FrFT Verification (Complex Input) ---")
+    print(f"--- Starting 1D FrFT Verification (Complex Input) for Key: {args.key} ---")
     
-    alpha_param = np.pi / 4
+    # 將 key 轉換為對應的角度
+    alpha_param = args.key * np.pi / 128
     
     # 建立測試訊號 (加入實部與虛部)
     t_n = np.arange(32)
     real_part = 100 * np.tanh(2 * np.pi * t_n / 32)
-    imag_part = 50 * np.sin(4 * np.pi * t_n / 32)  # 加入一個正弦波作為虛部
+    imag_part = 100 * np.sin(4 * np.pi * t_n / 32)  # 加入一個正弦波作為虛部
     
     # 組合為浮點數複數與分離的整數實部/虛部
     x_float = real_part + 1j * imag_part
@@ -410,26 +301,21 @@ if __name__ == "__main__":
     # =========================
     # [2] FNT FrFT (+alpha)
     # =========================
-    chirps_pos = generate_chirps(alpha_param)
-    # 這裡把 x_int_real 和 x_int_imag 都傳進去了
-    fnt_r_pos, fnt_i_pos = frft_1d(x_int_real, x_int_imag, chirps_pos)
+    fnt_r_pos, fnt_i_pos = fnt_or_special_1d(x_int_real, x_int_imag, alpha_param)
     
     # =========================
     # [3] FNT FrFT (-alpha)
     # =========================
-    chirps_neg = generate_chirps(-alpha_param)
-    fnt_r_neg, fnt_i_neg = frft_1d(x_int_real, x_int_imag, chirps_neg)
+    fnt_r_neg, fnt_i_neg = fnt_or_special_1d(x_int_real, x_int_imag, -alpha_param)
     
     # =========================
     # [4] decode function
     # =========================
     def recover_complex(fnt_r, fnt_i):
-        fnt_r_decoded = np.array([decode_mod(v, M) for v in fnt_r], dtype=float)
-        fnt_i_decoded = np.array([decode_mod(v, M) for v in fnt_i], dtype=float)
-        
-        total_q_scale = Q_SCALE ** 3
-        return (fnt_r_decoded + 1j * fnt_i_decoded) / total_q_scale
-    
+        fnt_r_decoded = np.array([v for v in fnt_r], dtype=int)
+        fnt_i_decoded = np.array([v for v in fnt_i], dtype=int)
+        return fnt_r_decoded + 1j * fnt_i_decoded
+
     fnt_complex_pos = recover_complex(fnt_r_pos, fnt_i_pos)
     fnt_complex_neg = recover_complex(fnt_r_neg, fnt_i_neg)
     
@@ -448,14 +334,14 @@ if __name__ == "__main__":
     print(f"Max Error: {np.max(error_neg):.6f}")
     
     # =========================
-    # [6] visualization
+    # [6] visualization (Single Key)
     # =========================
     fig, axes = plt.subplots(3, 1, figsize=(10, 12))
     
-    # Input signal (現在包含 Real 和 Imag 兩條線)
+    # Input signal
     axes[0].plot(t_n, x_float.real, label="Input Real", marker='o')
     axes[0].plot(t_n, x_float.imag, label="Input Imag", marker='x', linestyle='--')
-    axes[0].set_title("Complex Input Signal")
+    axes[0].set_title(f"Complex Input Signal (Key = {args.key})")
     axes[0].legend()
     axes[0].grid(True, linestyle=':')
     
@@ -478,8 +364,51 @@ if __name__ == "__main__":
     axes[2].grid(True, linestyle=':')
     
     plt.tight_layout()
-    plt.show()
+    plt.savefig('test.png')
+    
+    # =========================
+    # [7] 新增：進行全部 Key 範圍的誤差掃描
+    # =========================
+    print("\n--- Sweeping Errors over all Keys ([-128, 127]) ---")
+    keys_array = list(range(-128, 128))
+    mse_real = []
+    mse_imag = []
 
+    for k in keys_array:
+        a_val = k * np.pi / 128
+        
+        # Theoretical float result
+        res_float = theoretical_frft_1d(x_float, a_val)
+        
+        # FNT result
+        r_fnt, i_fnt = fnt_or_special_1d(x_int_real, x_int_imag, a_val)
+        comp_fnt = recover_complex(r_fnt, i_fnt)
+        
+        # 計算 MSE 誤差
+        e_real = np.mean((res_float.real - comp_fnt.real)**2)
+        e_imag = np.mean((res_float.imag - comp_fnt.imag)**2)
+        
+        mse_real.append(e_real)
+        mse_imag.append(e_imag)
+        
+    # =========================
+    # [8] 繪製誤差折線圖
+    # =========================
+    fig2, ax2 = plt.subplots(figsize=(10, 5))
+    ax2.plot(keys_array, mse_real, label="MSE Real Part", color='blue')
+    ax2.plot(keys_array, mse_imag, label="MSE Imaginary Part", color='red', linestyle='--')
+    ax2.set_title("FrFT Error (MSE) vs. Angle Key ($\\alpha = \\text{key} \\times \\pi/128$)")
+    ax2.set_xlabel("Key")
+    ax2.set_ylabel("Mean Squared Error (MSE)")
+    ax2.grid(True, linestyle=':')
+    ax2.legend()
+    
+    plt.tight_layout()
+    plt.savefig('error_sweep.png')
+    
+    # 一併顯示兩張圖表
+    plt.show()
+    
 '''
 # --- Execution & Visualization ---
 if __name__ == "__main__":
