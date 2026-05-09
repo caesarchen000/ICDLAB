@@ -55,7 +55,7 @@ def generate_files():
     x_imag = np.random.randint(-128, 127, size=N)
 
     # 1. 生成 input.txt
-    with open("input.txt", "w") as f:
+    with open("../pattern/input.txt", "w") as f:
         for r, i in zip(x_real, x_imag):
             f.write(f"{(int(r) & 0xFF):02X} {(int(i) & 0xFF):02X}\n")
 
@@ -91,7 +91,7 @@ def generate_files():
     out_i = (y3_i + (1 << (S3_SHIFT - 1))) >> S3_SHIFT
 
     # 3. 生成 debug.txt
-    with open("debug.txt", "w") as f:
+    with open("../pattern/debug.txt", "w") as f:
         f.write("IDX | STAGE1_R STAGE1_I | STAGE2_R STAGE2_I | FINAL_R FINAL_I\n")
         f.write("-" * 65 + "\n")
         for k in range(N):
@@ -105,7 +105,7 @@ def generate_files():
     # 將理論值乘上硬體增益，對齊基準線
     res_float_scaled = res_float * HW_GAIN
 
-    with open("golden.txt", "w") as f:
+    with open("../pattern/golden.txt", "w") as f:
         for i in range(N):
             hr_hex = (int(out_r[i]) & 0xFFFF)
             hi_hex = (int(out_i[i]) & 0xFFFF)

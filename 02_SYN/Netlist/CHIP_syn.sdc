@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Sat May  9 15:37:58 2026
+# Created by write_sdc on Sun May 10 00:28:35 2026
 
 ###################################################################
 set sdc_version 1.8
@@ -13,20 +13,6 @@ fsa0m_a_generic_core_ff1p98vm40c
 set_wire_load_model -name G200K -library fsa0m_a_generic_core_tt1p8v25c
 set_max_fanout 6 [current_design]
 set_max_area 0
-set_load -pin_load 10 [get_ports i_ready]
-set_load -pin_load 10 [get_ports o_valid]
-set_load -pin_load 10 [get_ports {o_data[10]}]
-set_load -pin_load 10 [get_ports {o_data[9]}]
-set_load -pin_load 10 [get_ports {o_data[8]}]
-set_load -pin_load 10 [get_ports {o_data[7]}]
-set_load -pin_load 10 [get_ports {o_data[6]}]
-set_load -pin_load 10 [get_ports {o_data[5]}]
-set_load -pin_load 10 [get_ports {o_data[4]}]
-set_load -pin_load 10 [get_ports {o_data[3]}]
-set_load -pin_load 10 [get_ports {o_data[2]}]
-set_load -pin_load 10 [get_ports {o_data[1]}]
-set_load -pin_load 10 [get_ports {o_data[0]}]
-set_ideal_network [get_ports clk]
 create_clock [get_ports clk]  -name CLK  -period 20  -waveform {0 10}
 set_clock_latency 0.5  [get_clocks CLK]
 set_clock_uncertainty 0.1  [get_clocks CLK]

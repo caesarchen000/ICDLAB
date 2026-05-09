@@ -42,7 +42,7 @@ set_clock_latency     0.5  [get_clocks CLK]
 set_input_delay  -max 1   -clock CLK [all_inputs]
 set_output_delay -min 0.5 -clock CLK [all_outputs]
 set_drive 1  [all_inputs]
-set_load  10 [all_outputs]
+# set_load  10 [all_outputs]
 
 set_fix_multiple_port_nets -all -buffer_constants
 
@@ -59,9 +59,7 @@ check_design
 set_host_options -max_cores 16
 set_max_area 0
 
-compile
-# compile -inc -only_design_rule
-# optimize_netlist -area
+compile -area_effort high
 # optimize_netlist -area
 # compile_ultra -inc -retime
 

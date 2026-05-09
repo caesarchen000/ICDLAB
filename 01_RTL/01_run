@@ -1,1 +1,3 @@
-vcs ../00_TESTBED/testbench/tb.v -f rtl.f -full64 -R +v2k -debug_access+all | tee vcs_sim.log
+vcs ../00_TESTBED/testbench/tb.v -f rtl.f -full64 -R +v2k -debug_access+all
+vcs ../00_TESTBED/testbench/tb_all_keys.v -f rtl.f -full64 -R +v2k -debug_access+all
+#vcs ../00_TESTBED/testbench/tb_2d.v -f rtl.f -full64 -R +v2k -debug_access+all
