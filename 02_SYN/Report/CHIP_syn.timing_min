@@ -1,0 +1,192 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay min
+        -max_paths 5
+Design : CHIP
+Version: U-2022.12
+Date   : Sat May  9 15:37:52 2026
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: BCCOM   Library: fsa0m_a_generic_core_ff1p98vm40c
+Wire Load Model Mode: enclosed
+
+  Startpoint: mac/pe0_real/acc_reg_reg[0]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe0_real/acc_reg_reg[0]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_3     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  mac/pe0_real/acc_reg_reg[0]/CK (QDFFRBN)                0.00 #     0.50 r
+  mac/pe0_real/acc_reg_reg[0]/Q (QDFFRBN)                 0.18       0.68 f
+  mac/pe0_real/U107/O (AO22)                              0.09       0.77 f
+  mac/pe0_real/acc_reg_reg[0]/D (QDFFRBN)                 0.00       0.77 f
+  data arrival time                                                  0.77
+
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  clock uncertainty                                       0.10       0.60
+  mac/pe0_real/acc_reg_reg[0]/CK (QDFFRBN)                0.00       0.60 r
+  library hold time                                      -0.01       0.59
+  data required time                                                 0.59
+  --------------------------------------------------------------------------
+  data required time                                                 0.59
+  data arrival time                                                 -0.77
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.18
+
+
+  Startpoint: mac/pe1_imag/acc_reg_reg[0]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe1_imag/acc_reg_reg[0]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_2     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  mac/pe1_imag/acc_reg_reg[0]/CK (QDFFRBN)                0.00 #     0.50 r
+  mac/pe1_imag/acc_reg_reg[0]/Q (QDFFRBN)                 0.18       0.68 f
+  mac/pe1_imag/U107/O (AO22)                              0.09       0.77 f
+  mac/pe1_imag/acc_reg_reg[0]/D (QDFFRBN)                 0.00       0.77 f
+  data arrival time                                                  0.77
+
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  clock uncertainty                                       0.10       0.60
+  mac/pe1_imag/acc_reg_reg[0]/CK (QDFFRBN)                0.00       0.60 r
+  library hold time                                      -0.01       0.59
+  data required time                                                 0.59
+  --------------------------------------------------------------------------
+  data required time                                                 0.59
+  data arrival time                                                 -0.77
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.18
+
+
+  Startpoint: mac/pe2_real/acc_reg_reg[0]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe2_real/acc_reg_reg[0]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  mac/pe2_real/acc_reg_reg[0]/CK (QDFFRBN)                0.00 #     0.50 r
+  mac/pe2_real/acc_reg_reg[0]/Q (QDFFRBN)                 0.18       0.68 f
+  mac/pe2_real/U107/O (AO22)                              0.09       0.77 f
+  mac/pe2_real/acc_reg_reg[0]/D (QDFFRBN)                 0.00       0.77 f
+  data arrival time                                                  0.77
+
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  clock uncertainty                                       0.10       0.60
+  mac/pe2_real/acc_reg_reg[0]/CK (QDFFRBN)                0.00       0.60 r
+  library hold time                                      -0.01       0.59
+  data required time                                                 0.59
+  --------------------------------------------------------------------------
+  data required time                                                 0.59
+  data arrival time                                                 -0.77
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.18
+
+
+  Startpoint: mac/pe3_imag/acc_reg_reg[0]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe3_imag/acc_reg_reg[0]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_0     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  mac/pe3_imag/acc_reg_reg[0]/CK (QDFFRBN)                0.00 #     0.50 r
+  mac/pe3_imag/acc_reg_reg[0]/Q (QDFFRBN)                 0.18       0.68 f
+  mac/pe3_imag/U107/O (AO22)                              0.09       0.77 f
+  mac/pe3_imag/acc_reg_reg[0]/D (QDFFRBN)                 0.00       0.77 f
+  data arrival time                                                  0.77
+
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  clock uncertainty                                       0.10       0.60
+  mac/pe3_imag/acc_reg_reg[0]/CK (QDFFRBN)                0.00       0.60 r
+  library hold time                                      -0.01       0.59
+  data required time                                                 0.59
+  --------------------------------------------------------------------------
+  data required time                                                 0.59
+  data arrival time                                                 -0.77
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.18
+
+
+  Startpoint: mac/pe0_real/acc_reg_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe0_real/acc_reg_reg[2]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_3     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  mac/pe0_real/acc_reg_reg[2]/CK (QDFFRBN)                0.00 #     0.50 r
+  mac/pe0_real/acc_reg_reg[2]/Q (QDFFRBN)                 0.18       0.68 f
+  mac/pe0_real/U109/O (AO22)                              0.09       0.77 f
+  mac/pe0_real/acc_reg_reg[2]/D (QDFFRBN)                 0.00       0.77 f
+  data arrival time                                                  0.77
+
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  clock uncertainty                                       0.10       0.60
+  mac/pe0_real/acc_reg_reg[2]/CK (QDFFRBN)                0.00       0.60 r
+  library hold time                                      -0.01       0.59
+  data required time                                                 0.59
+  --------------------------------------------------------------------------
+  data required time                                                 0.59
+  data arrival time                                                 -0.77
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.18
+
+
+1

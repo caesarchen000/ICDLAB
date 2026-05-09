@@ -1,0 +1,617 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 5
+Design : CHIP
+Version: U-2022.12
+Date   : Sat May  9 15:37:52 2026
+****************************************
+
+ # A fanout number of 1000 was used for high fanout net computations.
+
+Operating Conditions: WCCOM   Library: fsa0m_a_generic_core_ss1p62v125c
+Wire Load Model Mode: enclosed
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe2_real/y_out_reg[15]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH34
+                     enG30K                fsa0m_a_generic_core_tt1p8v25c
+  DFrFT_MAC          enG30K                fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_sub_1_DW01_sub_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_1_DW01_add_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_2_DW01_add_22
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (DFFRBN)                              0.00 #     0.50 r
+  state_r_reg[2]/QB (DFFRBN)                              0.50       1.00 f
+  U604/O (ND3)                                            0.22       1.22 r
+  U424/O (BUF1CK)                                         0.32       1.54 r
+  U437/O (NR2P)                                           0.22       1.76 f
+  U438/O (AO12)                                           0.30       2.05 f
+  rf_data/read_addr_1[4] (RegFileDual_DATA_WIDTH34)       0.00       2.05 f
+  rf_data/U209/O (INV1S)                                  0.20       2.25 r
+  rf_data/U1161/O (XNR2HS)                                0.20       2.45 r
+  rf_data/U18/O (XOR4S)                                   0.35       2.81 r
+  rf_data/U943/O (INV1S)                                  0.37       3.17 f
+  rf_data/U258/O (BUF1S)                                  0.43       3.60 f
+  rf_data/U946/O (MOAI1S)                                 0.43       4.04 f
+  rf_data/U259/O (BUF1)                                   0.32       4.35 f
+  rf_data/U864/O (BUF1CK)                                 0.33       4.68 f
+  rf_data/U2723/O (NR2)                                   0.44       5.13 r
+  rf_data/U2727/O (AN2)                                   0.42       5.55 r
+  rf_data/U7/O (BUF1)                                     0.27       5.82 r
+  rf_data/U557/O (BUF1CK)                                 0.36       6.18 r
+  rf_data/U272/O (AO222S)                                 0.38       6.55 r
+  rf_data/U2752/O (AN4B1S)                                0.12       6.67 f
+  rf_data/U2753/O (INV1S)                                 0.14       6.81 r
+  rf_data/U948/O (MOAI1S)                                 0.40       7.21 r
+  rf_data/read_data_1[2] (RegFileDual_DATA_WIDTH34)       0.00       7.21 r
+  U293/O (AO22)                                           0.32       7.53 r
+  mac/data_in_r[2] (DFrFT_MAC)                            0.00       7.53 r
+  mac/U109/O (INV1S)                                      0.13       7.66 f
+  mac/U111/O (INV1S)                                      0.26       7.92 r
+  mac/pe2_real/x_in[2] (PE_Shift_Add_1)                   0.00       7.92 r
+  mac/pe2_real/U160/O (MUX2S)                             0.24       8.17 r
+  mac/pe2_real/U75/O (MUX2S)                              0.24       8.41 r
+  mac/pe2_real/U225/O (INV1S)                             0.13       8.53 f
+  mac/pe2_real/U332/O (NR2)                               0.19       8.72 r
+  mac/pe2_real/sub_16/B[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       8.72 r
+  mac/pe2_real/sub_16/U33/O (INV1S)                       0.14       8.86 f
+  mac/pe2_real/sub_16/U3/O (XOR2HS)                       0.19       9.05 f
+  mac/pe2_real/sub_16/DIFF[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       9.05 f
+  mac/pe2_real/U48/O (AO22)                               0.23       9.28 f
+  mac/pe2_real/add_21/A[2] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00       9.28 f
+  mac/pe2_real/add_21/U1_2/CO (FA1S)                      0.43       9.71 f
+  mac/pe2_real/add_21/U1_3/CO (FA1S)                      0.40      10.11 f
+  mac/pe2_real/add_21/U1_4/CO (FA1S)                      0.40      10.50 f
+  mac/pe2_real/add_21/U1_5/CO (FA1S)                      0.40      10.90 f
+  mac/pe2_real/add_21/U1_6/CO (FA1S)                      0.40      11.30 f
+  mac/pe2_real/add_21/U1_7/CO (FA1S)                      0.40      11.70 f
+  mac/pe2_real/add_21/U1_8/CO (FA1S)                      0.40      12.10 f
+  mac/pe2_real/add_21/U1_9/CO (FA1S)                      0.40      12.50 f
+  mac/pe2_real/add_21/U1_10/CO (FA1S)                     0.40      12.89 f
+  mac/pe2_real/add_21/U1_11/CO (FA1S)                     0.40      13.29 f
+  mac/pe2_real/add_21/U1_12/CO (FA1S)                     0.40      13.69 f
+  mac/pe2_real/add_21/U1_13/CO (FA1S)                     0.40      14.09 f
+  mac/pe2_real/add_21/U1_14/CO (FA1S)                     0.40      14.49 f
+  mac/pe2_real/add_21/U1_15/CO (FA1S)                     0.40      14.89 f
+  mac/pe2_real/add_21/U1_16/CO (FA1S)                     0.40      15.28 f
+  mac/pe2_real/add_21/U1_17/CO (FA1S)                     0.40      15.68 f
+  mac/pe2_real/add_21/U1_18/CO (FA1S)                     0.40      16.08 f
+  mac/pe2_real/add_21/U1_19/CO (FA1S)                     0.40      16.48 f
+  mac/pe2_real/add_21/U1_20/CO (FA1S)                     0.40      16.88 f
+  mac/pe2_real/add_21/U1_21/CO (FA1S)                     0.40      17.28 f
+  mac/pe2_real/add_21/U1_22/CO (FA1S)                     0.40      17.67 f
+  mac/pe2_real/add_21/U1_23/CO (FA1S)                     0.40      18.07 f
+  mac/pe2_real/add_21/U1_24/CO (FA1S)                     0.40      18.47 f
+  mac/pe2_real/add_21/U1_25/S (FA1S)                      0.47      18.94 f
+  mac/pe2_real/add_21/SUM[25] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/B[25] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_25/CO (FA1S)
+                                                          0.43      19.36 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_26/O (XOR3)
+                                                          0.27      19.63 r
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/SUM[26] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      19.63 r
+  mac/pe2_real/U79/O (ND2)                                0.15      19.78 f
+  mac/pe2_real/U177/O (OA12)                              0.24      20.02 f
+  mac/pe2_real/U272/O (MOAI1S)                            0.26      20.29 r
+  mac/pe2_real/y_out_reg[15]/D (QDFFRBN)                  0.00      20.29 r
+  data arrival time                                                 20.29
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  mac/pe2_real/y_out_reg[15]/CK (QDFFRBN)                 0.00      20.40 r
+  library setup time                                     -0.11      20.29
+  data required time                                                20.29
+  --------------------------------------------------------------------------
+  data required time                                                20.29
+  data arrival time                                                -20.29
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe2_real/y_out_reg[14]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH34
+                     enG30K                fsa0m_a_generic_core_tt1p8v25c
+  DFrFT_MAC          enG30K                fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_sub_1_DW01_sub_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_1_DW01_add_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_2_DW01_add_22
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (DFFRBN)                              0.00 #     0.50 r
+  state_r_reg[2]/QB (DFFRBN)                              0.50       1.00 f
+  U604/O (ND3)                                            0.22       1.22 r
+  U424/O (BUF1CK)                                         0.32       1.54 r
+  U437/O (NR2P)                                           0.22       1.76 f
+  U438/O (AO12)                                           0.30       2.05 f
+  rf_data/read_addr_1[4] (RegFileDual_DATA_WIDTH34)       0.00       2.05 f
+  rf_data/U209/O (INV1S)                                  0.20       2.25 r
+  rf_data/U1161/O (XNR2HS)                                0.20       2.45 r
+  rf_data/U18/O (XOR4S)                                   0.35       2.81 r
+  rf_data/U943/O (INV1S)                                  0.37       3.17 f
+  rf_data/U258/O (BUF1S)                                  0.43       3.60 f
+  rf_data/U946/O (MOAI1S)                                 0.43       4.04 f
+  rf_data/U259/O (BUF1)                                   0.32       4.35 f
+  rf_data/U864/O (BUF1CK)                                 0.33       4.68 f
+  rf_data/U2723/O (NR2)                                   0.44       5.13 r
+  rf_data/U2727/O (AN2)                                   0.42       5.55 r
+  rf_data/U7/O (BUF1)                                     0.27       5.82 r
+  rf_data/U557/O (BUF1CK)                                 0.36       6.18 r
+  rf_data/U272/O (AO222S)                                 0.38       6.55 r
+  rf_data/U2752/O (AN4B1S)                                0.12       6.67 f
+  rf_data/U2753/O (INV1S)                                 0.14       6.81 r
+  rf_data/U948/O (MOAI1S)                                 0.40       7.21 r
+  rf_data/read_data_1[2] (RegFileDual_DATA_WIDTH34)       0.00       7.21 r
+  U293/O (AO22)                                           0.32       7.53 r
+  mac/data_in_r[2] (DFrFT_MAC)                            0.00       7.53 r
+  mac/U109/O (INV1S)                                      0.13       7.66 f
+  mac/U111/O (INV1S)                                      0.26       7.92 r
+  mac/pe2_real/x_in[2] (PE_Shift_Add_1)                   0.00       7.92 r
+  mac/pe2_real/U160/O (MUX2S)                             0.24       8.17 r
+  mac/pe2_real/U75/O (MUX2S)                              0.24       8.41 r
+  mac/pe2_real/U225/O (INV1S)                             0.13       8.53 f
+  mac/pe2_real/U332/O (NR2)                               0.19       8.72 r
+  mac/pe2_real/sub_16/B[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       8.72 r
+  mac/pe2_real/sub_16/U33/O (INV1S)                       0.14       8.86 f
+  mac/pe2_real/sub_16/U3/O (XOR2HS)                       0.19       9.05 f
+  mac/pe2_real/sub_16/DIFF[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       9.05 f
+  mac/pe2_real/U48/O (AO22)                               0.23       9.28 f
+  mac/pe2_real/add_21/A[2] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00       9.28 f
+  mac/pe2_real/add_21/U1_2/CO (FA1S)                      0.43       9.71 f
+  mac/pe2_real/add_21/U1_3/CO (FA1S)                      0.40      10.11 f
+  mac/pe2_real/add_21/U1_4/CO (FA1S)                      0.40      10.50 f
+  mac/pe2_real/add_21/U1_5/CO (FA1S)                      0.40      10.90 f
+  mac/pe2_real/add_21/U1_6/CO (FA1S)                      0.40      11.30 f
+  mac/pe2_real/add_21/U1_7/CO (FA1S)                      0.40      11.70 f
+  mac/pe2_real/add_21/U1_8/CO (FA1S)                      0.40      12.10 f
+  mac/pe2_real/add_21/U1_9/CO (FA1S)                      0.40      12.50 f
+  mac/pe2_real/add_21/U1_10/CO (FA1S)                     0.40      12.89 f
+  mac/pe2_real/add_21/U1_11/CO (FA1S)                     0.40      13.29 f
+  mac/pe2_real/add_21/U1_12/CO (FA1S)                     0.40      13.69 f
+  mac/pe2_real/add_21/U1_13/CO (FA1S)                     0.40      14.09 f
+  mac/pe2_real/add_21/U1_14/CO (FA1S)                     0.40      14.49 f
+  mac/pe2_real/add_21/U1_15/CO (FA1S)                     0.40      14.89 f
+  mac/pe2_real/add_21/U1_16/CO (FA1S)                     0.40      15.28 f
+  mac/pe2_real/add_21/U1_17/CO (FA1S)                     0.40      15.68 f
+  mac/pe2_real/add_21/U1_18/CO (FA1S)                     0.40      16.08 f
+  mac/pe2_real/add_21/U1_19/CO (FA1S)                     0.40      16.48 f
+  mac/pe2_real/add_21/U1_20/CO (FA1S)                     0.40      16.88 f
+  mac/pe2_real/add_21/U1_21/CO (FA1S)                     0.40      17.28 f
+  mac/pe2_real/add_21/U1_22/CO (FA1S)                     0.40      17.67 f
+  mac/pe2_real/add_21/U1_23/CO (FA1S)                     0.40      18.07 f
+  mac/pe2_real/add_21/U1_24/CO (FA1S)                     0.40      18.47 f
+  mac/pe2_real/add_21/U1_25/S (FA1S)                      0.47      18.94 f
+  mac/pe2_real/add_21/SUM[25] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/B[25] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_25/CO (FA1S)
+                                                          0.43      19.36 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_26/O (XOR3)
+                                                          0.27      19.63 r
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/SUM[26] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      19.63 r
+  mac/pe2_real/U79/O (ND2)                                0.15      19.78 f
+  mac/pe2_real/U176/O (OA12)                              0.24      20.02 f
+  mac/pe2_real/U270/O (MOAI1S)                            0.26      20.29 r
+  mac/pe2_real/y_out_reg[14]/D (QDFFRBN)                  0.00      20.29 r
+  data arrival time                                                 20.29
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  mac/pe2_real/y_out_reg[14]/CK (QDFFRBN)                 0.00      20.40 r
+  library setup time                                     -0.11      20.29
+  data required time                                                20.29
+  --------------------------------------------------------------------------
+  data required time                                                20.29
+  data arrival time                                                -20.29
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe2_real/y_out_reg[13]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH34
+                     enG30K                fsa0m_a_generic_core_tt1p8v25c
+  DFrFT_MAC          enG30K                fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_sub_1_DW01_sub_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_1_DW01_add_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_2_DW01_add_22
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (DFFRBN)                              0.00 #     0.50 r
+  state_r_reg[2]/QB (DFFRBN)                              0.50       1.00 f
+  U604/O (ND3)                                            0.22       1.22 r
+  U424/O (BUF1CK)                                         0.32       1.54 r
+  U437/O (NR2P)                                           0.22       1.76 f
+  U438/O (AO12)                                           0.30       2.05 f
+  rf_data/read_addr_1[4] (RegFileDual_DATA_WIDTH34)       0.00       2.05 f
+  rf_data/U209/O (INV1S)                                  0.20       2.25 r
+  rf_data/U1161/O (XNR2HS)                                0.20       2.45 r
+  rf_data/U18/O (XOR4S)                                   0.35       2.81 r
+  rf_data/U943/O (INV1S)                                  0.37       3.17 f
+  rf_data/U258/O (BUF1S)                                  0.43       3.60 f
+  rf_data/U946/O (MOAI1S)                                 0.43       4.04 f
+  rf_data/U259/O (BUF1)                                   0.32       4.35 f
+  rf_data/U864/O (BUF1CK)                                 0.33       4.68 f
+  rf_data/U2723/O (NR2)                                   0.44       5.13 r
+  rf_data/U2727/O (AN2)                                   0.42       5.55 r
+  rf_data/U7/O (BUF1)                                     0.27       5.82 r
+  rf_data/U557/O (BUF1CK)                                 0.36       6.18 r
+  rf_data/U272/O (AO222S)                                 0.38       6.55 r
+  rf_data/U2752/O (AN4B1S)                                0.12       6.67 f
+  rf_data/U2753/O (INV1S)                                 0.14       6.81 r
+  rf_data/U948/O (MOAI1S)                                 0.40       7.21 r
+  rf_data/read_data_1[2] (RegFileDual_DATA_WIDTH34)       0.00       7.21 r
+  U293/O (AO22)                                           0.32       7.53 r
+  mac/data_in_r[2] (DFrFT_MAC)                            0.00       7.53 r
+  mac/U109/O (INV1S)                                      0.13       7.66 f
+  mac/U111/O (INV1S)                                      0.26       7.92 r
+  mac/pe2_real/x_in[2] (PE_Shift_Add_1)                   0.00       7.92 r
+  mac/pe2_real/U160/O (MUX2S)                             0.24       8.17 r
+  mac/pe2_real/U75/O (MUX2S)                              0.24       8.41 r
+  mac/pe2_real/U225/O (INV1S)                             0.13       8.53 f
+  mac/pe2_real/U332/O (NR2)                               0.19       8.72 r
+  mac/pe2_real/sub_16/B[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       8.72 r
+  mac/pe2_real/sub_16/U33/O (INV1S)                       0.14       8.86 f
+  mac/pe2_real/sub_16/U3/O (XOR2HS)                       0.19       9.05 f
+  mac/pe2_real/sub_16/DIFF[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       9.05 f
+  mac/pe2_real/U48/O (AO22)                               0.23       9.28 f
+  mac/pe2_real/add_21/A[2] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00       9.28 f
+  mac/pe2_real/add_21/U1_2/CO (FA1S)                      0.43       9.71 f
+  mac/pe2_real/add_21/U1_3/CO (FA1S)                      0.40      10.11 f
+  mac/pe2_real/add_21/U1_4/CO (FA1S)                      0.40      10.50 f
+  mac/pe2_real/add_21/U1_5/CO (FA1S)                      0.40      10.90 f
+  mac/pe2_real/add_21/U1_6/CO (FA1S)                      0.40      11.30 f
+  mac/pe2_real/add_21/U1_7/CO (FA1S)                      0.40      11.70 f
+  mac/pe2_real/add_21/U1_8/CO (FA1S)                      0.40      12.10 f
+  mac/pe2_real/add_21/U1_9/CO (FA1S)                      0.40      12.50 f
+  mac/pe2_real/add_21/U1_10/CO (FA1S)                     0.40      12.89 f
+  mac/pe2_real/add_21/U1_11/CO (FA1S)                     0.40      13.29 f
+  mac/pe2_real/add_21/U1_12/CO (FA1S)                     0.40      13.69 f
+  mac/pe2_real/add_21/U1_13/CO (FA1S)                     0.40      14.09 f
+  mac/pe2_real/add_21/U1_14/CO (FA1S)                     0.40      14.49 f
+  mac/pe2_real/add_21/U1_15/CO (FA1S)                     0.40      14.89 f
+  mac/pe2_real/add_21/U1_16/CO (FA1S)                     0.40      15.28 f
+  mac/pe2_real/add_21/U1_17/CO (FA1S)                     0.40      15.68 f
+  mac/pe2_real/add_21/U1_18/CO (FA1S)                     0.40      16.08 f
+  mac/pe2_real/add_21/U1_19/CO (FA1S)                     0.40      16.48 f
+  mac/pe2_real/add_21/U1_20/CO (FA1S)                     0.40      16.88 f
+  mac/pe2_real/add_21/U1_21/CO (FA1S)                     0.40      17.28 f
+  mac/pe2_real/add_21/U1_22/CO (FA1S)                     0.40      17.67 f
+  mac/pe2_real/add_21/U1_23/CO (FA1S)                     0.40      18.07 f
+  mac/pe2_real/add_21/U1_24/CO (FA1S)                     0.40      18.47 f
+  mac/pe2_real/add_21/U1_25/S (FA1S)                      0.47      18.94 f
+  mac/pe2_real/add_21/SUM[25] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/B[25] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_25/CO (FA1S)
+                                                          0.43      19.36 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_26/O (XOR3)
+                                                          0.27      19.63 r
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/SUM[26] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      19.63 r
+  mac/pe2_real/U79/O (ND2)                                0.15      19.78 f
+  mac/pe2_real/U175/O (OA12)                              0.24      20.02 f
+  mac/pe2_real/U268/O (MOAI1S)                            0.26      20.29 r
+  mac/pe2_real/y_out_reg[13]/D (QDFFRBN)                  0.00      20.29 r
+  data arrival time                                                 20.29
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  mac/pe2_real/y_out_reg[13]/CK (QDFFRBN)                 0.00      20.40 r
+  library setup time                                     -0.11      20.29
+  data required time                                                20.29
+  --------------------------------------------------------------------------
+  data required time                                                20.29
+  data arrival time                                                -20.29
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe2_real/y_out_reg[12]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH34
+                     enG30K                fsa0m_a_generic_core_tt1p8v25c
+  DFrFT_MAC          enG30K                fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_sub_1_DW01_sub_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_1_DW01_add_15
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_1_DW01_add_2_DW01_add_22
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (DFFRBN)                              0.00 #     0.50 r
+  state_r_reg[2]/QB (DFFRBN)                              0.50       1.00 f
+  U604/O (ND3)                                            0.22       1.22 r
+  U424/O (BUF1CK)                                         0.32       1.54 r
+  U437/O (NR2P)                                           0.22       1.76 f
+  U438/O (AO12)                                           0.30       2.05 f
+  rf_data/read_addr_1[4] (RegFileDual_DATA_WIDTH34)       0.00       2.05 f
+  rf_data/U209/O (INV1S)                                  0.20       2.25 r
+  rf_data/U1161/O (XNR2HS)                                0.20       2.45 r
+  rf_data/U18/O (XOR4S)                                   0.35       2.81 r
+  rf_data/U943/O (INV1S)                                  0.37       3.17 f
+  rf_data/U258/O (BUF1S)                                  0.43       3.60 f
+  rf_data/U946/O (MOAI1S)                                 0.43       4.04 f
+  rf_data/U259/O (BUF1)                                   0.32       4.35 f
+  rf_data/U864/O (BUF1CK)                                 0.33       4.68 f
+  rf_data/U2723/O (NR2)                                   0.44       5.13 r
+  rf_data/U2727/O (AN2)                                   0.42       5.55 r
+  rf_data/U7/O (BUF1)                                     0.27       5.82 r
+  rf_data/U557/O (BUF1CK)                                 0.36       6.18 r
+  rf_data/U272/O (AO222S)                                 0.38       6.55 r
+  rf_data/U2752/O (AN4B1S)                                0.12       6.67 f
+  rf_data/U2753/O (INV1S)                                 0.14       6.81 r
+  rf_data/U948/O (MOAI1S)                                 0.40       7.21 r
+  rf_data/read_data_1[2] (RegFileDual_DATA_WIDTH34)       0.00       7.21 r
+  U293/O (AO22)                                           0.32       7.53 r
+  mac/data_in_r[2] (DFrFT_MAC)                            0.00       7.53 r
+  mac/U109/O (INV1S)                                      0.13       7.66 f
+  mac/U111/O (INV1S)                                      0.26       7.92 r
+  mac/pe2_real/x_in[2] (PE_Shift_Add_1)                   0.00       7.92 r
+  mac/pe2_real/U160/O (MUX2S)                             0.24       8.17 r
+  mac/pe2_real/U75/O (MUX2S)                              0.24       8.41 r
+  mac/pe2_real/U225/O (INV1S)                             0.13       8.53 f
+  mac/pe2_real/U332/O (NR2)                               0.19       8.72 r
+  mac/pe2_real/sub_16/B[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       8.72 r
+  mac/pe2_real/sub_16/U33/O (INV1S)                       0.14       8.86 f
+  mac/pe2_real/sub_16/U3/O (XOR2HS)                       0.19       9.05 f
+  mac/pe2_real/sub_16/DIFF[2] (PE_Shift_Add_1_DW01_sub_1_DW01_sub_15)
+                                                          0.00       9.05 f
+  mac/pe2_real/U48/O (AO22)                               0.23       9.28 f
+  mac/pe2_real/add_21/A[2] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00       9.28 f
+  mac/pe2_real/add_21/U1_2/CO (FA1S)                      0.43       9.71 f
+  mac/pe2_real/add_21/U1_3/CO (FA1S)                      0.40      10.11 f
+  mac/pe2_real/add_21/U1_4/CO (FA1S)                      0.40      10.50 f
+  mac/pe2_real/add_21/U1_5/CO (FA1S)                      0.40      10.90 f
+  mac/pe2_real/add_21/U1_6/CO (FA1S)                      0.40      11.30 f
+  mac/pe2_real/add_21/U1_7/CO (FA1S)                      0.40      11.70 f
+  mac/pe2_real/add_21/U1_8/CO (FA1S)                      0.40      12.10 f
+  mac/pe2_real/add_21/U1_9/CO (FA1S)                      0.40      12.50 f
+  mac/pe2_real/add_21/U1_10/CO (FA1S)                     0.40      12.89 f
+  mac/pe2_real/add_21/U1_11/CO (FA1S)                     0.40      13.29 f
+  mac/pe2_real/add_21/U1_12/CO (FA1S)                     0.40      13.69 f
+  mac/pe2_real/add_21/U1_13/CO (FA1S)                     0.40      14.09 f
+  mac/pe2_real/add_21/U1_14/CO (FA1S)                     0.40      14.49 f
+  mac/pe2_real/add_21/U1_15/CO (FA1S)                     0.40      14.89 f
+  mac/pe2_real/add_21/U1_16/CO (FA1S)                     0.40      15.28 f
+  mac/pe2_real/add_21/U1_17/CO (FA1S)                     0.40      15.68 f
+  mac/pe2_real/add_21/U1_18/CO (FA1S)                     0.40      16.08 f
+  mac/pe2_real/add_21/U1_19/CO (FA1S)                     0.40      16.48 f
+  mac/pe2_real/add_21/U1_20/CO (FA1S)                     0.40      16.88 f
+  mac/pe2_real/add_21/U1_21/CO (FA1S)                     0.40      17.28 f
+  mac/pe2_real/add_21/U1_22/CO (FA1S)                     0.40      17.67 f
+  mac/pe2_real/add_21/U1_23/CO (FA1S)                     0.40      18.07 f
+  mac/pe2_real/add_21/U1_24/CO (FA1S)                     0.40      18.47 f
+  mac/pe2_real/add_21/U1_25/S (FA1S)                      0.47      18.94 f
+  mac/pe2_real/add_21/SUM[25] (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/B[25] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      18.94 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_25/CO (FA1S)
+                                                          0.43      19.36 f
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/U1_26/O (XOR3)
+                                                          0.27      19.63 r
+  mac/pe2_real/add_0_root_add_0_root_add_38_S2/SUM[26] (PE_Shift_Add_1_DW01_add_2_DW01_add_22)
+                                                          0.00      19.63 r
+  mac/pe2_real/U79/O (ND2)                                0.15      19.78 f
+  mac/pe2_real/U178/O (OA12)                              0.24      20.02 f
+  mac/pe2_real/U266/O (MOAI1S)                            0.26      20.29 r
+  mac/pe2_real/y_out_reg[12]/D (QDFFRBN)                  0.00      20.29 r
+  data arrival time                                                 20.29
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  mac/pe2_real/y_out_reg[12]/CK (QDFFRBN)                 0.00      20.40 r
+  library setup time                                     -0.11      20.29
+  data required time                                                20.29
+  --------------------------------------------------------------------------
+  data required time                                                20.29
+  data arrival time                                                -20.29
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: mac/pe0_real/y_out_reg[12]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH34
+                     enG30K                fsa0m_a_generic_core_tt1p8v25c
+  DFrFT_MAC          enG30K                fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_3     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_3_DW01_sub_1_DW01_sub_19
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_3_DW01_add_1_DW01_add_19
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+  PE_Shift_Add_3_DW01_add_2_DW01_add_24
+                     enG5K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (DFFRBN)                              0.00 #     0.50 r
+  state_r_reg[2]/QB (DFFRBN)                              0.50       1.00 f
+  U604/O (ND3)                                            0.22       1.22 r
+  U424/O (BUF1CK)                                         0.32       1.54 r
+  U437/O (NR2P)                                           0.22       1.76 f
+  U438/O (AO12)                                           0.30       2.05 f
+  rf_data/read_addr_1[4] (RegFileDual_DATA_WIDTH34)       0.00       2.05 f
+  rf_data/U209/O (INV1S)                                  0.20       2.25 r
+  rf_data/U1161/O (XNR2HS)                                0.20       2.45 r
+  rf_data/U18/O (XOR4S)                                   0.35       2.81 r
+  rf_data/U943/O (INV1S)                                  0.37       3.17 f
+  rf_data/U258/O (BUF1S)                                  0.43       3.60 f
+  rf_data/U946/O (MOAI1S)                                 0.43       4.04 f
+  rf_data/U259/O (BUF1)                                   0.32       4.35 f
+  rf_data/U864/O (BUF1CK)                                 0.33       4.68 f
+  rf_data/U2723/O (NR2)                                   0.44       5.13 r
+  rf_data/U2727/O (AN2)                                   0.42       5.55 r
+  rf_data/U7/O (BUF1)                                     0.27       5.82 r
+  rf_data/U557/O (BUF1CK)                                 0.36       6.18 r
+  rf_data/U272/O (AO222S)                                 0.38       6.55 r
+  rf_data/U2752/O (AN4B1S)                                0.12       6.67 f
+  rf_data/U2753/O (INV1S)                                 0.14       6.81 r
+  rf_data/U948/O (MOAI1S)                                 0.40       7.21 r
+  rf_data/read_data_1[2] (RegFileDual_DATA_WIDTH34)       0.00       7.21 r
+  U293/O (AO22)                                           0.32       7.53 r
+  mac/data_in_r[2] (DFrFT_MAC)                            0.00       7.53 r
+  mac/U109/O (INV1S)                                      0.13       7.66 f
+  mac/U110/O (INV1S)                                      0.26       7.92 r
+  mac/pe0_real/x_in[2] (PE_Shift_Add_3)                   0.00       7.92 r
+  mac/pe0_real/U159/O (MUX2S)                             0.24       8.17 r
+  mac/pe0_real/U140/O (MUX2S)                             0.24       8.41 r
+  mac/pe0_real/U224/O (INV1S)                             0.13       8.53 f
+  mac/pe0_real/U332/O (NR2)                               0.19       8.72 r
+  mac/pe0_real/sub_16/B[2] (PE_Shift_Add_3_DW01_sub_1_DW01_sub_19)
+                                                          0.00       8.72 r
+  mac/pe0_real/sub_16/U33/O (INV1S)                       0.14       8.86 f
+  mac/pe0_real/sub_16/U3/O (XOR2HS)                       0.19       9.05 f
+  mac/pe0_real/sub_16/DIFF[2] (PE_Shift_Add_3_DW01_sub_1_DW01_sub_19)
+                                                          0.00       9.05 f
+  mac/pe0_real/U48/O (AO22)                               0.23       9.28 f
+  mac/pe0_real/add_21/A[2] (PE_Shift_Add_3_DW01_add_1_DW01_add_19)
+                                                          0.00       9.28 f
+  mac/pe0_real/add_21/U1_2/CO (FA1S)                      0.43       9.71 f
+  mac/pe0_real/add_21/U1_3/CO (FA1S)                      0.40      10.10 f
+  mac/pe0_real/add_21/U1_4/CO (FA1S)                      0.40      10.50 f
+  mac/pe0_real/add_21/U1_5/CO (FA1S)                      0.40      10.90 f
+  mac/pe0_real/add_21/U1_6/CO (FA1S)                      0.40      11.30 f
+  mac/pe0_real/add_21/U1_7/CO (FA1S)                      0.40      11.70 f
+  mac/pe0_real/add_21/U1_8/CO (FA1S)                      0.40      12.10 f
+  mac/pe0_real/add_21/U1_9/CO (FA1S)                      0.40      12.49 f
+  mac/pe0_real/add_21/U1_10/CO (FA1S)                     0.40      12.89 f
+  mac/pe0_real/add_21/U1_11/CO (FA1S)                     0.40      13.29 f
+  mac/pe0_real/add_21/U1_12/CO (FA1S)                     0.40      13.69 f
+  mac/pe0_real/add_21/U1_13/CO (FA1S)                     0.40      14.09 f
+  mac/pe0_real/add_21/U1_14/CO (FA1S)                     0.40      14.49 f
+  mac/pe0_real/add_21/U1_15/CO (FA1S)                     0.40      14.88 f
+  mac/pe0_real/add_21/U1_16/CO (FA1S)                     0.40      15.28 f
+  mac/pe0_real/add_21/U1_17/CO (FA1S)                     0.40      15.68 f
+  mac/pe0_real/add_21/U1_18/CO (FA1S)                     0.40      16.08 f
+  mac/pe0_real/add_21/U1_19/CO (FA1S)                     0.40      16.48 f
+  mac/pe0_real/add_21/U1_20/CO (FA1S)                     0.40      16.88 f
+  mac/pe0_real/add_21/U1_21/CO (FA1S)                     0.40      17.27 f
+  mac/pe0_real/add_21/U1_22/CO (FA1S)                     0.40      17.67 f
+  mac/pe0_real/add_21/U1_23/CO (FA1S)                     0.40      18.07 f
+  mac/pe0_real/add_21/U1_24/CO (FA1S)                     0.40      18.47 f
+  mac/pe0_real/add_21/U1_25/S (FA1S)                      0.47      18.94 f
+  mac/pe0_real/add_21/SUM[25] (PE_Shift_Add_3_DW01_add_1_DW01_add_19)
+                                                          0.00      18.94 f
+  mac/pe0_real/add_0_root_add_0_root_add_38_S2/B[25] (PE_Shift_Add_3_DW01_add_2_DW01_add_24)
+                                                          0.00      18.94 f
+  mac/pe0_real/add_0_root_add_0_root_add_38_S2/U1_25/CO (FA1S)
+                                                          0.43      19.36 f
+  mac/pe0_real/add_0_root_add_0_root_add_38_S2/U1_26/O (XOR3)
+                                                          0.27      19.63 r
+  mac/pe0_real/add_0_root_add_0_root_add_38_S2/SUM[26] (PE_Shift_Add_3_DW01_add_2_DW01_add_24)
+                                                          0.00      19.63 r
+  mac/pe0_real/U77/O (ND2)                                0.15      19.78 f
+  mac/pe0_real/U177/O (OA12)                              0.24      20.02 f
+  mac/pe0_real/U263/O (MOAI1S)                            0.26      20.28 r
+  mac/pe0_real/y_out_reg[12]/D (QDFFRBN)                  0.00      20.28 r
+  data arrival time                                                 20.28
+
+  clock CLK (rise edge)                                  20.00      20.00
+  clock network delay (ideal)                             0.50      20.50
+  clock uncertainty                                      -0.10      20.40
+  mac/pe0_real/y_out_reg[12]/CK (QDFFRBN)                 0.00      20.40 r
+  library setup time                                     -0.11      20.29
+  data required time                                                20.29
+  --------------------------------------------------------------------------
+  data required time                                                20.29
+  data arrival time                                                -20.28
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.01
+
+
+1
