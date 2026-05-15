@@ -147,6 +147,16 @@ module CHIP #(
         counter_w   = counter_r;
         o_counter_w = o_counter_r;
         key_w       = key_r;
+        
+        rf_d_wen_1   = 0; rf_d_wen_2   = 0;
+        rf_d_raddr_1 = 0; rf_d_raddr_2 = 0;
+        rf_d_waddr_1 = 0; rf_d_waddr_2 = 0;
+        rf_d_wdata_1 = 0; rf_d_wdata_2 = 0;
+
+        rf_io_wen_1   = 0; rf_io_wen_2   = 0;
+        rf_io_raddr_1 = 0; rf_io_raddr_2 = 0;
+        rf_io_waddr_1 = 0; rf_io_waddr_2 = 0;
+        rf_io_wdata_1 = 0; rf_io_wdata_2 = 0;
 
         case(state_r)
             S_IDLE : begin
@@ -157,30 +167,62 @@ module CHIP #(
                 end
             end
             S_LOAD : begin
+                rf_io_wen_1   = 1'b1;
+                rf_io_waddr_1 = counter_r;
+                rf_io_wdata_1 = i_data;
+
                 counter_w = counter_r + 1;
                 if (counter_r == 5'd31) state_w = S_STAGE1;
             end
             S_STAGE1 : begin
+                rf_d_wen_1   = cordic_valid_out[0];
+                rf_d_wen_2   = cordic_valid_out[1];
+                rf_d_waddr_1 = c_idx_0;
+                rf_d_waddr_2 = c_idx_1;
+                rf_d_wdata_1 = {cor_y_out[0], cor_x_out[0]};
+                rf_d_wdata_2 = {cor_y_out[1], cor_x_out[1]};
+
+                rf_io_raddr_1 = mac_current_n;
+
                 // 當 MAC 算完最後一組，且 CORDIC 也乒乓算完最後一組時，才進入 Stage 3
                 if (c_state == 2 && cordic_valid_out[0] && c_group_idx == 3'd7) begin
                     state_w = S_STAGE3;
                 end
             end
             S_STAGE3 : begin
+                rf_d_raddr_1 = mac_current_n;
+
+                if (mac_valid_out) begin
+                    rf_io_wen_1 = 1; rf_io_wen_2 = 1;
+                    rf_io_waddr_1 = {mac_group_idx, 2'b00};
+                    rf_io_waddr_2 = {mac_group_idx, 2'b01};
+                    rf_io_wdata_1 = {pe_i0[10:0], pe_r0[10:0]};
+                    rf_io_wdata_2 = {pe_i1[10:0], pe_r1[10:0]};
+                end else if (rf_io_write_delay) begin
+                    rf_io_wen_1 = 1; rf_io_wen_2 = 1;
+                    rf_io_waddr_1 = {delayed_mac_group, 2'b10};
+                    rf_io_waddr_2 = {delayed_mac_group, 2'b11};
+                    rf_io_wdata_1 = delayed_out2;
+                    rf_io_wdata_2 = delayed_out3;
+                end
+
                 // 等待 MAC 算完最後一組，且延遲的一拍 (Channel 2,3) 也寫入 IO SRAM 後結束
                 if (rf_io_write_delay && delayed_mac_group == 3'd7) begin
-                    state_w     = S_DONE;
-                    o_counter_w = 0;
+                    rf_io_raddr_1 = 5'd0;
+                    state_w       = S_DONE;
+                    o_counter_w   = 0;
                 end
             end
             S_DONE : begin
+                rf_io_raddr_1 = 5'd0;
                 if (o_ready) begin
                     o_counter_w = o_counter_r + 1;
                     state_w = S_OUT;
                 end
             end
             S_OUT : begin
-                o_counter_w = o_counter_r + 1;
+                rf_io_raddr_1 = (o_counter_r + 1) >> 1;
+                o_counter_w   = o_counter_r + 1;
                 if (o_counter_r == 6'd63) state_w = S_IDLE;
             end
         endcase
@@ -221,62 +263,4 @@ module CHIP #(
         .write_data_1(rf_io_wdata_1), .write_data_2(rf_io_wdata_2)
     );
 
-    // ==========================================
-    // SRAM R/W Controls
-    // ==========================================
-    always @(*) begin
-        rf_d_wen_1   = 0; rf_d_wen_2   = 0;
-        rf_d_raddr_1 = 0; rf_d_raddr_2 = 0;
-        rf_d_waddr_1 = 0; rf_d_waddr_2 = 0;
-        rf_d_wdata_1 = 0; rf_d_wdata_2 = 0;
-        case (state_r)
-            S_STAGE1 : begin
-                rf_d_wen_1   = cordic_valid_out[0];
-                rf_d_wen_2   = cordic_valid_out[1];
-                rf_d_waddr_1 = c_idx_0;
-                rf_d_waddr_2 = c_idx_1;
-                rf_d_wdata_1 = {cor_y_out[0], cor_x_out[0]};
-                rf_d_wdata_2 = {cor_y_out[1], cor_x_out[1]};
-            end
-            S_STAGE3 : begin
-                rf_d_raddr_1 = mac_current_n;
-            end
-        endcase
-    end
-
-    always @(*) begin
-        rf_io_wen_1   = 0; rf_io_wen_2   = 0;
-        rf_io_raddr_1 = 0; rf_io_raddr_2 = 0;
-        rf_io_waddr_1 = 0; rf_io_waddr_2 = 0;
-        rf_io_wdata_1 = 0; rf_io_wdata_2 = 0;
-
-        case (state_r)
-            S_LOAD : begin
-                rf_io_wen_1   = 1'b1;
-                rf_io_waddr_1 = counter_r;
-                rf_io_wdata_1 = i_data;
-            end
-            S_STAGE1 : begin
-                rf_io_raddr_1 = mac_current_n;
-            end
-            S_STAGE3 : begin
-                if (mac_valid_out) begin
-                    rf_io_wen_1 = 1; rf_io_wen_2 = 1;
-                    rf_io_waddr_1 = {mac_group_idx, 2'b00};
-                    rf_io_waddr_2 = {mac_group_idx, 2'b01};
-                    rf_io_wdata_1 = {pe_i0[10:0], pe_r0[10:0]};
-                    rf_io_wdata_2 = {pe_i1[10:0], pe_r1[10:0]};
-                end else if (rf_io_write_delay) begin
-                    rf_io_wen_1 = 1; rf_io_wen_2 = 1;
-                    rf_io_waddr_1 = {delayed_mac_group, 2'b10};
-                    rf_io_waddr_2 = {delayed_mac_group, 2'b11};
-                    rf_io_wdata_1 = delayed_out2;
-                    rf_io_wdata_2 = delayed_out3;
-                end
-            end
-            S_OUT : begin
-                rf_io_raddr_1 = o_counter_r[5:1];
-            end
-        endcase
-    end
 endmodule

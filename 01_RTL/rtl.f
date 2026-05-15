@@ -4,3 +4,4 @@
 ../01_RTL/MAC.v
 ../01_RTL/PE.v
 ../01_RTL/RegFile.v
+../01_RTL/ROM_Wrapper.v

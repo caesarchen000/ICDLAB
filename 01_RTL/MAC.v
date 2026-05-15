@@ -15,14 +15,14 @@ module DFrFT_MAC (
     output wire signed [16:0] y_out_2_r, y_out_2_i,
     output wire signed [16:0] y_out_3_r, y_out_3_i
 );
-    localparam NCNT_CYCLE = 6'd32;
+    localparam NCNT_CYCLE = 6'd33;
     integer i;
     reg [5:0] n_cnt;
     reg [2:0] g_cnt;
     reg is_computing;
     assign current_n = n_cnt;
 
-    wire pe_clear = (n_cnt == 6'd0);
+    wire pe_clear = (n_cnt == 6'd1);
     wire pe_done  = (n_cnt == NCNT_CYCLE);
 
     always @(posedge clk or negedge rst_n) begin
@@ -74,10 +74,22 @@ module DFrFT_MAC (
     wire [1:0] s01, s02, s03, s11, s12, s13, s21, s22, s23, s31, s32, s33;
     wire [3:0] h01, h02, h03, h11, h12, h13, h21, h22, h23, h31, h32, h33;
 
-    CSD_ROM_Table_even rom0 (.n_idx(rom_n_idx[0]), .k_idx(rom_k_idx[0]), .sign1(s01), .shift1(h01), .sign2(s02), .shift2(h02), .sign3(s03), .shift3(h03));
-    CSD_ROM_Table_odd  rom1 (.n_idx(rom_n_idx[1]), .k_idx(rom_k_idx[1]), .sign1(s11), .shift1(h11), .sign2(s12), .shift2(h12), .sign3(s13), .shift3(h13));
-    CSD_ROM_Table_even rom2 (.n_idx(rom_n_idx[2]), .k_idx(rom_k_idx[2]), .sign1(s21), .shift1(h21), .sign2(s22), .shift2(h22), .sign3(s23), .shift3(h23));
-    CSD_ROM_Table_odd  rom3 (.n_idx(rom_n_idx[3]), .k_idx(rom_k_idx[3]), .sign1(s31), .shift1(h31), .sign2(s32), .shift2(h32), .sign3(s33), .shift3(h33));
+    ROM_Wrapper_Even rom0 (
+        .clk(clk), .rst_n(rst_n), .en(is_computing), .n_in(rom_n_idx[0]), .k_idx(rom_k_idx[0]),
+        .reg_sign1(s01), .reg_shift1(h01), .reg_sign2(s02), .reg_shift2(h02), .reg_sign3(s03), .reg_shift3(h03)
+    );
+    ROM_Wrapper_Odd  rom1 (
+        .clk(clk), .rst_n(rst_n), .en(is_computing), .n_in(rom_n_idx[1]), .k_idx(rom_k_idx[1]),
+        .reg_sign1(s11), .reg_shift1(h11), .reg_sign2(s12), .reg_shift2(h12), .reg_sign3(s13), .reg_shift3(h13)
+    );
+    ROM_Wrapper_Even rom2 (
+        .clk(clk), .rst_n(rst_n), .en(is_computing), .n_in(rom_n_idx[2]), .k_idx(rom_k_idx[2]),
+        .reg_sign1(s21), .reg_shift1(h21), .reg_sign2(s22), .reg_shift2(h22), .reg_sign3(s23), .reg_shift3(h23)
+    );
+    ROM_Wrapper_Odd  rom3 (
+        .clk(clk), .rst_n(rst_n), .en(is_computing), .n_in(rom_n_idx[3]), .k_idx(rom_k_idx[3]),
+        .reg_sign1(s31), .reg_shift1(h31), .reg_sign2(s32), .reg_shift2(h32), .reg_sign3(s33), .reg_shift3(h33)
+    );
 
     PE_Shift_Add pe0_r (
         .clk(clk), .rst_n(rst_n), .en(is_computing), .clear(pe_clear), .calc_done(pe_done), .stage_sel(stage_sel),

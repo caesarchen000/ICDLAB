@@ -1,6 +1,0 @@
-{"vcs1":{"timestamp_begin":1774886309.811545400, "rt":0.47, "ut":0.17, "st":0.12}}
-{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1774886308.873560764}
-{"VCS_COMP_START_TIME": 1774886308.873560764}
-{"VCS_COMP_END_TIME": 1774886310.514546273}
-{"VCS_USER_OPTIONS": "HW3_alu_tb.v CHIP.v -v fsa0m_a_generic_core_21.lib.src"}
-{"vcs1": {"peak_mem": 223688}}

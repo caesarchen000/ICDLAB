@@ -3,7 +3,7 @@
 Report : area
 Design : CHIP
 Version: U-2022.12
-Date   : Fri May 15 10:37:17 2026
+Date   : Fri May 15 20:37:26 2026
 ****************************************
 
 Information: Updating design information... (UID-85)
@@ -12,22 +12,22 @@ Library(s) Used:
 
     fsa0m_a_generic_core_tt1p8v25c (File: /home/raid7_2/userb12/b12006/ICDlab/chip_new_v1/02_SYN/fsa0m_a_generic_core_tt1p8v25c.db)
 
-Number of ports:                         5928
-Number of nets:                         28666
-Number of cells:                        22895
-Number of combinational cells:          20262
-Number of sequential cells:              2554
+Number of ports:                         6052
+Number of nets:                         29469
+Number of cells:                        23741
+Number of combinational cells:          20976
+Number of sequential cells:              2682
 Number of macros/black boxes:               0
-Number of buf/inv:                       5525
-Number of references:                      45
+Number of buf/inv:                       5585
+Number of references:                      62
 
-Combinational area:             343906.113652
-Buf/Inv area:                    46584.517907
-Noncombinational area:          139416.079220
+Combinational area:             365517.231127
+Buf/Inv area:                    48090.671523
+Noncombinational area:          147184.332001
 Macro/Black Box area:                0.000000
 Net Interconnect area:      undefined  (Wire load has zero net area)
 
-Total cell area:                483322.192872
+Total cell area:                512701.563128
 Total area:                 undefined
 
 Hierarchical area distribution
@@ -38,111 +38,115 @@ Hierarchical area distribution
 Hierarchical cell                 Absolute     Percent  Combi-       Noncombi-    Black-
                                   Total        Total    national     national     boxes   Design
 --------------------------------  -----------  -------  -----------  -----------  ------  ----------------------------------------
-CHIP                              483322.1929    100.0   12702.3120   11568.0097  0.0000  CHIP
-cordic0                            23170.3921      4.8   11436.7680    5462.1505  0.0000  cordic_rotation_1
+CHIP                              512701.5631    100.0   13661.6256   11602.3825  0.0000  CHIP
+cordic0                            23161.0177      4.5   11433.6432    5468.4000  0.0000  cordic_rotation_1
 cordic0/add_82                      1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_1_DW01_add_4_DW01_add_10
 cordic0/add_85                      1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_1_DW01_add_3_DW01_add_9
 cordic0/add_87                       881.1936      0.2     881.1936       0.0000  0.0000  cordic_rotation_1_DW01_add_2_DW01_add_8
-cordic0/sub_81                      1162.4256      0.2    1162.4256       0.0000  0.0000  cordic_rotation_1_DW01_sub_2_DW01_sub_32
-cordic0/sub_83                       971.8128      0.2     971.8128       0.0000  0.0000  cordic_rotation_1_DW01_sub_1_DW01_sub_31
-cordic0/sub_86                      1162.4256      0.2    1162.4256       0.0000  0.0000  cordic_rotation_1_DW01_sub_0_DW01_sub_30
-cordic1                            23232.8881      4.8   11499.2640    5462.1505  0.0000  cordic_rotation_0
+cordic0/sub_81                      1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_1_DW01_sub_2_DW01_sub_36
+cordic0/sub_83                       971.8128      0.2     971.8128       0.0000  0.0000  cordic_rotation_1_DW01_sub_1_DW01_sub_35
+cordic0/sub_86                      1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_1_DW01_sub_0_DW01_sub_34
+cordic1                            23245.3873      4.5   11524.2624    5462.1505  0.0000  cordic_rotation_0
 cordic1/add_82                      1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_0_DW01_add_4
 cordic1/add_85                      1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_0_DW01_add_3
 cordic1/add_87                       881.1936      0.2     881.1936       0.0000  0.0000  cordic_rotation_0_DW01_add_2
-cordic1/sub_81                      1162.4256      0.2    1162.4256       0.0000  0.0000  cordic_rotation_0_DW01_sub_2_DW01_sub_26
-cordic1/sub_83                       971.8128      0.2     971.8128       0.0000  0.0000  cordic_rotation_0_DW01_sub_1_DW01_sub_25
-cordic1/sub_86                      1162.4256      0.2    1162.4256       0.0000  0.0000  cordic_rotation_0_DW01_sub_0_DW01_sub_24
-mac                               234978.7101     48.6    1809.2592     831.1968  0.0000  DFrFT_MAC
-mac/pe0_i                          21176.7696      4.4   10161.8496    2612.3328  0.0000  PE_Shift_Add_6
+cordic1/sub_81                      1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_0_DW01_sub_2_DW01_sub_30
+cordic1/sub_83                       971.8128      0.2     971.8128       0.0000  0.0000  cordic_rotation_0_DW01_sub_1_DW01_sub_29
+cordic1/sub_86                      1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_0_DW01_sub_0_DW01_sub_28
+mac                               259933.3636     50.7    1859.2560     834.3216  0.0000  DFrFT_MAC
+mac/pe0_i                          23692.2337      4.6   10555.5744    2615.4576  0.0000  PE_Shift_Add_6
 mac/pe0_i/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_6_DW01_add_0_DW01_add_14
+                                    2362.3488      0.5    2362.3488       0.0000  0.0000  PE_Shift_Add_6_DW01_add_0_DW01_add_26
 mac/pe0_i/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_6_DW01_add_1_DW01_add_15
+                                    2224.8576      0.4    2224.8576       0.0000  0.0000  PE_Shift_Add_6_DW01_add_2_DW01_add_28
 mac/pe0_i/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_6_DW01_add_2_DW01_add_16
-mac/pe0_i/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_2_DW01_sub_20
-mac/pe0_i/sub_24                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_1_DW01_sub_19
-mac/pe0_i/sub_25                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_0_DW01_sub_18
-mac/pe0_r                          21123.6480      4.4   10108.7280    2612.3328  0.0000  PE_Shift_Add_7
+                                    2231.1072      0.4    2231.1072       0.0000  0.0000  PE_Shift_Add_6_DW01_add_1_DW01_add_27
+mac/pe0_i/sub_23                    1228.0464      0.2    1228.0464       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_2_DW01_sub_20
+mac/pe0_i/sub_24                    1243.6704      0.2    1243.6704       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_1_DW01_sub_19
+mac/pe0_i/sub_25                    1231.1712      0.2    1231.1712       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_0_DW01_sub_18
+mac/pe0_r                          23667.2353      4.6   10452.4560    2612.3328  0.0000  PE_Shift_Add_7
 mac/pe0_r/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_7_DW01_add_0_DW01_add_35
+                                    2343.6000      0.5    2343.6000       0.0000  0.0000  PE_Shift_Add_7_DW01_add_0_DW01_add_23
 mac/pe0_r/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_7_DW01_add_1_DW01_add_36
+                                    2274.8544      0.4    2274.8544       0.0000  0.0000  PE_Shift_Add_7_DW01_add_2_DW01_add_25
 mac/pe0_r/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_7_DW01_add_2_DW01_add_37
-mac/pe0_r/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_2_DW01_sub_23
-mac/pe0_r/sub_24                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_1_DW01_sub_22
-mac/pe0_r/sub_25                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_0_DW01_sub_21
-mac/pe1_i                          21136.1472      4.4   10121.2272    2612.3328  0.0000  PE_Shift_Add_4
+                                    2268.6048      0.4    2268.6048       0.0000  0.0000  PE_Shift_Add_7_DW01_add_1_DW01_add_24
+mac/pe0_r/sub_23                    1234.2960      0.2    1234.2960       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_2_DW01_sub_23
+mac/pe0_r/sub_24                    1256.1696      0.2    1256.1696       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_1_DW01_sub_22
+mac/pe0_r/sub_25                    1224.9216      0.2    1224.9216       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_0_DW01_sub_21
+mac/pe1_i                          23551.6177      4.6   10486.8288    2621.7072  0.0000  PE_Shift_Add_4
 mac/pe1_i/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_4_DW01_add_0_DW01_add_17
+                                    2334.2256      0.5    2334.2256       0.0000  0.0000  PE_Shift_Add_4_DW01_add_0_DW01_add_29
 mac/pe1_i/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_4_DW01_add_1_DW01_add_18
+                                    2212.3584      0.4    2212.3584       0.0000  0.0000  PE_Shift_Add_4_DW01_add_2_DW01_add_31
 mac/pe1_i/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_4_DW01_add_2_DW01_add_19
-mac/pe1_i/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_2_DW01_sub_14
-mac/pe1_i/sub_24                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_1_DW01_sub_13
-mac/pe1_i/sub_25                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_0_DW01_sub_12
-mac/pe1_r                          21170.5200      4.4   10155.6000    2612.3328  0.0000  PE_Shift_Add_5
+                                    2243.6065      0.4    2243.6065       0.0000  0.0000  PE_Shift_Add_4_DW01_add_1_DW01_add_30
+mac/pe1_i/sub_23                    1209.2976      0.2    1209.2976       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_2_DW01_sub_14
+mac/pe1_i/sub_24                    1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_1_DW01_sub_13
+mac/pe1_i/sub_25                    1224.9216      0.2    1224.9216       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_0_DW01_sub_12
+mac/pe1_r                          23785.9777      4.6   10596.1968    2612.3328  0.0000  PE_Shift_Add_5
 mac/pe1_r/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_5_DW01_add_0_DW01_add_26
+                                    2356.0992      0.5    2356.0992       0.0000  0.0000  PE_Shift_Add_5_DW01_add_0_DW01_add_14
 mac/pe1_r/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_5_DW01_add_1_DW01_add_27
+                                    2227.9824      0.4    2227.9824       0.0000  0.0000  PE_Shift_Add_5_DW01_add_2_DW01_add_16
 mac/pe1_r/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_5_DW01_add_2_DW01_add_28
-mac/pe1_r/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_2_DW01_sub_17
-mac/pe1_r/sub_24                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_1_DW01_sub_16
-mac/pe1_r/sub_25                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_0_DW01_sub_15
-mac/pe2_i                          21129.8976      4.4   10114.9776    2612.3328  0.0000  PE_Shift_Add_2
+                                    2249.8560      0.4    2249.8560       0.0000  0.0000  PE_Shift_Add_5_DW01_add_1_DW01_add_15
+mac/pe1_r/sub_23                    1231.1712      0.2    1231.1712       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_2_DW01_sub_17
+mac/pe1_r/sub_24                    1253.0448      0.2    1253.0448       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_1_DW01_sub_16
+mac/pe1_r/sub_25                    1259.2944      0.2    1259.2944       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_0_DW01_sub_15
+mac/pe2_i                          23770.3537      4.6   10614.9456    2612.3328  0.0000  PE_Shift_Add_2
 mac/pe2_i/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_2_DW01_add_0_DW01_add_20
+                                    2274.8544      0.4    2274.8544       0.0000  0.0000  PE_Shift_Add_2_DW01_add_0_DW01_add_32
 mac/pe2_i/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_2_DW01_add_1_DW01_add_21
+                                    2243.6064      0.4    2243.6064       0.0000  0.0000  PE_Shift_Add_2_DW01_add_2_DW01_add_34
 mac/pe2_i/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_2_DW01_add_2_DW01_add_22
-mac/pe2_i/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_2_DW01_sub_8
-mac/pe2_i/sub_24                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_1_DW01_sub_7
-mac/pe2_i/sub_25                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_0_DW01_sub_6
-mac/pe2_r                          21154.8960      4.4   10139.9760    2612.3328  0.0000  PE_Shift_Add_3
+                                    2293.6033      0.4    2293.6033       0.0000  0.0000  PE_Shift_Add_2_DW01_add_1_DW01_add_33
+mac/pe2_i/sub_23                    1259.2944      0.2    1259.2944       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_2_DW01_sub_8
+mac/pe2_i/sub_24                    1246.7952      0.2    1246.7952       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_1_DW01_sub_7
+mac/pe2_i/sub_25                    1224.9216      0.2    1224.9216       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_0_DW01_sub_6
+mac/pe2_r                          23757.8545      4.6   10518.0768    2612.3328  0.0000  PE_Shift_Add_3
 mac/pe2_r/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_3_DW01_add_0_DW01_add_29
+                                    2374.8480      0.5    2374.8480       0.0000  0.0000  PE_Shift_Add_3_DW01_add_0_DW01_add_17
 mac/pe2_r/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_3_DW01_add_1_DW01_add_30
+                                    2302.9776      0.4    2302.9776       0.0000  0.0000  PE_Shift_Add_3_DW01_add_2_DW01_add_19
 mac/pe2_r/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_3_DW01_add_2_DW01_add_31
-mac/pe2_r/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_2_DW01_sub_11
-mac/pe2_r/sub_24                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_1_DW01_sub_10
-mac/pe2_r/sub_25                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_0_DW01_sub_9
-mac/pe3_i                          21161.1456      4.4   10146.2256    2612.3328  0.0000  PE_Shift_Add_0
+                                    2218.6080      0.4    2218.6080       0.0000  0.0000  PE_Shift_Add_3_DW01_add_1_DW01_add_18
+mac/pe2_r/sub_23                    1246.7952      0.2    1246.7952       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_2_DW01_sub_11
+mac/pe2_r/sub_24                    1253.0448      0.2    1253.0448       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_1_DW01_sub_10
+mac/pe2_r/sub_25                    1231.1712      0.2    1231.1712       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_0_DW01_sub_9
+mac/pe3_i                          23748.4801      4.6   10555.5744    2621.7072  0.0000  PE_Shift_Add_0
 mac/pe3_i/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_0_DW01_add_0_DW01_add_23
+                                    2331.1008      0.5    2331.1008       0.0000  0.0000  PE_Shift_Add_0_DW01_add_0_DW01_add_35
 mac/pe3_i/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_0_DW01_add_1_DW01_add_24
+                                    2312.3520      0.5    2312.3520       0.0000  0.0000  PE_Shift_Add_0_DW01_add_2_DW01_add_37
 mac/pe3_i/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_0_DW01_add_2_DW01_add_25
-mac/pe3_i/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_2
-mac/pe3_i/sub_24                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_1
-mac/pe3_i/sub_25                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_0
-mac/pe3_r                          21164.2704      4.4   10149.3504    2612.3328  0.0000  PE_Shift_Add_1
+                                    2243.6064      0.4    2243.6064       0.0000  0.0000  PE_Shift_Add_0_DW01_add_1_DW01_add_36
+mac/pe3_i/sub_23                    1234.2960      0.2    1234.2960       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_2
+mac/pe3_i/sub_24                    1224.9216      0.2    1224.9216       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_1
+mac/pe3_i/sub_25                    1224.9216      0.2    1224.9216       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_0
+mac/pe3_r                          23673.4849      4.6   10461.8304    2612.3328  0.0000  PE_Shift_Add_1
 mac/pe3_r/add_0_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_1_DW01_add_0_DW01_add_32
+                                    2381.0976      0.5    2381.0976       0.0000  0.0000  PE_Shift_Add_1_DW01_add_0_DW01_add_20
 mac/pe3_r/add_1_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_1_DW01_add_1_DW01_add_33
+                                    2259.2304      0.4    2259.2304       0.0000  0.0000  PE_Shift_Add_1_DW01_add_2_DW01_add_22
 mac/pe3_r/add_2_root_add_0_root_add_35_3
-                                    1581.1488      0.3    1581.1488       0.0000  0.0000  PE_Shift_Add_1_DW01_add_2_DW01_add_34
-mac/pe3_r/sub_23                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_2_DW01_sub_5
-mac/pe3_r/sub_24                    1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_1_DW01_sub_4
-mac/pe3_r/sub_25                    1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_0_DW01_sub_3
-mac/rom0                           15477.1344      3.2   15477.1344       0.0000  0.0000  CSD_ROM_Table_even_1
-mac/rom1                           16070.8464      3.3   16070.8464       0.0000  0.0000  CSD_ROM_Table_odd_1
-mac/rom2                           15461.5104      3.2   15461.5104       0.0000  0.0000  CSD_ROM_Table_even_0
-mac/rom3                           16111.4688      3.3   16111.4688       0.0000  0.0000  CSD_ROM_Table_odd_0
+                                    2290.4784      0.4    2290.4784       0.0000  0.0000  PE_Shift_Add_1_DW01_add_1_DW01_add_21
+mac/pe3_r/sub_23                    1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_2_DW01_sub_5
+mac/pe3_r/sub_24                    1234.2960      0.2    1234.2960       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_1_DW01_sub_4
+mac/pe3_r/sub_25                    1215.5472      0.2    1215.5472       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_0_DW01_sub_3
+mac/rom0                           17195.7744      3.4    1046.8080    1093.6800  0.0000  ROM_Wrapper_Even_1
+mac/rom0/rom_inst                  15055.2864      2.9   15055.2864       0.0000  0.0000  CSD_ROM_Table_even_1
+mac/rom1                           16605.1872      3.2    1046.8080    1096.8048  0.0000  ROM_Wrapper_Odd_1
+mac/rom1/rom_inst                  14461.5744      2.8   14461.5744       0.0000  0.0000  CSD_ROM_Table_odd_1
+mac/rom2                           17208.2736      3.4    1028.0592    1096.8048  0.0000  ROM_Wrapper_Even_0
+mac/rom2/rom_inst                  15083.4096      2.9   15083.4096       0.0000  0.0000  CSD_ROM_Table_even_0
+mac/rom3                           16583.3136      3.2    1037.4336    1090.5552  0.0000  ROM_Wrapper_Odd_0
+mac/rom3/rom_inst                  14455.3248      2.8   14455.3248       0.0000  0.0000  CSD_ROM_Table_odd_0
 mult_93                             1112.4288      0.2    1112.4288       0.0000  0.0000  CHIP_DW02_mult_0
-mult_94                             1774.8864      0.4    1774.8864       0.0000  0.0000  CHIP_DW02_mult_1
-rf_data                           106165.0815     22.0   48368.7795   57796.3020  0.0000  RegFileDual_DATA_WIDTH34
-rf_io                              68617.4842     14.2   31219.8770   37397.6072  0.0000  RegFileDual_DATA_WIDTH22
+mult_94                             1774.8864      0.3    1774.8864       0.0000  0.0000  CHIP_DW02_mult_1
+rf_data                           108249.3231     21.1   48434.4003   59814.9228  0.0000  RegFileDual_DATA_WIDTH34
+rf_io                              69961.1482     13.6   31257.3746   38703.7736  0.0000  RegFileDual_DATA_WIDTH22
 --------------------------------  -----------  -------  -----------  -----------  ------  ----------------------------------------
-Total                                                   343906.1137  139416.0792  0.0000
+Total                                                   365517.2311  147184.3320  0.0000
 
 1

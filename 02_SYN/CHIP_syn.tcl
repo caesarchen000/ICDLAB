@@ -25,7 +25,7 @@ link
 #You may modified the clock constraints 
 #or add more constraints for your design
 ####################################################
-set cycle  20
+set cycle  14
 ####################################################
 
 #The following are design spec. for synthesis
@@ -56,10 +56,11 @@ check_design
 
 #####################################################
 #Compile and save files
-set_host_options -max_cores 16
+set_host_options -max_cores 8
 set_max_area 0
 
-compile -area_effort high
+compile -area_effort high -map_effort high
+compile -inc -area_effort high -map_effort high
 # optimize_netlist -area
 # compile_ultra -inc -retime
 

@@ -47,7 +47,7 @@ def generate_all_keys_files():
         print("錯誤: 找不到 V_q.txt，請先用 hw_sim.py 生成。")
         return
 
-    np.random.seed(42)
+    np.random.seed(67)
     # 控制振幅避免全範圍飽和影響真實 MSE 評估
     x_real = np.random.randint(-128, 127, size=N)
     x_imag = np.random.randint(-128, 127, size=N)
@@ -70,7 +70,7 @@ def generate_all_keys_files():
     y1_i_q = (y1_i_full + (1 << (S1_SHIFT - 1))) >> S1_SHIFT
 
     # DFrFT 的硬體系統真實增益
-    HW_GAIN = 1.64676 / 2.0  
+    HW_GAIN = 1.0 #1.64676 / 2.0  
 
     # 3. 掃描所有 Key (-128 ~ 127) 並寫入 golden_all_keys.txt
     with open("../pattern/golden_all_keys.txt", "w") as f:

@@ -13,8 +13,9 @@ config_sweep = False
 N = 32
 V_BITS = 14       # 矩陣 V 的小數點位數 (Q14)
 S1_SHIFT = 10     # Stage 1 算完後的右移量
-OUTPUT_SHIFT = 4  # CORDIC Stage 算完後的右移量 (原 S2_SHIFT)
+OUTPUT_SHIFT = 5  # CORDIC Stage 算完後的右移量 (原 S2_SHIFT)
 S3_SHIFT = 14     # Stage 3 算完後的最終右移量 (從 17 改為 14 以符合 gen_test)
+V_SCALE = np.sqrt(2/1.64676)
 
 # Shift-and-Add 限制
 MAX_TERMS = 3     # 硬體限制：每個常數最多由幾個 2 的次方相加減組成
@@ -24,8 +25,9 @@ STAGES = 11
 
 # 取消 K_INV 的預先乘法補償，因為直接做向量旋轉
 # 取而代之的是硬體會自帶一個固定的 Gain (CORDIC 旋轉增益 + Shift 所產生的等效縮放)
-HW_GAIN = 1.64676 * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT)  # 約 0.82338 (理論值需乘上此係數才能與硬體 Bit-True 對齊)
-#HW_GAIN = 2
+HW_GAIN = 1.64676 * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT) * (V_SCALE**2) # 約 0.82338 (理論值需乘上此係數才能與硬體 Bit-True 對齊)
+# HW_GAIN = 1
+print(f"HW_GAIN:{HW_GAIN}")
 
 ATAN_TABLE_FULL = [8192, 4836, 2555, 1297, 651, 326, 163, 81, 41, 20, 10, 5]
 ATAN_TABLE = ATAN_TABLE_FULL[:STAGES]
@@ -144,7 +146,6 @@ def get_ultimate_V_and_k(N):
     for i in range(N):
         if V[np.argmax(np.abs(V[:, i])), i] < 0: V[:, i] *= -1
     # for K_inv
-    #V = V * np.sqrt(1/1.64676)
     return V, k_orders
 
 np.set_printoptions(precision=5, suppress=True, linewidth=200, threshold=np.inf)
@@ -157,7 +158,7 @@ V_ops = [[None for _ in range(N)] for _ in range(N)]
 
 for i in range(N):
     for j in range(N):
-        val_int = int(round(V_float[i, j] * (1 << V_BITS)))
+        val_int = int(round(V_float[i, j] * V_SCALE * (1 << V_BITS)))
         V_q[i, j], ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
         V_ops[i][j] = ops
 np.savetxt("V_q.txt", V_q, fmt="%6d")
@@ -264,7 +265,6 @@ if __name__ == "__main__":
         print("\n--- Sweeping Errors over all Keys with RANDOM 8-bit inputs ---")
         for k in tqdm(keys_array):
             total_mse_r, total_mse_i, total_sig_pwr = 0.0, 0.0, 0.0
-            
             for _ in range(NUM_SAMPLES):
                 x_int_real = np.random.randint(-128, 128, size=N)
                 x_int_imag = np.random.randint(-128, 128, size=N)

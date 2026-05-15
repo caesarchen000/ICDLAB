@@ -51,7 +51,7 @@ def generate_files():
         print("錯誤: 找不到 V_q.txt，請先用 hw_sim.py 生成。")
         return
 
-    np.random.seed(42)
+    np.random.seed(67)
     x_real = np.random.randint(-128, 127, size=N)
     x_imag = np.random.randint(-128, 127, size=N)
 
@@ -102,7 +102,7 @@ def generate_files():
     # 4. 生成 golden.txt (為配合你的 TB，假定理論值填 0，我們專注比對 Bit-true)
     res_float = theoretical_eigen_dfrft(x_real, x_imag, TEST_KEY)
     # DFrFT 的硬體系統真實增益
-    HW_GAIN = 1.64676 / 2.0  # 約 0.82338
+    HW_GAIN = 1.0 #1.64676 / 2.0  # 約 0.82338
     # 將理論值乘上硬體增益，對齊基準線
     res_float_scaled = res_float * HW_GAIN
 

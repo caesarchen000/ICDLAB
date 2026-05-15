@@ -86,20 +86,20 @@ module RegFileDual #(
     end
 
     // Pipeline Register for Read Data (Timing Optimization)
-    // always @(posedge clk or negedge rst_n) begin
-    //     if (!rst_n) begin
-    //         read_data_1 <= 0; read_data_2 <= 0;
-    //     end else begin
-    //         // Fetch the output data based on the original Bank ID mapping
-    //         read_data_1 <= bank_rdata[p_raddr_1[4]];
-    //         read_data_2 <= bank_rdata[p_raddr_2[4]];
-    //     end
-    // end
-
-    always @(*) begin
-        read_data_1 = bank_rdata[p_raddr_1[4]];
-        read_data_2 = bank_rdata[p_raddr_2[4]];
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n) begin
+            read_data_1 <= 0; read_data_2 <= 0;
+        end else begin
+            // Fetch the output data based on the original Bank ID mapping
+            read_data_1 <= bank_rdata[p_raddr_1[4]];
+            read_data_2 <= bank_rdata[p_raddr_2[4]];
+        end
     end
+
+    // always @(*) begin
+    //     read_data_1 = bank_rdata[p_raddr_1[4]];
+    //     read_data_2 = bank_rdata[p_raddr_2[4]];
+    // end
 
     // ====================================================================
     // 4. Write Crossbar (Dispatching Data and Enables)

@@ -18,7 +18,7 @@ def generate_rom_module(f, module_name, lines, N, is_even):
     for k in range(N):
         # [核心優化] 預先過濾掉絕對用不到的 n
         valid_n = []
-        for n in range(N):
+        for n in range( (N // 2) + 1):
             # Even ROM (PE0/2) 不會遇到 (k奇數 AND n奇數)
             if is_even and (k % 2 == 1 and n % 2 == 1): continue
             # Odd ROM (PE1/3) 不會遇到 (k偶數 AND n偶數)
