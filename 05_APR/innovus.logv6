@@ -1,0 +1,14 @@
+[05/11 21:24:49      0s] 
+[05/11 21:24:49      0s] Cadence Innovus(TM) Implementation System.
+[05/11 21:24:49      0s] Copyright 2017 Cadence Design Systems, Inc. All rights reserved worldwide.
+[05/11 21:24:49      0s] 
+[05/11 21:24:49      0s] Version:	v17.11-s080_1, built Fri Aug 4 11:13:11 PDT 2017
+[05/11 21:24:49      0s] Options:	
+[05/11 21:24:49      0s] Date:		Mon May 11 21:24:49 2026
+[05/11 21:24:49      0s] Host:		cad16 (x86_64 w/Linux 3.10.0-1160.88.1.el7.x86_64) (6cores*24cpus*Intel(R) Xeon(R) CPU E5-2620 0 @ 2.00GHz 15360KB)
+[05/11 21:24:49      0s] OS:		CentOS Linux release 7.9.2009 (Core)
+[05/11 21:24:49      0s] 
+[05/11 21:24:49      0s] License:
+[05/11 21:24:49      0s] 		invs	Innovus Implementation System	17.1	checkout succeeded
+[05/11 21:24:49      0s] 		8 CPU jobs allowed with the current license(s). Use setMultiCpuUsage to set your required CPU count.
+[05/11 21:24:49      0s] **WARN: (IMPSYT-1507):	The display is invalid and will start in no window mode
