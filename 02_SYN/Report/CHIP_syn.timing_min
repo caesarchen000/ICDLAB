@@ -6,7 +6,7 @@ Report : timing
         -max_paths 5
 Design : CHIP
 Version: U-2022.12
-Date   : Sun May 10 00:28:29 2026
+Date   : Fri May 15 10:37:19 2026
 ****************************************
 
  # A fanout number of 1000 was used for high fanout net computations.
@@ -14,9 +14,9 @@ Date   : Sun May 10 00:28:29 2026
 Operating Conditions: BCCOM   Library: fsa0m_a_generic_core_ff1p98vm40c
 Wire Load Model Mode: enclosed
 
-  Startpoint: mac/pe0_r/acc_reg_reg[0]
+  Startpoint: mac/pe0_i/y_out_reg[15]
               (rising edge-triggered flip-flop clocked by CLK)
-  Endpoint: mac/pe0_r/acc_reg_reg[0]
+  Endpoint: c_buf_i_reg[0][15]
             (rising edge-triggered flip-flop clocked by CLK)
   Path Group: CLK
   Path Type: min
@@ -24,34 +24,35 @@ Wire Load Model Mode: enclosed
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
   CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
-  PE_Shift_Add_7     enG5K                 fsa0m_a_generic_core_tt1p8v25c
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  mac/pe0_r/acc_reg_reg[0]/CK (QDFFRBN)                   0.00 #     0.50 r
-  mac/pe0_r/acc_reg_reg[0]/Q (QDFFRBN)                    0.18       0.68 f
-  mac/pe0_r/U107/O (AO22)                                 0.09       0.77 f
-  mac/pe0_r/acc_reg_reg[0]/D (QDFFRBN)                    0.00       0.77 f
+  mac/pe0_i/y_out_reg[15]/CK (QDFFRBN)                    0.00 #     0.50 r
+  mac/pe0_i/y_out_reg[15]/Q (QDFFRBN)                     0.18       0.68 f
+  mac/pe0_i/y_out[15] (PE_Shift_Add_6)                    0.00       0.68 f
+  mac/y_out_0_i[15] (DFrFT_MAC)                           0.00       0.68 f
+  U561/O (AO22)                                           0.09       0.77 f
+  c_buf_i_reg[0][15]/D (QDFFN)                            0.00       0.77 f
   data arrival time                                                  0.77
 
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  mac/pe0_r/acc_reg_reg[0]/CK (QDFFRBN)                   0.00       0.60 r
-  library hold time                                      -0.01       0.59
-  data required time                                                 0.59
+  c_buf_i_reg[0][15]/CK (QDFFN)                           0.00       0.60 r
+  library hold time                                      -0.02       0.58
+  data required time                                                 0.58
   --------------------------------------------------------------------------
-  data required time                                                 0.59
+  data required time                                                 0.58
   data arrival time                                                 -0.77
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.18
+  slack (MET)                                                        0.19
 
 
-  Startpoint: mac/pe0_i/acc_reg_reg[0]
+  Startpoint: mac/pe0_i/y_out_reg[14]
               (rising edge-triggered flip-flop clocked by CLK)
-  Endpoint: mac/pe0_i/acc_reg_reg[0]
+  Endpoint: c_buf_i_reg[0][14]
             (rising edge-triggered flip-flop clocked by CLK)
   Path Group: CLK
   Path Type: min
@@ -59,34 +60,35 @@ Wire Load Model Mode: enclosed
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
   CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
-  PE_Shift_Add_6     enG5K                 fsa0m_a_generic_core_tt1p8v25c
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  mac/pe0_i/acc_reg_reg[0]/CK (QDFFRBN)                   0.00 #     0.50 r
-  mac/pe0_i/acc_reg_reg[0]/Q (QDFFRBN)                    0.18       0.68 f
-  mac/pe0_i/U107/O (AO22)                                 0.09       0.77 f
-  mac/pe0_i/acc_reg_reg[0]/D (QDFFRBN)                    0.00       0.77 f
+  mac/pe0_i/y_out_reg[14]/CK (QDFFRBN)                    0.00 #     0.50 r
+  mac/pe0_i/y_out_reg[14]/Q (QDFFRBN)                     0.18       0.68 f
+  mac/pe0_i/y_out[14] (PE_Shift_Add_6)                    0.00       0.68 f
+  mac/y_out_0_i[14] (DFrFT_MAC)                           0.00       0.68 f
+  U562/O (AO22)                                           0.09       0.77 f
+  c_buf_i_reg[0][14]/D (QDFFN)                            0.00       0.77 f
   data arrival time                                                  0.77
 
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  mac/pe0_i/acc_reg_reg[0]/CK (QDFFRBN)                   0.00       0.60 r
-  library hold time                                      -0.01       0.59
-  data required time                                                 0.59
+  c_buf_i_reg[0][14]/CK (QDFFN)                           0.00       0.60 r
+  library hold time                                      -0.02       0.58
+  data required time                                                 0.58
   --------------------------------------------------------------------------
-  data required time                                                 0.59
+  data required time                                                 0.58
   data arrival time                                                 -0.77
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.18
+  slack (MET)                                                        0.19
 
 
-  Startpoint: mac/pe1_r/acc_reg_reg[0]
+  Startpoint: mac/pe0_i/y_out_reg[13]
               (rising edge-triggered flip-flop clocked by CLK)
-  Endpoint: mac/pe1_r/acc_reg_reg[0]
+  Endpoint: c_buf_i_reg[0][13]
             (rising edge-triggered flip-flop clocked by CLK)
   Path Group: CLK
   Path Type: min
@@ -94,34 +96,35 @@ Wire Load Model Mode: enclosed
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
   CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
-  PE_Shift_Add_5     enG5K                 fsa0m_a_generic_core_tt1p8v25c
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  mac/pe1_r/acc_reg_reg[0]/CK (QDFFRBN)                   0.00 #     0.50 r
-  mac/pe1_r/acc_reg_reg[0]/Q (QDFFRBN)                    0.18       0.68 f
-  mac/pe1_r/U107/O (AO22)                                 0.09       0.77 f
-  mac/pe1_r/acc_reg_reg[0]/D (QDFFRBN)                    0.00       0.77 f
+  mac/pe0_i/y_out_reg[13]/CK (QDFFRBN)                    0.00 #     0.50 r
+  mac/pe0_i/y_out_reg[13]/Q (QDFFRBN)                     0.18       0.68 f
+  mac/pe0_i/y_out[13] (PE_Shift_Add_6)                    0.00       0.68 f
+  mac/y_out_0_i[13] (DFrFT_MAC)                           0.00       0.68 f
+  U563/O (AO22)                                           0.09       0.77 f
+  c_buf_i_reg[0][13]/D (QDFFN)                            0.00       0.77 f
   data arrival time                                                  0.77
 
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  mac/pe1_r/acc_reg_reg[0]/CK (QDFFRBN)                   0.00       0.60 r
-  library hold time                                      -0.01       0.59
-  data required time                                                 0.59
+  c_buf_i_reg[0][13]/CK (QDFFN)                           0.00       0.60 r
+  library hold time                                      -0.02       0.58
+  data required time                                                 0.58
   --------------------------------------------------------------------------
-  data required time                                                 0.59
+  data required time                                                 0.58
   data arrival time                                                 -0.77
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.18
+  slack (MET)                                                        0.19
 
 
-  Startpoint: mac/pe1_i/acc_reg_reg[0]
+  Startpoint: mac/pe0_i/y_out_reg[12]
               (rising edge-triggered flip-flop clocked by CLK)
-  Endpoint: mac/pe1_i/acc_reg_reg[0]
+  Endpoint: c_buf_i_reg[0][12]
             (rising edge-triggered flip-flop clocked by CLK)
   Path Group: CLK
   Path Type: min
@@ -129,34 +132,35 @@ Wire Load Model Mode: enclosed
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
   CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
-  PE_Shift_Add_4     enG5K                 fsa0m_a_generic_core_tt1p8v25c
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  mac/pe1_i/acc_reg_reg[0]/CK (QDFFRBN)                   0.00 #     0.50 r
-  mac/pe1_i/acc_reg_reg[0]/Q (QDFFRBN)                    0.18       0.68 f
-  mac/pe1_i/U107/O (AO22)                                 0.09       0.77 f
-  mac/pe1_i/acc_reg_reg[0]/D (QDFFRBN)                    0.00       0.77 f
+  mac/pe0_i/y_out_reg[12]/CK (QDFFRBN)                    0.00 #     0.50 r
+  mac/pe0_i/y_out_reg[12]/Q (QDFFRBN)                     0.18       0.68 f
+  mac/pe0_i/y_out[12] (PE_Shift_Add_6)                    0.00       0.68 f
+  mac/y_out_0_i[12] (DFrFT_MAC)                           0.00       0.68 f
+  U564/O (AO22)                                           0.09       0.77 f
+  c_buf_i_reg[0][12]/D (QDFFN)                            0.00       0.77 f
   data arrival time                                                  0.77
 
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  mac/pe1_i/acc_reg_reg[0]/CK (QDFFRBN)                   0.00       0.60 r
-  library hold time                                      -0.01       0.59
-  data required time                                                 0.59
+  c_buf_i_reg[0][12]/CK (QDFFN)                           0.00       0.60 r
+  library hold time                                      -0.02       0.58
+  data required time                                                 0.58
   --------------------------------------------------------------------------
-  data required time                                                 0.59
+  data required time                                                 0.58
   data arrival time                                                 -0.77
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.18
+  slack (MET)                                                        0.19
 
 
-  Startpoint: mac/pe2_i/acc_reg_reg[0]
+  Startpoint: mac/pe0_i/y_out_reg[11]
               (rising edge-triggered flip-flop clocked by CLK)
-  Endpoint: mac/pe2_i/acc_reg_reg[0]
+  Endpoint: c_buf_i_reg[0][11]
             (rising edge-triggered flip-flop clocked by CLK)
   Path Group: CLK
   Path Type: min
@@ -164,29 +168,30 @@ Wire Load Model Mode: enclosed
   Des/Clust/Port     Wire Load Model       Library
   ------------------------------------------------
   CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
-  PE_Shift_Add_2     enG5K                 fsa0m_a_generic_core_tt1p8v25c
 
   Point                                                   Incr       Path
   --------------------------------------------------------------------------
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
-  mac/pe2_i/acc_reg_reg[0]/CK (QDFFRBN)                   0.00 #     0.50 r
-  mac/pe2_i/acc_reg_reg[0]/Q (QDFFRBN)                    0.18       0.68 f
-  mac/pe2_i/U107/O (AO22)                                 0.09       0.77 f
-  mac/pe2_i/acc_reg_reg[0]/D (QDFFRBN)                    0.00       0.77 f
+  mac/pe0_i/y_out_reg[11]/CK (QDFFRBN)                    0.00 #     0.50 r
+  mac/pe0_i/y_out_reg[11]/Q (QDFFRBN)                     0.18       0.68 f
+  mac/pe0_i/y_out[11] (PE_Shift_Add_6)                    0.00       0.68 f
+  mac/y_out_0_i[11] (DFrFT_MAC)                           0.00       0.68 f
+  U565/O (AO22)                                           0.09       0.77 f
+  c_buf_i_reg[0][11]/D (QDFFN)                            0.00       0.77 f
   data arrival time                                                  0.77
 
   clock CLK (rise edge)                                   0.00       0.00
   clock network delay (ideal)                             0.50       0.50
   clock uncertainty                                       0.10       0.60
-  mac/pe2_i/acc_reg_reg[0]/CK (QDFFRBN)                   0.00       0.60 r
-  library hold time                                      -0.01       0.59
-  data required time                                                 0.59
+  c_buf_i_reg[0][11]/CK (QDFFN)                           0.00       0.60 r
+  library hold time                                      -0.02       0.58
+  data required time                                                 0.58
   --------------------------------------------------------------------------
-  data required time                                                 0.59
+  data required time                                                 0.58
   data arrival time                                                 -0.77
   --------------------------------------------------------------------------
-  slack (MET)                                                        0.18
+  slack (MET)                                                        0.19
 
 
 1

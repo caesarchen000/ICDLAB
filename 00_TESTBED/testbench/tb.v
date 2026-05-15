@@ -45,6 +45,7 @@ module tb;
     reg [63:0] gold_th_i [0:31];
 
     integer i, fd_in, fd_gold, code;
+    integer total_cycle = 0;
 
     // MSE 計算用的浮點數變數
     real th_r_real, th_i_real;
@@ -56,6 +57,11 @@ module tb;
 
     always begin
         #(`CYCLE/2) clk = ~clk;
+    end
+
+    always @(posedge clk) begin
+        if (rst_n & ~i_valid & ~o_valid)
+            total_cycle <= total_cycle + 1;
     end
 
     initial begin
@@ -103,7 +109,7 @@ module tb;
         end
         i_valid = 1'b0; // 傳輸結束拉低 valid
 
-        $display("\nProcessing DFrFT for Key = %d", key);
+        $display("\nProcessing DFrFT for Key = %d at cycle time = %2.1f", key, `CYCLE);
         $display("=======================================================================");
         $display("   Idx |  HW_R |    TH_R    | Err_R^2  ||  HW_I |    TH_I    | Err_I^2");
         $display("-----------------------------------------------------------------------");
@@ -139,8 +145,13 @@ module tb;
             total_mse_r = total_mse_r + sq_err_r;
             total_mse_i = total_mse_i + sq_err_i;
 
-            $display("  %2d   | %5d | %10.4f | %8.4f || %5d | %10.4f | %8.4f", 
-                      i, hw_r_int, th_r_real, sq_err_r, hw_i_int, th_i_real, sq_err_i);
+            if ($signed(gold_hw_r[i]) !== hw_r_int || $signed(gold_hw_i[i]) !== hw_i_int) begin
+                $display("❌ 抓到了！硬體算錯了 at Idx=%2d. HW_R=%4d, Python_R=%4d", 
+                          i, hw_r_int, $signed(gold_hw_r[i]));
+            end else begin
+                $display("  %2d   | %5d | %10.4f | %8.4f || %5d | %10.4f | %8.4f", 
+                        i, hw_r_int, th_r_real, sq_err_r, hw_i_int, th_i_real, sq_err_i);
+            end
 
             // 準備接收下一個 Index 的 Real Part
             if (i != 31) @(negedge clk);
@@ -160,6 +171,7 @@ module tb;
         $display(" Real Channel MSE : %f", total_mse_r);
         $display(" Imag Channel MSE : %f", total_mse_i);
         $display(" Total MSE (R+I)  : %f", total_mse_r + total_mse_i);
+        $display(" Total Exec cycle : %3d", total_cycle);
         $display("=======================================================================\n");
         $finish;
     end

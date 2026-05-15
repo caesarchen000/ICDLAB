@@ -1,6 +1,6 @@
 import numpy as np
 import struct
-from hw_sim import theoretical_eigen_dfrft
+from new_hw_sim import theoretical_eigen_dfrft
 
 # --- 參數設定 (確保與 RTL 一致) ---
 N = 32

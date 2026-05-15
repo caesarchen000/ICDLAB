@@ -1,1 +1,2 @@
-vcs ../00_TESTBED/testbench/tb.v -f gate.f fsa0m_a_generic_core_21.lib.src -full64 -R -debug_access+all +v2k +define+SDF | tee vcs_sim.log
+vcs ../00_TESTBED/testbench/tb.v -f gate.f fsa0m_a_generic_core_21.lib.src -full64 -R -debug_access+all +v2k +neg_tchk +define+SDF
+#vcs ../00_TESTBED/testbench/tb_all_keys.v -f gate.f fsa0m_a_generic_core_21.lib.src -full64 -R -debug_access+all +v2k +neg_tchk +define+SDF
