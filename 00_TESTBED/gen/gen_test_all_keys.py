@@ -1,13 +1,14 @@
 import numpy as np
 import struct
 from new_hw_sim import theoretical_eigen_dfrft
+from config import *
 
 # --- 參數設定 (確保與 RTL 一致) ---
-N = 32
-V_BITS = 14
-S1_SHIFT = 10
-OUTPUT_SHIFT = 5  # CORDIC
-S3_SHIFT = 14     # Stage 3 截斷
+#N = 32
+#V_BITS = 14
+#S1_SHIFT = 10
+#OUTPUT_SHIFT = 5  # CORDIC
+#S3_SHIFT = 14     # Stage 3 截斷
 
 def to_signed(val, bits):
     val = int(val) & ((1 << bits) - 1)
@@ -70,7 +71,7 @@ def generate_all_keys_files():
     y1_i_q = (y1_i_full + (1 << (S1_SHIFT - 1))) >> S1_SHIFT
 
     # DFrFT 的硬體系統真實增益
-    HW_GAIN = 1.64676 / 2.0  
+    #HW_GAIN = 1.64676 / 2.0  
 
     # 3. 掃描所有 Key (-128 ~ 127) 並寫入 golden_all_keys.txt
     with open("../pattern/golden_all_keys.txt", "w") as f:

@@ -3,44 +3,10 @@ import scipy.linalg as la
 import matplotlib.pyplot as plt
 import math
 from tqdm import tqdm
+from config import *
 
 error_sweep = True
 config_sweep = False
-
-# ==========================================
-# 硬體系統常數與 Bit-width 設定
-# ==========================================
-N = 32
-V_BITS = 14       # 矩陣 V 的小數點位數 (Q14)
-S1_SHIFT = 10     # Stage 1 算完後的右移量
-OUTPUT_SHIFT = 4  # CORDIC Stage 算完後的右移量 (原 S2_SHIFT)
-S3_SHIFT = 14     # Stage 3 算完後的最終右移量 (從 17 改為 14 以符合 gen_test)
-
-# Shift-and-Add 限制
-MAX_TERMS = 3     # 硬體限制：每個常數最多由幾個 2 的次方相加減組成
-
-# CORDIC 參數
-STAGES = 11
-
-# 取消 K_INV 的預先乘法補償，因為直接做向量旋轉
-# 取而代之的是硬體會自帶一個固定的 Gain (CORDIC 旋轉增益 + Shift 所產生的等效縮放)
-HW_GAIN = 1.64676 * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT)  # 約 0.82338 (理論值需乘上此係數才能與硬體 Bit-True 對齊)
-#HW_GAIN = 2
-
-ATAN_TABLE_FULL = [8192, 4836, 2555, 1297, 651, 326, 163, 81, 41, 20, 10, 5]
-ATAN_TABLE = ATAN_TABLE_FULL[:STAGES]
-
-# Hardware bit design:
-INPUT_PORT = 8
-OUTPUT_PORT = 11
-
-MAC_INPUT = 17
-MAC_OUTPUT = 17
-MAC_INTERMEDIATE = 27
-
-CORDIC_INPUT = 17
-CORDIC_INTERMEDIATE = 18
-CORDIC_OUTPUT = 17
 
 # ==========================================
 # 輔助函式：模擬 Verilog 截斷與符號
@@ -144,7 +110,6 @@ def get_ultimate_V_and_k(N):
     for i in range(N):
         if V[np.argmax(np.abs(V[:, i])), i] < 0: V[:, i] *= -1
     # for K_inv
-    #V = V * np.sqrt(1/1.64676)
     return V, k_orders
 
 np.set_printoptions(precision=5, suppress=True, linewidth=200, threshold=np.inf)
@@ -157,7 +122,7 @@ V_ops = [[None for _ in range(N)] for _ in range(N)]
 
 for i in range(N):
     for j in range(N):
-        val_int = int(round(V_float[i, j] * (1 << V_BITS)))
+        val_int = int(round(V_float[i, j] * V_SCALE * (1 << V_BITS)))
         V_q[i, j], ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
         V_ops[i][j] = ops
 np.savetxt("V_q.txt", V_q, fmt="%6d")
@@ -240,6 +205,19 @@ if __name__ == "__main__":
     res_float = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key) * HW_GAIN
     hw_out_r, hw_out_i = hw_dfrft_pipeline(x_test_r, x_test_i, test_key)
 
+    mse_r = np.mean((res_float.real - hw_out_r)**2)
+    mse_i = np.mean((res_float.imag - hw_out_i)**2)
+    worst_mse = max(np.max((res_float.real - hw_out_r)**2), np.max(res_float.imag - hw_out_i)**2)
+    sig_pwr = np.mean(np.abs(res_float)**2)
+    nmse = (mse_r + mse_i) / (sig_pwr + 1e-12)
+
+    print("\n=== Hardware Bit-True Performance Case Study ===")
+    print(f"Real MSE   : {mse_r:.6e}")
+    print(f"Imag MSE   : {mse_i:.6e}")
+    print(f"R+I MSE    : {mse_r+mse_i:.6e}")
+    print(f"NMSE       : {nmse:.6e}")
+    print(f"Worst MSE  : {worst_mse:.6e}")
+
     fig1, axes1 = plt.subplots(2, 1, figsize=(12, 8))
     axes1[0].plot(t_n, x_test_r, 'ko-', label="Input Real")
     axes1[0].plot(t_n, x_test_i, 'kx--', label="Input Imag")
@@ -259,16 +237,18 @@ if __name__ == "__main__":
     if error_sweep:
         NUM_SAMPLES = 10
         keys_array = list(range(-128, 128))
+        #keys_array = [64]
         mse_real, mse_imag, nmse_list = [], [], []
 
         print("\n--- Sweeping Errors over all Keys with RANDOM 8-bit inputs ---")
         for k in tqdm(keys_array):
             total_mse_r, total_mse_i, total_sig_pwr = 0.0, 0.0, 0.0
-            
             for _ in range(NUM_SAMPLES):
                 x_int_real = np.random.randint(-128, 128, size=N)
                 x_int_imag = np.random.randint(-128, 128, size=N)
-                
+                #print(x_int_real)
+                #print(x_int_imag)
+
                 # 👉 記得乘上 Gain
                 res_float = theoretical_eigen_dfrft(x_int_real, x_int_imag, k) * HW_GAIN
                 hw_r, hw_i = hw_dfrft_pipeline(x_int_real, x_int_imag, k)
@@ -315,7 +295,7 @@ if __name__ == "__main__":
         print(f"Fixed V_BITS={V_BITS}, Fixed shifts")
         print(f"Sweeping CORDIC_STAGES and MAX_TERMS")
 
-        np.random.seed(42)
+        np.random.seed(67)
 
         for stg in cordic_stages_list:
             for max_terms in max_terms_list:
