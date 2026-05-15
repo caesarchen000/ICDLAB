@@ -1,0 +1,27 @@
+# APR directory - selective ignore
+05_APR/.DS_Store
+05_APR/**/*.log*
+05_APR/**/*.logv*
+05_APR/**/*.cshrc
+05_APR/**/*.rpt
+05_APR/**/*.rpt.old
+05_APR/**/*.dat
+05_APR/**/*.fsdb
+05_APR/*.dat
+05_APR/cmd.dat
+05_APR/data*.dat
+05_APR/out*.dat
+05_APR/streamOut.map
+05_APR/ucli.key
+05_APR/innovus.cmd[0-9]*
+05_APR/simv
+05_APR/simv.daidir/
+05_APR/DBS/
+05_APR/celtic/
+05_APR/FireIce/
+05_APR/Phantom/
+05_APR/timingReports/
+05_APR/csrc/
+05_APR/lef2gds/
+05_APR/Lab4/
+05_APR/*.cmd.example
