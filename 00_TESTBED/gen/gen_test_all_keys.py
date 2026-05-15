@@ -48,7 +48,7 @@ def generate_all_keys_files():
         print("錯誤: 找不到 V_q.txt，請先用 hw_sim.py 生成。")
         return
 
-    np.random.seed(67)
+    np.random.seed(RANDOM_SEED)
     # 控制振幅避免全範圍飽和影響真實 MSE 評估
     x_real = np.random.randint(-128, 127, size=N)
     x_imag = np.random.randint(-128, 127, size=N)

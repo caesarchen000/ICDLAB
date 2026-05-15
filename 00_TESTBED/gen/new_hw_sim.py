@@ -131,7 +131,7 @@ def hw_dfrft_pipeline(x_real, x_imag, key):
     x_real = to_signed(x_real, INPUT_PORT)
     x_imag = to_signed(x_imag, INPUT_PORT)
 
-    # [Stage 1: V^T * x] 
+    # [Stage 1: V^T * x]
     x_real = to_signed(x_real, MAC_INPUT)
     x_imag = to_signed(x_imag, MAC_INPUT)
     y1_r_full, y1_i_full = np.zeros(N, dtype=np.int64), np.zeros(N, dtype=np.int64)
@@ -168,29 +168,37 @@ def hw_dfrft_pipeline(x_real, x_imag, key):
     return out_r, out_i
 
 def find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS):
-    print("\n啟動 Unity Gain (HW_GAIN = 1.0) 黃金 V_SCALE 掃描...")
+    print("\n啟動「多維度隨機期望值」黃金 V_SCALE 掃描...")
     
-    # 數學上的理想值 (大約 1.10204)
-    base_scale = np.sqrt(2 / 1.64676)
+    # 1. 準備代表性測資 (Representative Mini-Batch)
+    # 選取 16 個均勻分佈的角度，涵蓋 CORDIC 在各象限的表現
+    sample_keys = np.linspace(-128, 127, 16, dtype=int)
+    num_signals_per_key = 10 
     
-    # 因為 CSD 截斷會讓能量縮水，我們從 1.09 往上掃描到 1.15 來進行補償
-    scale_candidates = np.linspace(1.09, 1.15, 1000)
+    np.random.seed(RANDOM_SEED)
+    test_signals_r = np.random.randint(-128, 127, size=(num_signals_per_key, N))
+    test_signals_i = np.random.randint(-128, 127, size=(num_signals_per_key, N))
+
+    # 2. 預先計算所有樣本的理論值 (Target with Gain=1.0)
+    # 這樣在 loop 內就不用重算理論值
+    theory_targets = {}
+    for k in sample_keys:
+        targets = []
+        for i in range(num_signals_per_key):
+            targets.append(theoretical_eigen_dfrft(test_signals_r[i], test_signals_i[i], k))
+        theory_targets[k] = targets
+
+    # 3. 定義搜索範圍 (使用更精確的步長)
+    # 從原本的 1000 點掃描改為兩階段以兼顧效率
+    scale_candidates = np.linspace(1.09, 1.15, 200) 
     
-    best_scale = base_scale
-    best_mse = float('inf')
+    best_scale = 1.10
+    min_overall_mse = float('inf')
     best_V_q = None
     
-    # 產生一組隨機測資來評估整體表現
-    np.random.seed(67)
-    x_test_r = np.random.randint(-128, 127, size=N)
-    x_test_i = np.random.randint(-128, 127, size=N)
-    test_key = 64
-    
-    # ⚠️ 產生理論值 (絕對不乘任何 HW_GAIN，強制以 Gain = 1.0 為標準！)
-    theory_out = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key)
-    
-    global V_q # 宣告 global 以便 hw_dfrft_pipeline 能吃到臨時產生的矩陣
-    for test_scale in scale_candidates:
+    global V_q
+    for test_scale in tqdm(scale_candidates, desc="Searching Scale"):
+        # 生成當前 scale 下的量化矩陣
         temp_V_q = np.zeros((N, N), dtype=np.int64)
         for i in range(N):
             for j in range(N):
@@ -198,33 +206,39 @@ def find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS):
                 q_val, _ = approx_pot_csd(val_int, num_terms=MAX_TERMS)
                 temp_V_q[i, j] = q_val
         
-        # 把臨時矩陣餵給硬體模型
         V_q = temp_V_q
-        hw_r, hw_i = hw_dfrft_pipeline(x_test_r, x_test_i, test_key)
         
-        # 計算與「Gain=1.0 理論值」的真實差距
-        mse = np.mean((theory_out.real - hw_r)**2 + (theory_out.imag - hw_i)**2)
+        # 計算在所有樣本下的平均 MSE
+        current_total_mse = 0.0
+        for k in sample_keys:
+            for i in range(num_signals_per_key):
+                hw_r, hw_i = hw_dfrft_pipeline(test_signals_r[i], test_signals_i[i], k)
+                target = theory_targets[k][i]
+                mse = np.mean((target.real - hw_r)**2 + (target.imag - hw_i)**2)
+                current_total_mse += mse
         
-        if mse < best_mse:
-            best_mse = mse
+        avg_mse = current_total_mse / (len(sample_keys) * num_signals_per_key)
+        
+        if avg_mse < min_overall_mse:
+            min_overall_mse = avg_mse
             best_scale = test_scale
             best_V_q = np.copy(temp_V_q)
-            
-    print(f"數學理想 Scale: {base_scale:.6f}")
-    print(f"黃金補償 Scale: {best_scale:.6f} (真實 MSE 降至: {best_mse:.2f})")
-    
-    # 儲存具有完美 Gain=1 的新矩陣
-    np.savetxt("V_q.txt", best_V_q, fmt="%6d")
+
+    # 4. 儲存結果
     V_q = best_V_q
-    # 同步生成 V_ops.txt 供 Verilog 使用
+    print(f"\n最佳化完成！")
+    print(f"最優補償 Scale: {best_scale:.8f}")
+    print(f"樣本平均 MSE: {min_overall_mse:.6f}")
+    
+    np.savetxt("V_q.txt", V_q, fmt="%6d")
+    
+    # 同步更新 V_ops.txt
     with open("V_ops.txt", "w") as f:
         for i in range(N):
             for j in range(N):
                 val_int = int(round(V_float[i, j] * best_scale * (1 << V_BITS)))
                 _, ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
                 f.write(" ".join(f"({s},{p})" for s, p in ops) + "\n")
-                
-    print(f"成功生成 Gain={HW_GAIN} 的 V_q.txt 與 V_ops.txt！SCALE={best_scale}")
 
 def find_gain_v_scale(V_float, V_BITS, MAX_TERMS):
     global V_q
@@ -271,7 +285,8 @@ if __name__ == "__main__":
     # 👉 理論結果必須乘上硬體管線的 HW_GAIN 才能互相對齊比較
     res_float = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key) * HW_GAIN
     hw_out_r, hw_out_i = hw_dfrft_pipeline(x_test_r, x_test_i, test_key)
-
+    print(hw_out_r)
+    print(hw_out_i)
     mse_r = np.mean((res_float.real - hw_out_r)**2)
     mse_i = np.mean((res_float.imag - hw_out_i)**2)
     worst_mse = max(np.max((res_float.real - hw_out_r)**2), np.max(res_float.imag - hw_out_i)**2)
@@ -367,7 +382,7 @@ if __name__ == "__main__":
         print(f"Fixed V_BITS={V_BITS}, Fixed shifts")
         print(f"Sweeping CORDIC_STAGES and MAX_TERMS")
 
-        np.random.seed(67)
+        np.random.seed(RANDOM_SEED)
 
         for stg in cordic_stages_list:
             for max_terms in max_terms_list:
@@ -527,3 +542,154 @@ if __name__ == "__main__":
 
         print("\n===== BEST CONFIG =====")
         print(df_results.loc[best_idx])
+
+'''
+def _find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS):
+    print("\n啟動 Unity Gain (HW_GAIN = 1.0) 黃金 V_SCALE 全域掃描...")
+    
+    # 數學上的理想值 (大約 1.10204)
+    base_scale = np.sqrt(2 / 1.64676)
+    
+    # 稍微減少掃描點 (1000 -> 200) 以換取多測資的計算時間
+    scale_candidates = np.linspace(1.09, 1.15, 1000)
+    
+    best_scale = base_scale
+    best_mse = float('inf')
+    best_V_q = None
+    
+    # ==========================================
+    # 1. 準備代表性的測資池 (Representative Dataset)
+    # ==========================================
+    np.random.seed(RANDOM_SEED)
+    num_test_inputs = 10  # 測試 10 組不同的隨機訊號
+    test_inputs_r = np.random.randint(-128, 128, size=(num_test_inputs, N))
+    test_inputs_i = np.random.randint(-128, 128, size=(num_test_inputs, N))
+    
+    # 挑選具代表性的 Key，涵蓋各個象限與邊界
+    test_keys = [-128, -64, -32, 0, 32, 64, 127]
+    
+    # 預先計算所有理論值，避免在迴圈內重複計算
+    theory_outs = {}
+    for k in test_keys:
+        theory_outs[k] = []
+        for idx in range(num_test_inputs):
+            # 強制以 Gain = 1.0 為標準
+            ideal_out = theoretical_eigen_dfrft(test_inputs_r[idx], test_inputs_i[idx], k)
+            theory_outs[k].append(ideal_out)
+            
+    # ==========================================
+    # 2. 開始掃描
+    # ==========================================
+    global V_q # 宣告 global 以便 hw_dfrft_pipeline 能吃到臨時產生的矩陣
+    
+    for test_scale in tqdm(scale_candidates, desc="Sweeping V_SCALE"):
+        # 生成當前 scale 的臨時 CSD 矩陣
+        temp_V_q = np.zeros((N, N), dtype=np.int64)
+        for i in range(N):
+            for j in range(N):
+                val_int = int(round(V_float[i, j] * test_scale * (1 << V_BITS)))
+                q_val, _ = approx_pot_csd(val_int, num_terms=MAX_TERMS)
+                temp_V_q[i, j] = q_val
+        
+        V_q = temp_V_q
+        
+        # 評估這個 V_q 在整個測資池上的平均表現
+        current_scale_total_mse = 0.0
+        
+        for k in test_keys:
+            for idx in range(num_test_inputs):
+                hw_r, hw_i = hw_dfrft_pipeline(test_inputs_r[idx], test_inputs_i[idx], k)
+                theory = theory_outs[k][idx]
+                
+                # 計算真實差距
+                mse = np.mean((theory.real - hw_r)**2 + (theory.imag - hw_i)**2)
+                current_scale_total_mse += mse
+                
+        # 計算全域平均 MSE
+        avg_mse = current_scale_total_mse / (len(test_keys) * num_test_inputs)
+        
+        if avg_mse < best_mse:
+            best_mse = avg_mse
+            best_scale = test_scale
+            best_V_q = np.copy(temp_V_q)
+            
+    # ==========================================
+    # 3. 儲存最佳結果
+    # ==========================================
+    print(f"\n數學理想 Scale: {base_scale:.6f}")
+    print(f"全域黃金補償 Scale: {best_scale:.6f} (代表性測資平均 MSE 降至: {best_mse:.2f})")
+    
+    # 儲存具有完美 Gain=1 的新矩陣
+    np.savetxt("V_q.txt", best_V_q, fmt="%6d")
+    V_q = best_V_q
+    
+    # 同步生成 V_ops.txt 供 Verilog 使用
+    with open("V_ops.txt", "w") as f:
+        for i in range(N):
+            for j in range(N):
+                val_int = int(round(V_float[i, j] * best_scale * (1 << V_BITS)))
+                _, ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
+                f.write(" ".join(f"({s},{p})" for s, p in ops) + "\n")
+                
+    print(f"成功生成最佳化的 V_q.txt 與 V_ops.txt！SCALE={best_scale}")
+
+def __find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS):
+    print("\n啟動 Unity Gain (HW_GAIN = 1.0) 黃金 V_SCALE 掃描...")
+    
+    # 數學上的理想值 (大約 1.10204)
+    base_scale = np.sqrt(2 / 1.64676)
+    
+    # 因為 CSD 截斷會讓能量縮水，我們從 1.09 往上掃描到 1.15 來進行補償
+    scale_candidates = np.linspace(1.09, 1.15, 1000)
+    
+    best_scale = base_scale
+    best_mse = float('inf')
+    best_V_q = None
+    
+    # 產生一組隨機測資來評估整體表現
+    np.random.seed(RANDOM_SEED)
+    x_test_r = np.random.randint(-128, 127, size=N)
+    x_test_i = np.random.randint(-128, 127, size=N)
+    test_key = 47
+    
+    # ⚠️ 產生理論值 (絕對不乘任何 HW_GAIN，強制以 Gain = 1.0 為標準！)
+    theory_out = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key)
+    
+    global V_q # 宣告 global 以便 hw_dfrft_pipeline 能吃到臨時產生的矩陣
+    for test_scale in scale_candidates:
+        temp_V_q = np.zeros((N, N), dtype=np.int64)
+        for i in range(N):
+            for j in range(N):
+                val_int = int(round(V_float[i, j] * test_scale * (1 << V_BITS)))
+                q_val, _ = approx_pot_csd(val_int, num_terms=MAX_TERMS)
+                temp_V_q[i, j] = q_val
+        
+        # 把臨時矩陣餵給硬體模型
+        V_q = temp_V_q
+        hw_r, hw_i = hw_dfrft_pipeline(x_test_r, x_test_i, test_key)
+        
+        # 計算與「Gain=1.0 理論值」的真實差距
+        mse = np.mean((theory_out.real - hw_r)**2 + (theory_out.imag - hw_i)**2)
+        
+        if mse < best_mse:
+            best_mse = mse
+            best_scale = test_scale
+            best_V_q = np.copy(temp_V_q)
+            
+    print(f"數學理想 Scale: {base_scale:.6f}")
+    print(f"黃金補償 Scale: {best_scale:.6f} (真實 MSE 降至: {best_mse:.2f})")
+    
+    # 儲存具有完美 Gain=1 的新矩陣
+    np.savetxt("V_q.txt", best_V_q, fmt="%6d")
+    V_q = best_V_q
+    # 同步生成 V_ops.txt 供 Verilog 使用
+    with open("V_ops.txt", "w") as f:
+        for i in range(N):
+            for j in range(N):
+                val_int = int(round(V_float[i, j] * best_scale * (1 << V_BITS)))
+                _, ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
+                f.write(" ".join(f"({s},{p})" for s, p in ops) + "\n")
+                
+    print(f"成功生成 Gain={HW_GAIN} 的 V_q.txt 與 V_ops.txt！SCALE={best_scale}") 
+
+'''

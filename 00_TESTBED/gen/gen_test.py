@@ -54,9 +54,13 @@ def generate_files():
         print("錯誤: 找不到 V_q.txt，請先用 hw_sim.py 生成。")
         return
 
-    np.random.seed(67)
-    x_real = np.random.randint(-128, 127, size=N)
-    x_imag = np.random.randint(-128, 127, size=N)
+    np.random.seed(RANDOM_SEED)
+    #x_real = np.random.randint(-128, 127, size=N)
+    #x_imag = np.random.randint(-128, 127, size=N)
+    t_n = np.arange(N)
+    x_test_float = 100 * np.exp(-(t_n - N/3)**2 / (N/8)) + 1j * 50 * np.sin(4 * np.pi * t_n / N)
+    x_real = np.clip(np.round(x_test_float.real), -128, 127).astype(np.int64)
+    x_imag = np.clip(np.round(x_test_float.imag), -128, 127).astype(np.int64)
 
     # 1. 生成 input.txt
     with open("../pattern/input.txt", "w") as f:
@@ -107,7 +111,7 @@ def generate_files():
     # DFrFT 的硬體系統真實增益
     # 將理論值乘上硬體增益，對齊基準線
     res_float_scaled = res_float * HW_GAIN
-
+    
     with open("../pattern/golden.txt", "w") as f:
         for i in range(N):
             hr_hex = (int(out_r[i]) & 0xFFFF)
