@@ -116,23 +116,6 @@ V_float, k_orders = get_ultimate_V_and_k(N)
 print(f"k_orders:{k_orders}")
 np.savetxt("V_float.txt", V_float, fmt="%.10f")
 
-V_q = np.zeros((N, N), dtype=np.int64)
-V_ops = [[None for _ in range(N)] for _ in range(N)]
-
-for i in range(N):
-    for j in range(N):
-        val_int = int(round(V_float[i, j] * V_SCALE * (1 << V_BITS)))
-        V_q[i, j], ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
-        V_ops[i][j] = ops
-np.savetxt("V_q.txt", V_q, fmt="%6d")
-
-with open("V_ops.txt", "w") as f:
-    for i in range(N):
-        for j in range(N):
-            ops = V_ops[i][j]
-            line = " ".join(f"({s},{p})" for s, p in ops)
-            f.write(line + "\n")
-
 # ==========================================
 # 理論與硬體模型
 # ==========================================
@@ -184,10 +167,95 @@ def hw_dfrft_pipeline(x_real, x_imag, key):
     out_i = to_signed(out_i, OUTPUT_PORT)
     return out_r, out_i
 
+def find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS):
+    print("\n啟動 Unity Gain (HW_GAIN = 1.0) 黃金 V_SCALE 掃描...")
+    
+    # 數學上的理想值 (大約 1.10204)
+    base_scale = np.sqrt(2 / 1.64676)
+    
+    # 因為 CSD 截斷會讓能量縮水，我們從 1.09 往上掃描到 1.15 來進行補償
+    scale_candidates = np.linspace(1.09, 1.15, 1000)
+    
+    best_scale = base_scale
+    best_mse = float('inf')
+    best_V_q = None
+    
+    # 產生一組隨機測資來評估整體表現
+    np.random.seed(67)
+    x_test_r = np.random.randint(-128, 127, size=N)
+    x_test_i = np.random.randint(-128, 127, size=N)
+    test_key = 64
+    
+    # ⚠️ 產生理論值 (絕對不乘任何 HW_GAIN，強制以 Gain = 1.0 為標準！)
+    theory_out = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key)
+    
+    global V_q # 宣告 global 以便 hw_dfrft_pipeline 能吃到臨時產生的矩陣
+    for test_scale in scale_candidates:
+        temp_V_q = np.zeros((N, N), dtype=np.int64)
+        for i in range(N):
+            for j in range(N):
+                val_int = int(round(V_float[i, j] * test_scale * (1 << V_BITS)))
+                q_val, _ = approx_pot_csd(val_int, num_terms=MAX_TERMS)
+                temp_V_q[i, j] = q_val
+        
+        # 把臨時矩陣餵給硬體模型
+        V_q = temp_V_q
+        hw_r, hw_i = hw_dfrft_pipeline(x_test_r, x_test_i, test_key)
+        
+        # 計算與「Gain=1.0 理論值」的真實差距
+        mse = np.mean((theory_out.real - hw_r)**2 + (theory_out.imag - hw_i)**2)
+        
+        if mse < best_mse:
+            best_mse = mse
+            best_scale = test_scale
+            best_V_q = np.copy(temp_V_q)
+            
+    print(f"數學理想 Scale: {base_scale:.6f}")
+    print(f"黃金補償 Scale: {best_scale:.6f} (真實 MSE 降至: {best_mse:.2f})")
+    
+    # 儲存具有完美 Gain=1 的新矩陣
+    np.savetxt("V_q.txt", best_V_q, fmt="%6d")
+    V_q = best_V_q
+    # 同步生成 V_ops.txt 供 Verilog 使用
+    with open("V_ops.txt", "w") as f:
+        for i in range(N):
+            for j in range(N):
+                val_int = int(round(V_float[i, j] * best_scale * (1 << V_BITS)))
+                _, ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
+                f.write(" ".join(f"({s},{p})" for s, p in ops) + "\n")
+                
+    print(f"成功生成 Gain={HW_GAIN} 的 V_q.txt 與 V_ops.txt！SCALE={best_scale}")
+
+def find_gain_v_scale(V_float, V_BITS, MAX_TERMS):
+    global V_q
+    V_q = np.zeros((N, N), dtype=np.int64)
+    V_ops = [[None for _ in range(N)] for _ in range(N)]
+
+    for i in range(N):
+        for j in range(N):
+            val_int = int(round(V_float[i, j] * V_SCALE * (1 << V_BITS)))
+            V_q[i, j], ops = approx_pot_csd(val_int, num_terms=MAX_TERMS)
+            V_ops[i][j] = ops
+    np.savetxt("V_q.txt", V_q, fmt="%6d")
+
+    with open("V_ops.txt", "w") as f:
+        for i in range(N):
+            for j in range(N):
+                ops = V_ops[i][j]
+                line = " ".join(f"({s},{p})" for s, p in ops)
+                f.write(line + "\n")
+    print(f"成功生成 Gain={HW_GAIN} 的 V_q.txt 與 V_ops.txt！SCALE={V_SCALE}")
+
 # ==========================================
 # 主程式：測試與繪圖
 # ==========================================
 if __name__ == "__main__":
+    
+    if AUTO_UNITY_GAIN:
+        find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS)
+    else:
+        find_gain_v_scale(V_float, V_BITS, MAX_TERMS)
+        
     t_n = np.arange(N)
 
     # ==========================================
@@ -241,7 +309,7 @@ if __name__ == "__main__":
 
         print("\n--- Sweeping Errors over all Keys with RANDOM 8-bit inputs ---")
         for k in tqdm(keys_array):
-            total_mse_r, total_mse_i, total_sig_pwr = 0.0, 0.0, 0.0
+            total_mse_r, total_mse_i, total_nmse = 0.0, 0.0, 0.0
             for _ in range(NUM_SAMPLES):
                 x_int_real = np.random.randint(-128, 128, size=N)
                 x_int_imag = np.random.randint(-128, 128, size=N)
@@ -251,14 +319,19 @@ if __name__ == "__main__":
                 # 👉 記得乘上 Gain
                 res_float = theoretical_eigen_dfrft(x_int_real, x_int_imag, k) * HW_GAIN
                 hw_r, hw_i = hw_dfrft_pipeline(x_int_real, x_int_imag, k)
-                
-                total_mse_r += np.mean((res_float.real - hw_r)**2)
-                total_mse_i += np.mean((res_float.imag - hw_i)**2)
-                total_sig_pwr += np.mean(np.abs(res_float)**2)
-
+                mse_r = np.mean((res_float.real - hw_r)**2)
+                mse_i = np.mean((res_float.imag - hw_i)**2)
+                total_mse_r += mse_r
+                total_mse_i += mse_i
+                sig_pwr = np.mean(np.abs(res_float)**2)
+                nmse = (mse_r + mse_i) / (sig_pwr + 1e-12)
+                #total_sig_pwr += np.mean(np.abs(res_float)**2)
+                total_nmse += nmse
+            
             mse_real.append(total_mse_r / NUM_SAMPLES)
             mse_imag.append(total_mse_i / NUM_SAMPLES)
-            nmse_list.append((total_mse_r + total_mse_i) / (total_sig_pwr + 1e-12))
+            nmse_list.append(total_nmse / NUM_SAMPLES)
+            #nmse_list.append((total_mse_r + total_mse_i) / (total_sig_pwr + 1e-12))
 
         print("\n=== Hardware Bit-True Performance Summary ===")
         print(f"Overall MSE        : {np.mean(mse_real) + np.mean(mse_imag):.6e}")

@@ -71,12 +71,6 @@ def generate_all_keys_files():
     y1_i_q = (y1_i_full + (1 << (S1_SHIFT - 1))) >> S1_SHIFT
 
     # DFrFT 的硬體系統真實增益
-<<<<<<< HEAD
-    HW_GAIN = 1.0 #1.64676 / 2.0  
-=======
-    #HW_GAIN = 1.64676 / 2.0  
->>>>>>> b5d720a1ec24b460ad11dcb1041e06701cf28745
-
     # 3. 掃描所有 Key (-128 ~ 127) 並寫入 golden_all_keys.txt
     with open("../pattern/golden_all_keys.txt", "w") as f:
         print("開始生成 256 組 Key 的 Golden Patterns...")

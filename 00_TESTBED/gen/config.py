@@ -3,6 +3,9 @@ import numpy as np
 # ==========================================
 # 硬體系統常數與 Bit-width 設定
 # ==========================================
+RANDOM_SEED = 67
+AUTO_UNITY_GAIN = True
+
 N = 32
 V_BITS = 14       # 矩陣 V 的小數點位數 (Q14)
 S1_SHIFT = 10     # Stage 1 算完後的右移量
@@ -18,8 +21,17 @@ STAGES = 11
 
 # 取消 K_INV 的預先乘法補償，因為直接做向量旋轉
 # 取而代之的是硬體會自帶一個固定的 Gain (CORDIC 旋轉增益 + Shift 所產生的等效縮放)
-HW_GAIN = 1.64676 * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT) * (V_SCALE**2) # 約 0.82338 (理論值需乘上此係數才能與硬體 Bit-True 對齊)
+#HW_GAIN = 1.64676 * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT) * (V_SCALE**2) # 約 0.82338 (理論值需乘上此係數才能與硬體 Bit-True 對齊)
 #HW_GAIN = 1
+if AUTO_UNITY_GAIN:
+    HW_GAIN = 1.0
+else:
+    HW_GAIN = (
+        1.64676
+        * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT)
+        * (V_SCALE**2)
+    )
+
 print(f"HW_GAIN:{HW_GAIN}")
 
 ATAN_TABLE_FULL = [8192, 4836, 2555, 1297, 651, 326, 163, 81, 41, 20, 10, 5]
