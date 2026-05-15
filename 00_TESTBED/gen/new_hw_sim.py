@@ -3,11 +3,13 @@ import scipy.linalg as la
 import matplotlib.pyplot as plt
 import math
 from tqdm import tqdm
+from config import *
 
 error_sweep = True
 config_sweep = False
 
 # ==========================================
+<<<<<<< HEAD
 # 硬體系統常數與 Bit-width 設定
 # ==========================================
 N = 32
@@ -45,6 +47,8 @@ CORDIC_INTERMEDIATE = 18
 CORDIC_OUTPUT = 17
 
 # ==========================================
+=======
+>>>>>>> b5d720a1ec24b460ad11dcb1041e06701cf28745
 # 輔助函式：模擬 Verilog 截斷與符號
 # ==========================================
 def _to_signed(val, bits):
@@ -241,6 +245,19 @@ if __name__ == "__main__":
     res_float = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key) * HW_GAIN
     hw_out_r, hw_out_i = hw_dfrft_pipeline(x_test_r, x_test_i, test_key)
 
+    mse_r = np.mean((res_float.real - hw_out_r)**2)
+    mse_i = np.mean((res_float.imag - hw_out_i)**2)
+    worst_mse = max(np.max((res_float.real - hw_out_r)**2), np.max(res_float.imag - hw_out_i)**2)
+    sig_pwr = np.mean(np.abs(res_float)**2)
+    nmse = (mse_r + mse_i) / (sig_pwr + 1e-12)
+
+    print("\n=== Hardware Bit-True Performance Case Study ===")
+    print(f"Real MSE   : {mse_r:.6e}")
+    print(f"Imag MSE   : {mse_i:.6e}")
+    print(f"R+I MSE    : {mse_r+mse_i:.6e}")
+    print(f"NMSE       : {nmse:.6e}")
+    print(f"Worst MSE  : {worst_mse:.6e}")
+
     fig1, axes1 = plt.subplots(2, 1, figsize=(12, 8))
     axes1[0].plot(t_n, x_test_r, 'ko-', label="Input Real")
     axes1[0].plot(t_n, x_test_i, 'kx--', label="Input Imag")
@@ -260,6 +277,7 @@ if __name__ == "__main__":
     if error_sweep:
         NUM_SAMPLES = 10
         keys_array = list(range(-128, 128))
+        #keys_array = [64]
         mse_real, mse_imag, nmse_list = [], [], []
 
         print("\n--- Sweeping Errors over all Keys with RANDOM 8-bit inputs ---")
@@ -268,7 +286,9 @@ if __name__ == "__main__":
             for _ in range(NUM_SAMPLES):
                 x_int_real = np.random.randint(-128, 128, size=N)
                 x_int_imag = np.random.randint(-128, 128, size=N)
-                
+                #print(x_int_real)
+                #print(x_int_imag)
+
                 # 👉 記得乘上 Gain
                 res_float = theoretical_eigen_dfrft(x_int_real, x_int_imag, k) * HW_GAIN
                 hw_r, hw_i = hw_dfrft_pipeline(x_int_real, x_int_imag, k)
@@ -315,7 +335,7 @@ if __name__ == "__main__":
         print(f"Fixed V_BITS={V_BITS}, Fixed shifts")
         print(f"Sweeping CORDIC_STAGES and MAX_TERMS")
 
-        np.random.seed(42)
+        np.random.seed(67)
 
         for stg in cordic_stages_list:
             for max_terms in max_terms_list:
