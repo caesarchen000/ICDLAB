@@ -11,7 +11,7 @@ S3_SHIFT = 14     # Stage 3 算完後的最終右移量 (從 17 改為 14 以符
 V_SCALE = np.sqrt(2/1.64676)
 
 # Shift-and-Add 限制
-MAX_TERMS = 4     # 硬體限制：每個常數最多由幾個 2 的次方相加減組成
+MAX_TERMS = 3     # 硬體限制：每個常數最多由幾個 2 的次方相加減組成
 
 # CORDIC 參數
 STAGES = 11

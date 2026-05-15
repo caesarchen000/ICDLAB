@@ -105,12 +105,6 @@ def generate_files():
     # 4. 生成 golden.txt (為配合你的 TB，假定理論值填 0，我們專注比對 Bit-true)
     res_float = theoretical_eigen_dfrft(x_real, x_imag, TEST_KEY)
     # DFrFT 的硬體系統真實增益
-<<<<<<< HEAD
-    HW_GAIN = 1.0 #1.64676 / 2.0  # 約 0.82338
-=======
-    #HW_GAIN = 1.64676 / 2.0  # 約 0.82338
-    #HW_GAIN = 1.0
->>>>>>> b5d720a1ec24b460ad11dcb1041e06701cf28745
     # 將理論值乘上硬體增益，對齊基準線
     res_float_scaled = res_float * HW_GAIN
 
