@@ -42,8 +42,26 @@ module cordic_rotation #(
     wire sign = z_reg[15]; 
     
     // 移位運算 (Shift)
-    wire signed [17:0] x_shift = x_reg >>> step_cnt;
-    wire signed [17:0] y_shift = y_reg >>> step_cnt;
+    // wire signed [17:0] x_shift = x_reg >>> step_cnt;
+    // wire signed [17:0] y_shift = y_reg >>> step_cnt;
+
+    reg signed [16:0] x_shift, y_shift;
+    always @(*) begin
+        case(step_cnt)
+            4'd0:  begin x_shift = x_reg;        y_shift = y_reg;        end
+            4'd1:  begin x_shift = x_reg >>> 1;  y_shift = y_reg >>> 1;  end
+            4'd2:  begin x_shift = x_reg >>> 2;  y_shift = y_reg >>> 2;  end
+            4'd3:  begin x_shift = x_reg >>> 3;  y_shift = y_reg >>> 3;  end
+            4'd4:  begin x_shift = x_reg >>> 4;  y_shift = y_reg >>> 4;  end
+            4'd5:  begin x_shift = x_reg >>> 5;  y_shift = y_reg >>> 5;  end
+            4'd6:  begin x_shift = x_reg >>> 6;  y_shift = y_reg >>> 6;  end
+            4'd7:  begin x_shift = x_reg >>> 7;  y_shift = y_reg >>> 7;  end
+            4'd8:  begin x_shift = x_reg >>> 8;  y_shift = y_reg >>> 8;  end
+            4'd9:  begin x_shift = x_reg >>> 9;  y_shift = y_reg >>> 9;  end
+            4'd10: begin x_shift = x_reg >>> 10; y_shift = y_reg >>> 10; end
+            default: begin x_shift = 17'd0; y_shift = 17'd0; end
+        endcase
+    end
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin

@@ -16,13 +16,6 @@ module PE_Shift_Add (
     assign term1_shifted = term1_in << shf1;
     assign term2_shifted = term2_in << shf2;
     assign term3_shifted = term3_in << shf3;
-    
-    // 決定加或減：sign[1] 已經保證 0 輸出，這裡只需看 sign[0] 決定正負
-    // sign[0] == 0 -> 加法, sign[0] == 1 -> 減法
-    wire signed [26:0] term1, term2, term3;
-    assign term1 = (sign1[0]) ? -term1_shifted : term1_shifted;
-    assign term2 = (sign2[0]) ? -term2_shifted : term2_shifted;
-    assign term3 = (sign3[0]) ? -term3_shifted : term3_shifted;
 
     wire [4:0] shf_amt;
     wire signed [26:0] rnd_const;
@@ -32,7 +25,10 @@ module PE_Shift_Add (
     wire signed [26:0] base_val, next_acc;
     reg signed [26:0] acc_reg;
     assign base_val = clear ? rnd_const : acc_reg;
-    assign next_acc = base_val + term1 + term2 + term3;
+    assign next_acc = base_val + 
+                      ((sign1[0]) ? -term1_shifted : term1_shifted) + 
+                      ((sign2[0]) ? -term2_shifted : term2_shifted) + 
+                      ((sign3[0]) ? -term3_shifted : term3_shifted);
 
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) acc_reg <= 27'd0;

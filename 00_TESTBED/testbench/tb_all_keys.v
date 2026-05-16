@@ -43,6 +43,7 @@ module tb;
 
     integer i, fd_in, fd_gold, code;
     integer k_int, global_idx;
+    integer total_cycle = 0;
 
     // MSE 計算用的浮點數變數
     real th_r_real, th_i_real;
@@ -56,6 +57,11 @@ module tb;
 
     always begin
         #(`CYCLE/2) clk = ~clk;
+    end
+
+    always @(posedge clk) begin
+        if (rst_n & o_ready)
+            total_cycle <= total_cycle + 1;
     end
 
     initial begin
@@ -89,7 +95,7 @@ module tb;
         #15 rst_n = 0;
         #20 rst_n = 1;
         #10;
-
+        o_ready = 1'b1;
         $display("\n=======================================================================");
         $display("   STARTING GLOBAL SWEEP VERIFICATION (256 KEYS)");
         $display("=======================================================================");
@@ -122,7 +128,6 @@ module tb;
             i_valid = 1'b0;
 
             // --- B. 接收輸出並計算 MSE ---
-            o_ready = 1'b1;
             wait(o_valid == 1'b1);
             @(negedge clk);
 
@@ -143,14 +148,14 @@ module tb;
                 th_r_real = $bitstoreal(gold_th_r[global_idx]);
                 th_i_real = $bitstoreal(gold_th_i[global_idx]);
 
-                // // 比對硬體整數是否完全相符 (Bit-True Check)
-                // if ($signed(gold_hw_r[global_idx]) !== hw_r_int || 
-                //     $signed(gold_hw_i[global_idx]) !== hw_i_int) begin
-                //     $display("❌ FATAL BIT-TRUE ERROR at Key=%d, Idx=%d", k_int, i);
-                //     $display("   Expected : HW_R=%d, HW_I=%d", $signed(gold_hw_r[global_idx]), $signed(gold_hw_i[global_idx]));
-                //     $display("   Got      : HW_R=%d, HW_I=%d", hw_r_int, hw_i_int);
-                //     $finish;
-                // end
+                // 比對硬體整數是否完全相符 (Bit-True Check)
+                if ($signed(gold_hw_r[global_idx]) !== hw_r_int || 
+                    $signed(gold_hw_i[global_idx]) !== hw_i_int) begin
+                    $display("❌ FATAL BIT-TRUE ERROR at Key=%d, Idx=%d", k_int, i);
+                    $display("   Expected : HW_R=%d, HW_I=%d", $signed(gold_hw_r[global_idx]), $signed(gold_hw_i[global_idx]));
+                    $display("   Got      : HW_R=%d, HW_I=%d", hw_r_int, hw_i_int);
+                    $finish;
+                end
 
                 // 累加浮點數 MSE
                 err_r = hw_r_real - th_r_real;
@@ -167,7 +172,6 @@ module tb;
                 // $display("  %2d   | %5d | %10.4f | %8.4f || %5d | %10.4f | %8.4f", 
                 //       i, hw_r_int, th_r_real, sq_err_r, hw_i_int, th_i_real, sq_err_i);
             end
-            o_ready = 1'b0;
             
             // [新增] 算完 32 點後，結算並印出這個 Key 的 MSE
             key_mse_r = key_mse_r / 32.0;
@@ -193,6 +197,7 @@ module tb;
         $display(" Global Real Channel MSE : %f", total_mse_r);
         $display(" Global Imag Channel MSE : %f", total_mse_i);
         $display(" Global Total MSE (R+I)  : %f", total_mse_r + total_mse_i);
+        $display(" Total Exec cycle        : %3d", total_cycle);
         $display("=======================================================================\n");
         $finish;
     end

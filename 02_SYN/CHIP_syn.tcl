@@ -25,7 +25,7 @@ link
 #You may modified the clock constraints 
 #or add more constraints for your design
 ####################################################
-set cycle  14
+set cycle  10
 ####################################################
 
 #The following are design spec. for synthesis
@@ -42,7 +42,7 @@ set_clock_latency     0.5  [get_clocks CLK]
 set_input_delay  -max 1   -clock CLK [all_inputs]
 set_output_delay -min 0.5 -clock CLK [all_outputs]
 set_drive 1  [all_inputs]
-# set_load  10 [all_outputs]
+set_load  1  [all_outputs]
 
 set_fix_multiple_port_nets -all -buffer_constants
 
@@ -50,7 +50,7 @@ set_operating_conditions -min_library fsa0m_a_generic_core_ff1p98vm40c -min BCCO
 set_wire_load_model -name G200K -library fsa0m_a_generic_core_tt1p8v25c
 
 set_max_area 0
-set_max_fanout 6 [get_designs $DESIGN]
+set_max_fanout 8 [get_designs $DESIGN]
 set_boundary_optimization {"*"}
 check_design
 
@@ -59,10 +59,11 @@ check_design
 set_host_options -max_cores 8
 set_max_area 0
 
+# ungroup -all -flatten
+
+# compile -area_effort high
 compile -area_effort high -map_effort high
 compile -inc -area_effort high -map_effort high
-# optimize_netlist -area
-# compile_ultra -inc -retime
 
 #####################################################
 report_area         -hierarchy              > ./Report/${DESIGN}_syn.area

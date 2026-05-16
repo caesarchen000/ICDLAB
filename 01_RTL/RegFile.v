@@ -10,7 +10,7 @@
 *     REG_ADDRW  : reg data address width
 * Note:
 *     It contains 32 words with 33 bits
-*     There is 2 banks, each bank supports 1 read & 1 write
+*     There is 2 banks, supports 1 read & 2 write
 *     synchronous read (read will delay 1 cycle)
 * Review History:
 *     2026.05.03    Guan-Yi Tsen
@@ -22,8 +22,8 @@ module RegFileDual #(
     parameter REG_ADDRW  = 5
 )(
     input                       clk, rst_n,
-    input       [REG_ADDRW-1:0] read_addr_1, read_addr_2,
-    output reg [DATA_WIDTH-1:0] read_data_1, read_data_2,
+    input       [REG_ADDRW-1:0] read_addr_1, //read_addr_2,
+    output reg [DATA_WIDTH-1:0] read_data_1, //read_data_2,
 
     input                       wen1, wen2,
     input       [REG_ADDRW-1:0] write_addr_1, write_addr_2,
@@ -72,27 +72,27 @@ module RegFileDual #(
     // 3. Read Crossbar (Dispatching Addresses & Collecting Data)
     // ====================================================================
     wire [4:0] p_raddr_1 = get_physical_addr(read_addr_1);
-    wire [4:0] p_raddr_2 = get_physical_addr(read_addr_2);
+    // wire [4:0] p_raddr_2 = get_physical_addr(read_addr_2);
 
     always @(*) begin
         // Bank 0 的 Address 選擇
         if      (p_raddr_1[4] == 1'd0) bank_raddr[0] = p_raddr_1[3:0];
-        else                           bank_raddr[0] = p_raddr_2[3:0]; 
+        // else                           bank_raddr[0] = p_raddr_2[3:0]; 
 
         // Bank 1 的 Address 選擇
         if      (p_raddr_1[4] == 1'd1) bank_raddr[1] = p_raddr_1[3:0];
-        else                           bank_raddr[1] = p_raddr_2[3:0];
+        // else                           bank_raddr[1] = p_raddr_2[3:0];
 
     end
 
     // Pipeline Register for Read Data (Timing Optimization)
     always @(posedge clk or negedge rst_n) begin
         if (!rst_n) begin
-            read_data_1 <= 0; read_data_2 <= 0;
+            read_data_1 <= 0; //read_data_2 <= 0;
         end else begin
             // Fetch the output data based on the original Bank ID mapping
             read_data_1 <= bank_rdata[p_raddr_1[4]];
-            read_data_2 <= bank_rdata[p_raddr_2[4]];
+            // read_data_2 <= bank_rdata[p_raddr_2[4]];
         end
     end
 
