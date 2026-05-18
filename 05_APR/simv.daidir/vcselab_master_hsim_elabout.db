@@ -2,7 +2,7 @@ hsDirType                          	1
 fHsimDesignHasDebugNodes           	63
 fNSParam                           	1024
 fLargeSizeSdfTest                  	0
-fHsimDelayGateMbme                 	0
+fHsimDelayGateMbme                 	1
 fNoMergeDelays                     	0
 fHsimAllMtmPat                     	0
 fHsimCertRaptMode                  	0
@@ -811,7 +811,7 @@ fHsimPreInlineInstNum64            	0
 fHsimAutoInstNum64Limit            	-7
 fHsimAutoEnableInstNum64PC         	0
 fHsCgOptFixLeaf                    	1
-fHsimDumpVars                      	1
+fHsimDumpVars                      	0
 fFgpTbReactiveLite                 	1
 fHsCgOptCongLite                   	1
 fHsimGateDiag                      	0

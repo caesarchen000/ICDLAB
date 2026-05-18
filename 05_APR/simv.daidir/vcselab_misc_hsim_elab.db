@@ -1,12 +1,15 @@
 psSimBaseName                      	simv
 psLogFileName                      	NULL
-pDaiDir                            	/home/raid7_2/userb12/b12166/Lab4_Innovus/simv.daidir
+pDaiDir                            	/home/raid7_2/userb12/b12166/chip_v2/05_APR/simv.daidir
 destPath                           	csrc/
 fSharedMaster                      	0
 fHsimPCSharedLibSpecified          	0
-hsMainFileCount                    	0
-hsMainFileName                     	dummy
-hsAuxFileName                      	dummy
+hsMainFileCount                    	1
+hsMtmSpecArr_i                     	2
+hsMainFileSuffixArr_i              	csdf1.MAIN
+hsAuxFileSuffixArr_i               	csdf1.AUX
+hsOriginalSdfFileArr_i             	./CHIP.sdf
+fHsMultiSdfDbg                     	0
 partitionName                      	6	MASTER
 hsimInitRegValue                   	3
 fNSParam                           	1024
@@ -459,7 +462,7 @@ fHsimStitchNew                     	0
 fHsimCbkOpt                        	1
 fFrcRelCbk                         	1
 fPulserrWarn                       	1
-hsMtmSpec                          	0
+hsMtmSpec                          	2
 fprofile                           	0
 fPreserveDaidir                    	1
 fElabGraphLevelize                 	0
@@ -548,7 +551,7 @@ fHsimParallelElab                  	0
 fHsimParallelElabVcs1              	0
 fpicArchive                        	1
 fCsrcInTmpDir                      	0
-fHsimInterconFE                    	0
+fHsimInterconFE                    	1
 fHsimMxOpt                         	1
 fHsimModpathFE                     	1
 fHsimPathOnCCN                     	0
@@ -558,7 +561,7 @@ fHsimOptMPDelayLoad                	0
 fHsimTransMPDelay                  	1
 fLargeSizeSdfTest                  	0
 fAllMtm                            	0
-fHsimDelayGateMbme                 	0
+fHsimDelayGateMbme                 	1
 fHsimDelayGateMbmeOld              	0
 fHsimNdb                           	1
 fHsimNdbDebug                      	0
@@ -636,7 +639,7 @@ dGblPeR                            	1.000000
 fNewdaidirpath                     	0
 fHsimDelayMbmeCheck                	4
 fHsimMdbPartInputLimit             	1
-fHsimSdfData                       	0
+fHsimSdfData                       	1
 fHsimDesignHasSdfAnnotation        	1
 fHsimDesignUsesParallelVcs         	0
 fHsimCMEnabled                     	0
@@ -1377,7 +1380,7 @@ fHsimPreInlineInstNum64            	0
 fHsimAutoInstNum64Limit            	-7
 fHsimAutoEnableInstNum64PC         	0
 fHsCgOptFixLeaf                    	1
-fHsimDumpVars                      	1
+fHsimDumpVars                      	0
 fFgpTbReactiveLite                 	1
 fHsimCcnUnion                      	0
 fHsimOnlyElabMod                   	0

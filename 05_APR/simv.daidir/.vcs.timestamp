@@ -1,11 +1,9 @@
-4        
-0 ./HW3_alu.sdf
-0 ./HW3_alu.sdf
-0 ./HW3_alu.sdf
-0 ./HW3_alu.sdf
+1        
+0 ./CHIP.sdf_c
 36
 +define+SDF
 +itf+/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
++neg_tchk
 +v2k
 +vcsd1
 +vpi
@@ -22,7 +20,7 @@
 -Mobjects= /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
 -Mout=simv
 -Msaverestoreobj=/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcs_save_restore_new.o
--Msyslibs=/usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/pli.a -ldl
+-Msyslibs=/usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a -ldl
 -Mvcsaceobjs=
 -Mxcflags= -pipe -fPIC -I/usr/cad/synopsys/vcs/2022.06/include
 -Mxllcflags=
@@ -33,27 +31,30 @@
 -full64
 -gen_obj
 -picarchive
--v
 /usr/cad/synopsys/vcs/2022.06/linux64/bin/vcs1
-/usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/verdi.tab
-HW3_alu_tb.v
+/usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/verdi.tab
+tb.v
 CHIP.v
 Verilog/fsa0m_a_generic_core_21.lib.src
-Verilog/fsa0m_a_t33_generic_io_21.lib.src
-112
-usefulSkewCCOpt=1
+Verilog/fsa0m_a_io_pad_only.lib.src
+96
 synopsys_root=/usr/cad/synopsys/pathmill/cur
 mraarch=linux_64
 installdir=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice
-_enable_mmmc_by_default_flow=1
 XLOCALEDIR=/usr/cad/synopsys/astro/cur/etc/locale
 XKEYSYMDB=/usr/cad/synopsys/astro/cur/etc/XKeysymDB
-XDG_SESSION_ID=175636
+XDG_SESSION_ID=196474
 XDG_RUNTIME_DIR=/run/user/2792
-W3264_NHC_708c3b14=1
-W3264_ENV=/home/raid7_2/userb12/b12166/.kshrc
+XDG_DATA_DIRS=/home/raid7_2/userb12/b12166/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
+VSCODE_NONCE=c0f51e91-4f33-4978-9b0e-e2d16bae3a4c
+VSCODE_IPC_HOOK_CLI=/run/user/2792/vscode-ipc-c4e30fd3-1326-4385-8611-9b1bc4736670.sock
+VSCODE_GIT_IPC_HANDLE=/run/user/2792/vscode-git-589fecd4db.sock
+VSCODE_GIT_IPC_AUTH_TOKEN=e036011490e590a7da7b1498a172a5764497e43cd064a0e6727f8ba3b81b5e71
+VSCODE_GIT_ASKPASS_NODE=/tmp/cursor-b12166/.cursor-server/bin/linux-x64/fea2f546c979a0a4ad1deab23552a43568807590/node
+VSCODE_GIT_ASKPASS_MAIN=/tmp/cursor-b12166/.cursor-server/bin/linux-x64/fea2f546c979a0a4ad1deab23552a43568807590/extensions/git/dist/askpass-main.js
+VSCODE_GIT_ASKPASS_EXTRA_ARGS=
 VMR_MODE_FLAG=64
-VERDI_HOME=/usr/cad/synopsys/verdi/2022.06/
+VERDI_HOME=/usr/cad/synopsys/verdi/cur
 VERA_HOME=/usr/cad/synopsys/vera/cur/cur
 VENDOR=unknown
 VCS_PATHMAP_PRELOAD_DONE=1
@@ -68,15 +69,11 @@ VCS_ARCH=linux64
 UNAME=/bin/uname
 TOOL_HOME=/usr/cad/synopsys/vcs/2022.06/linux64
 TMIARCH=RH_64
-TK_TABLE_LIBRARY_FILE=tkTable.tcl
-TK_TABLE_LIBRARY=EMBEDDED_RUNTIME
-TK_LIBRARY=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/share/tcltools/icd8.6.4/lib/tk8.6
-TIX_LIBRARY=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/share/tcltools/icd8.6.4/lib/Tix8.4.3/library
-TCL_LIBRARY=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/share/tcltools/icd8.6.4/lib/tcl8.6
-TCLTK_ROOT=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/share/tcltools/icd8.6.4/lib
+TERM_PROGRAM_VERSION=2.6.21
+TERM_PROGRAM=vscode
 TARGET_ARCH=linux
 SYSTEMC_HOME=/usr/cad/synopsys/ccss/cur/linux/ccss/ccss_systemc
-SYN_MAN_DIR=/usr/cad/synopsys/synthesis/cur/doc/syn/man
+SYN_MAN_DIR=/usr/cad/synopsys/vcs/2022.06//doc/man
 SYNTHESIS=/usr/cad/synopsys/synthesis/cur
 SYNOPSYS_TMAX=/usr/cad/synopsys/tmax/cur
 SYNOPSYS_SIM=/usr/cad/synopsys/scirocco/cur
@@ -84,9 +81,8 @@ SYNOPSYS_SCIROCCO=/usr/cad/synopsys/scirocco/cur
 SYNOPSYS_NCX_ROOT=/usr/cad/synopsys/star-rcxt/2022.12
 SYNOPSYS_LC_ROOT=/usr/cad/synopsys/synthesis/cur
 SYNOPSYS_CCSS=/usr/cad/synopsys/ccss/cur/linux/ccss
-SSH_TTY=/dev/pts/41
-SSH_CONNECTION=101.10.163.46 51919 140.112.20.59 22
-SSH_CLIENT=101.10.163.46 51919 22
+SSH_CONNECTION=49.216.128.93 5892 140.112.20.59 22
+SSH_CLIENT=49.216.128.93 5892 22
 SPAPI_AHDL_INCLUDE=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice/include
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2022.06//linux64/clang
 SNPS_SIMIF=/usr/cad/synopsys/nanosim/cur
@@ -100,19 +96,15 @@ SELINUX_ROLE_REQUESTED=
 SELINUX_LEVEL_REQUESTED=
 SCRNAME=vcs
 SCRIPT_NAME=vcs
-REMOTEHOST=101.10.163.46
 QT_GRAPHICSSYSTEM_CHECKED=1
 QTLIB=/usr/lib64/qt-3.3/lib
 QTINC=/usr/lib64/qt-3.3/include
 QTDIR=/usr/lib64/qt-3.3
-PROD_NAME=innovus
-PRODUCT=
-PROCINFO_DISABLE_SERVER=1
 PRIMEPOWER=/usr/cad/synopsys/primepower/cur
+OVSX_REGISTRY_URL=https://open-vsx.org
 OVA_UUM=0
 OSTYPE=linux
-OA_HOME=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11//oa
-OA_BIT=64
+OA_HOME=/usr/cad/cadence6/IC18/cur/oa
 OAHOME=/usr/cad/cadence/oa
 MGC_TMPDIR=/tmp
 MGC_LOCATION_MAP=NO_MAP
@@ -121,52 +113,41 @@ LESSOPEN=||/usr/bin/lesspipe.sh %s
 LEDA_PATH=/usr/cad/synopsys/leda/cur
 LC_ALL=C
 LAKER_PDK_DIR=/home/raid7_1/userd/d01010/T18/T018MMSP001K1/laker
-INNOVUS=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/tools/innovus
 HSP_SIGMA_AMP=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice/linux64/python/AVA/ava
 HSP_HOME=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice
 HSP_GCC_VERSION=4.8.5
 HSP_GCC=/usr/bin/gcc -m64 
 HOSTTYPE=x86_64-linux
+HISTCONTROL=ignoredups
 GROUP=user
+GIT_ASKPASS=/tmp/cursor-b12166/.cursor-server/bin/linux-x64/fea2f546c979a0a4ad1deab23552a43568807590/extensions/git/dist/askpass.sh
 FORMALITY=/usr/cad/synopsys/formality/cur
-FE_TMPDIR=/home/raid7_2/userb12/b12166/tmp/innovus_temp_11971_cad16_b12166_3pqvT4
-FE_MASTER_USER_ORIGINAL_TMPDIR=/home/raid7_2/userb12/b12166/tmp
-ENCOUNTER=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/tools/innovus
-ENABLE_MMMC2_VIEW_DEFINITION_GENERATION_IN_TEMPUS_CUI=1
-DD_NO_TMPDIR_WARN=true
 DDD_SESSIONS=.
+COLORTERM=truecolor
 CMIARCH=RH_64
-CDS_SET_LOCALE=C
 CDS_Netlisting_Mode=Analog
 CDS_LOAD_ENV=CSF
 CDS_LIC_FILE=/usr/cad/cadence/IC/cur/share/license/license.dat
-CDS_AUTO_64BIT=ALL
-CDS_ARCH=lnx86
 CDPL_HOME=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice/cdpl
-CDNS_QTDIR=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/tools/Qt/64bit
 CCSS_SIM_DIR=/home/raid7_2/userb12/b12166/SIM
 CCSS_KEYS=26585@lstn:26585@lstc:26585@lshc:1717@lstn:1717@lstc:1717@lshc:5280@lstn:5280@lstc:5280@lshc:
 CCSS_GNUHOME=/usr/cad/synopsys/ccss/cur/linux/gnupackages
 CCSS_DEBUGGER=ddd --gdb --debugger /usr/cad/synopsys/ccss/cur/linux/ccss/bin/gdbw --directory /usr/cad/synopsys/ccss/cur/linux/ccss/ccss_systemc/include/sysc/kernel --session ccss_dbg_ddd
-BLT_LIBRARY=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/share/tcltools/icd8.6.4/lib/blt2.4
-A__z="*SHLVL
 ARCH=linux64
-AMBIT_MSG_PATH=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/etc/innovus/syntechEtc/msgc:/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/etc/innovus/cteng/msgc:/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/share/innovus/man
-AMBIT_BDF_PATH=/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/etc/innovus/syntechEtc/bdfc:/home/raid7_4/raid1_1/linux/innovus/INNOVUS17.11/etc/innovus/cteng/bdfc
 0
 0
 7
-1774518277 Verilog/fsa0m_a_generic_core_21.lib.src
-1774518275 Verilog/fsa0m_a_t33_generic_io_21.lib.src
-1774518277 Verilog/fsa0m_a_generic_core_21.lib.src
-1774803778 CHIP.v
-1774804569 HW3_alu_tb.v
-1653825972 /usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/verdi.tab
+1779090493 ./CHIP.sdf
+1779090634 Verilog/fsa0m_a_io_pad_only.lib.src
+1778917598 Verilog/fsa0m_a_generic_core_21.lib.src
+1779047965 CHIP.v
+1779091007 tb.v
+1653825972 /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/verdi.tab
 1654052745 /usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
 4
 1654054205 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so
 1654053585 /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so
 1654053489 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
-1774886448 simv.daidir
+1779091095 simv.daidir
 -1 partitionlib
