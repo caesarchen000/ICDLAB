@@ -1,0 +1,46 @@
+#cell                      cntr-x     cntr_y  bond_width side   row  iotype
+#south side
+opad_i_ready               220.580   -28.460       52   south  outer      O
+opad_o_valid               332.350   -28.460       52   south  outer      O
+opad_o_data_0              444.120   -28.460       52   south  outer      O
+opad_o_data_1              555.890   -28.460       52   south  outer      O
+ipad_CoreVSS2              667.660   -28.460       52   south  outer   CGnd
+ipad_CoreVDD2              779.420   -28.460       52   south  outer   CPwr
+opad_o_data_2              891.190   -28.460       52   south  outer      O
+opad_o_data_3             1002.960   -28.460       52   south  outer      O
+opad_o_data_4             1114.730   -28.460       52   south  outer      O
+opad_o_data_5             1226.500   -28.460       52   south  outer      O
+#east side
+opad_o_data_6             1475.540   262.090       52    east  outer      O
+opad_o_data_7             1475.540   415.360       52    east  outer      O
+opad_o_data_8             1475.540   568.630       52    east  outer      O
+opad_o_data_9             1475.540   721.900       52    east  outer      O
+ipad_IOVDD2               1475.540   875.170       52    east  outer  IOPwr
+ipad_IOVSS2               1475.540  1028.440       52    east  outer  IOGnd
+opad_o_data_10            1475.540  1181.710       52    east  outer      O
+#north side
+ipad_i_data_5             1243.690  1472.260       52   north  outer      I
+ipad_i_data_4             1149.110  1472.260       52   north  outer      I
+ipad_i_data_3             1054.540  1472.260       52   north  outer      I
+ipad_i_data_2              959.970  1472.260       52   north  outer      I
+ipad_i_data_1              865.400  1472.260       52   north  outer      I
+ipad_CoreVSS1              770.830  1472.260       52   north  outer   CGnd
+ipad_CoreVDD1              676.260  1472.260       52   north  outer   CPwr
+ipad_i_data_0              581.690  1472.260       52   north  outer      I
+ipad_o_ready               487.120  1472.260       52   north  outer      I
+ipad_i_valid               392.550  1472.260       52   north  outer      I
+ipad_rst_n                 297.970  1472.260       52   north  outer      I
+ipad_clk                   203.390  1472.260       52   north  outer      I
+#west side
+ipad_i_data_15             -28.460  1240.660       52    west  outer      I
+ipad_i_data_14             -28.460  1146.340       52    west  outer      I
+ipad_i_data_13             -28.460  1052.020       52    west  outer      I
+ipad_i_data_12             -28.460   957.700       52    west  outer      I
+ipad_i_data_11             -28.460   863.380       52    west  outer      I
+ipad_IOVSS1                -28.460   769.060       52    west  outer  IOGnd
+ipad_IOVDD1                -28.460   674.740       52    west  outer  IOPwr
+ipad_i_data_10             -28.460   580.420       52    west  outer      I
+ipad_i_data_9              -28.460   486.100       52    west  outer      I
+ipad_i_data_8              -28.460   391.780       52    west  outer      I
+ipad_i_data_7              -28.460   297.460       52    west  outer      I
+ipad_i_data_6              -28.460   203.140       52    west  outer      I
