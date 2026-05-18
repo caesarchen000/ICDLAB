@@ -3,31 +3,30 @@
 Report : area
 Design : CHIP
 Version: U-2022.12
-Date   : Sat May 16 13:46:28 2026
+Date   : Mon May 18 21:48:40 2026
 ****************************************
 
 Information: Updating design information... (UID-85)
-Warning: Design 'CHIP' contains 1 high-fanout nets. A fanout number of 1000 will be used for delay calculations involving these nets. (TIM-134)
 Library(s) Used:
 
     fsa0m_a_generic_core_tt1p8v25c (File: /home/raid7_2/userb12/b12006/ICDlab/chip_new_v1/02_SYN/fsa0m_a_generic_core_tt1p8v25c.db)
 
-Number of ports:                         6006
-Number of nets:                         28530
-Number of cells:                        22815
-Number of combinational cells:          20029
-Number of sequential cells:              2702
+Number of ports:                         6393
+Number of nets:                         25856
+Number of cells:                        19820
+Number of combinational cells:          16776
+Number of sequential cells:              2831
 Number of macros/black boxes:               0
-Number of buf/inv:                       4519
-Number of references:                      67
+Number of buf/inv:                       3853
+Number of references:                      77
 
-Combinational area:             356161.579854
-Buf/Inv area:                    36969.508434
-Noncombinational area:          147959.282463
+Combinational area:             304608.629235
+Buf/Inv area:                    30010.578910
+Noncombinational area:          152696.479382
 Macro/Black Box area:                0.000000
 Net Interconnect area:      undefined  (Wire load has zero net area)
 
-Total cell area:                504120.862317
+Total cell area:                457305.108616
 Total area:                 undefined
 
 Hierarchical area distribution
@@ -37,117 +36,310 @@ Hierarchical area distribution
                                   --------------------  -------------------------------- 
 Hierarchical cell                 Absolute     Percent  Combi-       Noncombi-    Black-
                                   Total        Total    national     national     boxes   Design
---------------------------------  -----------  -------  -----------  -----------  ------  ----------------------------------------
-CHIP                              504120.8623    100.0   13177.2817   12596.0690  0.0000  CHIP
-cordic0                            23370.3792      4.6   11624.2559    5487.1488  0.0000  cordic_rotation_1
+--------------------------------  -----------  -------  -----------  -----------  ------  ------------------------------------------------
+CHIP                              457305.1086    100.0    9002.5488   12539.8226  0.0000  CHIP
+clk_gate_c_buf_i_reg[0]               49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_10
+clk_gate_c_buf_i_reg[1]               49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_9
+clk_gate_c_buf_i_reg[3]               49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_8
+clk_gate_c_buf_r_reg[0]               49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_7
+clk_gate_c_buf_r_reg[2]               49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_6
+clk_gate_counter_r_reg                49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_1
+clk_gate_delayed_mac_group_reg        49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_5
+clk_gate_delayed_out2_reg             49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_4
+clk_gate_g_cnt_d2_reg                 49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_0
+clk_gate_key_r_reg                    49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_2
+clk_gate_o_counter_r_reg              49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_CHIP_3
+cordic0                            22082.9616      4.8   10114.9776    5462.1505  0.0000  cordic_rotation_1
 cordic0/add_100                     1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_1_DW01_add_4_DW01_add_10
 cordic0/add_103                     1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_1_DW01_add_3_DW01_add_9
-cordic0/add_105                      881.1936      0.2     881.1936       0.0000  0.0000  cordic_rotation_1_DW01_add_2_DW01_add_8
+cordic0/add_105                      878.0688      0.2     878.0688       0.0000  0.0000  cordic_rotation_1_DW01_add_2_DW01_add_8
+cordic0/clk_gate_step_cnt_reg         49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_1
+cordic0/clk_gate_x_out_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_2
+cordic0/clk_gate_y_out_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_3
+cordic0/clk_gate_y_reg_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_0
+cordic0/clk_gate_z_reg_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_4
 cordic0/sub_101                      971.8128      0.2     971.8128       0.0000  0.0000  cordic_rotation_1_DW01_sub_1_DW01_sub_35
-cordic0/sub_104                     1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_1_DW01_sub_0_DW01_sub_34
-cordic0/sub_99                      1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_1_DW01_sub_2_DW01_sub_36
-cordic1                            23439.1248      4.6   11693.0015    5487.1488  0.0000  cordic_rotation_0
+cordic0/sub_104                     1156.1760      0.3    1156.1760       0.0000  0.0000  cordic_rotation_1_DW01_sub_0_DW01_sub_34
+cordic0/sub_99                      1156.1760      0.3    1156.1760       0.0000  0.0000  cordic_rotation_1_DW01_sub_2_DW01_sub_36
+cordic1                            22126.7088      4.8   10152.4752    5468.4000  0.0000  cordic_rotation_0
 cordic1/add_100                     1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_0_DW01_add_4
 cordic1/add_103                     1046.8080      0.2    1046.8080       0.0000  0.0000  cordic_rotation_0_DW01_add_3
-cordic1/add_105                      881.1936      0.2     881.1936       0.0000  0.0000  cordic_rotation_0_DW01_add_2
+cordic1/add_105                      878.0688      0.2     878.0688       0.0000  0.0000  cordic_rotation_0_DW01_add_2
+cordic1/clk_gate_step_cnt_reg         49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_1
+cordic1/clk_gate_x_out_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_2
+cordic1/clk_gate_y_out_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_3
+cordic1/clk_gate_y_reg_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_0
+cordic1/clk_gate_z_reg_reg            49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_4
 cordic1/sub_101                      971.8128      0.2     971.8128       0.0000  0.0000  cordic_rotation_0_DW01_sub_1_DW01_sub_29
-cordic1/sub_104                     1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_0_DW01_sub_0_DW01_sub_28
-cordic1/sub_99                      1156.1760      0.2    1156.1760       0.0000  0.0000  cordic_rotation_0_DW01_sub_2_DW01_sub_30
-mac                               254008.7427     50.4     784.3248       0.0000  0.0000  DFrFT_MAC
-mac/pe0_i                          23417.2512      4.6   10118.1024    2612.3328  0.0000  PE_Shift_Add_6
+cordic1/sub_104                     1156.1760      0.3    1156.1760       0.0000  0.0000  cordic_rotation_0_DW01_sub_0_DW01_sub_28
+cordic1/sub_99                      1156.1760      0.3    1156.1760       0.0000  0.0000  cordic_rotation_0_DW01_sub_2_DW01_sub_30
+mac                               247399.7910     54.1     831.1968       0.0000  0.0000  DFrFT_MAC
+mac/pe0_i                          22636.0513      4.9    9755.6256    2612.3328  0.0000  PE_Shift_Add_6
 mac/pe0_i/add_0_root_add_0_root_add_28_3
-                                    2437.3440      0.5    2437.3440       0.0000  0.0000  PE_Shift_Add_6_DW01_add_0_DW01_add_26
+                                    2256.1056      0.5    2256.1056       0.0000  0.0000  PE_Shift_Add_6_DW01_add_0_DW01_add_35
 mac/pe0_i/add_1_root_add_0_root_add_28_3
-                                    2365.4736      0.5    2365.4736       0.0000  0.0000  PE_Shift_Add_6_DW01_add_2_DW01_add_28
+                                    2168.6112      0.5    2168.6112       0.0000  0.0000  PE_Shift_Add_6_DW01_add_2_DW01_add_37
 mac/pe0_i/add_2_root_add_0_root_add_28_3
-                                    2252.9808      0.4    2252.9808       0.0000  0.0000  PE_Shift_Add_6_DW01_add_1_DW01_add_27
-mac/pe0_i/sub_28                    1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_2_DW01_sub_20
-mac/pe0_i/sub_28_2                  1199.9232      0.2    1199.9232       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_1_DW01_sub_19
-mac/pe0_i/sub_28_3                  1212.4224      0.2    1212.4224       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_0_DW01_sub_18
-mac/pe0_r                          23279.7601      4.6   10208.7216    2612.3328  0.0000  PE_Shift_Add_7
+                                    2112.3649      0.5    2112.3649       0.0000  0.0000  PE_Shift_Add_6_DW01_add_1_DW01_add_36
+mac/pe0_i/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_6
+mac/pe0_i/sub_28                    1237.4208      0.3    1237.4208       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_2_DW01_sub_20
+mac/pe0_i/sub_28_2                  1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_1_DW01_sub_19
+mac/pe0_i/sub_28_3                  1218.6720      0.3    1218.6720       0.0000  0.0000  PE_Shift_Add_6_DW01_sub_0_DW01_sub_18
+mac/pe0_r                          22704.7969      5.0    9768.1248    2615.4576  0.0000  PE_Shift_Add_7
 mac/pe0_r/add_0_root_add_0_root_add_28_3
-                                    2287.3536      0.5    2287.3536       0.0000  0.0000  PE_Shift_Add_7_DW01_add_0_DW01_add_23
+                                    2199.8592      0.5    2199.8592       0.0000  0.0000  PE_Shift_Add_7_DW01_add_0_DW01_add_23
 mac/pe0_r/add_1_root_add_0_root_add_28_3
-                                    2296.7280      0.5    2296.7280       0.0000  0.0000  PE_Shift_Add_7_DW01_add_2_DW01_add_25
+                                    2199.8593      0.5    2199.8593       0.0000  0.0000  PE_Shift_Add_7_DW01_add_2_DW01_add_25
 mac/pe0_r/add_2_root_add_0_root_add_28_3
-                                    2212.3584      0.4    2212.3584       0.0000  0.0000  PE_Shift_Add_7_DW01_add_1_DW01_add_24
-mac/pe0_r/sub_28                    1212.4224      0.2    1212.4224       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_2_DW01_sub_23
-mac/pe0_r/sub_28_2                  1231.1712      0.2    1231.1712       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_1_DW01_sub_22
-mac/pe0_r/sub_28_3                  1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_0_DW01_sub_21
-mac/pe1_i                          23229.7632      4.6   10093.1040    2621.7072  0.0000  PE_Shift_Add_4
+                                    2181.1104      0.5    2181.1104       0.0000  0.0000  PE_Shift_Add_7_DW01_add_1_DW01_add_24
+mac/pe0_r/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_7
+mac/pe0_r/sub_28                    1228.0464      0.3    1228.0464       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_2_DW01_sub_23
+mac/pe0_r/sub_28_2                  1249.9200      0.3    1249.9200       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_1_DW01_sub_22
+mac/pe0_r/sub_28_3                  1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_7_DW01_sub_0_DW01_sub_21
+mac/pe1_i                          22595.4289      4.9    9655.6320    2612.3328  0.0000  PE_Shift_Add_4
 mac/pe1_i/add_0_root_add_0_root_add_28_3
-                                    2387.3472      0.5    2387.3472       0.0000  0.0000  PE_Shift_Add_4_DW01_add_0_DW01_add_29
+                                    2268.6048      0.5    2268.6048       0.0000  0.0000  PE_Shift_Add_4_DW01_add_0_DW01_add_32
 mac/pe1_i/add_1_root_add_0_root_add_28_3
-                                    2231.1072      0.4    2231.1072       0.0000  0.0000  PE_Shift_Add_4_DW01_add_2_DW01_add_31
+                                    2193.6096      0.5    2193.6096       0.0000  0.0000  PE_Shift_Add_4_DW01_add_2_DW01_add_34
 mac/pe1_i/add_2_root_add_0_root_add_28_3
-                                    2256.1056      0.4    2256.1056       0.0000  0.0000  PE_Shift_Add_4_DW01_add_1_DW01_add_30
-mac/pe1_i/sub_28                    1212.4224      0.2    1212.4224       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_2_DW01_sub_14
-mac/pe1_i/sub_28_2                  1212.4224      0.2    1212.4224       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_1_DW01_sub_13
-mac/pe1_i/sub_28_3                  1215.5472      0.2    1215.5472       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_0_DW01_sub_12
-mac/pe1_r                          23232.8881      4.6   10189.9728    2612.3328  0.0000  PE_Shift_Add_5
+                                    2181.1105      0.5    2181.1105       0.0000  0.0000  PE_Shift_Add_4_DW01_add_1_DW01_add_33
+mac/pe1_i/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_4
+mac/pe1_i/sub_28                    1234.2960      0.3    1234.2960       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_2_DW01_sub_14
+mac/pe1_i/sub_28_2                  1196.7984      0.3    1196.7984       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_1_DW01_sub_13
+mac/pe1_i/sub_28_3                  1203.0480      0.3    1203.0480       0.0000  0.0000  PE_Shift_Add_4_DW01_sub_0_DW01_sub_12
+mac/pe1_r                          22673.5489      5.0    9702.5040    2612.3328  0.0000  PE_Shift_Add_5
 mac/pe1_r/add_0_root_add_0_root_add_28_3
-                                    2274.8544      0.5    2274.8544       0.0000  0.0000  PE_Shift_Add_5_DW01_add_0_DW01_add_14
+                                    2256.1056      0.5    2256.1056       0.0000  0.0000  PE_Shift_Add_5_DW01_add_0_DW01_add_20
 mac/pe1_r/add_1_root_add_0_root_add_28_3
-                                    2231.1072      0.4    2231.1072       0.0000  0.0000  PE_Shift_Add_5_DW01_add_2_DW01_add_16
+                                    2212.3584      0.5    2212.3584       0.0000  0.0000  PE_Shift_Add_5_DW01_add_2_DW01_add_22
 mac/pe1_r/add_2_root_add_0_root_add_28_3
-                                    2249.8560      0.4    2249.8560       0.0000  0.0000  PE_Shift_Add_5_DW01_add_1_DW01_add_15
-mac/pe1_r/sub_28                    1203.0480      0.2    1203.0480       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_2_DW01_sub_17
-mac/pe1_r/sub_28_2                  1221.7968      0.2    1221.7968       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_1_DW01_sub_16
-mac/pe1_r/sub_28_3                  1249.9200      0.2    1249.9200       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_0_DW01_sub_15
-mac/pe2_i                          23298.5089      4.6   10080.6048    2612.3328  0.0000  PE_Shift_Add_2
+                                    2181.1104      0.5    2181.1104       0.0000  0.0000  PE_Shift_Add_5_DW01_add_1_DW01_add_21
+mac/pe1_r/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_5
+mac/pe1_r/sub_28                    1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_2_DW01_sub_17
+mac/pe1_r/sub_28_2                  1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_1_DW01_sub_16
+mac/pe1_r/sub_28_3                  1212.4224      0.3    1212.4224       0.0000  0.0000  PE_Shift_Add_5_DW01_sub_0_DW01_sub_15
+mac/pe2_i                          22607.9281      4.9    9633.7584    2612.3328  0.0000  PE_Shift_Add_2
 mac/pe2_i/add_0_root_add_0_root_add_28_3
-                                    2402.9712      0.5    2402.9712       0.0000  0.0000  PE_Shift_Add_2_DW01_add_0_DW01_add_32
+                                    2249.8560      0.5    2249.8560       0.0000  0.0000  PE_Shift_Add_2_DW01_add_0_DW01_add_29
 mac/pe2_i/add_1_root_add_0_root_add_28_3
-                                    2306.1024      0.5    2306.1024       0.0000  0.0000  PE_Shift_Add_2_DW01_add_2_DW01_add_34
+                                    2237.3568      0.5    2237.3568       0.0000  0.0000  PE_Shift_Add_2_DW01_add_2_DW01_add_31
 mac/pe2_i/add_2_root_add_0_root_add_28_3
-                                    2259.2304      0.4    2259.2304       0.0000  0.0000  PE_Shift_Add_2_DW01_add_1_DW01_add_33
-mac/pe2_i/sub_28                    1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_2_DW01_sub_8
-mac/pe2_i/sub_28_2                  1206.1728      0.2    1206.1728       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_1_DW01_sub_7
-mac/pe2_i/sub_28_3                  1212.4224      0.2    1212.4224       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_0_DW01_sub_6
-mac/pe2_r                          23367.2544      4.6   10121.2272    2612.3328  0.0000  PE_Shift_Add_3
+                                    2149.8625      0.5    2149.8625       0.0000  0.0000  PE_Shift_Add_2_DW01_add_1_DW01_add_30
+mac/pe2_i/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_2
+mac/pe2_i/sub_28                    1215.5472      0.3    1215.5472       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_2_DW01_sub_8
+mac/pe2_i/sub_28_2                  1237.4208      0.3    1237.4208       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_1_DW01_sub_7
+mac/pe2_i/sub_28_3                  1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_2_DW01_sub_0_DW01_sub_6
+mac/pe2_r                          22704.7969      5.0    9671.2560    2612.3328  0.0000  PE_Shift_Add_3
 mac/pe2_r/add_0_root_add_0_root_add_28_3
-                                    2381.0976      0.5    2381.0976       0.0000  0.0000  PE_Shift_Add_3_DW01_add_0_DW01_add_17
+                                    2231.1072      0.5    2231.1072       0.0000  0.0000  PE_Shift_Add_3_DW01_add_0_DW01_add_17
 mac/pe2_r/add_1_root_add_0_root_add_28_3
-                                    2284.2288      0.5    2284.2288       0.0000  0.0000  PE_Shift_Add_3_DW01_add_2_DW01_add_19
+                                    2249.8560      0.5    2249.8560       0.0000  0.0000  PE_Shift_Add_3_DW01_add_2_DW01_add_19
 mac/pe2_r/add_2_root_add_0_root_add_28_3
-                                    2293.6032      0.5    2293.6032       0.0000  0.0000  PE_Shift_Add_3_DW01_add_1_DW01_add_18
-mac/pe2_r/sub_28                    1228.0464      0.2    1228.0464       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_2_DW01_sub_11
-mac/pe2_r/sub_28_2                  1228.0464      0.2    1228.0464       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_1_DW01_sub_10
-mac/pe2_r/sub_28_3                  1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_0_DW01_sub_9
-mac/pe3_i                          23220.3888      4.6   10014.9840    2612.3328  0.0000  PE_Shift_Add_0
+                                    2206.1088      0.5    2206.1088       0.0000  0.0000  PE_Shift_Add_3_DW01_add_1_DW01_add_18
+mac/pe2_r/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_3
+mac/pe2_r/sub_28                    1206.1728      0.3    1206.1728       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_2_DW01_sub_11
+mac/pe2_r/sub_28_2                  1253.0448      0.3    1253.0448       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_1_DW01_sub_10
+mac/pe2_r/sub_28_3                  1224.9216      0.3    1224.9216       0.0000  0.0000  PE_Shift_Add_3_DW01_sub_0_DW01_sub_9
+mac/pe3_i                          22648.5505      5.0    9743.1264    2612.3328  0.0000  PE_Shift_Add_0
 mac/pe3_i/add_0_root_add_0_root_add_28_3
-                                    2406.0960      0.5    2406.0960       0.0000  0.0000  PE_Shift_Add_0_DW01_add_0_DW01_add_35
+                                    2199.8592      0.5    2199.8592       0.0000  0.0000  PE_Shift_Add_0_DW01_add_0_DW01_add_26
 mac/pe3_i/add_1_root_add_0_root_add_28_3
-                                    2296.7280      0.5    2296.7280       0.0000  0.0000  PE_Shift_Add_0_DW01_add_2_DW01_add_37
+                                    2231.1073      0.5    2231.1073       0.0000  0.0000  PE_Shift_Add_0_DW01_add_2_DW01_add_28
 mac/pe3_i/add_2_root_add_0_root_add_28_3
-                                    2237.3568      0.4    2237.3568       0.0000  0.0000  PE_Shift_Add_0_DW01_add_1_DW01_add_36
-mac/pe3_i/sub_28                    1215.5472      0.2    1215.5472       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_2
-mac/pe3_i/sub_28_2                  1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_1
-mac/pe3_i/sub_28_3                  1218.6720      0.2    1218.6720       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_0
-mac/pe3_r                          23329.7569      4.6   10274.3424    2612.3328  0.0000  PE_Shift_Add_1
+                                    2143.6129      0.5    2143.6129       0.0000  0.0000  PE_Shift_Add_0_DW01_add_1_DW01_add_27
+mac/pe3_i/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_0
+mac/pe3_i/sub_28                    1228.0464      0.3    1228.0464       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_2
+mac/pe3_i/sub_28_2                  1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_1
+mac/pe3_i/sub_28_3                  1218.6720      0.3    1218.6720       0.0000  0.0000  PE_Shift_Add_0_DW01_sub_0
+mac/pe3_r                          22707.9217      5.0    9730.6272    2615.4576  0.0000  PE_Shift_Add_1
 mac/pe3_r/add_0_root_add_0_root_add_28_3
-                                    2337.3504      0.5    2337.3504       0.0000  0.0000  PE_Shift_Add_1_DW01_add_0_DW01_add_20
+                                    2231.1072      0.5    2231.1072       0.0000  0.0000  PE_Shift_Add_1_DW01_add_0_DW01_add_14
 mac/pe3_r/add_1_root_add_0_root_add_28_3
-                                    2212.3584      0.4    2212.3584       0.0000  0.0000  PE_Shift_Add_1_DW01_add_2_DW01_add_22
+                                    2218.6081      0.5    2218.6081       0.0000  0.0000  PE_Shift_Add_1_DW01_add_2_DW01_add_16
 mac/pe3_r/add_2_root_add_0_root_add_28_3
-                                    2224.8576      0.4    2224.8576       0.0000  0.0000  PE_Shift_Add_1_DW01_add_1_DW01_add_21
-mac/pe3_r/sub_28                    1203.0480      0.2    1203.0480       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_2_DW01_sub_5
-mac/pe3_r/sub_28_2                  1240.5456      0.2    1240.5456       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_1_DW01_sub_4
-mac/pe3_r/sub_28_3                  1224.9216      0.2    1224.9216       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_0_DW01_sub_3
-mac/rom0                           16958.2896      3.4     962.4384    1090.5552  0.0000  ROM_Wrapper_Even_1
-mac/rom0/rom_inst                  14905.2960      3.0   14905.2960       0.0000  0.0000  CSD_ROM_Table_even_1
-mac/rom1                           16464.5712      3.3     931.1904    1087.4304  0.0000  ROM_Wrapper_Odd_1
-mac/rom1/rom_inst                  14445.9504      2.9   14445.9504       0.0000  0.0000  CSD_ROM_Table_odd_1
-mac/rom2                           16970.7888      3.4     959.3136    1093.6800  0.0000  ROM_Wrapper_Even_0
-mac/rom2/rom_inst                  14917.7952      3.0   14917.7952       0.0000  0.0000  CSD_ROM_Table_even_0
-mac/rom3                           16455.1968      3.3     934.3152    1090.5552  0.0000  ROM_Wrapper_Odd_0
-mac/rom3/rom_inst                  14430.3264      2.9   14430.3264       0.0000  0.0000  CSD_ROM_Table_odd_0
-mult_134                            1099.9296      0.2    1099.9296       0.0000  0.0000  CHIP_DW02_mult_0
-mult_135                            1759.2624      0.3    1759.2624       0.0000  0.0000  CHIP_DW02_mult_1
-r118                                 318.7296      0.1     318.7296       0.0000  0.0000  CHIP_DW01_inc_1_DW01_inc_2
-rf_data                           105621.3663     21.0   45506.4627   60114.9036  0.0000  RegFileDual_DATA_WIDTH34
-rf_io                              68729.9770     13.6   29726.2226   39003.7544  0.0000  RegFileDual_DATA_WIDTH22
---------------------------------  -----------  -------  -----------  -----------  ------  ----------------------------------------
-Total                                                   356161.5799  147959.2825  0.0000
+                                    2149.8625      0.5    2149.8625       0.0000  0.0000  PE_Shift_Add_1_DW01_add_1_DW01_add_15
+mac/pe3_r/clk_gate_y_out_reg          49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_1
+mac/pe3_r/sub_28                    1240.5456      0.3    1240.5456       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_2_DW01_sub_5
+mac/pe3_r/sub_28_2                  1221.7968      0.3    1221.7968       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_1_DW01_sub_4
+mac/pe3_r/sub_28_3                  1249.9200      0.3    1249.9200       0.0000  0.0000  PE_Shift_Add_1_DW01_sub_0_DW01_sub_3
+mac/rom0                           16552.0656      3.6     506.2176    1093.6800  0.0000  ROM_Wrapper_Even_1
+mac/rom0/clk_gate_reg_shift1_reg      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Even_1
+mac/rom0/rom_inst                  14902.1712      3.3   14902.1712       0.0000  0.0000  CSD_ROM_Table_even_1
+mac/rom1                           16077.0960      3.5     493.7184    1090.5552  0.0000  ROM_Wrapper_Odd_1
+mac/rom1/clk_gate_reg_shift1_reg      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Odd_1
+mac/rom1/rom_inst                  14442.8256      3.2   14442.8256       0.0000  0.0000  CSD_ROM_Table_odd_1
+mac/rom2                           16555.1904      3.6     490.5936    1087.4304  0.0000  ROM_Wrapper_Even_0
+mac/rom2/clk_gate_reg_shift1_reg      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Even_0
+mac/rom2/rom_inst                  14927.1696      3.3   14927.1696       0.0000  0.0000  CSD_ROM_Table_even_0
+mac/rom3                           16105.2192      3.5     490.5936    1093.6800  0.0000  ROM_Wrapper_Odd_0
+mac/rom3/clk_gate_reg_shift1_reg      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Odd_0
+mac/rom3/rom_inst                  14470.9488      3.2   14470.9488       0.0000  0.0000  CSD_ROM_Table_odd_0
+mult_134                            1240.5456      0.3    1240.5456       0.0000  0.0000  CHIP_DW02_mult_0
+mult_135                            1759.2624      0.4    1759.2624       0.0000  0.0000  CHIP_DW02_mult_1
+r118                                 318.7296      0.1     318.7296       0.0000  0.0000  CHIP_DW01_inc_1_DW01_inc_3
+rf_data                            85188.2989     18.6   21873.6000   60114.9036  0.0000  RegFileDual_DATA_WIDTH34
+rf_data/clk_gate_bank_mem_0_reg[0]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_32
+rf_data/clk_gate_bank_mem_0_reg[0]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_31
+rf_data/clk_gate_bank_mem_0_reg[10]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_12
+rf_data/clk_gate_bank_mem_0_reg[10]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_11
+rf_data/clk_gate_bank_mem_0_reg[11]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_10
+rf_data/clk_gate_bank_mem_0_reg[11]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_9
+rf_data/clk_gate_bank_mem_0_reg[12]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_8
+rf_data/clk_gate_bank_mem_0_reg[12]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_7
+rf_data/clk_gate_bank_mem_0_reg[13]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_6
+rf_data/clk_gate_bank_mem_0_reg[13]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_5
+rf_data/clk_gate_bank_mem_0_reg[14]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_4
+rf_data/clk_gate_bank_mem_0_reg[14]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_3
+rf_data/clk_gate_bank_mem_0_reg[15]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_2
+rf_data/clk_gate_bank_mem_0_reg[15]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_1
+rf_data/clk_gate_bank_mem_0_reg[1]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_30
+rf_data/clk_gate_bank_mem_0_reg[1]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_29
+rf_data/clk_gate_bank_mem_0_reg[2]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_28
+rf_data/clk_gate_bank_mem_0_reg[2]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_27
+rf_data/clk_gate_bank_mem_0_reg[3]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_26
+rf_data/clk_gate_bank_mem_0_reg[3]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_25
+rf_data/clk_gate_bank_mem_0_reg[4]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_24
+rf_data/clk_gate_bank_mem_0_reg[4]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_23
+rf_data/clk_gate_bank_mem_0_reg[5]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_22
+rf_data/clk_gate_bank_mem_0_reg[5]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_21
+rf_data/clk_gate_bank_mem_0_reg[6]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_20
+rf_data/clk_gate_bank_mem_0_reg[6]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_19
+rf_data/clk_gate_bank_mem_0_reg[7]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_18
+rf_data/clk_gate_bank_mem_0_reg[7]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_17
+rf_data/clk_gate_bank_mem_0_reg[8]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_16
+rf_data/clk_gate_bank_mem_0_reg[8]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_15
+rf_data/clk_gate_bank_mem_0_reg[9]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_14
+rf_data/clk_gate_bank_mem_0_reg[9]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_13
+rf_data/clk_gate_bank_mem_1_reg[0]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_0
+rf_data/clk_gate_bank_mem_1_reg[0]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_63
+rf_data/clk_gate_bank_mem_1_reg[10]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_44
+rf_data/clk_gate_bank_mem_1_reg[10]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_43
+rf_data/clk_gate_bank_mem_1_reg[11]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_42
+rf_data/clk_gate_bank_mem_1_reg[11]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_41
+rf_data/clk_gate_bank_mem_1_reg[12]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_40
+rf_data/clk_gate_bank_mem_1_reg[12]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_39
+rf_data/clk_gate_bank_mem_1_reg[13]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_38
+rf_data/clk_gate_bank_mem_1_reg[13]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_37
+rf_data/clk_gate_bank_mem_1_reg[14]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_36
+rf_data/clk_gate_bank_mem_1_reg[14]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_35
+rf_data/clk_gate_bank_mem_1_reg[15]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_34
+rf_data/clk_gate_bank_mem_1_reg[15]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_33
+rf_data/clk_gate_bank_mem_1_reg[1]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_62
+rf_data/clk_gate_bank_mem_1_reg[1]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_61
+rf_data/clk_gate_bank_mem_1_reg[2]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_60
+rf_data/clk_gate_bank_mem_1_reg[2]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_59
+rf_data/clk_gate_bank_mem_1_reg[3]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_58
+rf_data/clk_gate_bank_mem_1_reg[3]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_57
+rf_data/clk_gate_bank_mem_1_reg[4]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_56
+rf_data/clk_gate_bank_mem_1_reg[4]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_55
+rf_data/clk_gate_bank_mem_1_reg[5]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_54
+rf_data/clk_gate_bank_mem_1_reg[5]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_53
+rf_data/clk_gate_bank_mem_1_reg[6]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_52
+rf_data/clk_gate_bank_mem_1_reg[6]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_51
+rf_data/clk_gate_bank_mem_1_reg[7]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_50
+rf_data/clk_gate_bank_mem_1_reg[7]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_49
+rf_data/clk_gate_bank_mem_1_reg[8]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_48
+rf_data/clk_gate_bank_mem_1_reg[8]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_47
+rf_data/clk_gate_bank_mem_1_reg[9]
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_46
+rf_data/clk_gate_bank_mem_1_reg[9]_0
+                                      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_45
+rf_io                              55096.4744     12.0   14492.8224   39003.7544  0.0000  RegFileDual_DATA_WIDTH22
+rf_io/clk_gate_bank_mem_0_reg[0]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_16
+rf_io/clk_gate_bank_mem_0_reg[10]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_6
+rf_io/clk_gate_bank_mem_0_reg[11]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_5
+rf_io/clk_gate_bank_mem_0_reg[12]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_4
+rf_io/clk_gate_bank_mem_0_reg[13]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_3
+rf_io/clk_gate_bank_mem_0_reg[14]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_2
+rf_io/clk_gate_bank_mem_0_reg[15]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_1
+rf_io/clk_gate_bank_mem_0_reg[1]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_15
+rf_io/clk_gate_bank_mem_0_reg[2]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_14
+rf_io/clk_gate_bank_mem_0_reg[3]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_13
+rf_io/clk_gate_bank_mem_0_reg[4]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_12
+rf_io/clk_gate_bank_mem_0_reg[5]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_11
+rf_io/clk_gate_bank_mem_0_reg[6]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_10
+rf_io/clk_gate_bank_mem_0_reg[7]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_9
+rf_io/clk_gate_bank_mem_0_reg[8]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_8
+rf_io/clk_gate_bank_mem_0_reg[9]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_7
+rf_io/clk_gate_bank_mem_1_reg[0]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_0
+rf_io/clk_gate_bank_mem_1_reg[10]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_22
+rf_io/clk_gate_bank_mem_1_reg[11]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_21
+rf_io/clk_gate_bank_mem_1_reg[12]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_20
+rf_io/clk_gate_bank_mem_1_reg[13]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_19
+rf_io/clk_gate_bank_mem_1_reg[14]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_18
+rf_io/clk_gate_bank_mem_1_reg[15]     49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_17
+rf_io/clk_gate_bank_mem_1_reg[1]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_31
+rf_io/clk_gate_bank_mem_1_reg[2]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_30
+rf_io/clk_gate_bank_mem_1_reg[3]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_29
+rf_io/clk_gate_bank_mem_1_reg[4]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_28
+rf_io/clk_gate_bank_mem_1_reg[5]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_27
+rf_io/clk_gate_bank_mem_1_reg[6]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_26
+rf_io/clk_gate_bank_mem_1_reg[7]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_25
+rf_io/clk_gate_bank_mem_1_reg[8]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_24
+rf_io/clk_gate_bank_mem_1_reg[9]      49.9968      0.0      12.4992      37.4976  0.0000  SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_23
+--------------------------------  -----------  -------  -----------  -----------  ------  ------------------------------------------------
+Total                                                   304608.6292  152696.4794  0.0000
 
 1

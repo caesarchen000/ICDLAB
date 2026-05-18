@@ -59,6 +59,9 @@ check_design
 set_host_options -max_cores 8
 set_max_area 0
 
+set_clock_gating_style -minimum_bitwidth 4 -max_fanout 32
+insert_clock_gating
+
 # ungroup -all -flatten
 
 # compile -area_effort high
@@ -69,6 +72,7 @@ compile -inc -area_effort high -map_effort high
 report_area         -hierarchy              > ./Report/${DESIGN}_syn.area
 report_timing       -delay min  -max_path 5 > ./Report/${DESIGN}_syn.timing_min
 report_timing       -delay max  -max_path 5 > ./Report/${DESIGN}_syn.timing_max
+report_power        -hierarchy              > ./Report/${DESIGN}_syn.power
 
 write   -f ddc      -hierarchy  -output ./Netlist/${DESIGN}_syn.ddc
 write   -f verilog  -hierarchy  -output ./Netlist/${DESIGN}_syn.v
