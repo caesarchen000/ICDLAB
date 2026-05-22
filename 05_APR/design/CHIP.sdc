@@ -3,6 +3,8 @@
 # Source: CHIP_syn.sdc + minimal Innovus edits (see CHIP_previous.sdc)
 # Regenerate: python3 mk_apr_sdc.py [CHIP_syn.sdc]
 ###################################################################
+
+
 set sdc_version 1.8
 
 # Innovus: set_units / set_max_area unsupported (CTE-25). MMMC owns corners.
@@ -12,7 +14,10 @@ set sdc_version 1.8
 
 # Innovus MMMC: wire_load from RC corners, not SDC wire_load_model
 # set_wire_load_model -name G200K -library fsa0m_a_generic_core_tt1p8v25c
-set_max_fanout 32 [current_design]
+# Innovus: no set_max_fanout in SDC after CTS — [current_design] flags clock nets (fanout 40+);
+# [all_outputs]/[all_registers] are invalid or fail TCLCMD-1117/917 on CHIP+pad netlist.
+# Data fanout DRV: setOptMode -fixFanoutLoad + optDesign (see fix_max_fanout.tcl).
+# DC syn only: set_max_fanout 32 [current_design] in 02_SYN/Netlist/CHIP_syn.sdc
 # set_max_area 0
 set_load -pin_load 1 [get_ports i_ready]
 set_load -pin_load 1 [get_ports o_valid]

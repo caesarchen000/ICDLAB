@@ -196,9 +196,23 @@ def find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS):
     min_overall_mse = float('inf')
     best_V_q = None
     
+<<<<<<< Updated upstream
     global V_q
     for test_scale in tqdm(scale_candidates, desc="Searching Scale"):
         # 生成當前 scale 下的量化矩陣
+=======
+    # 產生一組隨機測資來評估整體表現
+    np.random.seed(67)
+    x_test_r = np.random.randint(-128, 127, size=N)
+    x_test_i = np.random.randint(-128, 127, size=N)
+    test_key = 64
+    
+    # ⚠️ 產生理論值 (絕對不乘任何 HW_GAIN，強制以 Gain = 1.0 為標準！)
+    theory_out = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key)
+    
+    global V_q # 宣告 global 以便 hw_dfrft_pipeline 能吃到臨時產生的矩陣
+    for test_scale in tqdm(scale_candidates):
+>>>>>>> Stashed changes
         temp_V_q = np.zeros((N, N), dtype=np.int64)
         for i in range(N):
             for j in range(N):

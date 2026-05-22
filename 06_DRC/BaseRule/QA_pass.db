@@ -1,0 +1,158 @@
+CHIP 1000
+4.1M
+1 1 3 May 19 23:17:11 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+Minimum DIFFUSION density over 500um x 500 um areas is 20%
+in % moved in 250um increments across the chip 
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.29NOTICE
+1 1 4 May 19 23:17:30 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+There is NO RFMMCMK in the GDS file,
+all RF RULES ( 4.29G ~ 4.29K ) will not be checked,
+if the process is NOT a RF process, please unselect RF_RULES OPTION to bypass the rule check.
+p 1 4
+-57920 -57920
+1373560 -57920
+1373560 1370680
+-57920 1370680
+4.20F
+1 1 2 May 19 23:17:31 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME1 coverage must be larger than 30% of entire chip area
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.20G
+1 1 2 May 19 23:17:32 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME1 coverage must be larger than 25% for every 500*500um square
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.22F
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME2 coverage must be larger than 30% of entire chip area
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.22G
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME2 coverage must be larger than 25% for every 500*500um square
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.24F
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME3 coverage must be larger than 30% of entire chip area
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.24G
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME3 coverage must be larger than 25% for every 500*500um square
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.26F
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME4 coverage must be larger than 30% of entire chip area
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.26G
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME4 coverage must be larger than 25% for every 500*500um square
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.28F
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME5 coverage must be larger than 30% of entire chip area
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.28G
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The ME5 coverage must be larger than 25% for every 500*500um square
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.31E
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The Metal6 coverage must be larger than 30% of entire chip area
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+4.31F
+1 1 2 May 19 23:17:33 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+The Metal6 coverage must be larger than 25% for every 500*500um square
+p 1 4
+-56920 -56920
+1372560 -56920
+1372560 1369680
+-56920 1369680
+6.1A.M6
+1 1 7 May 19 23:17:54 2026                     
+Rule File Pathname: G-DF-Mixed_Mode_RFCMOS18-1.8v_3.3v-1P6M-MMC-Calibre-DRC-2.11_P2
+Maximum metal_6 width without slotting when length is greater than 30um is 20um except,                 
+between metal edge and slots  
+spacing between slots  
+bonding Pad areas 
+MMC areas 
+IND areas
+p 1 4
+-56920 163060
+-9920 163060
+-9920 223060
+-56920 223060
+DENSITY_PRINT_FILES
+0 0 12 May 19 23:17:57 2026
+4.20F_M1.density
+4.20G_M1.density
+4.22F_M2.density
+4.22G_M2.density
+4.24F_M3.density
+4.24G_M3.density
+4.26F_M4.density
+4.26G_M4.density
+4.28F_M5.density
+4.28G_M5.density
+4.31E_M6.density
+4.31F_M6.density

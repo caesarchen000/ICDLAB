@@ -1,7 +1,8 @@
 1        
 0 ./CHIP.sdf_c
-36
+37
 +define+SDF
++define+VCD
 +itf+/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
 +neg_tchk
 +v2k
@@ -20,7 +21,7 @@
 -Mobjects= /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
 -Mout=simv
 -Msaverestoreobj=/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcs_save_restore_new.o
--Msyslibs=/usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/pli.a -ldl
+-Msyslibs=/usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/pli.a -ldl
 -Mvcsaceobjs=
 -Mxcflags= -pipe -fPIC -I/usr/cad/synopsys/vcs/2022.06/include
 -Mxllcflags=
@@ -32,7 +33,7 @@
 -gen_obj
 -picarchive
 /usr/cad/synopsys/vcs/2022.06/linux64/bin/vcs1
-/usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/verdi.tab
+/usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/verdi.tab
 tb.v
 CHIP.v
 Verilog/fsa0m_a_generic_core_21.lib.src
@@ -43,18 +44,18 @@ mraarch=linux_64
 installdir=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice
 XLOCALEDIR=/usr/cad/synopsys/astro/cur/etc/locale
 XKEYSYMDB=/usr/cad/synopsys/astro/cur/etc/XKeysymDB
-XDG_SESSION_ID=196474
+XDG_SESSION_ID=197632
 XDG_RUNTIME_DIR=/run/user/2792
 XDG_DATA_DIRS=/home/raid7_2/userb12/b12166/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
-VSCODE_NONCE=c0f51e91-4f33-4978-9b0e-e2d16bae3a4c
-VSCODE_IPC_HOOK_CLI=/run/user/2792/vscode-ipc-c4e30fd3-1326-4385-8611-9b1bc4736670.sock
+VSCODE_NONCE=ec1b87fc-dd47-459e-a7c9-ed7441d7a9f2
+VSCODE_IPC_HOOK_CLI=/run/user/2792/vscode-ipc-306567d9-b5ea-4251-b5de-c881ef8b447f.sock
 VSCODE_GIT_IPC_HANDLE=/run/user/2792/vscode-git-589fecd4db.sock
-VSCODE_GIT_IPC_AUTH_TOKEN=e036011490e590a7da7b1498a172a5764497e43cd064a0e6727f8ba3b81b5e71
+VSCODE_GIT_IPC_AUTH_TOKEN=d5dcb716f7fded18564a32c9705c464c62dd89fa37d36fe75517bf207328b355
 VSCODE_GIT_ASKPASS_NODE=/tmp/cursor-b12166/.cursor-server/bin/linux-x64/fea2f546c979a0a4ad1deab23552a43568807590/node
 VSCODE_GIT_ASKPASS_MAIN=/tmp/cursor-b12166/.cursor-server/bin/linux-x64/fea2f546c979a0a4ad1deab23552a43568807590/extensions/git/dist/askpass-main.js
 VSCODE_GIT_ASKPASS_EXTRA_ARGS=
 VMR_MODE_FLAG=64
-VERDI_HOME=/usr/cad/synopsys/verdi/cur
+VERDI_HOME=/usr/cad/synopsys/verdi/2022.06/
 VERA_HOME=/usr/cad/synopsys/vera/cur/cur
 VENDOR=unknown
 VCS_PATHMAP_PRELOAD_DONE=1
@@ -73,7 +74,7 @@ TERM_PROGRAM_VERSION=2.6.21
 TERM_PROGRAM=vscode
 TARGET_ARCH=linux
 SYSTEMC_HOME=/usr/cad/synopsys/ccss/cur/linux/ccss/ccss_systemc
-SYN_MAN_DIR=/usr/cad/synopsys/vcs/2022.06//doc/man
+SYN_MAN_DIR=/usr/cad/synopsys/synthesis/cur/doc/syn/man
 SYNTHESIS=/usr/cad/synopsys/synthesis/cur
 SYNOPSYS_TMAX=/usr/cad/synopsys/tmax/cur
 SYNOPSYS_SIM=/usr/cad/synopsys/scirocco/cur
@@ -81,8 +82,8 @@ SYNOPSYS_SCIROCCO=/usr/cad/synopsys/scirocco/cur
 SYNOPSYS_NCX_ROOT=/usr/cad/synopsys/star-rcxt/2022.12
 SYNOPSYS_LC_ROOT=/usr/cad/synopsys/synthesis/cur
 SYNOPSYS_CCSS=/usr/cad/synopsys/ccss/cur/linux/ccss
-SSH_CONNECTION=49.216.128.93 5892 140.112.20.59 22
-SSH_CLIENT=49.216.128.93 5892 22
+SSH_CONNECTION=49.216.128.93 5538 140.112.20.59 22
+SSH_CLIENT=49.216.128.93 5538 22
 SPAPI_AHDL_INCLUDE=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice/include
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2022.06//linux64/clang
 SNPS_SIMIF=/usr/cad/synopsys/nanosim/cur
@@ -137,17 +138,17 @@ ARCH=linux64
 0
 0
 7
-1779090493 ./CHIP.sdf
+1779172822 ./CHIP.sdf
 1779090634 Verilog/fsa0m_a_io_pad_only.lib.src
 1778917598 Verilog/fsa0m_a_generic_core_21.lib.src
-1779047965 CHIP.v
-1779091007 tb.v
-1653825972 /usr/cad/synopsys/verdi/cur/share/PLI/VCS/LINUX64/verdi.tab
+1779172719 CHIP.v
+1779289036 tb.v
+1653825972 /usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/verdi.tab
 1654052745 /usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
 4
 1654054205 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvirsim.so
 1654053585 /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so
 1654053489 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
-1779091095 simv.daidir
+1779289171 simv.daidir
 -1 partitionlib

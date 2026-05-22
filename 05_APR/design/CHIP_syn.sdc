@@ -1,6 +1,7 @@
 ###################################################################
-# DC synthesis output (reference only). For Innovus use CHIP.sdc.
-# Created by write_sdc - matches 02_SYN cycle=10 ns
+
+# Created by write_sdc on Mon May 18 21:48:53 2026
+
 ###################################################################
 set sdc_version 1.8
 

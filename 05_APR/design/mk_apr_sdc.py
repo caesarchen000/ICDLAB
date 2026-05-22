@@ -27,7 +27,21 @@ def main():
             "# " + m.group(0)
         )
     text = re.sub(r"^set_wire_load_model[^\n]*\n", _comment_wire_load, text, flags=re.M)
-    text = re.sub(r"^set_max_fanout 8 ", "set_max_fanout 32 ", text, flags=re.M)
+    fanout_note = (
+        "# Innovus: no set_max_fanout in SDC (CTS clocks violate global limit; use fixFanoutLoad)\n"
+    )
+    text = re.sub(
+        r"^set_max_fanout \d+ \[get_designs \$DESIGN\]\n",
+        fanout_note,
+        text,
+        flags=re.M,
+    )
+    text = re.sub(
+        r"^set_max_fanout \d+ \[current_design\]\n",
+        fanout_note,
+        text,
+        flags=re.M,
+    )
     text = re.sub(r"^set_max_area 0\n", "# set_max_area 0\n", text, flags=re.M)
     text = re.sub(
         r"^set_input_delay -clock CLK  -max 1  \[get_ports clk\]\n",
