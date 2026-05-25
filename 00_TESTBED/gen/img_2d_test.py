@@ -75,8 +75,8 @@ if __name__ == "__main__":
             
             fig, ax = plt.subplots(1, 3, figsize=(15, 5))
             ax[0].imshow(orig, cmap='gray', vmin=0, vmax=255); ax[0].set_title("1. Original Image")
-            ax[1].imshow(enc_vis, cmap='turbo'); ax[1].set_title("2. Hardware Encrypted (Key=64)")
-            ax[2].imshow(dec_vis, cmap='gray', vmin=0, vmax=255);  ax[2].set_title("3. Hardware Decrypted (Key=-64)")
+            ax[1].imshow(enc_vis, cmap='turbo'); ax[1].set_title("2. Hardware Encrypted (Key=40)")
+            ax[2].imshow(dec_vis, cmap='gray', vmin=0, vmax=255);  ax[2].set_title("3. Hardware Decrypted (Key=-40)")
             plt.tight_layout()
             plt.savefig('hw_2d_encryption_8bit.png')
             print("✅ 成功繪製比對圖 hw_2d_encryption_8bit.png！")

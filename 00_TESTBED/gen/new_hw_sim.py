@@ -2,8 +2,21 @@ import numpy as np
 import scipy.linalg as la
 import matplotlib.pyplot as plt
 import math
+import sys
+import io
+import os
+import json
+from PIL import Image
 from tqdm import tqdm
 from config import *
+
+_SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+_IMAGE_PATH = os.path.join(_SCRIPT_DIR, "image.png")
+_PATCH_KEYS_JSON = os.path.join(_SCRIPT_DIR, "sim_patch_keys.json")
+_PATCH_KEYS_PY = os.path.join(_SCRIPT_DIR, "sim_patch_keys.py")
+
+if getattr(sys.stdout, "encoding", None) in (None, "ANSI_X3.4-1968", "ascii"):
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 error_sweep = True
 config_sweep = False
@@ -196,23 +209,9 @@ def find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS):
     min_overall_mse = float('inf')
     best_V_q = None
     
-<<<<<<< Updated upstream
     global V_q
     for test_scale in tqdm(scale_candidates, desc="Searching Scale"):
         # 生成當前 scale 下的量化矩陣
-=======
-    # 產生一組隨機測資來評估整體表現
-    np.random.seed(67)
-    x_test_r = np.random.randint(-128, 127, size=N)
-    x_test_i = np.random.randint(-128, 127, size=N)
-    test_key = 64
-    
-    # ⚠️ 產生理論值 (絕對不乘任何 HW_GAIN，強制以 Gain = 1.0 為標準！)
-    theory_out = theoretical_eigen_dfrft(x_test_r, x_test_i, test_key)
-    
-    global V_q # 宣告 global 以便 hw_dfrft_pipeline 能吃到臨時產生的矩陣
-    for test_scale in tqdm(scale_candidates):
->>>>>>> Stashed changes
         temp_V_q = np.zeros((N, N), dtype=np.int64)
         for i in range(N):
             for j in range(N):
@@ -274,6 +273,445 @@ def find_gain_v_scale(V_float, V_BITS, MAX_TERMS):
                 f.write(line + "\n")
     print(f"成功生成 Gain={HW_GAIN} 的 V_q.txt 與 V_ops.txt！SCALE={V_SCALE}")
 
+
+def load_image_32(path):
+    im = Image.open(path).convert("L").resize((N, N), Image.LANCZOS)
+    img = np.array(list(im.getdata()), dtype=np.float64).reshape(N, N)
+    lo, hi = img.min(), img.max()
+    if hi > lo:
+        img = (img - lo) / (hi - lo) * 255.0
+    return img
+
+
+def load_rgb_divisible_by_32(path, max_dim=None):
+    """
+    Load RGB image; resize so H and W are multiples of 32 (LANCZOS).
+    Returns (rgb float HxWx3, original_h, original_w).
+    """
+    im = Image.open(path)
+    if im.mode != "RGB":
+        im = im.convert("RGB")
+    ow, oh = im.size
+    w, h = ow, oh
+    if max_dim and max(w, h) > max_dim:
+        scale = max_dim / float(max(w, h))
+        w = max(N, int(round(w * scale)))
+        h = max(N, int(round(h * scale)))
+    wp = ((w + N - 1) // N) * N
+    hp = ((h + N - 1) // N) * N
+    if (wp, hp) != (ow, oh):
+        im = im.resize((wp, hp), Image.LANCZOS)
+    w, h = im.size
+    rgb = np.array(list(im.getdata()), dtype=np.float64).reshape(h, w, 3)
+    return rgb, oh, ow
+
+
+def save_rgb(arr_hwc, path):
+    u8 = np.clip(np.round(arr_hwc), 0, 255).astype(np.uint8)
+    Image.fromarray(u8, mode="RGB").save(path)
+
+
+def upscale_rgb_to_size(rgb, out_w, out_h):
+    """Resize canvas RGB to another size (e.g. original photo dimensions)."""
+    h, w, _ = rgb.shape
+    im = Image.fromarray(np.clip(np.round(rgb), 0, 255).astype(np.uint8), mode="RGB")
+    im = im.resize((int(out_w), int(out_h)), Image.LANCZOS)
+    ow, oh = im.size
+    return np.array(list(im.getdata()), dtype=np.float64).reshape(oh, ow, 3)
+
+
+def normalize_to_255(arr):
+    lo, hi = arr.min(), arr.max()
+    if hi > lo:
+        return ((arr - lo) / (hi - lo)) * 255.0
+    return arr
+
+
+def save_gray(img, path):
+    Image.fromarray(np.clip(np.round(img), 0, 255).astype(np.uint8), mode="L").save(path)
+
+
+def input_port_limits():
+    """Signed range for INPUT_PORT bits (8-bit: -128..127, 9-bit: -256..255)."""
+    hi = (1 << (INPUT_PORT - 1)) - 1
+    lo = -(1 << (INPUT_PORT - 1))
+    return lo, hi
+
+
+def saturate_to_input(val):
+    """宇彥 saturate: clip 11-bit pipeline out to INPUT_PORT signed range (no >>3)."""
+    lo, hi = input_port_limits()
+    v = int(val)
+    if v > hi:
+        return hi
+    if v < lo:
+        return lo
+    return v
+
+
+def saturate_to_input_arr(arr):
+    return np.array([saturate_to_input(x) for x in arr], dtype=np.int64)
+
+
+def print_saturate_clip_stats(raw, label):
+    lo_lim, hi_lim = input_port_limits()
+    a = np.asarray(raw, dtype=np.int64)
+    n = a.size
+    hi = int(np.sum(a > hi_lim))
+    lo = int(np.sum(a < lo_lim))
+    ok = n - hi - lo
+    print(
+        f"  {label}: {ok}/{n} in-range ({100 * ok / n:.1f}%), "
+        f"clip>{hi_lim}: {hi} ({100 * hi / n:.1f}%), "
+        f"clip<{lo_lim}: {lo} ({100 * lo / n:.1f}%), "
+        f"any: {hi + lo} ({100 * (hi + lo) / n:.1f}%), "
+        f"raw [{a.min()}, {a.max()}]  (INPUT_PORT={INPUT_PORT}-bit)"
+    )
+
+
+def quantize_11_to_8_signed(arr):
+    """
+    Fixed full-range map: signed 11-bit span -> unsigned 0..255 -> signed 8-bit.
+      (val - min_11) / (max_11 - min_11) * 255, then -128 for pipeline input.
+    Same idea as normalize_to_255 but with fixed limits from OUTPUT_PORT / INPUT_PORT.
+    """
+    min11 = -(1 << (OUTPUT_PORT - 1))
+    max11 = (1 << (OUTPUT_PORT - 1)) - 1
+    max_u8 = (1 << INPUT_PORT) - 1
+    span11 = max11 - min11
+    a = np.clip(np.asarray(arr, dtype=np.int64), min11, max11)
+    u8 = np.round((a.astype(np.float64) - min11) * max_u8 / span11)
+    u8 = np.clip(u8, 0, max_u8)
+    return (u8 - 128).astype(np.int64)
+
+
+def enc_mag_vis(real, imag):
+    return normalize_to_255(np.sqrt(real.astype(float) ** 2 + imag.astype(float) ** 2))
+
+
+def grey_from_real(real):
+    return np.clip(real.astype(np.float64) + 128, 0, 255)
+
+
+def clip_hw_key(k):
+    return int(max(-128, min(127, int(k))))
+
+
+def patch_keys_for_grid(nbr, nbc, seed):
+    """Random per-patch encrypt keys; seed only drives the RNG draw."""
+    rng = np.random.default_rng(int(seed))
+    return rng.integers(-127, 128, size=(nbr, nbc), dtype=np.int64)
+
+
+def save_patch_keys(keys_file, nbr, nbc, canvas_w, canvas_h, key_table, seed):
+    """Save key table to JSON + a Python module for later decrypt."""
+    key_table = np.asarray(key_table, dtype=np.int64)
+    meta = {
+        "nbr": int(nbr),
+        "nbc": int(nbc),
+        "canvas_w": int(canvas_w),
+        "canvas_h": int(canvas_h),
+        "seed": int(seed),
+        "keys": key_table.tolist(),
+    }
+    with open(keys_file, "w", encoding="utf-8") as f:
+        json.dump(meta, f, indent=2)
+    py_path = keys_file.replace(".json", ".py") if keys_file.endswith(".json") else _PATCH_KEYS_PY
+    rows = ",\n    ".join("[" + ", ".join(str(int(x)) for x in row) + "]" for row in key_table)
+    with open(py_path, "w", encoding="utf-8") as f:
+        f.write(
+            "# Auto-generated patch encrypt keys — keep with encrypted image for decrypt.\n"
+            "import numpy as np\n\n"
+            f"CANVAS_W, CANVAS_H = {int(canvas_w)}, {int(canvas_h)}\n"
+            f"NBR, NBC = {int(nbr)}, {int(nbc)}\n"
+            f"KEY_SEED = {int(seed)}\n"
+            f"PATCH_KEYS = np.array([\n    {rows}\n], dtype=np.int64)\n"
+        )
+    print(f"  saved patch keys: {keys_file}")
+    print(f"  saved patch keys: {py_path}")
+
+
+def load_patch_keys(keys_file):
+    """Load recorded key table; returns (meta dict, key_table ndarray)."""
+    with open(keys_file, encoding="utf-8") as f:
+        meta = json.load(f)
+    keys = np.array(meta["keys"], dtype=np.int64)
+    return meta, keys
+
+
+def resolve_patch_keys(nbr, nbc, canvas_w, canvas_h, seed, keys_file, regen=False):
+    """Use recorded keys if file matches grid; else generate random keys and save."""
+    if not regen and os.path.isfile(keys_file):
+        meta, keys = load_patch_keys(keys_file)
+        if (
+            meta["nbr"] == nbr
+            and meta["nbc"] == nbc
+            and meta.get("canvas_w") == canvas_w
+            and meta.get("canvas_h") == canvas_h
+        ):
+            return keys, f"loaded from {keys_file}"
+        print(
+            f"  key file grid {meta['nbr']}x{meta['nbc']} "
+            f"({meta.get('canvas_w')}x{meta.get('canvas_h')}) != canvas {nbr}x{nbc} ({canvas_w}x{canvas_h})"
+        )
+        print("  generating new random keys")
+    keys = patch_keys_for_grid(nbr, nbc, seed)
+    save_patch_keys(keys_file, nbr, nbc, canvas_w, canvas_h, keys, seed)
+    return keys, f"random (seed={seed}), recorded for decrypt"
+
+
+def parse_image_cli(argv=None):
+    """CLI: --max, --32, --seed, --fixed-key, --keys-file, --regen-keys."""
+    argv = argv if argv is not None else sys.argv[1:]
+    max_dim, force_32 = 320, False
+    seed = RANDOM_SEED
+    per_patch_keys = True
+    regen_keys = False
+    fixed_key = 40
+    keys_file = _PATCH_KEYS_JSON
+    i = 0
+    while i < len(argv):
+        if argv[i] == "--32":
+            force_32 = True
+        elif argv[i] == "--fixed-key":
+            per_patch_keys = False
+        elif argv[i] == "--regen-keys":
+            regen_keys = True
+        elif argv[i] == "--seed" and i + 1 < len(argv):
+            seed = int(argv[i + 1])
+            i += 1
+        elif argv[i] in ("--keys-file",) and i + 1 < len(argv):
+            keys_file = argv[i + 1]
+            if not os.path.isabs(keys_file):
+                keys_file = os.path.join(_SCRIPT_DIR, keys_file)
+            i += 1
+        elif argv[i] in ("--key", "--master-key") and i + 1 < len(argv):
+            fixed_key = int(argv[i + 1])
+            per_patch_keys = False
+            i += 1
+        elif argv[i] == "--max" and i + 1 < len(argv):
+            max_dim = int(argv[i + 1])
+            i += 1
+        i += 1
+    return max_dim, force_32, seed, per_patch_keys, keys_file, regen_keys, fixed_key
+
+
+def dfrft_pass_2d(real_in, imag_in, key, along="row", report_clips=False, stage=""):
+    """
+    Run hw_dfrft on every row or column; saturate 11-bit out to INPUT_PORT bits.
+    along: 'row' (axis 0) or 'col' (axis 1)
+    """
+    out_r = np.zeros((N, N), dtype=np.int64)
+    out_i = np.zeros((N, N), dtype=np.int64)
+    raw_r, raw_i = [], []
+    indices = range(N)
+    for idx in indices:
+        if along == "row":
+            xr, xi = real_in[idx, :].copy(), imag_in[idx, :].copy()
+        else:
+            xr, xi = real_in[:, idx].copy(), imag_in[:, idx].copy()
+        r, ix = hw_dfrft_pipeline(xr, xi, key)
+        raw_r.append(r)
+        raw_i.append(ix)
+        sr, si = saturate_to_input_arr(r), saturate_to_input_arr(ix)
+        if along == "row":
+            out_r[idx, :], out_i[idx, :] = sr, si
+        else:
+            out_r[:, idx], out_i[:, idx] = sr, si
+    if report_clips:
+        label = f"{stage} ({along})"
+        print(f"  saturate clips — {label}:")
+        print_saturate_clip_stats(np.concatenate(raw_r), "real")
+        print_saturate_clip_stats(np.concatenate(raw_i), "imag")
+    return out_r, out_i
+
+
+def process_block_2d(img_block, key_enc=40, key_dec=-40, decrypt_col_first=True, report_clips=False):
+    """
+    One 32x32 channel (0..255): row enc -> col enc -> col dec -> row dec.
+    img_block: (N, N) float grey.
+    """
+    lo_in, hi_in = input_port_limits()
+    real0 = np.clip(np.round(img_block - 128), lo_in, hi_in).astype(np.int64)
+    imag0 = np.zeros((N, N), dtype=np.int64)
+
+    enc1_r, enc1_i = dfrft_pass_2d(real0, imag0, key_enc, "row", report_clips=report_clips, stage="enc row")
+    enc2_r, enc2_i = dfrft_pass_2d(enc1_r, enc1_i, key_enc, "col", report_clips=report_clips, stage="enc col")
+
+    if decrypt_col_first:
+        dec1_r, dec1_i = dfrft_pass_2d(enc2_r, enc2_i, key_dec, "col", report_clips=report_clips, stage="dec col")
+        dec2_r, dec2_i = dfrft_pass_2d(dec1_r, dec1_i, key_dec, "row", report_clips=report_clips, stage="dec row")
+    else:
+        dec1_r, dec1_i = dfrft_pass_2d(enc2_r, enc2_i, key_dec, "row", report_clips=report_clips, stage="dec row")
+        dec2_r, dec2_i = dfrft_pass_2d(dec1_r, dec1_i, key_dec, "col", report_clips=report_clips, stage="dec col")
+
+    return {
+        "enc1_r": enc1_r,
+        "enc1_i": enc1_i,
+        "enc2_r": enc2_r,
+        "enc2_i": enc2_i,
+        "dec_r": dec2_r,
+        "dec_grey": grey_from_real(dec2_r),
+        "enc1_vis": enc_mag_vis(enc1_r, enc1_i),
+        "enc2_vis": enc_mag_vis(enc2_r, enc2_i),
+    }
+
+
+def run_image_row_encrypt_decrypt(key_enc=40, key_dec=-40):
+    """1D only: row encrypt then row decrypt (32x32)."""
+    img = load_image_32(_IMAGE_PATH)
+    lo_in, hi_in = input_port_limits()
+    real0 = np.clip(np.round(img - 128), lo_in, hi_in).astype(np.int64)
+    imag0 = np.zeros((N, N), dtype=np.int64)
+    print(f"\n=== 1D image pipeline (INPUT_PORT={INPUT_PORT}-bit) ===")
+    enc_r, enc_i = dfrft_pass_2d(real0, imag0, key_enc, "row", report_clips=True, stage="encrypt")
+    dec_r, dec_i = dfrft_pass_2d(enc_r, enc_i, key_dec, "row", report_clips=True, stage="decrypt")
+    _save_image_pipeline(img, enc_r, enc_i, dec_r, dec_i, enc_2d_r=None, enc_2d_i=None, tag="1d")
+
+
+def run_image_2d_encrypt_decrypt(key_enc=40, key_dec=-40, decrypt_col_first=True):
+    """Single 32x32 grey block (image.png resized)."""
+    img = load_image_32(_IMAGE_PATH)
+    print(f"\n=== 2D block (32x32, INPUT_PORT={INPUT_PORT}-bit, key_enc={key_enc}) ===")
+    out = process_block_2d(img, key_enc, key_dec, decrypt_col_first, report_clips=True)
+    _save_image_pipeline(
+        img, out["enc1_r"], out["enc1_i"], out["dec_r"], out["enc1_i"],
+        enc_2d_r=out["enc2_r"], enc_2d_i=out["enc2_i"], tag="2d",
+    )
+
+
+def run_tiled_rgb_encrypt_decrypt(
+    path=None,
+    seed=RANDOM_SEED,
+    per_patch_keys=True,
+    keys_file=_PATCH_KEYS_JSON,
+    regen_keys=False,
+    fixed_key=40,
+    decrypt_col_first=True,
+    max_dim=320,
+):
+    """
+    Full RGB tiled 2D. Per-patch keys are random, saved to keys_file (+ .py) for later decrypt.
+    """
+    path = path or _IMAGE_PATH
+    rgb, orig_h, orig_w = load_rgb_divisible_by_32(path, max_dim=max_dim)
+    h, w, _ = rgb.shape
+    nbr, nbc = h // N, w // N
+    nblocks = nbr * nbc
+
+    resized_path = os.path.join(_SCRIPT_DIR, "sim_image_resized.png")
+    save_rgb(rgb, resized_path)
+    print(f"  resized canvas: {w}x{h}  ->  {resized_path}")
+    if (orig_h, orig_w) != (h, w):
+        print(f"  (original was {orig_w}x{orig_h})")
+
+    if per_patch_keys:
+        key_table, key_mode = resolve_patch_keys(nbr, nbc, w, h, seed, keys_file, regen=regen_keys)
+    else:
+        key_table = None
+        key_mode = f"fixed key_enc={clip_hw_key(fixed_key)}"
+
+    print(f"\n=== Tiled RGB 2D (INPUT_PORT={INPUT_PORT}-bit) ===")
+    print(f"  source: {path}  original {orig_w}x{orig_h}  ->  canvas {w}x{h}")
+    print(f"  blocks: {nbr}x{nbc} = {nblocks}  x 3 channels = {nblocks * 3} pipeline runs")
+    print(f"  keys: {key_mode}")
+    if per_patch_keys and nblocks <= 12:
+        print(f"  key table:\n{key_table}")
+
+    enc1_vis = np.zeros((h, w, 3), dtype=np.float64)
+    enc2_vis = np.zeros((h, w, 3), dtype=np.float64)
+    dec_rgb = np.zeros((h, w, 3), dtype=np.float64)
+
+    blocks = [(br, bc, ch) for br in range(nbr) for bc in range(nbc) for ch in range(3)]
+    for br, bc, ch in tqdm(blocks, desc="32x32 x RGB"):
+        if per_patch_keys:
+            key_enc = clip_hw_key(key_table[br, bc])
+            key_dec = clip_hw_key(-key_enc)
+        else:
+            key_enc, key_dec = clip_hw_key(fixed_key), clip_hw_key(-fixed_key)
+        rs, cs = br * N, bc * N
+        block = rgb[rs : rs + N, cs : cs + N, ch]
+        out = process_block_2d(block, key_enc, key_dec, decrypt_col_first, report_clips=False)
+        enc1_vis[rs : rs + N, cs : cs + N, ch] = out["enc1_vis"]
+        enc2_vis[rs : rs + N, cs : cs + N, ch] = out["enc2_vis"]
+        dec_rgb[rs : rs + N, cs : cs + N, ch] = out["dec_grey"]
+
+    rmse = float(np.sqrt(np.mean((rgb - dec_rgb) ** 2)))
+    print(f"  full image MSE vs input: {rmse:.2f}")
+
+    save_rgb(rgb, os.path.join(_SCRIPT_DIR, "sim_image_input.png"))
+    save_rgb(enc1_vis, os.path.join(_SCRIPT_DIR, "sim_image_encrypted_1d.png"))
+    save_rgb(enc2_vis, os.path.join(_SCRIPT_DIR, "sim_image_encrypted_2d.png"))
+    save_rgb(dec_rgb, os.path.join(_SCRIPT_DIR, "sim_image_decrypted_2d.png"))
+
+    if (orig_h, orig_w) != (h, w):
+        dec_full = upscale_rgb_to_size(dec_rgb, orig_w, orig_h)
+        full_path = os.path.join(_SCRIPT_DIR, "sim_image_decrypted_fullsize.png")
+        save_rgb(dec_full, full_path)
+        print(f"  decrypted upscaled to {orig_w}x{orig_h}  ->  {full_path}")
+
+    # Summary figure: downscale for display if large
+    preview_scale = min(1.0, 512.0 / max(h, w))
+    if preview_scale < 1.0:
+        def _down(a):
+            im = Image.fromarray(np.clip(np.round(a), 0, 255).astype(np.uint8), mode="RGB")
+            nw, nh = int(w * preview_scale), int(h * preview_scale)
+            im2 = im.resize((nw, nh), Image.LANCZOS)
+            return np.array(list(im2.getdata()), dtype=np.float64).reshape(nh, nw, 3)
+        pin, e1, e2, pdec = _down(rgb), _down(enc1_vis), _down(enc2_vis), _down(dec_rgb)
+    else:
+        pin, e1, e2, pdec = rgb, enc1_vis, enc2_vis, dec_rgb
+
+    fig, ax = plt.subplots(1, 4, figsize=(16, 4))
+    for a, (title, data) in zip(
+        ax,
+        [
+            ("Input", pin),
+            ("Enc 1D (rows)", e1),
+            ("Enc 2D (+cols)", e2),
+            (f"Dec  MSE={rmse:.1f}", pdec),
+        ],
+    ):
+        a.imshow(np.clip(data, 0, 255).astype(np.uint8))
+        a.set_title(title)
+        a.axis("off")
+    plt.tight_layout()
+    plt.savefig(os.path.join(_SCRIPT_DIR, "sim_image_pipeline.png"), dpi=120, bbox_inches="tight")
+    plt.close()
+    print("Saved sim_image_*.png (RGB, includes sim_image_resized.png)")
+
+
+def _save_image_pipeline(img, enc1_r, enc1_i, dec_r, dec_i, enc_2d_r=None, enc_2d_i=None, tag="2d"):
+    enc1_vis = enc_mag_vis(enc1_r, enc1_i)
+    dec_grey = grey_from_real(dec_r)
+    rmse = float(np.sqrt(np.mean((img - dec_grey) ** 2)))
+    print(f"  final dec grey unique: {len(np.unique(dec_grey))}, MSE vs input: {rmse:.2f}")
+
+    save_gray(img, os.path.join(_SCRIPT_DIR, "sim_image_input.png"))
+    save_gray(enc1_vis, os.path.join(_SCRIPT_DIR, "sim_image_encrypted_1d.png"))
+    save_gray(dec_grey, os.path.join(_SCRIPT_DIR, f"sim_image_decrypted_{tag}.png"))
+
+    if enc_2d_r is not None:
+        save_gray(enc_mag_vis(enc_2d_r, enc_2d_i), os.path.join(_SCRIPT_DIR, "sim_image_encrypted_2d.png"))
+
+    panels = [("Input", img, "gray"), ("Enc 1D (rows)", enc1_vis, "turbo")]
+    if enc_2d_r is not None:
+        panels.append(("Enc 2D (+cols)", enc_mag_vis(enc_2d_r, enc_2d_i), "turbo"))
+    panels.append((f"Dec ({tag})", dec_grey, "gray"))
+    fig, ax = plt.subplots(1, len(panels), figsize=(4 * len(panels), 4))
+    if len(panels) == 1:
+        ax = [ax]
+    for a, (title, data, cmap) in zip(ax, panels):
+        a.imshow(data, cmap=cmap, vmin=0, vmax=255)
+        a.set_title(title)
+        a.axis("off")
+    plt.suptitle(f"MSE={rmse:.2f}")
+    plt.tight_layout()
+    plt.savefig(os.path.join(_SCRIPT_DIR, "sim_image_pipeline.png"), dpi=120, bbox_inches="tight")
+    plt.close()
+    print("Saved sim_image_*.png")
+
+
 # ==========================================
 # 主程式：測試與繪圖
 # ==========================================
@@ -283,6 +721,23 @@ if __name__ == "__main__":
         find_unity_gain_v_scale(V_float, V_BITS, MAX_TERMS)
     else:
         find_gain_v_scale(V_float, V_BITS, MAX_TERMS)
+
+    if os.path.isfile(_IMAGE_PATH):
+        im = Image.open(_IMAGE_PATH)
+        max_dim, force_32, seed, per_patch_keys, keys_file, regen_keys, fixed_key = parse_image_cli()
+        if force_32 or (im.size == (N, N) and im.mode in ("L", "1")):
+            run_image_2d_encrypt_decrypt(key_enc=fixed_key, key_dec=-fixed_key)
+        else:
+            run_tiled_rgb_encrypt_decrypt(
+                _IMAGE_PATH,
+                seed=seed,
+                per_patch_keys=per_patch_keys,
+                keys_file=keys_file,
+                regen_keys=regen_keys,
+                fixed_key=fixed_key,
+                max_dim=max_dim,
+            )
+        sys.exit(0)
         
     t_n = np.arange(N)
 
@@ -291,8 +746,11 @@ if __name__ == "__main__":
     # ==========================================
     test_key = 64
     print(f"\n--- Running Single Case Visualization (Key={test_key}) ---")
-    
-    x_test_float = 100 * np.exp(-(t_n - N/3)**2 / (N/8)) + 1j * 50 * np.sin(4 * np.pi * t_n / N)
+
+    print("Input: built-in Gaussian (image.png not found)")
+    x_test_float = 100 * np.exp(-(t_n - N/3)**2 / (N/8)) + 1j * 50 * np.sin(
+        4 * np.pi * t_n / N
+    )
     x_test_r = np.clip(np.round(x_test_float.real), -128, 127).astype(np.int64)
     x_test_i = np.clip(np.round(x_test_float.imag), -128, 127).astype(np.int64)
     
@@ -317,7 +775,8 @@ if __name__ == "__main__":
     fig1, axes1 = plt.subplots(2, 1, figsize=(12, 8))
     axes1[0].plot(t_n, x_test_r, 'ko-', label="Input Real")
     axes1[0].plot(t_n, x_test_i, 'kx--', label="Input Imag")
-    axes1[0].set_title(f"Input Signal (8-bit quantized)")
+    in_title = "Input (8-bit)"
+    axes1[0].set_title(in_title)
     axes1[0].grid(True, linestyle=':'); axes1[0].legend()
     
     axes1[1].plot(t_n, res_float.real, 'ro-', alpha=0.5, label="Theory Real (Scaled by Gain)", linewidth=3)

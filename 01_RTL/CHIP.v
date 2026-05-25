@@ -1,6 +1,7 @@
 module CHIP #(
-    parameter IOPORT_IN_W   = 16, // 16-bit Input Pin
-    parameter IOPORT_OUT_W  = 11, // 11-bit Output Pin
+    // i_data[21:0] = {imag[10:0], real[10:0]} — 11+11 in/out path end-to-end
+    parameter IOPORT_IN_W   = 22,
+    parameter IOPORT_OUT_W  = 11,
     parameter RF_DATA_W     = 34,
     parameter RF_IO_W       = 22
 )(
@@ -48,6 +49,19 @@ module CHIP #(
     assign i_ready = ((state_r == S_IDLE) || (state_r == S_LOAD)) && can_load;
     assign o_valid = (o_state_r == O_OUT);
     assign o_data = o_counter_r[0] ? rf_io_rdata_1[21:11] : rf_io_rdata_1[10:0];
+
+    // Saturate 17-bit MAC/PE results to 11-bit RF storage (not truncate to 8)
+    function automatic signed [10:0] sat11;
+        input signed [16:0] v;
+        begin
+            if (v > $signed(17'sd1023))
+                sat11 = 11'sd1023;
+            else if (v < $signed(-17'sd1024))
+                sat11 = -11'sd1024;
+            else
+                sat11 = v[10:0];
+        end
+    endfunction
 
     // ===================================================================
     // MAC control Signals
@@ -158,8 +172,8 @@ module CHIP #(
             if (state_r == S_STAGE3 && mac_valid_out_r) begin
                 rf_io_write_delay <= 1;
                 delayed_mac_group <= g_cnt_d3;
-                delayed_out2 <= {pe_i2[10:0], pe_r2[10:0]};
-                delayed_out3 <= {pe_i3[10:0], pe_r3[10:0]};
+                delayed_out2 <= {sat11(pe_i2), sat11(pe_r2)};
+                delayed_out3 <= {sat11(pe_i3), sat11(pe_r3)};
             end else begin
                 rf_io_write_delay <= 0;
             end
@@ -252,8 +266,8 @@ module CHIP #(
                     rf_io_wen_1   = 1; rf_io_wen_2 = 1;
                     rf_io_waddr_1 = {g_cnt_d3, 2'b00};
                     rf_io_waddr_2 = {g_cnt_d3, 2'b01};
-                    rf_io_wdata_1 = {pe_i0[10:0], pe_r0[10:0]};
-                    rf_io_wdata_2 = {pe_i1[10:0], pe_r1[10:0]};
+                    rf_io_wdata_1 = {sat11(pe_i0), sat11(pe_r0)};
+                    rf_io_wdata_2 = {sat11(pe_i1), sat11(pe_r1)};
                 end else if (rf_io_write_delay) begin
                     rf_io_wen_1   = 1; rf_io_wen_2 = 1;
                     rf_io_waddr_1 = {delayed_mac_group, 2'b10};
@@ -305,9 +319,12 @@ module CHIP #(
     // Data Paths & Sub-Modules
     // ==========================================
     assign stage_sel = (state_r == S_STAGE3);
-    
-    assign mac_in_real = (state_r == S_STAGE1) ? {{9{rf_io_rdata_1[7]}}, rf_io_rdata_1[7:0]} : rf_d_rdata_1[16:0];
-    assign mac_in_imag = (state_r == S_STAGE1) ? {{9{rf_io_rdata_1[15]}}, rf_io_rdata_1[15:8]} : rf_d_rdata_1[33:17];
+
+    wire signed [16:0] mac_in_real_s1 = {{6{rf_io_rdata_1[10]}}, rf_io_rdata_1[10:0]};
+    wire signed [16:0] mac_in_imag_s1 = {{6{rf_io_rdata_1[21]}}, rf_io_rdata_1[21:11]};
+
+    assign mac_in_real = (state_r == S_STAGE1) ? mac_in_real_s1 : rf_d_rdata_1[16:0];
+    assign mac_in_imag = (state_r == S_STAGE1) ? mac_in_imag_s1 : rf_d_rdata_1[33:17];
 
     DFrFT_MAC mac(
         .clk(clk), .rst_n(rst_n), .en(mac_en), .stage_sel(stage_sel),

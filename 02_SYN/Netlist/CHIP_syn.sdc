@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Mon May 18 21:48:53 2026
+# Created by write_sdc on Mon May 25 17:39:08 2026
 
 ###################################################################
 set sdc_version 1.8
@@ -11,7 +11,7 @@ fsa0m_a_generic_core_ss1p62v125c\
                          -min BCCOM -min_library                               \
 fsa0m_a_generic_core_ff1p98vm40c
 set_wire_load_model -name G200K -library fsa0m_a_generic_core_tt1p8v25c
-set_max_fanout 8 [current_design]
+set_max_fanout 32 [current_design]
 set_max_area 0
 set_load -pin_load 1 [get_ports i_ready]
 set_load -pin_load 1 [get_ports o_valid]
@@ -33,6 +33,12 @@ set_input_delay -clock CLK  -max 1  [get_ports clk]
 set_input_delay -clock CLK  -max 1  [get_ports rst_n]
 set_input_delay -clock CLK  -max 1  [get_ports i_valid]
 set_input_delay -clock CLK  -max 1  [get_ports o_ready]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[21]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[20]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[19]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[18]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[17]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[16]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[15]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[14]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[13]}]
@@ -66,6 +72,12 @@ set_drive 1  [get_ports clk]
 set_drive 1  [get_ports rst_n]
 set_drive 1  [get_ports i_valid]
 set_drive 1  [get_ports o_ready]
+set_drive 1  [get_ports {i_data[21]}]
+set_drive 1  [get_ports {i_data[20]}]
+set_drive 1  [get_ports {i_data[19]}]
+set_drive 1  [get_ports {i_data[18]}]
+set_drive 1  [get_ports {i_data[17]}]
+set_drive 1  [get_ports {i_data[16]}]
 set_drive 1  [get_ports {i_data[15]}]
 set_drive 1  [get_ports {i_data[14]}]
 set_drive 1  [get_ports {i_data[13]}]

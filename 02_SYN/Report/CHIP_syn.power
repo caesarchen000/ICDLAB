@@ -1,4 +1,4 @@
-Loading db file '/home/raid7_2/userb12/b12006/ICDlab/chip_new_v1/02_SYN/fsa0m_a_generic_core_tt1p8v25c.db'
+Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_generic_core_tt1p8v25c.db'
 Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
 Warning: Design has unannotated primary inputs. (PWR-414)
 Warning: Design has unannotated sequential cell outputs. (PWR-415)
@@ -9,13 +9,13 @@ Report : power
         -analysis_effort low
 Design : CHIP
 Version: U-2022.12
-Date   : Mon May 18 21:48:47 2026
+Date   : Mon May 25 17:38:25 2026
 ****************************************
 
 
 Library(s) Used:
 
-    fsa0m_a_generic_core_tt1p8v25c (File: /home/raid7_2/userb12/b12006/ICDlab/chip_new_v1/02_SYN/fsa0m_a_generic_core_tt1p8v25c.db)
+    fsa0m_a_generic_core_tt1p8v25c (File: /home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_generic_core_tt1p8v25c.db)
 
 
 Operating Conditions: WCCOM   Library: fsa0m_a_generic_core_ss1p62v125c
@@ -111,11 +111,11 @@ PE_Shift_Add_7_DW01_sub_1_DW01_sub_22
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_7_DW01_sub_2_DW01_sub_23
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_7_DW01_add_2_DW01_add_25
+PE_Shift_Add_7_DW01_add_2_DW01_add_37
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_7_DW01_add_1_DW01_add_24
+PE_Shift_Add_7_DW01_add_1_DW01_add_36
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_7_DW01_add_0_DW01_add_23
+PE_Shift_Add_7_DW01_add_0_DW01_add_35
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_6
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -125,11 +125,11 @@ PE_Shift_Add_6_DW01_sub_1_DW01_sub_19
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_6_DW01_sub_2_DW01_sub_20
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_6_DW01_add_2_DW01_add_37
+PE_Shift_Add_6_DW01_add_2_DW01_add_25
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_6_DW01_add_1_DW01_add_36
+PE_Shift_Add_6_DW01_add_1_DW01_add_24
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_6_DW01_add_0_DW01_add_35
+PE_Shift_Add_6_DW01_add_0_DW01_add_23
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_5
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -139,11 +139,11 @@ PE_Shift_Add_5_DW01_sub_1_DW01_sub_16
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_5_DW01_sub_2_DW01_sub_17
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_5_DW01_add_2_DW01_add_22
+PE_Shift_Add_5_DW01_add_2_DW01_add_34
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_5_DW01_add_1_DW01_add_21
+PE_Shift_Add_5_DW01_add_1_DW01_add_33
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_5_DW01_add_0_DW01_add_20
+PE_Shift_Add_5_DW01_add_0_DW01_add_32
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_4
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -153,11 +153,11 @@ PE_Shift_Add_4_DW01_sub_1_DW01_sub_13
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_4_DW01_sub_2_DW01_sub_14
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_4_DW01_add_2_DW01_add_34
+PE_Shift_Add_4_DW01_add_2_DW01_add_22
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_4_DW01_add_1_DW01_add_33
+PE_Shift_Add_4_DW01_add_1_DW01_add_21
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_4_DW01_add_0_DW01_add_32
+PE_Shift_Add_4_DW01_add_0_DW01_add_20
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_3
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -167,11 +167,11 @@ PE_Shift_Add_3_DW01_sub_1_DW01_sub_10
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_3_DW01_sub_2_DW01_sub_11
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_3_DW01_add_2_DW01_add_19
+PE_Shift_Add_3_DW01_add_2_DW01_add_31
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_3_DW01_add_1_DW01_add_18
+PE_Shift_Add_3_DW01_add_1_DW01_add_30
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_3_DW01_add_0_DW01_add_17
+PE_Shift_Add_3_DW01_add_0_DW01_add_29
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_2
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -181,11 +181,11 @@ PE_Shift_Add_2_DW01_sub_1_DW01_sub_7
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_2_DW01_sub_2_DW01_sub_8
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_2_DW01_add_2_DW01_add_31
+PE_Shift_Add_2_DW01_add_2_DW01_add_19
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_2_DW01_add_1_DW01_add_30
+PE_Shift_Add_2_DW01_add_1_DW01_add_18
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_2_DW01_add_0_DW01_add_29
+PE_Shift_Add_2_DW01_add_0_DW01_add_17
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_1
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -195,11 +195,11 @@ PE_Shift_Add_1_DW01_sub_1_DW01_sub_4
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_1_DW01_sub_2_DW01_sub_5
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_1_DW01_add_2_DW01_add_16
+PE_Shift_Add_1_DW01_add_2_DW01_add_28
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_1_DW01_add_1_DW01_add_15
+PE_Shift_Add_1_DW01_add_1_DW01_add_27
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_1_DW01_add_0_DW01_add_14
+PE_Shift_Add_1_DW01_add_0_DW01_add_26
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_0
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -209,11 +209,11 @@ PE_Shift_Add_0_DW01_sub_1
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 PE_Shift_Add_0_DW01_sub_2
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_0_DW01_add_2_DW01_add_28
+PE_Shift_Add_0_DW01_add_2_DW01_add_16
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_0_DW01_add_1_DW01_add_27
+PE_Shift_Add_0_DW01_add_1_DW01_add_15
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
-PE_Shift_Add_0_DW01_add_0_DW01_add_26
+PE_Shift_Add_0_DW01_add_0_DW01_add_14
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
 SNPS_CLOCK_GATE_HIGH_CHIP_1
                        enG5K             fsa0m_a_generic_core_tt1p8v25c
@@ -444,149 +444,149 @@ Power-specific unit information :
                                        Switch   Int      Leak     Total
 Hierarchy                              Power    Power    Power    Power    %
 --------------------------------------------------------------------------------
-CHIP                                      1.287    3.127 1.89e+06    4.416 100.0
-  mult_134 (CHIP_DW02_mult_0)          2.23e-03 2.52e-03 4.74e+03 4.75e-03   0.1
-  mult_135 (CHIP_DW02_mult_1)          2.75e-03 2.09e-03 6.34e+03 4.85e-03   0.1
-  r118 (CHIP_DW01_inc_1_DW01_inc_3)    9.19e-04 1.85e-03 1.79e+03 2.77e-03   0.1
-  rf_io (RegFileDual_DATA_WIDTH22)        0.274    0.799 2.05e+05    1.073  24.3
-  rf_data (RegFileDual_DATA_WIDTH34)   5.56e-03    0.404 3.18e+05    0.410   9.3
-  mac (DFrFT_MAC)                         0.761    1.627 1.13e+06    2.388  54.1
-    pe3_i (PE_Shift_Add_0)             1.25e-02    0.140 1.14e+05    0.153   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_0_DW01_add_26)
-                                       2.85e-04 5.14e-04 1.12e+04 8.10e-04   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_1_DW01_add_27)
-                                       2.85e-04 4.68e-04 1.11e+04 7.65e-04   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_2_DW01_add_28)
-                                       3.00e-04 5.69e-04 1.13e+04 8.80e-04   0.0
+CHIP                                      1.297    3.394 1.86e+06    4.692 100.0
+  mult_148 (CHIP_DW02_mult_0)          1.57e-03 1.09e-03 3.95e+03 2.66e-03   0.1
+  mult_149 (CHIP_DW02_mult_1)          3.72e-03 3.97e-03 6.66e+03 7.69e-03   0.2
+  r166 (CHIP_DW01_inc_1_DW01_inc_3)    8.92e-04 1.81e-03 1.79e+03 2.71e-03   0.1
+  rf_io (RegFileDual_DATA_WIDTH22)        0.308    1.075 2.02e+05    1.383  29.5
+  rf_data (RegFileDual_DATA_WIDTH34)   5.31e-03    0.404 3.11e+05    0.410   8.7
+  mac (DFrFT_MAC)                         0.730    1.617 1.11e+06    2.348  50.0
+    pe3_i (PE_Shift_Add_0)             8.73e-03    0.138 1.13e+05    0.147   3.1
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_0_DW01_add_14)
+                                       3.73e-04 6.13e-04 1.13e+04 9.97e-04   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_1_DW01_add_15)
+                                       3.28e-04 5.12e-04 1.14e+04 8.52e-04   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_2_DW01_add_16)
+                                       3.41e-04 5.90e-04 1.11e+04 9.42e-04   0.0
       sub_28 (PE_Shift_Add_0_DW01_sub_2)
-                                       2.42e-04 3.61e-04 5.77e+03 6.09e-04   0.0
+                                       2.26e-04 3.62e-04 5.97e+03 5.93e-04   0.0
       sub_28_2 (PE_Shift_Add_0_DW01_sub_1)
-                                       2.58e-04 3.74e-04 5.74e+03 6.38e-04   0.0
+                                       2.30e-04 3.52e-04 5.67e+03 5.88e-04   0.0
       sub_28_3 (PE_Shift_Add_0_DW01_sub_0)
-                                       2.76e-04 4.04e-04 5.76e+03 6.86e-04   0.0
-    pe3_r (PE_Shift_Add_1)             1.30e-02    0.140 1.14e+05    0.153   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_0_DW01_add_14)
-                                       3.28e-04 5.39e-04 1.13e+04 8.78e-04   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_1_DW01_add_15)
-                                       2.79e-04 4.54e-04 1.11e+04 7.44e-04   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_2_DW01_add_16)
-                                       3.39e-04 6.01e-04 1.12e+04 9.51e-04   0.0
+                                       2.47e-04 3.75e-04 5.69e+03 6.28e-04   0.0
+    pe3_r (PE_Shift_Add_1)             1.22e-02    0.140 1.12e+05    0.152   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_0_DW01_add_26)
+                                       3.85e-04 6.71e-04 1.13e+04 1.07e-03   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_1_DW01_add_27)
+                                       3.85e-04 5.97e-04 1.12e+04 9.94e-04   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_2_DW01_add_28)
+                                       3.43e-04 5.99e-04 1.11e+04 9.53e-04   0.0
       sub_28 (PE_Shift_Add_1_DW01_sub_2_DW01_sub_5)
-                                       2.38e-04 3.77e-04 5.85e+03 6.20e-04   0.0
+                                       2.22e-04 3.58e-04 5.67e+03 5.86e-04   0.0
       sub_28_2 (PE_Shift_Add_1_DW01_sub_1_DW01_sub_4)
-                                       2.54e-04 3.88e-04 5.77e+03 6.47e-04   0.0
+                                       2.50e-04 3.85e-04 5.86e+03 6.41e-04   0.0
       sub_28_3 (PE_Shift_Add_1_DW01_sub_0_DW01_sub_3)
-                                       2.68e-04 4.10e-04 5.92e+03 6.84e-04   0.0
-    pe2_i (PE_Shift_Add_2)             1.34e-02    0.141 1.13e+05    0.154   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_0_DW01_add_29)
-                                       4.07e-04 6.60e-04 1.12e+04 1.08e-03   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_1_DW01_add_30)
-                                       3.71e-04 5.70e-04 1.10e+04 9.52e-04   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_2_DW01_add_31)
-                                       3.82e-04 6.67e-04 1.11e+04 1.06e-03   0.0
+                                       2.64e-04 4.10e-04 5.75e+03 6.80e-04   0.0
+    pe2_i (PE_Shift_Add_2)             9.45e-03    0.139 1.13e+05    0.149   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_0_DW01_add_17)
+                                       3.99e-04 7.01e-04 1.14e+04 1.11e-03   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_1_DW01_add_18)
+                                       4.10e-04 6.35e-04 1.12e+04 1.06e-03   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_2_DW01_add_19)
+                                       3.00e-04 5.69e-04 1.12e+04 8.80e-04   0.0
       sub_28 (PE_Shift_Add_2_DW01_sub_2_DW01_sub_8)
-                                       2.61e-04 3.99e-04 5.71e+03 6.65e-04   0.0
+                                       2.41e-04 3.95e-04 5.84e+03 6.43e-04   0.0
       sub_28_2 (PE_Shift_Add_2_DW01_sub_1_DW01_sub_7)
-                                       2.84e-04 4.25e-04 5.93e+03 7.16e-04   0.0
+                                       2.60e-04 4.07e-04 5.73e+03 6.72e-04   0.0
       sub_28_3 (PE_Shift_Add_2_DW01_sub_0_DW01_sub_6)
-                                       2.89e-04 4.29e-04 5.75e+03 7.23e-04   0.0
-    pe2_r (PE_Shift_Add_3)             1.31e-02    0.141 1.13e+05    0.154   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_0_DW01_add_17)
-                                       3.90e-04 6.24e-04 1.13e+04 1.03e-03   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_1_DW01_add_18)
-                                       3.90e-04 6.45e-04 1.12e+04 1.05e-03   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_2_DW01_add_19)
-                                       3.96e-04 7.03e-04 1.09e+04 1.11e-03   0.0
+                                       2.88e-04 4.16e-04 5.73e+03 7.10e-04   0.0
+    pe2_r (PE_Shift_Add_3)             1.22e-02    0.140 1.12e+05    0.152   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_0_DW01_add_29)
+                                       4.34e-04 7.32e-04 1.14e+04 1.18e-03   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_1_DW01_add_30)
+                                       3.84e-04 5.66e-04 1.13e+04 9.61e-04   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_2_DW01_add_31)
+                                       3.94e-04 6.77e-04 1.11e+04 1.08e-03   0.0
       sub_28 (PE_Shift_Add_3_DW01_sub_2_DW01_sub_11)
-                                       2.61e-04 4.12e-04 5.69e+03 6.78e-04   0.0
+                                       2.46e-04 4.00e-04 5.83e+03 6.52e-04   0.0
       sub_28_2 (PE_Shift_Add_3_DW01_sub_1_DW01_sub_10)
-                                       2.76e-04 4.35e-04 6.00e+03 7.17e-04   0.0
+                                       2.79e-04 4.30e-04 5.74e+03 7.16e-04   0.0
       sub_28_3 (PE_Shift_Add_3_DW01_sub_0_DW01_sub_9)
-                                       2.77e-04 4.22e-04 5.79e+03 7.04e-04   0.0
-    pe1_i (PE_Shift_Add_4)             1.32e-02    0.140 1.13e+05    0.153   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_0_DW01_add_32)
-                                       3.70e-04 6.10e-04 1.11e+04 9.91e-04   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_1_DW01_add_33)
-                                       2.79e-04 5.16e-04 1.13e+04 8.06e-04   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_2_DW01_add_34)
-                                       3.08e-04 5.30e-04 1.12e+04 8.49e-04   0.0
+                                       3.01e-04 4.47e-04 5.70e+03 7.54e-04   0.0
+    pe1_i (PE_Shift_Add_4)             1.16e-02    0.139 1.11e+05    0.150   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_0_DW01_add_20)
+                                       3.24e-04 5.75e-04 1.09e+04 9.10e-04   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_1_DW01_add_21)
+                                       3.28e-04 5.12e-04 1.10e+04 8.51e-04   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_2_DW01_add_22)
+                                       2.85e-04 4.86e-04 1.11e+04 7.82e-04   0.0
       sub_28 (PE_Shift_Add_4_DW01_sub_2_DW01_sub_14)
-                                       2.40e-04 3.58e-04 5.83e+03 6.04e-04   0.0
+                                       2.20e-04 3.48e-04 5.67e+03 5.74e-04   0.0
       sub_28_2 (PE_Shift_Add_4_DW01_sub_1_DW01_sub_13)
-                                       2.58e-04 3.70e-04 5.59e+03 6.33e-04   0.0
+                                       2.31e-04 3.49e-04 5.70e+03 5.86e-04   0.0
       sub_28_3 (PE_Shift_Add_4_DW01_sub_0_DW01_sub_12)
-                                       2.92e-04 4.28e-04 5.67e+03 7.26e-04   0.0
-    pe1_r (PE_Shift_Add_5)             1.27e-02    0.140 1.13e+05    0.152   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_0_DW01_add_20)
-                                       2.70e-04 4.79e-04 1.13e+04 7.61e-04   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_1_DW01_add_21)
-                                       2.92e-04 4.66e-04 1.10e+04 7.69e-04   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_2_DW01_add_22)
-                                       2.80e-04 5.10e-04 1.11e+04 8.01e-04   0.0
+                                       2.65e-04 3.90e-04 5.67e+03 6.61e-04   0.0
+    pe1_r (PE_Shift_Add_5)             8.85e-03    0.139 1.12e+05    0.148   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_0_DW01_add_32)
+                                       4.30e-04 7.01e-04 1.10e+04 1.14e-03   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_1_DW01_add_33)
+                                       3.69e-04 5.22e-04 1.11e+04 9.02e-04   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_2_DW01_add_34)
+                                       4.61e-04 7.66e-04 1.11e+04 1.24e-03   0.0
       sub_28 (PE_Shift_Add_5_DW01_sub_2_DW01_sub_17)
-                                       2.40e-04 3.74e-04 5.74e+03 6.20e-04   0.0
+                                       2.24e-04 3.53e-04 5.69e+03 5.83e-04   0.0
       sub_28_2 (PE_Shift_Add_5_DW01_sub_1_DW01_sub_16)
-                                       2.59e-04 3.96e-04 5.70e+03 6.61e-04   0.0
+                                       2.44e-04 3.78e-04 5.77e+03 6.27e-04   0.0
       sub_28_3 (PE_Shift_Add_5_DW01_sub_0_DW01_sub_15)
-                                       2.87e-04 4.24e-04 5.67e+03 7.17e-04   0.0
-    pe0_i (PE_Shift_Add_6)             1.35e-02    0.141 1.13e+05    0.154   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_0_DW01_add_35)
-                                       3.37e-04 5.74e-04 1.11e+04 9.22e-04   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_1_DW01_add_36)
-                                       2.92e-04 4.57e-04 1.11e+04 7.60e-04   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_2_DW01_add_37)
-                                       3.05e-04 5.37e-04 1.10e+04 8.52e-04   0.0
+                                       2.85e-04 4.20e-04 5.74e+03 7.10e-04   0.0
+    pe0_i (PE_Shift_Add_6)             1.21e-02    0.139 1.11e+05    0.151   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_0_DW01_add_23)
+                                       3.69e-04 6.54e-04 1.13e+04 1.03e-03   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_1_DW01_add_24)
+                                       3.53e-04 5.27e-04 1.14e+04 8.92e-04   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_2_DW01_add_25)
+                                       3.22e-04 5.61e-04 1.09e+04 8.94e-04   0.0
       sub_28 (PE_Shift_Add_6_DW01_sub_2_DW01_sub_20)
-                                       2.39e-04 3.57e-04 5.88e+03 6.02e-04   0.0
+                                       2.21e-04 3.52e-04 5.77e+03 5.78e-04   0.0
       sub_28_2 (PE_Shift_Add_6_DW01_sub_1_DW01_sub_19)
-                                       3.34e-04 4.90e-04 5.80e+03 8.30e-04   0.0
+                                       2.96e-04 4.44e-04 5.70e+03 7.46e-04   0.0
       sub_28_3 (PE_Shift_Add_6_DW01_sub_0_DW01_sub_18)
-                                       3.83e-04 5.17e-04 5.74e+03 9.06e-04   0.0
-    pe0_r (PE_Shift_Add_7)             1.35e-02    0.140 1.14e+05    0.154   3.5
-      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_0_DW01_add_23)
-                                       2.90e-04 5.09e-04 1.12e+04 8.10e-04   0.0
-      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_1_DW01_add_24)
-                                       3.44e-04 5.25e-04 1.10e+04 8.80e-04   0.0
-      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_2_DW01_add_25)
-                                       2.93e-04 4.83e-04 1.11e+04 7.87e-04   0.0
+                                       3.16e-04 4.33e-04 5.68e+03 7.54e-04   0.0
+    pe0_r (PE_Shift_Add_7)             1.32e-02    0.140 1.13e+05    0.153   3.3
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_0_DW01_add_35)
+                                       4.11e-04 6.60e-04 1.11e+04 1.08e-03   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_1_DW01_add_36)
+                                       3.99e-04 6.02e-04 1.11e+04 1.01e-03   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_2_DW01_add_37)
+                                       3.87e-04 6.29e-04 1.12e+04 1.03e-03   0.0
       sub_28 (PE_Shift_Add_7_DW01_sub_2_DW01_sub_23)
-                                       2.40e-04 3.77e-04 5.74e+03 6.23e-04   0.0
+                                       2.23e-04 3.60e-04 5.84e+03 5.89e-04   0.0
       sub_28_2 (PE_Shift_Add_7_DW01_sub_1_DW01_sub_22)
-                                       3.32e-04 4.99e-04 6.01e+03 8.36e-04   0.0
+                                       3.06e-04 4.55e-04 5.70e+03 7.67e-04   0.0
       sub_28_3 (PE_Shift_Add_7_DW01_sub_0_DW01_sub_21)
-                                       3.72e-04 5.33e-04 5.75e+03 9.11e-04   0.0
-    rom3 (ROM_Wrapper_Odd_0)              0.143    0.118 5.38e+04    0.261   5.9
-      rom_inst (CSD_ROM_Table_odd_0)      0.133 9.33e-02 4.72e+04    0.226   5.1
-    rom2 (ROM_Wrapper_Even_0)             0.170    0.134 5.57e+04    0.304   6.9
-      rom_inst (CSD_ROM_Table_even_0)     0.158    0.113 4.87e+04    0.271   6.1
-    rom1 (ROM_Wrapper_Odd_1)              0.143    0.113 5.37e+04    0.256   5.8
-      rom_inst (CSD_ROM_Table_odd_1)      0.132 9.03e-02 4.72e+04    0.223   5.0
-    rom0 (ROM_Wrapper_Even_1)             0.173    0.136 5.57e+04    0.309   7.0
-      rom_inst (CSD_ROM_Table_even_1)     0.161    0.114 4.86e+04    0.276   6.2
-  cordic1 (cordic_rotation_0)          1.69e-02 2.82e-02 7.26e+04 4.52e-02   1.0
+                                       3.40e-04 4.76e-04 5.85e+03 8.22e-04   0.0
+    rom3 (ROM_Wrapper_Odd_0)              0.138    0.117 5.04e+04    0.255   5.4
+      rom_inst (CSD_ROM_Table_odd_0)      0.129 9.29e-02 4.41e+04    0.222   4.7
+    rom2 (ROM_Wrapper_Even_0)             0.163    0.133 5.26e+04    0.296   6.3
+      rom_inst (CSD_ROM_Table_even_0)     0.156    0.111 4.56e+04    0.267   5.7
+    rom1 (ROM_Wrapper_Odd_1)              0.136    0.112 5.05e+04    0.249   5.3
+      rom_inst (CSD_ROM_Table_odd_1)      0.128 9.05e-02 4.43e+04    0.218   4.6
+    rom0 (ROM_Wrapper_Even_1)             0.166    0.136 5.23e+04    0.303   6.4
+      rom_inst (CSD_ROM_Table_even_1)     0.159    0.114 4.54e+04    0.273   5.8
+  cordic1 (cordic_rotation_0)          1.80e-02 2.88e-02 6.94e+04 4.68e-02   1.0
     sub_99 (cordic_rotation_0_DW01_sub_2_DW01_sub_30)
-                                       3.99e-06 4.87e-06 4.14e+03 1.30e-05   0.0
+                                       5.71e-05 5.51e-05 4.14e+03 1.16e-04   0.0
     add_100 (cordic_rotation_0_DW01_add_4)
-                                       1.98e-06 2.22e-06 3.46e+03 7.67e-06   0.0
+                                       3.22e-05 3.13e-05 3.46e+03 6.70e-05   0.0
     sub_101 (cordic_rotation_0_DW01_sub_1_DW01_sub_29)
-                                       2.02e-05 2.02e-05 3.53e+03 4.39e-05   0.0
+                                       5.77e-05 6.32e-05 3.53e+03 1.24e-04   0.0
     add_103 (cordic_rotation_0_DW01_add_3)
-                                       2.18e-06 2.36e-06 3.46e+03 8.01e-06   0.0
+                                       3.61e-05 3.40e-05 3.46e+03 7.36e-05   0.0
     sub_104 (cordic_rotation_0_DW01_sub_0_DW01_sub_28)
-                                       4.86e-06 5.71e-06 4.14e+03 1.47e-05   0.0
+                                       5.10e-05 4.96e-05 4.13e+03 1.05e-04   0.0
     add_105 (cordic_rotation_0_DW01_add_2)
-                                       5.06e-06 1.00e-05 2.82e+03 1.79e-05   0.0
-  cordic0 (cordic_rotation_1)          1.68e-02 2.83e-02 7.26e+04 4.52e-02   1.0
+                                       3.75e-05 4.06e-05 2.82e+03 8.09e-05   0.0
+  cordic0 (cordic_rotation_1)          1.48e-02 2.80e-02 7.00e+04 4.28e-02   0.9
     sub_99 (cordic_rotation_1_DW01_sub_2_DW01_sub_36)
-                                       6.01e-06 5.75e-06 4.14e+03 1.59e-05   0.0
+                                       5.16e-05 5.87e-05 4.51e+03 1.15e-04   0.0
     add_100 (cordic_rotation_1_DW01_add_4_DW01_add_10)
-                                       3.97e-06 3.56e-06 3.46e+03 1.10e-05   0.0
+                                       3.52e-05 3.34e-05 3.46e+03 7.21e-05   0.0
     sub_101 (cordic_rotation_1_DW01_sub_1_DW01_sub_35)
-                                       4.08e-06 4.46e-06 3.53e+03 1.21e-05   0.0
+                                       5.60e-05 6.26e-05 3.53e+03 1.22e-04   0.0
     add_103 (cordic_rotation_1_DW01_add_3_DW01_add_9)
-                                       3.26e-06 2.48e-06 3.46e+03 9.20e-06   0.0
+                                       3.19e-05 3.11e-05 3.46e+03 6.65e-05   0.0
     sub_104 (cordic_rotation_1_DW01_sub_0_DW01_sub_34)
-                                       5.99e-06 5.91e-06 4.14e+03 1.60e-05   0.0
+                                       5.74e-05 6.43e-05 4.50e+03 1.26e-04   0.0
     add_105 (cordic_rotation_1_DW01_add_2_DW01_add_8)
-                                       2.25e-06 3.88e-06 2.82e+03 8.94e-06   0.0
+                                       3.61e-05 3.86e-05 2.82e+03 7.75e-05   0.0
 1

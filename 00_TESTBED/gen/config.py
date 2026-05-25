@@ -4,7 +4,7 @@ import numpy as np
 # 硬體系統常數與 Bit-width 設定
 # ==========================================
 RANDOM_SEED = 67
-AUTO_UNITY_GAIN = True
+AUTO_UNITY_GAIN = False
 
 N = 32
 V_BITS = 14       # 矩陣 V 的小數點位數 (Q14)
@@ -38,7 +38,7 @@ ATAN_TABLE_FULL = [8192, 4836, 2555, 1297, 651, 326, 163, 81, 41, 20, 10, 5]
 ATAN_TABLE = ATAN_TABLE_FULL[:STAGES]
 
 # Hardware bit design:
-INPUT_PORT = 8
+INPUT_PORT = 9   # 8-bit chip default; 9-bit sim for wider inter-pass storage
 OUTPUT_PORT = 11
 
 MAC_INPUT = 17

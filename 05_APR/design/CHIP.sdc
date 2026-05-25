@@ -14,10 +14,7 @@ set sdc_version 1.8
 
 # Innovus MMMC: wire_load from RC corners, not SDC wire_load_model
 # set_wire_load_model -name G200K -library fsa0m_a_generic_core_tt1p8v25c
-# Innovus: no set_max_fanout in SDC after CTS — [current_design] flags clock nets (fanout 40+);
-# [all_outputs]/[all_registers] are invalid or fail TCLCMD-1117/917 on CHIP+pad netlist.
-# Data fanout DRV: setOptMode -fixFanoutLoad + optDesign (see fix_max_fanout.tcl).
-# DC syn only: set_max_fanout 32 [current_design] in 02_SYN/Netlist/CHIP_syn.sdc
+# Innovus: no set_max_fanout in SDC (CTS clocks violate global limit; use fixFanoutLoad)
 # set_max_area 0
 set_load -pin_load 1 [get_ports i_ready]
 set_load -pin_load 1 [get_ports o_valid]
@@ -40,6 +37,12 @@ set_clock_uncertainty 0.1  [get_clocks CLK]
 set_input_delay -clock CLK  -max 1  [get_ports rst_n]
 set_input_delay -clock CLK  -max 1  [get_ports i_valid]
 set_input_delay -clock CLK  -max 1  [get_ports o_ready]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[21]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[20]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[19]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[18]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[17]}]
+set_input_delay -clock CLK  -max 1  [get_ports {i_data[16]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[15]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[14]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[13]}]
@@ -73,6 +76,12 @@ set_drive 1  [get_ports clk]
 set_drive 1  [get_ports rst_n]
 set_drive 1  [get_ports i_valid]
 set_drive 1  [get_ports o_ready]
+set_drive 1  [get_ports {i_data[21]}]
+set_drive 1  [get_ports {i_data[20]}]
+set_drive 1  [get_ports {i_data[19]}]
+set_drive 1  [get_ports {i_data[18]}]
+set_drive 1  [get_ports {i_data[17]}]
+set_drive 1  [get_ports {i_data[16]}]
 set_drive 1  [get_ports {i_data[15]}]
 set_drive 1  [get_ports {i_data[14]}]
 set_drive 1  [get_ports {i_data[13]}]

@@ -30,7 +30,17 @@ if {![link]} {
 set_operating_conditions -max WCCOM -max_library fsa0m_a_generic_core_ss1p62v125c \
                          -min BCCOM -min_library fsa0m_a_generic_core_ff1p98vm40c
 
-read_sdc ./design/CHIP.sdc
+set fin [open ./CHIP_postAPR.sdc r]
+set fout [open ./CHIP_postAPR.pt.sdc w]
+while {[gets $fin line] >= 0} {
+    if {[regexp {^current_design} $line]} { continue }
+    puts $fout $line
+}
+close $fin
+close $fout
+if {[catch {read_sdc ./CHIP_postAPR.pt.sdc}]} {
+    read_sdc ./design/CHIP.sdc
+}
 
 read_sdf -load_delay net ./CHIP.sdf
 

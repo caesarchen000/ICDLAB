@@ -1,0 +1,8 @@
+/home/raid7_2/userb12/b12166/chip_v2/00_TESTBED/testbench/tb_2d_rgb_11.v
+/home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v
+/home/raid7_2/userb12/b12166/chip_v2/01_RTL/CORDIC.v
+/home/raid7_2/userb12/b12166/chip_v2/01_RTL/CSD_ROM_Table.v
+/home/raid7_2/userb12/b12166/chip_v2/01_RTL/MAC.v
+/home/raid7_2/userb12/b12166/chip_v2/01_RTL/PE.v
+/home/raid7_2/userb12/b12166/chip_v2/01_RTL/ROM_Wrapper.v
+/home/raid7_2/userb12/b12166/chip_v2/01_RTL/RegFile.v

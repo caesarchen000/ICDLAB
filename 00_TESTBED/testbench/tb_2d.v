@@ -28,6 +28,10 @@ module tb;
     integer i_val, r_val;
     integer total_pixels, num_blocks, blk, b_offset;
 
+    // Match Python rtl_img_tb.py / hw_sim_2d (fixed key, decrypt col then row)
+    localparam [7:0] KEY_ENC = 8'd40;
+    localparam signed [7:0] KEY_DEC = -8'sd40;
+
     always #(`CYCLE/2) clk = ~clk;
 
     // ==============================================================
@@ -100,12 +104,12 @@ module tb;
         #15 rst_n = 0; #20 rst_n = 1; #10;
 
         $display("==================================================");
-        $display("   [1/2] 正在執行 2D 影像加密 (Key = 64)...       ");
+        $display("   [1/2] 2D encrypt (rows then cols, key=%0d)", KEY_ENC);
         $display("==================================================");
         for (blk = 0; blk < num_blocks; blk = blk + 1) begin
             b_offset = blk * 1024;
-            for (r = 0; r < 32; r = r + 1) process_1d_burst(8'd64, 0, 1, b_offset + r*32, 1, b_offset + r*32); 
-            for (c = 0; c < 32; c = c + 1) process_1d_burst(8'd64, 1, 32, b_offset + c, 32, b_offset + c);     
+            for (r = 0; r < 32; r = r + 1) process_1d_burst(KEY_ENC, 0, 1, b_offset + r*32, 1, b_offset + r*32);
+            for (c = 0; c < 32; c = c + 1) process_1d_burst(KEY_ENC, 1, 32, b_offset + c, 32, b_offset + c);
         end
 
         fd_enc = $fopen("../00_TESTBED/pattern/img_enc.txt", "w");
@@ -113,12 +117,12 @@ module tb;
         $fclose(fd_enc);
 
         $display("==================================================");
-        $display("   [2/2] 正在執行 2D 影像解密 (Key = -64)...      ");
+        $display("   [2/2] 2D decrypt (cols then rows, key=%0d)", KEY_DEC);
         $display("==================================================");
         for (blk = 0; blk < num_blocks; blk = blk + 1) begin
             b_offset = blk * 1024;
-            for (r = 0; r < 32; r = r + 1) process_1d_burst(-8'sd64, 0, 1, b_offset + r*32, 1, b_offset + r*32);
-            for (c = 0; c < 32; c = c + 1) process_1d_burst(-8'sd64, 1, 32, b_offset + c, 32, b_offset + c);
+            for (c = 0; c < 32; c = c + 1) process_1d_burst(KEY_DEC, 0, 32, b_offset + c, 32, b_offset + c);
+            for (r = 0; r < 32; r = r + 1) process_1d_burst(KEY_DEC, 1, 1, b_offset + r*32, 1, b_offset + r*32);
         end
 
         fd_dec = $fopen("../00_TESTBED/pattern/img_dec.txt", "w");

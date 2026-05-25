@@ -1,0 +1,6 @@
+{"vcs1":{"timestamp_begin":1779648989.229531692, "rt":3.39, "ut":2.78, "st":0.35}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1779648988.074509051}
+{"VCS_COMP_START_TIME": 1779648988.074509051}
+{"VCS_COMP_END_TIME": 1779648992.795822013}
+{"VCS_USER_OPTIONS": "../00_TESTBED/testbench/tb.v -f gate.f ../05_APR/Verilog/fsa0m_a_generic_core_21.lib.src -full64 -R +v2k +neg_tchk"}
+{"vcs1": {"peak_mem": 336376}}

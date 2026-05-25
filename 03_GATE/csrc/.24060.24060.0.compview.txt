@@ -1,0 +1,5 @@
+{"vcs1":{"timestamp_begin":1779699505.909143601, "rt":0.24, "ut":0.12, "st":0.09}}
+{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1779699505.024938337}
+{"VCS_COMP_START_TIME": 1779699505.024938337}
+{"VCS_COMP_END_TIME": 1779699506.303086725}
+{"VCS_USER_OPTIONS": "../00_TESTBED/testbench/tb.v -f gate.f ../05_APR/Verilog/fsa0m_a_generic_core_21.lib.src -full64 -R +v2k +neg_tchk -debug_access+all"}

@@ -1,6 +1,10 @@
 `timescale 1ns/10ps
 `define CYCLE      20.0
+`ifdef SDF
+`define MAX_CYCLE  50000   // gate+SDF needs more cycles (delays + FSM)
+`else
 `define MAX_CYCLE  2000
+`endif
 `define SDFFILE    "./CHIP.sdf"
 
 module tb;
@@ -13,7 +17,7 @@ module tb;
     // ==========================================
     reg         i_valid;
     wire        i_ready;
-    reg  [15:0] i_data;
+    reg  [21:0] i_data;   // {imag[10:0], real[10:0]}
     
     reg         o_ready;
     wire        o_valid;
@@ -54,6 +58,11 @@ module tb;
     real sq_err_r, sq_err_i;
     real total_mse_r, total_mse_i;
     integer hw_r_int, hw_i_int;
+
+    function automatic signed [10:0] se11;
+        input signed [7:0] v;
+        se11 = {{3{v[7]}}, v};
+    endfunction
 
     always begin
         #(`CYCLE/2) clk = ~clk;
@@ -98,13 +107,13 @@ module tb;
         
         // 【第一拍】: 送出 Key (CHIP 在 S_IDLE 時會抓取 i_data[7:0])
         i_valid = 1'b1;
-        i_data  = {8'd0, key}; 
+        i_data  = {11'd0, {3'b0, key}};
         @(negedge clk);
         
         // 【接下來的 32 拍】: 連續送出 32 筆資料 (CHIP 在 S_LOAD 階段)
         for (i = 0; i < 32; i = i + 1) begin
             i_valid = 1'b1;
-            i_data  = {mem_in_i[i], mem_in_r[i]}; // [15:8]=Imag, [7:0]=Real
+            i_data  = {se11(mem_in_i[i]), se11(mem_in_r[i])};
             @(negedge clk);
         end
         i_valid = 1'b0; // 傳輸結束拉低 valid
@@ -119,17 +128,24 @@ module tb;
         // =====================================
         o_ready = 1'b1; // 告訴硬體 TB 端已經準備好接收
 
-        wait(o_valid == 1'b1); // 等待硬體進入 S_OUT
-        @(negedge clk);        // 對齊波谷開始取樣
-
+        wait(o_valid == 1'b1);
+`ifdef SDF
+        // Gate+SDF: sample after outputs settle (negedge was too early)
+        repeat (2) @(posedge clk);
         for (i = 0; i < 32; i = i + 1) begin
-            // 【第 1 拍】：讀取 Real Part (對應硬體 o_counter_r[0] == 0)
+            @(posedge clk);
+            #0.1;
             hw_r_int = $signed(o_data);
-            
-            @(negedge clk);
-            
-            // 【第 2 拍】：讀取 Imag Part (對應硬體 o_counter_r[0] == 1)
+            @(posedge clk);
+            #0.1;
             hw_i_int = $signed(o_data);
+`else
+        @(negedge clk);
+        for (i = 0; i < 32; i = i + 1) begin
+            hw_r_int = $signed(o_data);
+            @(negedge clk);
+            hw_i_int = $signed(o_data);
+`endif
 
             // 資料格式轉換為浮點數 real 並計算誤差
             hw_r_real = hw_r_int;
@@ -145,16 +161,19 @@ module tb;
             total_mse_r = total_mse_r + sq_err_r;
             total_mse_i = total_mse_i + sq_err_i;
 
-            // if ($signed(gold_hw_r[i]) !== hw_r_int || $signed(gold_hw_i[i]) !== hw_i_int) begin
-            //     $display("❌ 抓到了！硬體算錯了 at Idx=%2d. HW_R=%4d, Python_R=%4d", 
-            //               i, hw_r_int, $signed(gold_hw_r[i]));
-            // end else begin
+            if ($signed(gold_hw_r[i]) !== hw_r_int || $signed(gold_hw_i[i]) !== hw_i_int) begin
+                $display("❌ 抓到了！硬體算錯了 at Idx=%2d. HW_R=%4d, Python_R=%4d", 
+                          i, hw_r_int, $signed(gold_hw_r[i]));
+            end else begin
                 $display("  %2d   | %5d | %10.4f | %8.4f || %5d | %10.4f | %8.4f", 
                         i, hw_r_int, th_r_real, sq_err_r, hw_i_int, th_i_real, sq_err_i);
-            // end
+            end
 
-            // 準備接收下一個 Index 的 Real Part
+`ifdef SDF
+            if (i != 31) @(posedge clk);
+`else
             if (i != 31) @(negedge clk);
+`endif
         end
 
         o_ready = 1'b0;
@@ -176,18 +195,13 @@ module tb;
         $finish;
     end
     
-    // Waveforms: FSDB (Verdi) and/or IEEE VCD (PrimeTime PX read_vcd)
-    `ifdef VCD
-    initial begin
-        $dumpfile("CHIP_post.vcd");
-        $dumpvars(0, tb.u_chip);
-    end
-    `else
+    // FSDB needs Verdi PLI; omit for gate sim (use +define+FSDB + Verdi tab if needed)
+`ifdef FSDB
     initial begin
         $fsdbDumpfile("DFrFT.fsdb");
         $fsdbDumpvars(0, tb, "+mda");
     end
-    `endif
+`endif
 
     // gate sim
     `ifdef SDF
