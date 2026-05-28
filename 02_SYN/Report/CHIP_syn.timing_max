@@ -1,0 +1,355 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay max
+        -max_paths 5
+Design : CHIP
+Version: U-2022.12
+Date   : Thu May 28 10:53:09 2026
+****************************************
+
+Operating Conditions: WCCOM   Library: fsa0m_a_generic_core_ss1p62v125c
+Wire Load Model Mode: enclosed
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: rf_io/clk_gate_bank_mem_0_reg[1]/latch
+            (negative level-sensitive latch clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH22
+                     enG10K                fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (QDFFRBP)                             0.00       0.50 r
+  state_r_reg[2]/Q (QDFFRBP)                              0.33       0.83 r
+  U518/O (INV4)                                           0.06       0.90 f
+  U593/O (INV1S)                                          0.17       1.07 r
+  U554/O (INV1S)                                          0.16       1.23 f
+  U543/O (ND3HT)                                          0.26       1.48 r
+  U690/O (INV1S)                                          0.36       1.85 f
+  U536/O (ND2)                                            0.55       2.40 r
+  U689/O (INV1S)                                          0.68       3.07 f
+  U750/O (MOAI1S)                                         0.56       3.63 f
+  rf_io/write_addr_2[4] (RegFileDual_DATA_WIDTH22)        0.00       3.63 f
+  rf_io/U75/O (XOR2HS)                                    0.25       3.88 f
+  rf_io/U198/O (XOR4)                                     0.44       4.32 f
+  rf_io/U169/O (OR2B1S)                                   0.22       4.54 f
+  rf_io/U63/O (BUF1CK)                                    0.68       5.22 f
+  rf_io/U69/O (ND3)                                       0.58       5.80 r
+  rf_io/U53/O (OAI22S)                                    0.22       6.02 f
+  rf_io/U70/O (AOI12HS)                                   0.27       6.29 r
+  rf_io/U161/O (ND2)                                      0.26       6.55 f
+  rf_io/U39/O (NR2)                                       0.18       6.74 r
+  rf_io/clk_gate_bank_mem_0_reg[1]/EN (SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_15)
+                                                          0.00       6.74 r
+  rf_io/clk_gate_bank_mem_0_reg[1]/latch/D (QDBHN)        0.00       6.74 r
+  data arrival time                                                  6.74
+
+  clock CLK (fall edge)                                   5.00       5.00
+  clock network delay (ideal)                             0.50       5.50
+  clock uncertainty                                      -0.10       5.40
+  rf_io/clk_gate_bank_mem_0_reg[1]/latch/CKB (QDBHN)      0.00       5.40 f
+  time borrowed from endpoint                             1.34       6.74
+  data required time                                                 6.74
+  --------------------------------------------------------------------------
+  data required time                                                 6.74
+  data arrival time                                                 -6.74
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+  Time Borrowing Information
+  --------------------------------------------------------------
+  CLK nominal pulse width                                 5.00   
+  library setup time                                     -0.08   
+  --------------------------------------------------------------
+  max time borrow                                         4.92   
+  --------------------------------------------------------------
+  actual time borrow                                      1.34   
+  clock uncertainty                                      -0.10   
+  --------------------------------------------------------------
+  time given to startpoint                                1.24   
+  --------------------------------------------------------------
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: rf_io/clk_gate_bank_mem_0_reg[0]/latch
+            (negative level-sensitive latch clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH22
+                     enG10K                fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (QDFFRBP)                             0.00       0.50 r
+  state_r_reg[2]/Q (QDFFRBP)                              0.33       0.83 r
+  U518/O (INV4)                                           0.06       0.90 f
+  U593/O (INV1S)                                          0.17       1.07 r
+  U554/O (INV1S)                                          0.16       1.23 f
+  U543/O (ND3HT)                                          0.26       1.48 r
+  U690/O (INV1S)                                          0.36       1.85 f
+  U536/O (ND2)                                            0.55       2.40 r
+  U689/O (INV1S)                                          0.68       3.07 f
+  U750/O (MOAI1S)                                         0.56       3.63 f
+  rf_io/write_addr_2[4] (RegFileDual_DATA_WIDTH22)        0.00       3.63 f
+  rf_io/U75/O (XOR2HS)                                    0.25       3.88 f
+  rf_io/U198/O (XOR4)                                     0.44       4.32 f
+  rf_io/U169/O (OR2B1S)                                   0.22       4.54 f
+  rf_io/U63/O (BUF1CK)                                    0.68       5.22 f
+  rf_io/U69/O (ND3)                                       0.58       5.80 r
+  rf_io/U53/O (OAI22S)                                    0.22       6.02 f
+  rf_io/U70/O (AOI12HS)                                   0.27       6.29 r
+  rf_io/U160/O (ND2)                                      0.26       6.56 f
+  rf_io/U31/O (NR2)                                       0.17       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[0]/EN (SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_16)
+                                                          0.00       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[0]/latch/D (QDBHN)        0.00       6.73 r
+  data arrival time                                                  6.73
+
+  clock CLK (fall edge)                                   5.00       5.00
+  clock network delay (ideal)                             0.50       5.50
+  clock uncertainty                                      -0.10       5.40
+  rf_io/clk_gate_bank_mem_0_reg[0]/latch/CKB (QDBHN)      0.00       5.40 f
+  time borrowed from endpoint                             1.33       6.73
+  data required time                                                 6.73
+  --------------------------------------------------------------------------
+  data required time                                                 6.73
+  data arrival time                                                 -6.73
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+  Time Borrowing Information
+  --------------------------------------------------------------
+  CLK nominal pulse width                                 5.00   
+  library setup time                                     -0.08   
+  --------------------------------------------------------------
+  max time borrow                                         4.92   
+  --------------------------------------------------------------
+  actual time borrow                                      1.33   
+  clock uncertainty                                      -0.10   
+  --------------------------------------------------------------
+  time given to startpoint                                1.23   
+  --------------------------------------------------------------
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: rf_io/clk_gate_bank_mem_0_reg[2]/latch
+            (negative level-sensitive latch clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH22
+                     enG10K                fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (QDFFRBP)                             0.00       0.50 r
+  state_r_reg[2]/Q (QDFFRBP)                              0.33       0.83 r
+  U518/O (INV4)                                           0.06       0.90 f
+  U593/O (INV1S)                                          0.17       1.07 r
+  U554/O (INV1S)                                          0.16       1.23 f
+  U543/O (ND3HT)                                          0.26       1.48 r
+  U690/O (INV1S)                                          0.36       1.85 f
+  U536/O (ND2)                                            0.55       2.40 r
+  U689/O (INV1S)                                          0.68       3.07 f
+  U750/O (MOAI1S)                                         0.56       3.63 f
+  rf_io/write_addr_2[4] (RegFileDual_DATA_WIDTH22)        0.00       3.63 f
+  rf_io/U75/O (XOR2HS)                                    0.25       3.88 f
+  rf_io/U198/O (XOR4)                                     0.44       4.32 f
+  rf_io/U169/O (OR2B1S)                                   0.22       4.54 f
+  rf_io/U63/O (BUF1CK)                                    0.68       5.22 f
+  rf_io/U69/O (ND3)                                       0.58       5.80 r
+  rf_io/U53/O (OAI22S)                                    0.22       6.02 f
+  rf_io/U70/O (AOI12HS)                                   0.27       6.29 r
+  rf_io/U160/O (ND2)                                      0.26       6.56 f
+  rf_io/U32/O (NR2)                                       0.17       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[2]/EN (SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_14)
+                                                          0.00       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[2]/latch/D (QDBHN)        0.00       6.73 r
+  data arrival time                                                  6.73
+
+  clock CLK (fall edge)                                   5.00       5.00
+  clock network delay (ideal)                             0.50       5.50
+  clock uncertainty                                      -0.10       5.40
+  rf_io/clk_gate_bank_mem_0_reg[2]/latch/CKB (QDBHN)      0.00       5.40 f
+  time borrowed from endpoint                             1.33       6.73
+  data required time                                                 6.73
+  --------------------------------------------------------------------------
+  data required time                                                 6.73
+  data arrival time                                                 -6.73
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+  Time Borrowing Information
+  --------------------------------------------------------------
+  CLK nominal pulse width                                 5.00   
+  library setup time                                     -0.08   
+  --------------------------------------------------------------
+  max time borrow                                         4.92   
+  --------------------------------------------------------------
+  actual time borrow                                      1.33   
+  clock uncertainty                                      -0.10   
+  --------------------------------------------------------------
+  time given to startpoint                                1.23   
+  --------------------------------------------------------------
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: rf_io/clk_gate_bank_mem_0_reg[4]/latch
+            (negative level-sensitive latch clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH22
+                     enG10K                fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (QDFFRBP)                             0.00       0.50 r
+  state_r_reg[2]/Q (QDFFRBP)                              0.33       0.83 r
+  U518/O (INV4)                                           0.06       0.90 f
+  U593/O (INV1S)                                          0.17       1.07 r
+  U554/O (INV1S)                                          0.16       1.23 f
+  U543/O (ND3HT)                                          0.26       1.48 r
+  U690/O (INV1S)                                          0.36       1.85 f
+  U536/O (ND2)                                            0.55       2.40 r
+  U689/O (INV1S)                                          0.68       3.07 f
+  U750/O (MOAI1S)                                         0.56       3.63 f
+  rf_io/write_addr_2[4] (RegFileDual_DATA_WIDTH22)        0.00       3.63 f
+  rf_io/U75/O (XOR2HS)                                    0.25       3.88 f
+  rf_io/U198/O (XOR4)                                     0.44       4.32 f
+  rf_io/U169/O (OR2B1S)                                   0.22       4.54 f
+  rf_io/U63/O (BUF1CK)                                    0.68       5.22 f
+  rf_io/U69/O (ND3)                                       0.58       5.80 r
+  rf_io/U53/O (OAI22S)                                    0.22       6.02 f
+  rf_io/U70/O (AOI12HS)                                   0.27       6.29 r
+  rf_io/U160/O (ND2)                                      0.26       6.56 f
+  rf_io/U33/O (NR2)                                       0.17       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[4]/EN (SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_12)
+                                                          0.00       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[4]/latch/D (QDBHN)        0.00       6.73 r
+  data arrival time                                                  6.73
+
+  clock CLK (fall edge)                                   5.00       5.00
+  clock network delay (ideal)                             0.50       5.50
+  clock uncertainty                                      -0.10       5.40
+  rf_io/clk_gate_bank_mem_0_reg[4]/latch/CKB (QDBHN)      0.00       5.40 f
+  time borrowed from endpoint                             1.33       6.73
+  data required time                                                 6.73
+  --------------------------------------------------------------------------
+  data required time                                                 6.73
+  data arrival time                                                 -6.73
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+  Time Borrowing Information
+  --------------------------------------------------------------
+  CLK nominal pulse width                                 5.00   
+  library setup time                                     -0.08   
+  --------------------------------------------------------------
+  max time borrow                                         4.92   
+  --------------------------------------------------------------
+  actual time borrow                                      1.33   
+  clock uncertainty                                      -0.10   
+  --------------------------------------------------------------
+  time given to startpoint                                1.23   
+  --------------------------------------------------------------
+
+
+  Startpoint: state_r_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: rf_io/clk_gate_bank_mem_0_reg[6]/latch
+            (negative level-sensitive latch clocked by CLK)
+  Path Group: CLK
+  Path Type: max
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+  RegFileDual_DATA_WIDTH22
+                     enG10K                fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                                   Incr       Path
+  --------------------------------------------------------------------------
+  clock CLK (rise edge)                                   0.00       0.00
+  clock network delay (ideal)                             0.50       0.50
+  state_r_reg[2]/CK (QDFFRBP)                             0.00       0.50 r
+  state_r_reg[2]/Q (QDFFRBP)                              0.33       0.83 r
+  U518/O (INV4)                                           0.06       0.90 f
+  U593/O (INV1S)                                          0.17       1.07 r
+  U554/O (INV1S)                                          0.16       1.23 f
+  U543/O (ND3HT)                                          0.26       1.48 r
+  U690/O (INV1S)                                          0.36       1.85 f
+  U536/O (ND2)                                            0.55       2.40 r
+  U689/O (INV1S)                                          0.68       3.07 f
+  U750/O (MOAI1S)                                         0.56       3.63 f
+  rf_io/write_addr_2[4] (RegFileDual_DATA_WIDTH22)        0.00       3.63 f
+  rf_io/U75/O (XOR2HS)                                    0.25       3.88 f
+  rf_io/U198/O (XOR4)                                     0.44       4.32 f
+  rf_io/U169/O (OR2B1S)                                   0.22       4.54 f
+  rf_io/U63/O (BUF1CK)                                    0.68       5.22 f
+  rf_io/U69/O (ND3)                                       0.58       5.80 r
+  rf_io/U53/O (OAI22S)                                    0.22       6.02 f
+  rf_io/U70/O (AOI12HS)                                   0.27       6.29 r
+  rf_io/U160/O (ND2)                                      0.26       6.56 f
+  rf_io/U34/O (NR2)                                       0.17       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[6]/EN (SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_10)
+                                                          0.00       6.73 r
+  rf_io/clk_gate_bank_mem_0_reg[6]/latch/D (QDBHN)        0.00       6.73 r
+  data arrival time                                                  6.73
+
+  clock CLK (fall edge)                                   5.00       5.00
+  clock network delay (ideal)                             0.50       5.50
+  clock uncertainty                                      -0.10       5.40
+  rf_io/clk_gate_bank_mem_0_reg[6]/latch/CKB (QDBHN)      0.00       5.40 f
+  time borrowed from endpoint                             1.33       6.73
+  data required time                                                 6.73
+  --------------------------------------------------------------------------
+  data required time                                                 6.73
+  data arrival time                                                 -6.73
+  --------------------------------------------------------------------------
+  slack (MET)                                                        0.00
+
+  Time Borrowing Information
+  --------------------------------------------------------------
+  CLK nominal pulse width                                 5.00   
+  library setup time                                     -0.08   
+  --------------------------------------------------------------
+  max time borrow                                         4.92   
+  --------------------------------------------------------------
+  actual time borrow                                      1.33   
+  clock uncertainty                                      -0.10   
+  --------------------------------------------------------------
+  time given to startpoint                                1.23   
+  --------------------------------------------------------------
+
+
+1

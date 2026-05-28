@@ -1,0 +1,7 @@
+crop_h=224
+crop_w=320
+canvas_h=224
+canvas_w=320
+key_enc=40
+pixels=71680
+blocks=70

@@ -1,0 +1,594 @@
+Loading db file '/home/raid7_2/userb12/b12006/ICDlab/final_2/02_SYN/fsa0m_a_generic_core_tt1p8v25c.db'
+Information: Propagating switching activity (low effort zero delay simulation). (PWR-6)
+Warning: Design has unannotated primary inputs. (PWR-414)
+Warning: Design has unannotated sequential cell outputs. (PWR-415)
+ 
+****************************************
+Report : power
+        -hier
+        -analysis_effort low
+Design : CHIP
+Version: U-2022.12
+Date   : Thu May 28 10:53:14 2026
+****************************************
+
+
+Library(s) Used:
+
+    fsa0m_a_generic_core_tt1p8v25c (File: /home/raid7_2/userb12/b12006/ICDlab/final_2/02_SYN/fsa0m_a_generic_core_tt1p8v25c.db)
+
+
+Operating Conditions: WCCOM   Library: fsa0m_a_generic_core_ss1p62v125c
+Wire Load Model Mode: enclosed
+
+Design        Wire Load Model            Library
+------------------------------------------------
+CHIP                   G200K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_1      enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_0      enG5K             fsa0m_a_generic_core_tt1p8v25c
+DFrFT_MAC              enG30K            fsa0m_a_generic_core_tt1p8v25c
+RegFileDual_DATA_WIDTH34
+                       enG10K            fsa0m_a_generic_core_tt1p8v25c
+RegFileDual_DATA_WIDTH22
+                       enG10K            fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_11
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+CHIP_DW01_inc_1_DW01_inc_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+CHIP_DW02_mult_1       enG5K             fsa0m_a_generic_core_tt1p8v25c
+CHIP_DW02_mult_0       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_1_DW01_add_2_DW01_add_8
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_1_DW01_sub_0_DW01_sub_34
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_1_DW01_add_3_DW01_add_9
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_1_DW01_sub_1_DW01_sub_35
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_1_DW01_add_4_DW01_add_10
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_1_DW01_sub_2_DW01_sub_36
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_0_DW01_add_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_0_DW01_sub_0_DW01_sub_28
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_0_DW01_add_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_0_DW01_sub_1_DW01_sub_29
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_0_DW01_add_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+cordic_rotation_0_DW01_sub_2_DW01_sub_30
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+ROM_Wrapper_Even_1     enG5K             fsa0m_a_generic_core_tt1p8v25c
+ROM_Wrapper_Odd_1      enG5K             fsa0m_a_generic_core_tt1p8v25c
+ROM_Wrapper_Even_0     enG5K             fsa0m_a_generic_core_tt1p8v25c
+ROM_Wrapper_Odd_0      enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_7         enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_6         enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_5         enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_4         enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_3         enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_2         enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_1         enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_0         enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_63
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_31
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+CSD_ROM_Table_even_1   enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Even_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+CSD_ROM_Table_odd_1    enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Odd_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+CSD_ROM_Table_even_0   enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Even_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+CSD_ROM_Table_odd_0    enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Odd_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_7
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_7_DW01_sub_0_DW01_sub_21
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_7_DW01_sub_1_DW01_sub_22
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_7_DW01_sub_2_DW01_sub_23
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_7_DW01_add_2_DW01_add_37
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_7_DW01_add_1_DW01_add_36
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_7_DW01_add_0_DW01_add_35
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_6
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_6_DW01_sub_0_DW01_sub_18
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_6_DW01_sub_1_DW01_sub_19
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_6_DW01_sub_2_DW01_sub_20
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_6_DW01_add_2_DW01_add_25
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_6_DW01_add_1_DW01_add_24
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_6_DW01_add_0_DW01_add_23
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_5
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_5_DW01_sub_0_DW01_sub_15
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_5_DW01_sub_1_DW01_sub_16
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_5_DW01_sub_2_DW01_sub_17
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_5_DW01_add_2_DW01_add_34
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_5_DW01_add_1_DW01_add_33
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_5_DW01_add_0_DW01_add_32
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_4_DW01_sub_0_DW01_sub_12
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_4_DW01_sub_1_DW01_sub_13
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_4_DW01_sub_2_DW01_sub_14
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_4_DW01_add_2_DW01_add_22
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_4_DW01_add_1_DW01_add_21
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_4_DW01_add_0_DW01_add_20
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_3_DW01_sub_0_DW01_sub_9
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_3_DW01_sub_1_DW01_sub_10
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_3_DW01_sub_2_DW01_sub_11
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_3_DW01_add_2_DW01_add_31
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_3_DW01_add_1_DW01_add_30
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_3_DW01_add_0_DW01_add_29
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_2_DW01_sub_0_DW01_sub_6
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_2_DW01_sub_1_DW01_sub_7
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_2_DW01_sub_2_DW01_sub_8
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_2_DW01_add_2_DW01_add_19
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_2_DW01_add_1_DW01_add_18
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_2_DW01_add_0_DW01_add_17
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_1_DW01_sub_0_DW01_sub_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_1_DW01_sub_1_DW01_sub_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_1_DW01_sub_2_DW01_sub_5
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_1_DW01_add_2_DW01_add_28
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_1_DW01_add_1_DW01_add_27
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_1_DW01_add_0_DW01_add_26
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_PE_Shift_Add_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_0_DW01_sub_0
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_0_DW01_sub_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_0_DW01_sub_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_0_DW01_add_2_DW01_add_16
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_0_DW01_add_1_DW01_add_15
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+PE_Shift_Add_0_DW01_add_0_DW01_add_14
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_5
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_6
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_7
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_8
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_9
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_CHIP_10
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_5
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_6
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_7
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_8
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_9
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_10
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_11
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_12
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_13
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_14
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_15
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_16
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_17
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_18
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_19
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_20
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_21
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_22
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_23
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_24
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_25
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_26
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_27
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_28
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_29
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH22_30
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_4
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_5
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_6
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_7
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_8
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_9
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_10
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_11
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_12
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_13
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_14
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_15
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_16
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_17
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_18
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_19
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_20
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_21
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_22
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_23
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_24
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_25
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_26
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_27
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_28
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_29
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_30
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_31
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_32
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_33
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_34
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_35
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_36
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_37
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_38
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_39
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_40
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_41
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_42
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_43
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_44
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_45
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_46
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_47
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_48
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_49
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_50
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_51
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_52
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_53
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_54
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_55
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_56
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_57
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_58
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_59
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_60
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_61
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_RegFileDual_DATA_WIDTH34_62
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_0_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_1
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_2
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+SNPS_CLOCK_GATE_HIGH_cordic_rotation_1_3
+                       enG5K             fsa0m_a_generic_core_tt1p8v25c
+
+
+Global Operating Voltage = 1.62 
+Power-specific unit information :
+    Voltage Units = 1V
+    Capacitance Units = 1.000000pf
+    Time Units = 1ns
+    Dynamic Power Units = 1mW    (derived from V,C,T units)
+    Leakage Power Units = 1pW
+
+
+--------------------------------------------------------------------------------
+                                       Switch   Int      Leak     Total
+Hierarchy                              Power    Power    Power    Power    %
+--------------------------------------------------------------------------------
+CHIP                                      1.293    3.167 1.87e+06    4.462 100.0
+  mult_148 (CHIP_DW02_mult_0)          1.55e-03 1.08e-03 3.95e+03 2.64e-03   0.1
+  mult_149 (CHIP_DW02_mult_1)          3.68e-03 3.93e-03 6.66e+03 7.62e-03   0.2
+  r165 (CHIP_DW01_inc_1_DW01_inc_3)    9.88e-04 1.95e-03 1.79e+03 2.94e-03   0.1
+  rf_io (RegFileDual_DATA_WIDTH22)        0.250    0.820 2.01e+05    1.071  24.0
+  rf_data (RegFileDual_DATA_WIDTH34)   5.99e-03    0.403 3.11e+05    0.410   9.2
+  mac (DFrFT_MAC)                         0.738    1.595 1.11e+06    2.334  52.3
+    pe3_i (PE_Shift_Add_0)             4.27e-03    0.133 1.13e+05    0.137   3.1
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_0_DW01_add_14)
+                                       1.21e-05 2.49e-05 1.12e+04 4.82e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_1_DW01_add_15)
+                                       1.51e-05 2.54e-05 1.13e+04 5.17e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_0_DW01_add_2_DW01_add_16)
+                                       1.53e-05 2.54e-05 1.09e+04 5.16e-05   0.0
+      sub_28 (PE_Shift_Add_0_DW01_sub_2)
+                                       1.19e-05 2.08e-05 5.94e+03 3.86e-05   0.0
+      sub_28_2 (PE_Shift_Add_0_DW01_sub_1)
+                                       1.18e-05 2.12e-05 5.75e+03 3.88e-05   0.0
+      sub_28_3 (PE_Shift_Add_0_DW01_sub_0)
+                                       1.19e-05 2.12e-05 5.75e+03 3.88e-05   0.0
+    pe3_r (PE_Shift_Add_1)             7.34e-03    0.133 1.12e+05    0.140   3.1
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_0_DW01_add_26)
+                                       1.45e-05 2.43e-05 1.12e+04 4.99e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_1_DW01_add_27)
+                                       1.41e-05 2.35e-05 1.09e+04 4.85e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_1_DW01_add_2_DW01_add_28)
+                                       1.48e-05 2.73e-05 1.11e+04 5.31e-05   0.0
+      sub_28 (PE_Shift_Add_1_DW01_sub_2_DW01_sub_5)
+                                       1.22e-05 2.30e-05 5.95e+03 4.11e-05   0.0
+      sub_28_2 (PE_Shift_Add_1_DW01_sub_1_DW01_sub_4)
+                                       1.24e-05 2.26e-05 5.71e+03 4.06e-05   0.0
+      sub_28_3 (PE_Shift_Add_1_DW01_sub_0_DW01_sub_3)
+                                       1.24e-05 2.21e-05 5.76e+03 4.03e-05   0.0
+    pe2_i (PE_Shift_Add_2)             3.91e-03    0.133 1.12e+05    0.137   3.1
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_0_DW01_add_17)
+                                       1.42e-05 2.75e-05 1.12e+04 5.29e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_1_DW01_add_18)
+                                       1.77e-05 2.83e-05 1.11e+04 5.71e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_2_DW01_add_2_DW01_add_19)
+                                       1.29e-05 2.54e-05 1.13e+04 4.96e-05   0.0
+      sub_28 (PE_Shift_Add_2_DW01_sub_2_DW01_sub_8)
+                                       1.25e-05 2.21e-05 5.78e+03 4.04e-05   0.0
+      sub_28_2 (PE_Shift_Add_2_DW01_sub_1_DW01_sub_7)
+                                       1.30e-05 2.23e-05 5.92e+03 4.13e-05   0.0
+      sub_28_3 (PE_Shift_Add_2_DW01_sub_0_DW01_sub_6)
+                                       1.03e-05 1.49e-05 5.84e+03 3.11e-05   0.0
+    pe2_r (PE_Shift_Add_3)             7.37e-03    0.133 1.12e+05    0.140   3.1
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_0_DW01_add_29)
+                                       1.61e-05 2.59e-05 1.13e+04 5.34e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_1_DW01_add_30)
+                                       1.37e-05 2.54e-05 1.11e+04 5.02e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_3_DW01_add_2_DW01_add_31)
+                                       1.19e-05 2.53e-05 1.10e+04 4.82e-05   0.0
+      sub_28 (PE_Shift_Add_3_DW01_sub_2_DW01_sub_11)
+                                       1.28e-05 2.26e-05 5.75e+03 4.12e-05   0.0
+      sub_28_2 (PE_Shift_Add_3_DW01_sub_1_DW01_sub_10)
+                                       1.21e-05 2.15e-05 5.79e+03 3.94e-05   0.0
+      sub_28_3 (PE_Shift_Add_3_DW01_sub_0_DW01_sub_9)
+                                       1.10e-05 1.62e-05 5.67e+03 3.28e-05   0.0
+    pe1_i (PE_Shift_Add_4)             7.93e-03    0.133 1.13e+05    0.141   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_0_DW01_add_20)
+                                       1.61e-05 2.63e-05 1.09e+04 5.33e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_1_DW01_add_21)
+                                       1.57e-05 2.51e-05 1.11e+04 5.19e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_4_DW01_add_2_DW01_add_22)
+                                       1.54e-05 2.64e-05 1.11e+04 5.29e-05   0.0
+      sub_28 (PE_Shift_Add_4_DW01_sub_2_DW01_sub_14)
+                                       1.18e-05 2.02e-05 5.75e+03 3.77e-05   0.0
+      sub_28_2 (PE_Shift_Add_4_DW01_sub_1_DW01_sub_13)
+                                       1.22e-05 2.16e-05 6.06e+03 3.98e-05   0.0
+      sub_28_3 (PE_Shift_Add_4_DW01_sub_0_DW01_sub_12)
+                                       1.31e-05 2.26e-05 5.81e+03 4.15e-05   0.0
+    pe1_r (PE_Shift_Add_5)             7.94e-03    0.133 1.11e+05    0.141   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_0_DW01_add_32)
+                                       1.64e-05 2.90e-05 1.09e+04 5.63e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_1_DW01_add_33)
+                                       1.68e-05 2.51e-05 1.10e+04 5.30e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_5_DW01_add_2_DW01_add_34)
+                                       1.29e-05 2.37e-05 1.12e+04 4.79e-05   0.0
+      sub_28 (PE_Shift_Add_5_DW01_sub_2_DW01_sub_17)
+                                       1.18e-05 2.08e-05 5.61e+03 3.81e-05   0.0
+      sub_28_2 (PE_Shift_Add_5_DW01_sub_1_DW01_sub_16)
+                                       1.27e-05 2.19e-05 5.62e+03 4.02e-05   0.0
+      sub_28_3 (PE_Shift_Add_5_DW01_sub_0_DW01_sub_15)
+                                       1.27e-05 1.85e-05 5.74e+03 3.69e-05   0.0
+    pe0_i (PE_Shift_Add_6)             3.90e-03    0.133 1.12e+05    0.137   3.1
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_0_DW01_add_23)
+                                       1.54e-05 2.93e-05 1.13e+04 5.60e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_1_DW01_add_24)
+                                       1.36e-05 2.20e-05 1.12e+04 4.69e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_6_DW01_add_2_DW01_add_25)
+                                       1.08e-05 2.28e-05 1.11e+04 4.48e-05   0.0
+      sub_28 (PE_Shift_Add_6_DW01_sub_2_DW01_sub_20)
+                                       1.07e-05 1.84e-05 5.81e+03 3.49e-05   0.0
+      sub_28_2 (PE_Shift_Add_6_DW01_sub_1_DW01_sub_19)
+                                       1.41e-05 2.37e-05 5.73e+03 4.35e-05   0.0
+      sub_28_3 (PE_Shift_Add_6_DW01_sub_0_DW01_sub_18)
+                                       1.44e-05 1.84e-05 5.81e+03 3.86e-05   0.0
+    pe0_r (PE_Shift_Add_7)             7.47e-03    0.134 1.11e+05    0.141   3.2
+      add_0_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_0_DW01_add_35)
+                                       1.58e-05 2.46e-05 1.11e+04 5.15e-05   0.0
+      add_2_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_1_DW01_add_36)
+                                       1.36e-05 2.36e-05 1.12e+04 4.84e-05   0.0
+      add_1_root_add_0_root_add_28_3 (PE_Shift_Add_7_DW01_add_2_DW01_add_37)
+                                       8.21e-06 2.39e-05 1.11e+04 4.32e-05   0.0
+      sub_28 (PE_Shift_Add_7_DW01_sub_2_DW01_sub_23)
+                                       1.15e-05 2.05e-05 5.68e+03 3.77e-05   0.0
+      sub_28_2 (PE_Shift_Add_7_DW01_sub_1_DW01_sub_22)
+                                       1.43e-05 2.12e-05 5.81e+03 4.13e-05   0.0
+      sub_28_3 (PE_Shift_Add_7_DW01_sub_0_DW01_sub_21)
+                                       1.46e-05 1.90e-05 5.88e+03 3.95e-05   0.0
+    rom3 (ROM_Wrapper_Odd_0)              0.151    0.125 5.04e+04    0.276   6.2
+      rom_inst (CSD_ROM_Table_odd_0)      0.142    0.101 4.41e+04    0.243   5.4
+    rom2 (ROM_Wrapper_Even_0)             0.177    0.140 5.27e+04    0.317   7.1
+      rom_inst (CSD_ROM_Table_even_0)     0.169    0.119 4.57e+04    0.289   6.5
+    rom1 (ROM_Wrapper_Odd_1)              0.148    0.118 5.07e+04    0.267   6.0
+      rom_inst (CSD_ROM_Table_odd_1)      0.139 9.68e-02 4.44e+04    0.236   5.3
+    rom0 (ROM_Wrapper_Even_1)             0.180    0.143 5.24e+04    0.323   7.2
+      rom_inst (CSD_ROM_Table_even_1)     0.172    0.122 4.55e+04    0.295   6.6
+  cordic1 (cordic_rotation_0)          1.04e-02 2.49e-02 6.91e+04 3.54e-02   0.8
+    sub_99 (cordic_rotation_0_DW01_sub_2_DW01_sub_30)
+                                          0.000    0.000 4.14e+03 4.14e-06   0.0
+    add_100 (cordic_rotation_0_DW01_add_4)
+                                          0.000    0.000 3.46e+03 3.46e-06   0.0
+    sub_101 (cordic_rotation_0_DW01_sub_1_DW01_sub_29)
+                                          0.000    0.000 3.53e+03 3.53e-06   0.0
+    add_103 (cordic_rotation_0_DW01_add_3)
+                                          0.000    0.000 3.46e+03 3.46e-06   0.0
+    sub_104 (cordic_rotation_0_DW01_sub_0_DW01_sub_28)
+                                          0.000    0.000 4.14e+03 4.14e-06   0.0
+    add_105 (cordic_rotation_0_DW01_add_2)
+                                          0.000    0.000 2.82e+03 2.82e-06   0.0
+  cordic0 (cordic_rotation_1)          1.34e-02 2.56e-02 6.92e+04 3.90e-02   0.9
+    sub_99 (cordic_rotation_1_DW01_sub_2_DW01_sub_36)
+                                          0.000    0.000 4.14e+03 4.14e-06   0.0
+    add_100 (cordic_rotation_1_DW01_add_4_DW01_add_10)
+                                          0.000    0.000 3.46e+03 3.46e-06   0.0
+    sub_101 (cordic_rotation_1_DW01_sub_1_DW01_sub_35)
+                                          0.000    0.000 3.53e+03 3.53e-06   0.0
+    add_103 (cordic_rotation_1_DW01_add_3_DW01_add_9)
+                                          0.000    0.000 3.46e+03 3.46e-06   0.0
+    sub_104 (cordic_rotation_1_DW01_sub_0_DW01_sub_34)
+                                          0.000    0.000 4.14e+03 4.14e-06   0.0
+    add_105 (cordic_rotation_1_DW01_add_2_DW01_add_8)
+                                          0.000    0.000 2.82e+03 2.82e-06   0.0
+1

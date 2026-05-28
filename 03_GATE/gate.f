@@ -1,0 +1,1 @@
+../02_SYN/Netlist/CHIP_syn.v

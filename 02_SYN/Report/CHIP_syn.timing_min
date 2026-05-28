@@ -1,0 +1,180 @@
+ 
+****************************************
+Report : timing
+        -path full
+        -delay min
+        -max_paths 5
+Design : CHIP
+Version: U-2022.12
+Date   : Thu May 28 10:53:09 2026
+****************************************
+
+Operating Conditions: BCCOM   Library: fsa0m_a_generic_core_ff1p98vm40c
+Wire Load Model Mode: enclosed
+
+  Startpoint: g_cnt_d2_reg[0]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: g_cnt_d3_reg[0]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  g_cnt_d2_reg[0]/CK (QDFFRBN)             0.00       0.50 r
+  g_cnt_d2_reg[0]/Q (QDFFRBN)              0.17       0.67 f
+  g_cnt_d3_reg[0]/D (QDFFRBN)              0.00       0.67 f
+  data arrival time                                   0.67
+
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  clock uncertainty                        0.10       0.60
+  g_cnt_d3_reg[0]/CK (QDFFRBN)             0.00       0.60 r
+  library hold time                       -0.01       0.59
+  data required time                                  0.59
+  -----------------------------------------------------------
+  data required time                                  0.59
+  data arrival time                                  -0.67
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: g_cnt_d2_reg[1]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: g_cnt_d3_reg[1]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  g_cnt_d2_reg[1]/CK (QDFFRBN)             0.00       0.50 r
+  g_cnt_d2_reg[1]/Q (QDFFRBN)              0.17       0.67 f
+  g_cnt_d3_reg[1]/D (QDFFRBN)              0.00       0.67 f
+  data arrival time                                   0.67
+
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  clock uncertainty                        0.10       0.60
+  g_cnt_d3_reg[1]/CK (QDFFRBN)             0.00       0.60 r
+  library hold time                       -0.01       0.59
+  data required time                                  0.59
+  -----------------------------------------------------------
+  data required time                                  0.59
+  data arrival time                                  -0.67
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: g_cnt_d1_reg[0]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: g_cnt_d2_reg[0]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  g_cnt_d1_reg[0]/CK (QDFFRBN)             0.00       0.50 r
+  g_cnt_d1_reg[0]/Q (QDFFRBN)              0.17       0.67 f
+  g_cnt_d2_reg[0]/D (QDFFRBN)              0.00       0.67 f
+  data arrival time                                   0.67
+
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  clock uncertainty                        0.10       0.60
+  g_cnt_d2_reg[0]/CK (QDFFRBN)             0.00       0.60 r
+  library hold time                       -0.01       0.59
+  data required time                                  0.59
+  -----------------------------------------------------------
+  data required time                                  0.59
+  data arrival time                                  -0.67
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: g_cnt_d1_reg[1]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: g_cnt_d2_reg[1]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  g_cnt_d1_reg[1]/CK (QDFFRBN)             0.00       0.50 r
+  g_cnt_d1_reg[1]/Q (QDFFRBN)              0.17       0.67 f
+  g_cnt_d2_reg[1]/D (QDFFRBN)              0.00       0.67 f
+  data arrival time                                   0.67
+
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  clock uncertainty                        0.10       0.60
+  g_cnt_d2_reg[1]/CK (QDFFRBN)             0.00       0.60 r
+  library hold time                       -0.01       0.59
+  data required time                                  0.59
+  -----------------------------------------------------------
+  data required time                                  0.59
+  data arrival time                                  -0.67
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+  Startpoint: g_cnt_d1_reg[2]
+              (rising edge-triggered flip-flop clocked by CLK)
+  Endpoint: g_cnt_d2_reg[2]
+            (rising edge-triggered flip-flop clocked by CLK)
+  Path Group: CLK
+  Path Type: min
+
+  Des/Clust/Port     Wire Load Model       Library
+  ------------------------------------------------
+  CHIP               G200K                 fsa0m_a_generic_core_tt1p8v25c
+
+  Point                                    Incr       Path
+  -----------------------------------------------------------
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  g_cnt_d1_reg[2]/CK (QDFFRBN)             0.00       0.50 r
+  g_cnt_d1_reg[2]/Q (QDFFRBN)              0.17       0.67 f
+  g_cnt_d2_reg[2]/D (QDFFRBN)              0.00       0.67 f
+  data arrival time                                   0.67
+
+  clock CLK (rise edge)                    0.00       0.00
+  clock network delay (ideal)              0.50       0.50
+  clock uncertainty                        0.10       0.60
+  g_cnt_d2_reg[2]/CK (QDFFRBN)             0.00       0.60 r
+  library hold time                       -0.01       0.59
+  data required time                                  0.59
+  -----------------------------------------------------------
+  data required time                                  0.59
+  data arrival time                                  -0.67
+  -----------------------------------------------------------
+  slack (MET)                                         0.08
+
+
+1
