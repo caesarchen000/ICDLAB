@@ -3,7 +3,7 @@
 ==================================================================================
 === CALIBRE::ERC-H SUMMARY REPORT
 ===
-Execution Date/Time:          Tue May 26 01:59:58 2026
+Execution Date/Time:          Thu May 28 22:12:21 2026
 Calibre Version:              v2022.3_33.19    Tue Sep 6 12:10:05 PDT 2022
 Rule File Pathname:           G-DF-MIXED_MODE_RFCMOS18-1.8V_3.3V-1P6M-MMC_CALIBRE-LVS-2.1-P8.txt
 Rule File Title:              LVS of UMC 0.18um 1.8V/3.3V 1P6M MMC Mixed Mode/RFCMOS Process
@@ -31,11 +31,13 @@ LVS BOX cell "AN2B1P" not located or not allowed.
 LVS BOX cell "AN3B1P" not located or not allowed.
 LVS BOX cell "AN3B1S" not located or not allowed.
 LVS BOX cell "AN3B1T" not located or not allowed.
+LVS BOX cell "AN3B2" not located or not allowed.
 LVS BOX cell "AN3B2P" not located or not allowed.
 LVS BOX cell "AN3B2T" not located or not allowed.
 LVS BOX cell "AN3P" not located or not allowed.
 LVS BOX cell "AN3T" not located or not allowed.
 LVS BOX cell "AN4" not located or not allowed.
+LVS BOX cell "AN4B1" not located or not allowed.
 LVS BOX cell "AN4B1P" not located or not allowed.
 LVS BOX cell "AN4B1T" not located or not allowed.
 LVS BOX cell "AN4P" not located or not allowed.
@@ -44,10 +46,13 @@ LVS BOX cell "ANTENNA" not located or not allowed.
 LVS BOX cell "AO112P" not located or not allowed.
 LVS BOX cell "AO112S" not located or not allowed.
 LVS BOX cell "AO112T" not located or not allowed.
+LVS BOX cell "AO12P" not located or not allowed.
+LVS BOX cell "AO12T" not located or not allowed.
+LVS BOX cell "AO13" not located or not allowed.
+LVS BOX cell "AO13P" not located or not allowed.
 LVS BOX cell "AO13T" not located or not allowed.
 LVS BOX cell "AO222P" not located or not allowed.
 LVS BOX cell "AO222T" not located or not allowed.
-LVS BOX cell "AO22T" not located or not allowed.
 LVS BOX cell "AOI112H" not located or not allowed.
 LVS BOX cell "AOI112HP" not located or not allowed.
 LVS BOX cell "AOI112HS" not located or not allowed.
@@ -60,11 +65,7 @@ LVS BOX cell "AOI13HT" not located or not allowed.
 LVS BOX cell "AOI222H" not located or not allowed.
 LVS BOX cell "AOI222HP" not located or not allowed.
 LVS BOX cell "AOI222HS" not located or not allowed.
-LVS BOX cell "AOI22HT" not located or not allowed.
 LVS BOX cell "BHD1" not located or not allowed.
-LVS BOX cell "BUF3CK" not located or not allowed.
-LVS BOX cell "BUF4CK" not located or not allowed.
-LVS BOX cell "BUF6CK" not located or not allowed.
 LVS BOX cell "BUF8" not located or not allowed.
 LVS BOX cell "BUF8CK" not located or not allowed.
 LVS BOX cell "BUFB1" not located or not allowed.
@@ -85,6 +86,7 @@ LVS BOX cell "DBZRSBN" not located or not allowed.
 LVS BOX cell "DFCLRBN" not located or not allowed.
 LVS BOX cell "DFCRBN" not located or not allowed.
 LVS BOX cell "DFFP" not located or not allowed.
+LVS BOX cell "DFFRBP" not located or not allowed.
 LVS BOX cell "DFFRBS" not located or not allowed.
 LVS BOX cell "DFFRBT" not located or not allowed.
 LVS BOX cell "DFFRSBN" not located or not allowed.
@@ -137,7 +139,6 @@ LVS BOX cell "HA2T" not located or not allowed.
 LVS BOX cell "HA3" not located or not allowed.
 LVS BOX cell "HA3P" not located or not allowed.
 LVS BOX cell "HA3T" not located or not allowed.
-LVS BOX cell "INV1" not located or not allowed.
 LVS BOX cell "INVT1" not located or not allowed.
 LVS BOX cell "INVT2" not located or not allowed.
 LVS BOX cell "INVT4" not located or not allowed.
@@ -147,11 +148,11 @@ LVS BOX cell "JKFRBP" not located or not allowed.
 LVS BOX cell "JKZN" not located or not allowed.
 LVS BOX cell "JKZRBN" not located or not allowed.
 LVS BOX cell "JKZRBP" not located or not allowed.
-LVS BOX cell "MAO222S" not located or not allowed.
 LVS BOX cell "MAO222T" not located or not allowed.
 LVS BOX cell "MAOI1H" not located or not allowed.
 LVS BOX cell "MAOI1HP" not located or not allowed.
 LVS BOX cell "MAOI1HT" not located or not allowed.
+LVS BOX cell "MOAI1HT" not located or not allowed.
 LVS BOX cell "MULBE" not located or not allowed.
 LVS BOX cell "MULBEP" not located or not allowed.
 LVS BOX cell "MULBET" not located or not allowed.
@@ -169,6 +170,7 @@ LVS BOX cell "MUX4" not located or not allowed.
 LVS BOX cell "MUX4P" not located or not allowed.
 LVS BOX cell "MUX4S" not located or not allowed.
 LVS BOX cell "MUX4T" not located or not allowed.
+LVS BOX cell "MUXB2" not located or not allowed.
 LVS BOX cell "MUXB2P" not located or not allowed.
 LVS BOX cell "MUXB2S" not located or not allowed.
 LVS BOX cell "MUXB2T" not located or not allowed.
@@ -176,24 +178,22 @@ LVS BOX cell "MUXB4" not located or not allowed.
 LVS BOX cell "MUXB4P" not located or not allowed.
 LVS BOX cell "MUXB4S" not located or not allowed.
 LVS BOX cell "MUXB4T" not located or not allowed.
-LVS BOX cell "MXL2HF" not located or not allowed.
-LVS BOX cell "MXL2HT" not located or not allowed.
+LVS BOX cell "MXL2HP" not located or not allowed.
 LVS BOX cell "MXL3" not located or not allowed.
 LVS BOX cell "MXL3P" not located or not allowed.
 LVS BOX cell "MXL3S" not located or not allowed.
 LVS BOX cell "MXL3T" not located or not allowed.
-LVS BOX cell "ND2F" not located or not allowed.
 LVS BOX cell "ND4" not located or not allowed.
 LVS BOX cell "ND4P" not located or not allowed.
 LVS BOX cell "ND4S" not located or not allowed.
 LVS BOX cell "ND4T" not located or not allowed.
 LVS BOX cell "NR3HT" not located or not allowed.
+LVS BOX cell "NR4" not located or not allowed.
 LVS BOX cell "NR4P" not located or not allowed.
 LVS BOX cell "NR4S" not located or not allowed.
 LVS BOX cell "NR4T" not located or not allowed.
 LVS BOX cell "OA112P" not located or not allowed.
 LVS BOX cell "OA112T" not located or not allowed.
-LVS BOX cell "OA12P" not located or not allowed.
 LVS BOX cell "OA12T" not located or not allowed.
 LVS BOX cell "OA13P" not located or not allowed.
 LVS BOX cell "OA13T" not located or not allowed.
@@ -201,6 +201,7 @@ LVS BOX cell "OA222P" not located or not allowed.
 LVS BOX cell "OA222T" not located or not allowed.
 LVS BOX cell "OA22P" not located or not allowed.
 LVS BOX cell "OA22T" not located or not allowed.
+LVS BOX cell "OAI112H" not located or not allowed.
 LVS BOX cell "OAI112HP" not located or not allowed.
 LVS BOX cell "OAI112HT" not located or not allowed.
 LVS BOX cell "OAI12HP" not located or not allowed.
@@ -214,8 +215,7 @@ LVS BOX cell "OAI222HP" not located or not allowed.
 LVS BOX cell "OAI222HT" not located or not allowed.
 LVS BOX cell "OAI22HP" not located or not allowed.
 LVS BOX cell "OAI22HT" not located or not allowed.
-LVS BOX cell "OR2B1P" not located or not allowed.
-LVS BOX cell "OR2B1T" not located or not allowed.
+LVS BOX cell "OR3B1" not located or not allowed.
 LVS BOX cell "OR3B1P" not located or not allowed.
 LVS BOX cell "OR3B1S" not located or not allowed.
 LVS BOX cell "OR3B1T" not located or not allowed.
@@ -252,6 +252,7 @@ LVS BOX cell "RAM5" not located or not allowed.
 LVS BOX cell "RAM5S" not located or not allowed.
 LVS BOX cell "XMC" not located or not allowed.
 LVS BOX cell "XNR2HP" not located or not allowed.
+LVS BOX cell "XNR2HT" not located or not allowed.
 LVS BOX cell "XNR3P" not located or not allowed.
 LVS BOX cell "XNR3S" not located or not allowed.
 LVS BOX cell "XNR3T" not located or not allowed.
@@ -260,14 +261,15 @@ LVS BOX cell "XNR4P" not located or not allowed.
 LVS BOX cell "XNR4S" not located or not allowed.
 LVS BOX cell "XNR4T" not located or not allowed.
 LVS BOX cell "XOR2HP" not located or not allowed.
+LVS BOX cell "XOR2HT" not located or not allowed.
 LVS BOX cell "XOR4P" not located or not allowed.
 LVS BOX cell "XOR4S" not located or not allowed.
 LVS BOX cell "XOR4T" not located or not allowed.
 LVS BOX cell "YA2GSC" not located or not allowed.
 LVS BOX cell "ZMA2GSC" not located or not allowed.
 LVS BOX cell "ZMA2GSD" not located or not allowed.
-TEXT PRINT MAXIMUM limit of 1000 exceeded. 1503 object(s) not printed.
-TEXT PRINT MAXIMUM limit of 1000 exceeded. 1503 object(s) not printed.
+TEXT PRINT MAXIMUM limit of 1000 exceeded. 1430 object(s) not printed.
+TEXT PRINT MAXIMUM limit of 1000 exceeded. 1430 object(s) not printed.
 There is no data for layout net name ?VSS?.
 There is no data for layout net name ?VDD?.
 There is no data for layout net name ?VSS?.
@@ -282,15 +284,15 @@ There is no data for layout net name ?VSS?.
 ----------------------------------------------------------------------------------
 --- ORIGINAL LAYER STATISTICS
 ---
-LAYER ME6 ......... TOTAL Original Geometry Count = 1164   (1164)
-LAYER ME5 ......... TOTAL Original Geometry Count = 12360  (12397)
+LAYER ME6 ......... TOTAL Original Geometry Count = 881    (881)
+LAYER ME5 ......... TOTAL Original Geometry Count = 11979  (12005)
 LAYER RFSYMBOL .... TOTAL Original Geometry Count = 0      (0)
 LAYER M6RESMK ..... TOTAL Original Geometry Count = 0      (0)
 LAYER SIZE2 ....... TOTAL Original Geometry Count = 0      (0)
 LAYER SIZE1 ....... TOTAL Original Geometry Count = 0      (0)
 LAYER LSYMBOL ..... TOTAL Original Geometry Count = 0      (0)
 LAYER M5RESMK ..... TOTAL Original Geometry Count = 0      (0)
-LAYER VI5 ......... TOTAL Original Geometry Count = 515    (515)
+LAYER VI5 ......... TOTAL Original Geometry Count = 359    (359)
 LAYER MMC ......... TOTAL Original Geometry Count = 0      (0)
 LAYER SEPGND ...... TOTAL Original Geometry Count = 0      (0)
 LAYER TWEL ........ TOTAL Original Geometry Count = 0      (0)
@@ -307,13 +309,13 @@ LAYER PSYMBOL ..... TOTAL Original Geometry Count = 0      (0)
 LAYER HR .......... TOTAL Original Geometry Count = 0      (0)
 LAYER NWR ......... TOTAL Original Geometry Count = 0      (0)
 LAYER M1RESMK ..... TOTAL Original Geometry Count = 0      (0)
-LAYER ME1 ......... TOTAL Original Geometry Count = 154683 (449349)
+LAYER ME1 ......... TOTAL Original Geometry Count = 162324 (481249)
 LAYER M2RESMK ..... TOTAL Original Geometry Count = 0      (0)
-LAYER ME2 ......... TOTAL Original Geometry Count = 241011 (241220)
+LAYER ME2 ......... TOTAL Original Geometry Count = 254591 (254745)
 LAYER M3RESMK ..... TOTAL Original Geometry Count = 0      (0)
-LAYER ME3 ......... TOTAL Original Geometry Count = 135706 (135915)
+LAYER ME3 ......... TOTAL Original Geometry Count = 139411 (139565)
 LAYER M4RESMK ..... TOTAL Original Geometry Count = 0      (0)
-LAYER ME4 ......... TOTAL Original Geometry Count = 50794  (50831)
+LAYER ME4 ......... TOTAL Original Geometry Count = 51489  (51515)
 LAYER BLSP_1A ..... TOTAL Original Geometry Count = 0      (0)
 LAYER DP_ID ....... TOTAL Original Geometry Count = 0      (0)
 LAYER BLSP_ID1 .... TOTAL Original Geometry Count = 0      (0)
@@ -331,10 +333,10 @@ LAYER DSYMBOL ..... TOTAL Original Geometry Count = 0      (0)
 LAYER MCAP ........ TOTAL Original Geometry Count = 0      (0)
 LAYER PAD ......... TOTAL Original Geometry Count = 0      (0)
 LAYER CONT ........ TOTAL Original Geometry Count = 0      (0)
-LAYER VI1 ......... TOTAL Original Geometry Count = 91868  (91868)
-LAYER VI2 ......... TOTAL Original Geometry Count = 70674  (70674)
-LAYER VI3 ......... TOTAL Original Geometry Count = 38147  (38147)
-LAYER VI4 ......... TOTAL Original Geometry Count = 27384  (27384)
+LAYER VI1 ......... TOTAL Original Geometry Count = 97063  (97063)
+LAYER VI2 ......... TOTAL Original Geometry Count = 73508  (73508)
+LAYER VI3 ......... TOTAL Original Geometry Count = 38003  (38003)
+LAYER VI4 ......... TOTAL Original Geometry Count = 27271  (27271)
 ----------------------------------------------------------------------------------
 --- RULECHECK RESULTS STATISTICS
 ---
@@ -352,8 +354,8 @@ RULECHECK PATHCHK_NLABELED ...... TOTAL Result Count = 0 (0)
 ----------------------------------------------------------------------------------
 --- SUMMARY
 ---
-TOTAL CPU Time:                              12
-TOTAL REAL Time:                             22
-TOTAL Original Layer Geometries:             824306 (1119464)
+TOTAL CPU Time:                              14
+TOTAL REAL Time:                             21
+TOTAL Original Layer Geometries:             856879 (1176164)
 TOTAL ERC RuleChecks Executed:               11
 TOTAL ERC RuleCheck Results Generated:       0 (0)

@@ -2,7 +2,7 @@
 lvs_LvsOutFile RUNDIR /home/raid7_2/userb12/b12166/chip_v2/07_LVS
 lvs_LvsfVersion 4
 lvs_LvsInputSummary {0 0 0}
-lvs_LvsComparisonSummary {3 0 0 149}
+lvs_LvsComparisonSummary {3 0 0 147}
 lvs_SourceCase YES
 lvs_LayoutCase YES
 lvs_PowerName ?VDD?
@@ -12,4 +12,4 @@ lvs_GroundName ?GND?
 lvs_LvsOutFile LVS_REPORT lvs_test.rep
 lvs_LvsOutFile SOURCE_NETLIST CHIP.spi
 lvs_LvsOutFile RULES_FILE G-DF-MIXED_MODE_RFCMOS18-1.8V_3.3V-1P6M-MMC_CALIBRE-LVS-2.1-P8.txt
-lvs_LvsRunTimes 1779732021 1779732026
+lvs_LvsRunTimes 1779977563 1779977568

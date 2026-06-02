@@ -1,44 +1,74 @@
-# RTL RGB image flow (`tb_2d_rgb.v` + `rtl_rgb_flow.py`)
+# RTL RGB image flow (11-bit, matches CHIP)https://github.com/caesarchen000/ICDLAB/tree/chip_new_v2
 
-1. **split** — `sim_image_resized.png` -> `pattern/img_r.txt`, `img_g.txt`, `img_b.txt` (decimal 0–255, one per line)
-2. **RTL** — per channel: row enc -> `*_enc1d.txt`, col enc -> `*_enc2d.txt`, col dec -> `*_dec1d.txt`, row dec -> `*_dec2d.txt`  
-   Input: `pixel - 128` (8-bit signed real, imag=0). Between passes: **saturate** 11-bit to ±127 (no `>>3`).
-3. **merge** — `r/g/b_dec2d.txt` -> `rtl_rgb_decrypted.png`
+CHIP: `i_data[21:0] = {imag[10:0], real[10:0]}`, `o_data[10:0]`, saturate **11-bit** between row/col passes.
+
+`config.py`: `INPUT_PORT = 11`, `OUTPUT_PORT = 11` (same as `new_hw_sim.py` and `tb_2d_rgb_11.v`).
+
+## Main flow (11-bit)
 
 ```bash
 cd 00_TESTBED/gen
-python3 new_hw_sim.py
 python3 new_hw_sim.py --max 320 --fixed-key
 python3 rtl_rgb_flow.py split
-python3 rtl_rgb_flow.py golden
+python3 rtl_rgb_flow.py golden          # optional, slow — reference for check
 cd ../../01_RTL
-bash run_tb_2d_rgb.sh
+bash run_tb_2d_rgb_11.sh
 cd ../00_TESTBED/gen
-python3 rtl_rgb_flow.py check
+python3 rtl_rgb_flow.py check           # optional
 python3 rtl_rgb_flow.py merge --enc-preview
 python3 rtl_rgb_flow.py show
 ```
 
-Key **40** fixed; decrypt order: cols then rows (inverse of encrypt).
+| Step | Output |
+|------|--------|
+| `new_hw_sim.py` | `sim_image_resized.png`, `sim_image_*.png` |
+| `split` | `pattern/img_r.txt`, `img_g.txt`, `img_b.txt` |
+| `run_tb_2d_rgb_11.sh` | `pattern/r_enc1d_11.txt` … `r_dec2d_11.txt` |
+| `merge` | `rtl_rgb_decrypted_11.png`, `rtl_rgb_encrypted_2d_11.png` |
+| `show` | `rtl_rgb_pipeline_11.png` |
 
-### 11-bit inter-pass (wider storage, closer to `new_hw_sim` 9-bit sim)
+Key **40** / **-40**; decrypt: cols then rows.
 
-CHIP `IOPORT_IN_W=22` (`tb_2d_rgb_11.v`): `{imag[10:0], real[10:0]}`, saturate to 11-bit between passes.
+`golden` / `check` default to 11-bit paths (no `--in11` flag needed). Use `--in8` for legacy 8-bit.
+
+## Legacy 8-bit (`tb_2d_rgb.v`)
 
 ```bash
-cd 01_RTL
-bash run_tb_2d_rgb_11.sh
+python3 rtl_rgb_flow.py --in8 split
+python3 rtl_rgb_flow.py --in8 golden
+cd ../../01_RTL && bash run_tb_2d_rgb.sh
 cd ../00_TESTBED/gen
-python3 rtl_rgb_flow.py --in11 golden
-python3 rtl_rgb_flow.py --in11 check
-python3 rtl_rgb_flow.py --in11 merge --enc-preview
+python3 rtl_rgb_flow.py --in8 check
+python3 rtl_rgb_flow.py --in8 merge --enc-preview
 ```
 
-Outputs: `pattern/*_enc1d_11.txt` ... `rtl_rgb_decrypted_11.png`
+## Post-APR gate (`05_APR/CHIP.v`)
 
-Legacy 8-bit inter-pass: `run_tb_2d_rgb.sh` (no `--in11`).
+```bash
+python3 rtl_rgb_flow.py split
+cd ../../05_APR && bash run_tb_2d_rgb_11.sh
+cd ../00_TESTBED/gen && python3 rtl_rgb_flow.py merge --enc-preview
+```
 
-Legacy grey flow: `rtl_img_tb.py` + `tb_2d.v` (uses `clip_to_8` and `(pixel-128)//4`).
+(APR dumps: `*_11_apr.txt` if using `+define+APR_TAG` in `05_APR/run_tb_2d_rgb_11.sh`.)
+
+
+full 11bit
+cd ~/chip_v2/00_TESTBED/gen
+python3 new_hw_sim.py --max 320 --fixed-key
+python3 rtl_rgb_flow.py split
+
+# optional (slow): python3 rtl_rgb_flow.py golden
+
+cd ../../01_RTL
+bash run_tb_2d_rgb_11.sh
+
+cd ../00_TESTBED/gen
+python3 rtl_rgb_flow.py merge --enc-preview
+python3 rtl_rgb_flow.py show
+
+# optional after golden finishes:
+# python3 rtl_rgb_flow.py check
 
 ---
 

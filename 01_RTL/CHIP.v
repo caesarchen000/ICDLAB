@@ -1,6 +1,6 @@
 module CHIP #(
     // i_data[21:0] = {imag[10:0], real[10:0]} — 11+11 in/out path end-to-end
-    parameter IOPORT_IN_W   = 22,
+    parameter IOPORT_IN_W   = 11,
     parameter IOPORT_OUT_W  = 11,
     parameter RF_DATA_W     = 34,
     parameter RF_IO_W       = 22
@@ -45,8 +45,8 @@ module CHIP #(
     // ==========================================
     // IO signals
     // ==========================================
-    wire can_load = (o_state_r == O_IDLE) || (o_state_r == O_OUT && o_counter_r >= 6'd31);
-    assign i_ready = ((state_r == S_IDLE) || (state_r == S_LOAD)) && can_load;
+    reg signed [10:0] real_hold_reg;
+    assign i_ready = ((state_r == S_IDLE) || (state_r == S_LOAD));
     assign o_valid = (o_state_r == O_OUT);
     assign o_data = o_counter_r[0] ? rf_io_rdata_1[21:11] : rf_io_rdata_1[10:0];
 
@@ -198,7 +198,10 @@ module CHIP #(
             key_r       <= key_w;
         end
     end
-
+    always @(posedge clk or negedge rst_n) begin
+        if (!rst_n)                 real_hold_reg <= 0;
+        else if (state_r == S_LOAD) real_hold_reg <= i_data;
+    end
     always @(*) begin
         state_w     = state_r;
         counter_w   = counter_r;
@@ -225,19 +228,20 @@ module CHIP #(
 
         case(state_r)
             S_IDLE : begin
-                if (i_valid & can_load) begin 
+                if (i_valid) begin 
                     state_w   = S_LOAD;
                     counter_w = 0;
                     key_w     = i_data[7:0];
                 end
             end
             S_LOAD : begin
-                rf_io_wen_1   = 1'b1;
-                rf_io_waddr_1 = counter_r;
-                rf_io_wdata_1 = i_data;
-
+                if (counter_r[0] == 1'b1) begin
+                    rf_io_wen_1   = 1'b1;
+                    rf_io_waddr_1 = counter_r[5:1];
+                    rf_io_wdata_1 = {i_data, real_hold_reg};
+                end
                 counter_w = counter_r + 1;
-                if (counter_r == 5'd31) begin
+                if (counter_r == 9'd63) begin
                     state_w = S_STAGE1;
                     counter_w = 9'd0;
                 end

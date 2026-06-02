@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Mon May 25 17:39:08 2026
+# Created by write_sdc on Thu May 28 16:35:57 2026
 
 ###################################################################
 set sdc_version 1.8
@@ -26,24 +26,13 @@ set_load -pin_load 1 [get_ports {o_data[3]}]
 set_load -pin_load 1 [get_ports {o_data[2]}]
 set_load -pin_load 1 [get_ports {o_data[1]}]
 set_load -pin_load 1 [get_ports {o_data[0]}]
-create_clock [get_ports clk]  -name CLK  -period 10  -waveform {0 5}
+create_clock [get_ports clk]  -name CLK  -period 11  -waveform {0 5.5}
 set_clock_latency 0.5  [get_clocks CLK]
 set_clock_uncertainty 0.1  [get_clocks CLK]
 set_input_delay -clock CLK  -max 1  [get_ports clk]
 set_input_delay -clock CLK  -max 1  [get_ports rst_n]
 set_input_delay -clock CLK  -max 1  [get_ports i_valid]
 set_input_delay -clock CLK  -max 1  [get_ports o_ready]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[21]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[20]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[19]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[18]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[17]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[16]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[15]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[14]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[13]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[12]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[11]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[10]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[9]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[8]}]
@@ -72,17 +61,6 @@ set_drive 1  [get_ports clk]
 set_drive 1  [get_ports rst_n]
 set_drive 1  [get_ports i_valid]
 set_drive 1  [get_ports o_ready]
-set_drive 1  [get_ports {i_data[21]}]
-set_drive 1  [get_ports {i_data[20]}]
-set_drive 1  [get_ports {i_data[19]}]
-set_drive 1  [get_ports {i_data[18]}]
-set_drive 1  [get_ports {i_data[17]}]
-set_drive 1  [get_ports {i_data[16]}]
-set_drive 1  [get_ports {i_data[15]}]
-set_drive 1  [get_ports {i_data[14]}]
-set_drive 1  [get_ports {i_data[13]}]
-set_drive 1  [get_ports {i_data[12]}]
-set_drive 1  [get_ports {i_data[11]}]
 set_drive 1  [get_ports {i_data[10]}]
 set_drive 1  [get_ports {i_data[9]}]
 set_drive 1  [get_ports {i_data[8]}]

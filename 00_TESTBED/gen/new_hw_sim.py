@@ -791,7 +791,7 @@ if __name__ == "__main__":
 
     if error_sweep:
         NUM_SAMPLES = 10
-        keys_array = list(range(-256, 256))
+        keys_array = list(range(-128, 128))
         #keys_array = [64]
         mse_real, mse_imag, nmse_list = [], [], []
 

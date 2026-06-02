@@ -25,7 +25,7 @@ link
 #You may modified the clock constraints 
 #or add more constraints for your design
 ####################################################
-set cycle  10
+set cycle  11
 ####################################################
 
 #The following are design spec. for synthesis

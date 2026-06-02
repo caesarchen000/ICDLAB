@@ -1,21 +1,18 @@
 ###################################################################
-# Innovus APR (mmmc.view → design/CHIP.sdc)
-# Source: CHIP_syn.sdc + minimal Innovus edits (see CHIP_previous.sdc)
-# Regenerate: python3 mk_apr_sdc.py [CHIP_syn.sdc]
+
+# Created by write_sdc on Thu May 28 16:35:57 2026
+
 ###################################################################
-
-
 set sdc_version 1.8
 
-# Innovus: set_units / set_max_area unsupported (CTE-25). MMMC owns corners.
-# set_units -time ns -resistance kOhm -capacitance pF -voltage V -current mA
-# set_operating_conditions -max WCCOM -max_library fsa0m_a_generic_core_ss1p62v125c \
-#                          -min BCCOM -min_library fsa0m_a_generic_core_ff1p98vm40c
-
-# Innovus MMMC: wire_load from RC corners, not SDC wire_load_model
-# set_wire_load_model -name G200K -library fsa0m_a_generic_core_tt1p8v25c
-# Innovus: no set_max_fanout in SDC (CTS clocks violate global limit; use fixFanoutLoad)
-# set_max_area 0
+set_units -time ns -resistance kOhm -capacitance pF -voltage V -current mA
+set_operating_conditions -max WCCOM -max_library                               \
+fsa0m_a_generic_core_ss1p62v125c\
+                         -min BCCOM -min_library                               \
+fsa0m_a_generic_core_ff1p98vm40c
+set_wire_load_model -name G200K -library fsa0m_a_generic_core_tt1p8v25c
+set_max_fanout 32 [current_design]
+set_max_area 0
 set_load -pin_load 1 [get_ports i_ready]
 set_load -pin_load 1 [get_ports o_valid]
 set_load -pin_load 1 [get_ports {o_data[10]}]
@@ -29,25 +26,13 @@ set_load -pin_load 1 [get_ports {o_data[3]}]
 set_load -pin_load 1 [get_ports {o_data[2]}]
 set_load -pin_load 1 [get_ports {o_data[1]}]
 set_load -pin_load 1 [get_ports {o_data[0]}]
-create_clock [get_ports clk]  -name CLK  -period 10  -waveform {0 5}
+create_clock [get_ports clk]  -name CLK  -period 11  -waveform {0 5.5}
 set_clock_latency 0.5  [get_clocks CLK]
 set_clock_uncertainty 0.1  [get_clocks CLK]
-# Innovus: no set_input_delay on clock root (TCLNL-330)
-# set_input_delay -clock CLK  -max 1  [get_ports clk]
+set_input_delay -clock CLK  -max 1  [get_ports clk]
 set_input_delay -clock CLK  -max 1  [get_ports rst_n]
 set_input_delay -clock CLK  -max 1  [get_ports i_valid]
 set_input_delay -clock CLK  -max 1  [get_ports o_ready]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[21]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[20]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[19]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[18]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[17]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[16]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[15]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[14]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[13]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[12]}]
-set_input_delay -clock CLK  -max 1  [get_ports {i_data[11]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[10]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[9]}]
 set_input_delay -clock CLK  -max 1  [get_ports {i_data[8]}]
@@ -76,17 +61,6 @@ set_drive 1  [get_ports clk]
 set_drive 1  [get_ports rst_n]
 set_drive 1  [get_ports i_valid]
 set_drive 1  [get_ports o_ready]
-set_drive 1  [get_ports {i_data[21]}]
-set_drive 1  [get_ports {i_data[20]}]
-set_drive 1  [get_ports {i_data[19]}]
-set_drive 1  [get_ports {i_data[18]}]
-set_drive 1  [get_ports {i_data[17]}]
-set_drive 1  [get_ports {i_data[16]}]
-set_drive 1  [get_ports {i_data[15]}]
-set_drive 1  [get_ports {i_data[14]}]
-set_drive 1  [get_ports {i_data[13]}]
-set_drive 1  [get_ports {i_data[12]}]
-set_drive 1  [get_ports {i_data[11]}]
 set_drive 1  [get_ports {i_data[10]}]
 set_drive 1  [get_ports {i_data[9]}]
 set_drive 1  [get_ports {i_data[8]}]

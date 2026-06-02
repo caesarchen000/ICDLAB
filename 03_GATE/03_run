@@ -1,3 +1,3 @@
 # Prefer: bash run_postsyn.sh  (correct lib path + file checks)
-vcs ../00_TESTBED/testbench/tb.v -f gate.f ../05_APR/Verilog/fsa0m_a_generic_core_21.lib.src -full64 -R -debug_access+all +v2k +neg_tchk +define+SDF
+vcs ../00_TESTBED/testbench/tb.v -f gate.f ../02_SYN/fsa0m_a_generic_core_21.lib.src -full64 -R -debug_access+all +v2k +neg_tchk +define+SDF
 #vcs ../00_TESTBED/testbench/tb_all_keys.v -f gate.f ../05_APR/Verilog/fsa0m_a_generic_core_21.lib.src -full64 -R -debug_access+all +v2k +neg_tchk +define+SDF

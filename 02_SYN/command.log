@@ -1,6 +1,6 @@
 #@ # 
 #@ # Running dc_shell Version U-2022.12 for linux64 -- Nov 22, 2022
-#@ # Date:   Mon May 25 17:26:23 2026
+#@ # Date:   Thu May 28 16:22:08 2026
 #@ # Run by: b12166@cad16
 #@ 
 
@@ -9515,3 +9515,4 @@ source -echo -verbose /home/raid7_2/userb12/b12166/chip_v2/02_SYN/CHIP_syn.tcl
 #@ write_sdc   -version 1.8                ./Netlist/${DESIGN}_syn.sdc
 #@ # -- End source /home/raid7_2/userb12/b12166/chip_v2/02_SYN/CHIP_syn.tcl
 
+exit

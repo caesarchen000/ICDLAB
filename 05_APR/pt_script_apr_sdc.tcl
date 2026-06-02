@@ -34,6 +34,7 @@ set fin [open ./CHIP_postAPR.sdc r]
 set fout [open ./CHIP_postAPR.pt.sdc w]
 while {[gets $fin line] >= 0} {
     if {[regexp {^current_design} $line]} { continue }
+    if {[regexp {get_designs} $line]} { continue }
     puts $fout $line
 }
 close $fin

@@ -29,7 +29,9 @@ set_operating_conditions -max WCCOM -max_library fsa0m_a_generic_core_ss1p62v125
 set fin [open ./CHIP_postAPR.sdc r]
 set fout [open ./CHIP_postAPR.pt.sdc w]
 while {[gets $fin line] >= 0} {
+  # Innovus-only / DC-only commands not valid in PrimeTime read_sdc
     if {[regexp {^current_design} $line]} { continue }
+    if {[regexp {get_designs} $line]} { continue }
     puts $fout $line
 }
 close $fin
@@ -54,7 +56,7 @@ if {$wns == ""} { set wns "N/A (no constrained paths — SDC/clock problem)" }
 set fh [open CHIP_timing_summary.txt w]
 puts $fh "Post-APR PrimeTime STA summary"
 puts $fh "Worst setup slack (WNS): $wns ns"
-puts $fh "Clock period: 10 ns"
+puts $fh "Clock period: 11 ns"
 if {$wns != "N/A (no constrained paths — SDC/clock problem)" && $wns < 0} {
     puts $fh "Setup timing: VIOLATED"
 } elseif {$wns != "N/A (no constrained paths — SDC/clock problem)"} {

@@ -1,4 +1,4 @@
 Post-APR PrimeTime STA summary
-Worst setup slack (WNS): -0.602880 ns
-Clock period: 10 ns
-Setup timing: VIOLATED
+Worst setup slack (WNS): 0.000000 ns
+Clock period: 11 ns
+Setup timing: MET

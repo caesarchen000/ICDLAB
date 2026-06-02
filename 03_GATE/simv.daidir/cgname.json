@@ -153,13 +153,13 @@
         "SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Even_1",
         "Ytn3c",
         "module",
-        27
+        578
     ],
     "SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Odd_1": [
         "SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Odd_1",
         "QSyLw",
         "module",
-        30
+        294
     ],
     "ROM_Wrapper_Odd_1": [
         "ROM_Wrapper_Odd_1",
@@ -171,7 +171,7 @@
         "SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Even_0",
         "bYr39",
         "module",
-        33
+        290
     ],
     "ROM_Wrapper_Even_0": [
         "ROM_Wrapper_Even_0",
@@ -183,7 +183,7 @@
         "SNPS_CLOCK_GATE_HIGH_ROM_Wrapper_Odd_0",
         "cgrFG",
         "module",
-        36
+        98
     ],
     "ROM_Wrapper_Odd_0": [
         "ROM_Wrapper_Odd_0",
@@ -1175,6 +1175,12 @@
         "module",
         201
     ],
+    "SNPS_CLOCK_GATE_HIGH_CHIP_11": [
+        "SNPS_CLOCK_GATE_HIGH_CHIP_11",
+        "S0RUY",
+        "module",
+        586
+    ],
     "SNPS_CLOCK_GATE_HIGH_CHIP_10": [
         "SNPS_CLOCK_GATE_HIGH_CHIP_10",
         "YVUzb",
@@ -1715,11 +1721,11 @@
         "module",
         292
     ],
-    "BUF6CK": [
-        "BUF6CK",
-        "pyqpg",
+    "BUF4": [
+        "BUF4",
+        "fPIhq",
         "module",
-        350
+        574
     ],
     "BUF8": [
         "BUF8",
@@ -1905,7 +1911,7 @@
         "DFFSBN",
         "JNkc3",
         "module",
-        327
+        90
     ],
     "DFTRBN": [
         "DFTRBN",
@@ -3401,12 +3407,6 @@
         "module",
         577
     ],
-    "XNR3": [
-        "XNR3",
-        "y5peJ",
-        "module",
-        578
-    ],
     "XNR3P": [
         "XNR3P",
         "ZzGKt",
@@ -3484,12 +3484,6 @@
         "EHdxw",
         "module",
         592
-    ],
-    "XOR3T": [
-        "XOR3T",
-        "dBfps",
-        "module",
-        593
     ],
     "XOR4": [
         "XOR4",

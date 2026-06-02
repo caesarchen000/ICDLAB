@@ -1,9 +1,9 @@
 # Automagically generated file: Please do not edit!
 lvs_ExtfVersion 3
-lvs_ExtRunTimes 1779731998 1779732021
+lvs_ExtRunTimes 1779977541 1779977563
 lvs_ExtOutFile RUNDIR /home/raid7_2/userb12/b12166/chip_v2/07_LVS
 lvs_ExtOutFile RULES_FILE G-DF-MIXED_MODE_RFCMOS18-1.8V_3.3V-1P6M-MMC_CALIBRE-LVS-2.1-P8.txt
-lvs_ExtInfoExtSummary {0 0 0 0 28 0 0 0 0 149 0}
+lvs_ExtInfoExtSummary {0 0 0 0 28 0 0 0 0 147 0}
 lvs_ExtInfoErcSummary {11 0 0 0 0 0 0 0 0 0 0}
 lvs_ExtInfoDfmSummary {0}
 lvs_ExtOutFile LAYOUT_NETLIST svdb/CHIP.sp

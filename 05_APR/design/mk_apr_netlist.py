@@ -3,13 +3,13 @@
 import sys
 from pathlib import Path
 
-IOPORT_IN_W = 22   # {imag[10:0], real[10:0]} — pads i_data_0..21
+IOPORT_IN_W = 11   # follow CHIP.ioc pads i_data_0..10
 IOPORT_OUT_W = 11
 
 
 def _pad_shell() -> str:
     lines = [
-        "// IO pad shell (APR kit; matches CHIP IOPORT_IN_W=22)",
+        "// IO pad shell (APR kit; follows CHIP.ioc)",
         "module CHIP ( clk, rst_n, i_valid, i_ready, o_ready, o_valid, i_data, o_data );",
         "  input clk, rst_n, i_valid, o_ready;",
         "  output i_ready, o_valid;",

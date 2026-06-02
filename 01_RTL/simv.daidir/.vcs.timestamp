@@ -1,6 +1,5 @@
 0 
-34
-+define+CH_B
+33
 +itf+/usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
 +v2k
 +vcsd1
@@ -32,7 +31,7 @@
 -picarchive
 /usr/cad/synopsys/vcs/2022.06/linux64/bin/vcs1
 /usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/verdi.tab
-../00_TESTBED/testbench/tb_2d_rgb_11.v
+../00_TESTBED/testbench/tb_2d.v
 rtl.f
 96
 synopsys_root=/usr/cad/synopsys/pathmill/cur
@@ -40,13 +39,13 @@ mraarch=linux_64
 installdir=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice
 XLOCALEDIR=/usr/cad/synopsys/astro/cur/etc/locale
 XKEYSYMDB=/usr/cad/synopsys/astro/cur/etc/XKeysymDB
-XDG_SESSION_ID=199190
+XDG_SESSION_ID=201456
 XDG_RUNTIME_DIR=/run/user/2792
 XDG_DATA_DIRS=/home/raid7_2/userb12/b12166/.local/share/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/local/share:/usr/share
-VSCODE_NONCE=e9c26254-23f1-4594-ad9b-0bad071325fa
-VSCODE_IPC_HOOK_CLI=/run/user/2792/vscode-ipc-da5d1049-3da1-444b-b3d3-28578416d789.sock
+VSCODE_NONCE=c67c4829-a8c8-4174-93bf-2ab2ea18694a
+VSCODE_IPC_HOOK_CLI=/run/user/2792/vscode-ipc-a374f701-a8be-41ce-b303-ba2623449d84.sock
 VSCODE_GIT_IPC_HANDLE=/run/user/2792/vscode-git-589fecd4db.sock
-VSCODE_GIT_IPC_AUTH_TOKEN=73133f379a75091c9851547f1554969b3e7696bd5db97c2cab69dfe4671edaef
+VSCODE_GIT_IPC_AUTH_TOKEN=30cfa999da905fb99b15dbde90d76677e79500f768ef321431e74dfba6203ec1
 VSCODE_GIT_ASKPASS_NODE=/tmp/cursor-b12166/.cursor-server/bin/linux-x64/fea2f546c979a0a4ad1deab23552a43568807590/node
 VSCODE_GIT_ASKPASS_MAIN=/tmp/cursor-b12166/.cursor-server/bin/linux-x64/fea2f546c979a0a4ad1deab23552a43568807590/extensions/git/dist/askpass-main.js
 VSCODE_GIT_ASKPASS_EXTRA_ARGS=
@@ -78,8 +77,8 @@ SYNOPSYS_SCIROCCO=/usr/cad/synopsys/scirocco/cur
 SYNOPSYS_NCX_ROOT=/usr/cad/synopsys/star-rcxt/2022.12
 SYNOPSYS_LC_ROOT=/usr/cad/synopsys/synthesis/cur
 SYNOPSYS_CCSS=/usr/cad/synopsys/ccss/cur/linux/ccss
-SSH_CONNECTION=140.112.25.5 1915 140.112.20.59 22
-SSH_CLIENT=140.112.25.5 1915 22
+SSH_CONNECTION=49.216.132.129 13384 140.112.20.59 22
+SSH_CLIENT=49.216.132.129 13384 22
 SPAPI_AHDL_INCLUDE=/home/raid7_4/raid1_1/linux/synopsys/hspice/2022.06/hspice/include
 SNPS_VCS_CLANG_PATH=/usr/cad/synopsys/vcs/2022.06//linux64/clang
 SNPS_SIMIF=/usr/cad/synopsys/nanosim/cur
@@ -134,15 +133,15 @@ ARCH=linux64
 0
 0
 11
-1778920003 ../01_RTL/ROM_Wrapper.v
-1778920003 ../01_RTL/RegFile.v
-1778920003 ../01_RTL/PE.v
-1778920003 ../01_RTL/MAC.v
-1778920003 ../01_RTL/CSD_ROM_Table.v
-1778920003 ../01_RTL/CORDIC.v
-1779647285 ../01_RTL/CHIP.v
-1779646443 ../00_TESTBED/testbench/tb_2d_rgb_11.v
-1778920003 rtl.f
+1779952223 ../01_RTL/ROM_Wrapper.v
+1779952223 ../01_RTL/RegFile.v
+1779952223 ../01_RTL/PE.v
+1779952223 ../01_RTL/MAC.v
+1779952223 ../01_RTL/CSD_ROM_Table.v
+1779952223 ../01_RTL/CORDIC.v
+1779952223 ../01_RTL/CHIP.v
+1779952223 ../00_TESTBED/testbench/tb_2d.v
+1779952223 rtl.f
 1653825972 /usr/cad/synopsys/verdi/2022.06//share/PLI/VCS/LINUX64/verdi.tab
 1654052745 /usr/cad/synopsys/vcs/2022.06/linux64/lib/vcsdp_lite.tab
 4
@@ -150,5 +149,5 @@ ARCH=linux64
 1654053585 /usr/cad/synopsys/vcs/2022.06/linux64/lib/liberrorinf.so
 1654053489 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libsnpsmalloc.so
 1654053565 /usr/cad/synopsys/vcs/2022.06/linux64/lib/libvfs.so
-1779648014 simv.daidir
+1779952645 simv.daidir
 -1 partitionlib

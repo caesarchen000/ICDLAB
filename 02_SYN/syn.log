@@ -79,18 +79,19 @@ Compiling source file /home/raid7_2/userb12/b12166/chip_v2/01_RTL/PE.v
 Compiling source file /home/raid7_2/userb12/b12166/chip_v2/01_RTL/RegFile.v
 Compiling source file /home/raid7_2/userb12/b12166/chip_v2/01_RTL/ROM_Wrapper.v
 Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:62: signed to unsigned part selection occurs. (VER-318)
-Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:323: unsigned to signed assignment occurs. (VER-318)
-Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:324: unsigned to signed assignment occurs. (VER-318)
-Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:326: signed to unsigned conversion occurs. (VER-318)
-Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:327: signed to unsigned conversion occurs. (VER-318)
+Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:203: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:327: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:328: unsigned to signed assignment occurs. (VER-318)
+Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:330: signed to unsigned conversion occurs. (VER-318)
+Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v:331: signed to unsigned conversion occurs. (VER-318)
 
-Statistics for case statements in always block at line 202 in file
+Statistics for case statements in always block at line 205 in file
 	'/home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v'
 ===============================================
 |           Line           |  full/ parallel  |
 ===============================================
-|           226            |     no/auto      |
-|           306            |    auto/auto     |
+|           229            |     no/auto      |
+|           310            |    auto/auto     |
 ===============================================
 
 Inferred memory devices in process
@@ -145,6 +146,15 @@ Inferred memory devices in process
 |    o_state_r_reg    | Flip-flop |   1   |  N  | N  | Y  | N  | N  | N  | N  |
 |    counter_r_reg    | Flip-flop |   9   |  Y  | N  | Y  | N  | N  | N  | N  |
 ===============================================================================
+
+Inferred memory devices in process
+	in routine CHIP line 201 in file
+		'/home/raid7_2/userb12/b12166/chip_v2/01_RTL/CHIP.v'.
+===============================================================================
+|    Register Name    |   Type    | Width | Bus | MB | AR | AS | SR | SS | ST |
+===============================================================================
+|  real_hold_reg_reg  | Flip-flop |  11   |  Y  | N  | Y  | N  | N  | N  | N  |
+===============================================================================
 Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CORDIC.v:87: unsigned to signed assignment occurs. (VER-318)
 Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CORDIC.v:88: unsigned to signed assignment occurs. (VER-318)
 Warning:  /home/raid7_2/userb12/b12166/chip_v2/01_RTL/CORDIC.v:89: signed to unsigned conversion occurs. (VER-318)
@@ -194,10 +204,12 @@ Statistics for case statements in always block at line 10 in file
 |           170            |    auto/auto     |
 |           192            |    auto/auto     |
 |           204            |    auto/auto     |
+|           226            |    auto/auto     |
 |           238            |    auto/auto     |
 |           260            |    auto/auto     |
 |           272            |    auto/auto     |
 |           294            |    auto/auto     |
+|           306            |    auto/auto     |
 |           328            |    auto/auto     |
 |           340            |    auto/auto     |
 |           362            |    auto/auto     |
@@ -512,7 +524,7 @@ check_design
 ****************************************
 check_design summary:
 Version:     U-2022.12
-Date:        Mon May 25 02:41:58 2026
+Date:        Thu May 28 16:22:20 2026
 ****************************************
 
                    Name                                            Total
@@ -526,13 +538,13 @@ Cells                                                              61
     Nets connected to multiple pins on same cell (LINT-33)          3
 --------------------------------------------------------------------------------
 
-Warning: In design 'CHIP', cell 'C2029' does not drive any nets. (LINT-1)
-Warning: In design 'CHIP', cell 'B_47' does not drive any nets. (LINT-1)
-Warning: In design 'CHIP', cell 'C2083' does not drive any nets. (LINT-1)
-Warning: In design 'CHIP', cell 'C2087' does not drive any nets. (LINT-1)
-Warning: In design 'CHIP', cell 'C2092' does not drive any nets. (LINT-1)
-Warning: In design 'CHIP', cell 'B_50' does not drive any nets. (LINT-1)
-Warning: In design 'CHIP', cell 'C2131' does not drive any nets. (LINT-1)
+Warning: In design 'CHIP', cell 'C2115' does not drive any nets. (LINT-1)
+Warning: In design 'CHIP', cell 'B_48' does not drive any nets. (LINT-1)
+Warning: In design 'CHIP', cell 'C2172' does not drive any nets. (LINT-1)
+Warning: In design 'CHIP', cell 'C2176' does not drive any nets. (LINT-1)
+Warning: In design 'CHIP', cell 'C2181' does not drive any nets. (LINT-1)
+Warning: In design 'CHIP', cell 'B_52' does not drive any nets. (LINT-1)
+Warning: In design 'CHIP', cell 'C2220' does not drive any nets. (LINT-1)
 Warning: In design 'cordic_rotation_1', cell 'C993' does not drive any nets. (LINT-1)
 Warning: In design 'cordic_rotation_1', cell 'C994' does not drive any nets. (LINT-1)
 Warning: In design 'cordic_rotation_1', cell 'C999' does not drive any nets. (LINT-1)
@@ -598,7 +610,7 @@ Warning: In design 'CHIP', the same net is connected to more than one pin on sub
 #####################################################
 #Compile and save files
 set_host_options -max_cores 8
-Warning: You requested 8 cores. However, load on host cad16 is 24.54. Tool will ignore the request and use 1 cores. (UIO-231)
+Warning: You requested 8 cores. However, load on host cad16 is 24.02. Tool will ignore the request and use 1 cores. (UIO-231)
 1
 set_max_area 0
 1
@@ -858,6 +870,18 @@ Clock Gate Insertion Report
 |       | counter_r_reg[2]  |    -    |  1   |        |       |       |       |
 |       | counter_r_reg[1]  |    -    |  1   |        |       |       |       |
 |       | counter_r_reg[0]  |    -    |  1   |        |       |       |       |
+| cg11  |                   |         |  11  |  yes   |  yes  |  yes  |  yes  |
+|       | real_hold_reg_reg[10] |  -  |  1   |        |       |       |       |
+|       | real_hold_reg_reg[9] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[8] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[7] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[6] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[5] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[4] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[3] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[2] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[1] |  -   |  1   |        |       |       |       |
+|       | real_hold_reg_reg[0] |  -   |  1   |        |       |       |       |
 |       |                   |         |      |        |       |       |       |
 |       | UNGATED REGISTERS |         |      |        |       |       |       |
 |       |  pe_done_d2_reg   |    -    |  1   |   no   |  ??   |  ??   |  no   |
@@ -880,13 +904,13 @@ Clock Gate Insertion Report
 Summary:
 Flip-Flops                        Banks                   Bit-Width
                               number  percentage      number  percentage
-Clock gated (total):            22           68        215           93
+Clock gated (total):            23           69        226           93
 Clock not gated because
    Bank was excluded:            0            0          0            0
    Bank width too small:         4           12          9            3
    Enable condition not met:     6           18          6            2
    Setup condition violated:     0            0          0            0
-Total:                          32          100        230          100
+Total:                          33          100        241          100
 
 
 Information: Performing clock-gating on design RegFileDual_DATA_WIDTH22
@@ -3908,17 +3932,17 @@ Information: Evaluating DesignWare library utilization. (UISN-27)
 | Design Information                                      | Value                                  |
 ====================================================================================================
 | Number of Scenarios                                     | 0                                      |
-| Leaf Cell Count                                         | 7734                                   |
-| Number of User Hierarchies                              | 150                                    |
-| Sequential Cell Count                                   | 2831                                   |
+| Leaf Cell Count                                         | 7753                                   |
+| Number of User Hierarchies                              | 151                                    |
+| Sequential Cell Count                                   | 2843                                   |
 | Macro Count                                             | 0                                      |
 | Number of Power Domains                                 | 0                                      |
 | Number of Path Groups                                   | 2                                      |
 | Number of VT Class                                      | 0                                      |
 | Number of Clocks                                        | 1                                      |
-| Number of Dont Touch Cells                              | 1485                                   |
-| Number of Dont Touch Nets                               | 405                                    |
-| Number of Size Only Cells                               | 129                                    |
+| Number of Dont Touch Cells                              | 1486                                   |
+| Number of Dont Touch Nets                               | 408                                    |
+| Number of Size Only Cells                               | 130                                    |
 | Design with UPF Data                                    | false                                  |
 ----------------------------------------------------------------------------------------------------
 | Variables                                               | Value                                  |
@@ -3994,7 +4018,6 @@ Information: Updating design information... (UID-85)
   Processing 'CHIP_DW01_cmp2_13'
   Processing 'CHIP_DW01_cmp2_14'
   Processing 'CHIP_DW01_cmp2_15'
-  Processing 'CHIP_DW01_cmp2_16'
   Processing 'CHIP_DW01_inc_0_DW01_inc_2'
   Processing 'CHIP_DW01_inc_1_DW01_inc_3'
   Processing 'PE_Shift_Add_0_DW_rash_0'
@@ -4054,13 +4077,13 @@ Information: Updating design information... (UID-85)
   Processing 'PE_Shift_Add_7_DW01_ash_1_DW01_ash_22'
   Processing 'PE_Shift_Add_7_DW01_ash_2_DW01_ash_23'
   Processing 'ROM_Wrapper_Odd_0_DW01_sub_0_DW01_sub_24'
-  Processing 'ROM_Wrapper_Odd_0_DW01_cmp2_0_DW01_cmp2_17'
+  Processing 'ROM_Wrapper_Odd_0_DW01_cmp2_0_DW01_cmp2_16'
   Processing 'ROM_Wrapper_Even_0_DW01_sub_0_DW01_sub_25'
-  Processing 'ROM_Wrapper_Even_0_DW01_cmp2_0_DW01_cmp2_18'
+  Processing 'ROM_Wrapper_Even_0_DW01_cmp2_0_DW01_cmp2_17'
   Processing 'ROM_Wrapper_Odd_1_DW01_sub_0_DW01_sub_26'
-  Processing 'ROM_Wrapper_Odd_1_DW01_cmp2_0_DW01_cmp2_19'
+  Processing 'ROM_Wrapper_Odd_1_DW01_cmp2_0_DW01_cmp2_18'
   Processing 'ROM_Wrapper_Even_1_DW01_sub_0_DW01_sub_27'
-  Processing 'ROM_Wrapper_Even_1_DW01_cmp2_0_DW01_cmp2_20'
+  Processing 'ROM_Wrapper_Even_1_DW01_cmp2_0_DW01_cmp2_19'
   Processing 'cordic_rotation_0_DW01_add_0'
   Processing 'cordic_rotation_0_DW01_add_1'
   Processing 'cordic_rotation_0_DW01_add_2'
@@ -4071,11 +4094,11 @@ Information: Updating design information... (UID-85)
   Processing 'cordic_rotation_0_DW01_sub_2_DW01_sub_30'
   Processing 'cordic_rotation_0_DW01_add_5'
   Processing 'cordic_rotation_0_DW01_sub_3_DW01_sub_31'
-  Processing 'cordic_rotation_0_DW01_cmp2_0_DW01_cmp2_21'
+  Processing 'cordic_rotation_0_DW01_cmp2_0_DW01_cmp2_20'
   Processing 'cordic_rotation_0_DW01_sub_4_DW01_sub_32'
   Processing 'cordic_rotation_0_DW01_sub_5_DW01_sub_33'
-  Processing 'cordic_rotation_0_DW01_cmp2_1_DW01_cmp2_22'
-  Processing 'cordic_rotation_0_DW01_cmp2_2_DW01_cmp2_23'
+  Processing 'cordic_rotation_0_DW01_cmp2_1_DW01_cmp2_21'
+  Processing 'cordic_rotation_0_DW01_cmp2_2_DW01_cmp2_22'
   Processing 'cordic_rotation_1_DW01_add_0_DW01_add_6'
   Processing 'cordic_rotation_1_DW01_add_1_DW01_add_7'
   Processing 'cordic_rotation_1_DW01_add_2_DW01_add_8'
@@ -4086,11 +4109,11 @@ Information: Updating design information... (UID-85)
   Processing 'cordic_rotation_1_DW01_sub_2_DW01_sub_36'
   Processing 'cordic_rotation_1_DW01_add_5_DW01_add_11'
   Processing 'cordic_rotation_1_DW01_sub_3_DW01_sub_37'
-  Processing 'cordic_rotation_1_DW01_cmp2_0_DW01_cmp2_24'
+  Processing 'cordic_rotation_1_DW01_cmp2_0_DW01_cmp2_23'
   Processing 'cordic_rotation_1_DW01_sub_4_DW01_sub_38'
   Processing 'cordic_rotation_1_DW01_sub_5_DW01_sub_39'
-  Processing 'cordic_rotation_1_DW01_cmp2_1_DW01_cmp2_25'
-  Processing 'cordic_rotation_1_DW01_cmp2_2_DW01_cmp2_26'
+  Processing 'cordic_rotation_1_DW01_cmp2_1_DW01_cmp2_24'
+  Processing 'cordic_rotation_1_DW01_cmp2_2_DW01_cmp2_25'
   Building model 'DW01_NAND2'
   Processing 'DW01_NAND2'
   Building model 'DW01_sub_width16' (rpl)
@@ -4167,71 +4190,88 @@ Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_gen
    ELAPSED            WORST NEG   SETUP    DESIGN                              MIN DELAY 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT             COST    
   --------- --------- --------- --------- --------- ------------------------- -----------
-    0:01:54  590590.3      2.25      54.7    6823.9                                0.00  
-    0:01:54  590590.3      2.25      54.7    6823.9                                0.00  
-    0:02:30  637559.2      0.78       7.4    4380.6                                0.00  
-    0:02:32  637559.2      0.78       7.4    4380.6                                0.00  
-    0:02:32  637559.2      0.78       7.4    4380.6                                0.00  
-    0:02:33  637543.6      0.71       7.3    4380.6                                0.00  
-    0:02:33  637543.6      0.71       7.3    4380.6                                0.00  
-    0:02:52  447377.6      4.00     200.1    4333.9                                0.00  
-    0:03:02  448346.3      3.86     168.7    4334.5                                0.00  
-    0:03:09  448049.5      3.59     166.9    4334.5                                0.00  
-    0:03:11  448258.8      3.96     185.6    4334.5                                0.00  
-    0:03:12  448190.1      3.58     169.5    4334.5                                0.00  
-    0:03:14  448299.4      3.82     173.4    4334.5                                0.00  
-    0:03:15  448136.9      4.04     207.7    4334.5                                0.00  
-    0:03:16  448311.9      3.91     176.6    4334.5                                0.00  
-    0:03:18  448211.9      3.60     163.8    4334.5                                0.00  
-    0:03:19  448336.9      4.03     197.2    4334.5                                0.00  
-    0:03:20  448408.8      3.62     154.6    4334.5                                0.00  
-    0:03:21  448571.3      3.52     154.7    4334.5                                0.00  
-    0:03:22  448727.5      3.41     144.7    4334.5                                0.00  
-    0:03:23  449571.2      3.35     136.4    4334.5                                0.00  
-    0:03:24  449808.7      3.35     134.3    4334.5                                0.00  
-    0:03:25  450014.9      3.35     131.3    4334.5                                0.00  
-    0:03:26  450080.6      3.35     131.1    4334.5                                0.00  
-    0:03:26  450280.6      3.35     125.7    4334.5                                0.00  
-    0:03:27  450618.0      3.35     124.3    4334.5                                0.00  
-    0:03:27  450618.0      3.35     124.3    4334.5                                0.00  
-    0:03:27  450618.0      3.35     124.3    4334.5                                0.00  
-    0:03:28  450621.2      3.35     124.3    4088.8                                0.00  
-    0:03:28  450621.2      3.35     124.3    4088.8                                0.00  
-    0:03:28  450621.2      3.35     124.3    4088.8                                0.00  
-    0:03:28  450621.2      3.35     124.3    4088.8                                0.00  
-    0:03:31  451096.1      2.92     116.5    4088.8 mac/pe3_r/acc_reg_reg[25]/D      0.00  
-    0:03:34  451611.7      2.62     107.9    4088.8 mac/pe2_i/acc_reg_reg[25]/D      0.00  
-    0:03:36  452374.2      2.45     100.2    4088.8 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:03:37  452780.4      2.32      91.0    4088.8 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:03:39  453177.2      2.17      83.5    4088.8 mac/pe2_i/acc_reg_reg[26]/D      0.00  
-    0:03:43  458108.2      1.25      32.2    4088.8 mac/pe0_i/acc_reg_reg[25]/D      0.00  
-    0:03:46  459655.0      0.74      18.7    4088.8 mac/pe0_r/acc_reg_reg[26]/D      0.00  
-    0:03:49  460548.7      0.53      13.5    4088.8 mac/pe0_r/acc_reg_reg[26]/D      0.00  
-    0:03:49  460867.4      0.50      12.2    4088.8 mac/pe1_i/acc_reg_reg[26]/D      0.00  
-    0:03:50  461189.2      0.45      11.1    4088.8                                0.00  
-    0:03:51  461336.1      0.42       8.0    4088.8                                0.00  
-    0:03:51  461586.1      0.40       7.7    4088.8                                0.00  
-    0:03:52  461692.3      0.38       6.6    4088.8                                0.00  
-    0:03:53  461773.6      0.34       5.3    4088.8                                0.00  
-    0:03:54  461870.4      0.33       5.2    4088.8                                0.00  
-    0:03:54  462254.8      0.32       5.2    4088.8                                0.00  
-    0:03:54  462423.5      0.31       5.1    4088.8                                0.00  
-    0:03:55  462592.3      0.30       5.0    4088.8                                0.00  
-    0:03:55  462598.5      0.30       4.8    4088.8                                0.00  
-    0:03:56  462667.3      0.29       4.6    4088.8                                0.00  
-    0:03:56  462832.9      0.28       4.6    4088.8                                0.00  
-    0:03:57  463004.7      0.28       4.4    4088.8                                0.00  
-    0:03:57  463220.4      0.27       4.4    4088.8                                0.00  
-    0:03:58  463526.6      0.26       4.3    4088.8                                0.00  
-    0:03:58  463542.2      0.26       4.2    4088.8                                0.00  
-    0:03:59  463636.0      0.25       4.1    4088.8                                0.00  
-    0:03:59  463695.3      0.25       3.9    4088.8                                0.00  
-    0:04:01  463704.7      0.23       3.7    4088.8                                0.00  
-    0:04:01  463879.7      0.23       3.7    4088.8                                0.00  
-    0:04:02  463970.3      0.23       3.2    4088.8                                0.00  
-    0:04:03  464092.2      0.23       3.1    4088.8                                0.00  
-    0:04:03  464279.7      0.23       3.1    4088.8                                0.00  
-    0:04:03  464295.3      0.23       3.1    4088.8                                0.00  
+    0:02:04  591496.5      2.25      53.5    6866.4                                0.00  
+    0:02:04  591496.5      2.25      53.5    6866.4                                0.00  
+    0:02:42  637812.3      0.73       7.9    4379.6                                0.00  
+    0:02:45  637799.8      0.78       9.0    4379.6                                0.00  
+    0:02:45  637799.8      0.78       9.0    4379.6                                0.00  
+    0:02:46  637784.2      0.70       8.9    4379.6                                0.00  
+    0:02:47  637784.2      0.70       8.9    4379.6                                0.00  
+    0:03:07  446568.3      4.23     227.0    4349.4                                0.00  
+    0:03:18  447840.1      3.91     173.6    4349.3                                0.00  
+    0:03:25  446943.3      3.68     200.7    4349.4                                0.00  
+    0:03:27  447668.2      3.47     142.4    4349.3                                0.00  
+    0:03:29  447046.4      3.61     191.5    4349.4                                0.00  
+    0:03:32  447727.6      3.45     138.4    4349.3                                0.00  
+    0:03:34  447080.8      3.94     222.2    4349.4                                0.00  
+    0:03:36  447649.5      3.74     161.0    4349.3                                0.00  
+    0:03:38  447233.9      3.99     200.0    4349.3                                0.00  
+    0:03:39  447624.5      3.67     150.2    4349.3                                0.00  
+    0:03:40  447715.1      3.38     139.6    4349.3                                0.00  
+    0:03:41  447862.0      3.42     134.9    4349.3                                0.00  
+    0:03:42  447980.7      3.32     133.0    4349.3                                0.00  
+    0:03:43  448086.9      3.31     135.9    4349.3                                0.00  
+    0:03:44  448361.9      3.24     131.3    4349.3                                0.00  
+    0:03:45  448505.7      3.26     130.0    4349.3                                0.00  
+    0:03:46  448640.0      3.20     127.9    4349.3                                0.00  
+    0:03:47  448774.4      3.17     127.0    4349.3                                0.00  
+    0:03:47  449011.9      3.16     126.7    4349.3                                0.00  
+    0:03:48  449011.9      3.16     126.7    4349.3                                0.00  
+    0:03:48  449011.9      3.16     126.7    4349.3                                0.00  
+    0:03:49  449021.3      3.14     125.4    4092.6                                0.00  
+    0:03:49  449021.3      3.14     125.4    4092.6                                0.00  
+    0:03:49  449021.3      3.14     125.4    4092.6                                0.00  
+    0:03:49  449021.3      3.14     125.4    4092.6                                0.00  
+    0:03:50  449640.0      3.01     121.5    4092.6 mac/pe0_i/acc_reg_reg[26]/D      0.00  
+    0:03:52  450299.3      2.89     116.7    4092.6 mac/pe2_i/acc_reg_reg[26]/D      0.00  
+    0:03:53  450911.8      2.73     111.3    4092.6 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:03:55  451646.1      2.59     101.3    4092.6 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:03:57  452071.1      2.48      95.6    4092.6 mac/pe2_r/acc_reg_reg[26]/D      0.00  
+    0:04:02  457920.7      1.26      27.8    4092.6 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:04:06  459876.8      0.61      12.9    4092.6                                0.00  
+    0:04:07  460220.5      0.55      11.8    4092.6                                0.00  
+    0:04:08  460808.0      0.47       9.9    4092.6                                0.00  
+    0:04:08  461139.2      0.45       9.6    4092.6                                0.00  
+    0:04:09  461229.9      0.43       9.3    4092.6                                0.00  
+    0:04:10  461408.0      0.42       7.5    4092.6                                0.00  
+    0:04:11  461570.5      0.40       7.1    4092.6                                0.00  
+    0:04:11  461914.2      0.38       6.6    4092.6                                0.00  
+    0:04:12  462001.7      0.37       6.3    4092.6                                0.00  
+    0:04:13  462248.5      0.36       6.2    4092.6                                0.00  
+    0:04:13  462457.9      0.35       6.1    4092.6                                0.00  
+    0:04:13  462526.6      0.35       6.1    4092.6                                0.00  
+    0:04:14  462645.4      0.34       5.7    4092.6                                0.00  
+    0:04:15  462829.8      0.31       5.7    4092.6                                0.00  
+    0:04:16  463151.6      0.31       5.6    4092.6                                0.00  
+    0:04:16  463404.7      0.30       5.5    4092.6                                0.00  
+    0:04:17  463795.3      0.29       5.4    4092.6                                0.00  
+    0:04:17  463842.2      0.28       5.3    4092.6                                0.00  
+    0:04:18  464142.2      0.28       5.0    4092.6                                0.00  
+    0:04:18  464167.2      0.27       5.0    4092.6                                0.00  
+    0:04:19  464323.4      0.26       4.9    4092.6                                0.00  
+    0:04:19  464457.8      0.26       4.8    4092.6                                0.00  
+    0:04:20  464510.9      0.25       4.6    4092.6                                0.00  
+    0:04:20  464732.8      0.25       4.0    4092.6                                0.00  
+    0:04:21  464917.1      0.23       3.8    4092.6                                0.00  
+    0:04:22  464932.7      0.23       3.7    4092.6                                0.00  
+    0:04:23  465060.9      0.22       2.6    4092.6                                0.00  
+    0:04:24  465254.6      0.21       2.5    4092.6                                0.00  
+    0:04:25  465304.6      0.20       2.3    4092.6                                0.00  
+    0:04:25  465385.8      0.20       2.2    4092.6                                0.00  
+    0:04:26  465560.8      0.20       2.2    4092.6                                0.00  
+    0:04:26  465610.8      0.19       2.1    4092.6                                0.00  
+    0:04:26  465801.4      0.19       2.0    4092.6                                0.00  
+    0:04:27  465757.7      0.18       1.9    4092.6                                0.00  
+    0:04:28  465920.2      0.18       1.9    4092.6                                0.00  
+    0:04:28  466060.8      0.18       1.8    4092.6                                0.00  
+    0:04:29  466176.4      0.18       1.8    4092.6                                0.00  
+    0:04:30  466382.7      0.18       1.7    4092.6                                0.00  
+    0:04:30  466495.1      0.18       1.6    4092.6                                0.00  
+    0:04:31  466551.4      0.18       1.6    4092.6                                0.00  
+    0:04:31  466651.4      0.17       1.6    4092.6                                0.00  
+    0:04:31  466851.4      0.17       1.4    4092.6                                0.00  
+    0:04:32  466998.2      0.17       1.3    4092.6                                0.00  
+    0:04:32  467013.9      0.17       1.3    4092.6                                0.00  
 
 
 
@@ -4242,35 +4282,22 @@ Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_gen
    ELAPSED            WORST NEG   SETUP    DESIGN                              MIN DELAY 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT             COST    
   --------- --------- --------- --------- --------- ------------------------- -----------
-    0:04:03  464295.3      0.23       3.1    4088.8                                0.00  
-    0:04:04  464739.0      0.20       2.8    4092.9 mac/pe0_r/acc_reg_reg[26]/D      0.00  
-    0:04:05  465129.6      0.19       2.4    4092.9 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:04:07  465682.7      0.18       1.9    4092.9 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:04:08  466013.9      0.17       1.8    4092.9 mac/pe3_i/acc_reg_reg[26]/D      0.00  
-    0:04:09  466332.7      0.15       1.7    4092.9 mac/pe2_r/acc_reg_reg[26]/D      0.00  
-    0:04:10  466688.9      0.13       1.4    4092.9 mac/pe2_i/acc_reg_reg[26]/D      0.00  
-    0:04:10  466763.9      0.12       1.3    4092.9 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:04:11  466942.0      0.12       1.3    4092.9 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:04:12  467223.2      0.11       0.7    4092.9 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:04:13  467448.2      0.10       0.7    4092.9 mac/pe0_r/acc_reg_reg[26]/D      0.00  
-    0:04:14  467666.9      0.09       0.6    4092.9 mac/pe0_r/acc_reg_reg[26]/D      0.00  
-    0:04:14  467929.4      0.08       0.6    4092.9 mac/pe1_r/acc_reg_reg[26]/D      0.00  
-    0:04:15  468013.8      0.07       0.5    4092.9 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:04:15  468026.3      0.07       0.5    4092.9 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:04:15  467982.6      0.06       0.5    4092.9 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:04:16  468110.7      0.06       0.4    4092.9 mac/pe0_r/acc_reg_reg[26]/D      0.00  
-    0:04:16  468201.3      0.05       0.4    4092.9 mac/pe3_i/acc_reg_reg[26]/D      0.00  
-    0:04:17  468410.6      0.05       0.3    4092.9 mac/pe1_i/acc_reg_reg[26]/D      0.00  
-    0:04:17  468395.0      0.04       0.3    4092.9 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:04:17  468498.1      0.04       0.3    4092.9 mac/pe2_r/acc_reg_reg[26]/D      0.00  
-    0:04:18  468554.4      0.04       0.2    4092.9 mac/pe1_i/acc_reg_reg[26]/D      0.00  
-    0:04:19  468566.9      0.04       0.2    4092.9 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:04:20  468848.1      0.03       0.2    4092.9 mac/pe1_i/acc_reg_reg[26]/D      0.00  
-    0:04:20  469085.6      0.03       0.1    4092.9 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:04:21  469135.6      0.01       0.0    4092.9 mac/pe1_r/acc_reg_reg[26]/D      0.00  
-    0:04:21  469185.6      0.01       0.0    4092.9 mac/pe3_i/acc_reg_reg[26]/D      0.00  
-    0:04:22  469198.1      0.00       0.0    4092.9                                0.00  
-    0:04:26  469195.0      0.00       0.0    4092.9                                0.00  
+    0:04:32  467013.9      0.17       1.3    4092.6                                0.00  
+    0:04:33  467270.1      0.15       1.3    4092.6 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:04:33  467448.2      0.15       1.2    4092.6 mac/pe1_i/acc_reg_reg[26]/D      0.00  
+    0:04:36  467995.0      0.12       0.9    4092.6 mac/pe1_r/acc_reg_reg[26]/D      0.00  
+    0:04:37  468326.3      0.10       0.8    4092.6 mac/pe3_r/acc_reg_reg[26]/D      0.00  
+    0:04:37  468757.5      0.10       0.8    4092.6 mac/pe3_r/acc_reg_reg[26]/D      0.00  
+    0:04:39  469148.1      0.08       0.5    4092.6 mac/pe0_r/acc_reg_reg[26]/D      0.00  
+    0:04:41  469454.3      0.06       0.4    4092.6 mac/pe0_i/acc_reg_reg[26]/D      0.00  
+    0:04:41  469554.3      0.05       0.3    4092.6 mac/pe0_i/acc_reg_reg[26]/D      0.00  
+    0:04:42  469698.1      0.03       0.2    4092.6 mac/pe1_r/acc_reg_reg[26]/D      0.00  
+    0:04:43  469866.8      0.02       0.1    4092.6 mac/pe2_r/acc_reg_reg[26]/D      0.00  
+    0:04:44  469938.7      0.02       0.1    4092.6 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:04:44  470010.5      0.02       0.1    4092.6 mac/pe0_i/acc_reg_reg[26]/D      0.00  
+    0:04:45  470082.4      0.01       0.0    4092.6 mac/pe1_r/acc_reg_reg[26]/D      0.00  
+    0:04:45  470132.4      0.00       0.0    4092.6                                0.00  
+    0:04:47  470129.3      0.00       0.0    4092.6                                0.00  
 
 
   Beginning Design Rule Fixing  (max_transition)  (max_capacitance)
@@ -4280,8 +4307,8 @@ Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_gen
    ELAPSED            WORST NEG   SETUP    DESIGN                              MIN DELAY 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT             COST    
   --------- --------- --------- --------- --------- ------------------------- -----------
-    0:04:28  469195.0      0.00       0.0    4092.9                                0.00  
-    0:04:30  469182.5      0.00       0.0       0.0                                0.00  
+    0:04:49  470129.3      0.00       0.0    4092.6                                0.00  
+    0:04:51  470163.7      0.00       0.0       0.0                                0.00  
 
 
   Beginning Area-Recovery Phase  (max_area 0)
@@ -4291,88 +4318,97 @@ Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_gen
    ELAPSED            WORST NEG   SETUP    DESIGN                              MIN DELAY 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT             COST    
   --------- --------- --------- --------- --------- ------------------------- -----------
-    0:04:30  469182.5      0.00       0.0       0.0                                0.00  
-    0:04:30  469182.5      0.00       0.0       0.0                                0.00  
-    0:04:35  465888.9      0.47       1.7       0.0                                0.00  
-    0:04:38  464642.1      0.35       1.0       0.0                                0.00  
-    0:04:39  464210.9      0.36       1.1       0.0                                0.00  
-    0:04:40  463979.7      0.36       1.2       0.0                                0.00  
-    0:04:41  463776.6      0.36       1.3       0.0                                0.00  
-    0:04:41  463776.6      0.36       1.3       0.0                                0.00  
-    0:04:43  463860.9      0.03       0.2       0.0 mac/pe2_i/acc_reg_reg[26]/D      0.00  
-    0:04:45  463948.4      0.01       0.0       0.0                                0.00  
-    0:04:45  463989.1      0.00       0.0       0.0                                0.00  
-    0:04:46  464001.6      0.00       0.0       0.0                                0.00  
-    0:04:49  458730.0      0.88      16.7       0.0                                0.00  
-    0:04:51  457652.0      0.88      16.7       0.0                                0.00  
-    0:04:52  457445.7      0.88      16.7       0.0                                0.00  
-    0:04:52  457442.6      0.88      16.7       0.0                                0.00  
-    0:04:52  457442.6      0.88      16.7       0.0                                0.00  
-    0:04:52  457442.6      0.88      16.7       0.0                                0.00  
-    0:04:52  457442.6      0.88      16.7       0.0                                0.00  
-    0:04:52  457442.6      0.88      16.7       0.0                                0.00  
-    0:04:56  458117.6      0.15       1.5       0.0 mac/rom3/reg_shift3_reg[2]/D      0.00  
-    0:04:58  458545.7      0.10       0.8       0.0 mac/pe3_i/acc_reg_reg[26]/D      0.00  
-    0:05:00  458908.1      0.08       0.6       0.0 mac/pe1_i/acc_reg_reg[26]/D      0.00  
-    0:05:02  459173.7      0.05       0.4       0.0 mac/pe2_i/acc_reg_reg[26]/D      0.00  
-    0:05:04  459276.9      0.05       0.4       0.0 mac/pe2_i/acc_reg_reg[26]/D      0.00  
+    0:04:51  470163.7      0.00       0.0       0.0                                0.00  
+    0:04:51  470163.7      0.00       0.0       0.0                                0.00  
+    0:04:57  466745.1      0.47       1.1       0.0                                0.00  
+    0:05:00  465510.8      0.36       0.9       0.0                                0.00  
+    0:05:01  464770.3      0.35       0.9       0.0                                0.00  
+    0:05:02  464601.5      0.35       0.9       0.0                                0.00  
+    0:05:03  464357.8      0.35       1.1       0.0                                0.00  
+    0:05:03  464357.8      0.35       1.1       0.0                                0.00  
+    0:05:05  464410.9      0.01       0.1       0.0 mac/pe2_r/acc_reg_reg[26]/D      0.00  
+    0:05:06  464460.9      0.00       0.0       0.0                                0.00  
+    0:05:07  464410.9      0.00       0.0       0.0                                0.00  
+    0:05:10  458670.6      1.09      20.5       0.0                                0.00  
+    0:05:11  457342.6      1.09      20.7       0.0                                0.00  
+    0:05:12  457180.1      1.09      20.7       0.0                                0.00  
+    0:05:12  457180.1      1.09      20.7       0.0                                0.00  
+    0:05:12  457180.1      1.09      20.7       0.0                                0.00  
+    0:05:12  457180.1      1.09      20.7       0.0                                0.00  
+    0:05:12  457180.1      1.09      20.7       0.0                                0.00  
+    0:05:12  457180.1      1.09      20.7       0.0                                0.00  
+    0:05:15  457773.8      0.15       1.4       0.0 mac/pe1_r/acc_reg_reg[26]/D      0.00  
+    0:05:17  458192.6      0.11       1.1       0.0 mac/pe2_r/acc_reg_reg[26]/D      0.00  
+    0:05:18  458576.9      0.08       0.9       0.0 mac/pe1_r/acc_reg_reg[26]/D      0.00  
+    0:05:20  458998.8      0.06       0.4       0.0 mac/pe2_i/acc_reg_reg[26]/D      0.00  
+    0:05:22  459270.6      0.04       0.3       0.0 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:05:24  459480.0      0.03       0.2       0.0 mac/pe1_i/acc_reg_reg[26]/D      0.00  
+    0:05:25  459686.2      0.02       0.2       0.0 mac/pe2_i/acc_reg_reg[26]/D      0.00  
+    0:05:26  459786.2      0.02       0.1       0.0                                0.00  
+    0:05:27  459933.1      0.01       0.1       0.0                                0.00  
+    0:05:27  459983.1      0.01       0.1       0.0                                0.00  
+    0:05:28  460073.7      0.00       0.0       0.0                                0.00  
 Information: Complementing port 'stage_sel' in design 'DFrFT_MAC'.
 	 The new name of the port is 'stage_sel_BAR'. (OPT-319)
-Information: Complementing port 'rst_n' in design 'RegFileDual_DATA_WIDTH22'.
-	 The new name of the port is 'rst_n_BAR'. (OPT-319)
-Information: Complementing port 'rst_n' in design 'cordic_rotation_0'.
-	 The new name of the port is 'rst_n_BAR'. (OPT-319)
-Information: Complementing port 'rst_n_BAR' in design 'cordic_rotation_0'.
-	 The new name of the port is 'rst_n'. (OPT-319)
-Information: Complementing port 'rst_n_BAR' in design 'RegFileDual_DATA_WIDTH22'.
-	 The new name of the port is 'rst_n'. (OPT-319)
-    0:05:08  460220.5      0.00       0.0       0.0                                0.00  
-    0:05:11  459005.0      0.00       0.0       0.0                                0.00  
-    0:05:13  457898.8      0.00       0.0       0.0                                0.00  
-    0:05:15  457002.0      0.00       0.0       0.0                                0.00  
-    0:05:16  456148.9      0.00       0.0       0.0                                0.00  
-    0:05:18  455864.6      0.00       0.0       0.0                                0.00  
-    0:05:19  455805.2      0.00       0.0       0.0                                0.00  
-    0:05:21  455524.0      0.00       0.0       0.0                                0.00  
-    0:05:23  455414.6      0.00       0.0       0.0                                0.00  
-    0:05:25  455395.9      0.00       0.0       0.0                                0.00  
-    0:05:27  455333.4      0.00       0.0       0.0                                0.00  
-    0:05:30  452680.4      0.54       5.6       0.0                                0.00  
-    0:05:31  452442.9      0.54       5.5       0.0                                0.00  
-    0:05:31  452414.8      0.54       5.5       0.0                                0.00  
-    0:05:31  452414.8      0.54       5.5       0.0                                0.00  
-    0:05:31  452414.8      0.54       5.5       0.0                                0.00  
-    0:05:31  452414.8      0.54       5.5       0.0                                0.00  
-    0:05:31  452414.8      0.54       5.5       0.0                                0.00  
-    0:05:31  452414.8      0.54       5.5       0.0                                0.00  
-    0:05:34  453099.1      0.16       1.5       0.0 mac/pe2_i/acc_reg_reg[26]/D      0.00  
-    0:05:37  453480.4      0.06       0.5       0.0 mac/pe1_r/acc_reg_reg[26]/D      0.00  
-    0:05:39  453692.8      0.03       0.3       0.0 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:05:41  453883.5      0.02       0.1       0.0                                0.00  
-    0:05:42  453977.2      0.01       0.1       0.0                                0.00  
-    0:05:43  454133.4      0.01       0.0       0.0                                0.00  
-    0:05:43  454136.6      0.00       0.0       0.0                                0.00  
-    0:05:44  454139.7      0.00       0.0       0.0                                0.00  
-    0:06:58  453411.6      0.03       0.1       0.0                                0.00  
-    0:07:27  452949.1      0.03       0.2       0.0                                0.00  
-    0:07:46  452705.4      0.03       0.1       0.0                                0.00  
-    0:07:50  452521.0      0.03       0.1       0.0                                0.00  
-    0:07:53  452436.7      0.02       0.1       0.0                                0.00  
-    0:07:53  452436.7      0.02       0.1       0.0                                0.00  
-    0:07:53  452436.7      0.02       0.1       0.0                                0.00  
-    0:07:56  451477.4      0.36       3.5       0.0                                0.00  
-    0:07:56  451386.7      0.36       3.6       0.0                                0.00  
-    0:07:56  451386.7      0.36       3.6       0.0                                0.00  
-    0:07:56  451386.7      0.36       3.6       0.0                                0.00  
-    0:07:56  451386.7      0.36       3.6       0.0                                0.00  
-    0:07:56  451386.7      0.36       3.6       0.0                                0.00  
-    0:07:56  451386.7      0.36       3.6       0.0                                0.00  
-    0:08:00  451827.3      0.07       0.5       0.0 mac/pe3_r/acc_reg_reg[26]/D      0.00  
-    0:08:01  452099.2      0.03       0.2       0.0 mac/pe3_i/acc_reg_reg[26]/D      0.00  
-    0:08:04  452333.6      0.02       0.1       0.0                                0.00  
-    0:08:06  452405.4      0.01       0.0       0.0                                0.00  
-    0:08:08  452436.7      0.00       0.0       0.0                                0.00  
-    0:08:09  451674.2      0.00       0.0       0.0                                0.00  
+    0:05:30  460058.1      0.00       0.0       0.0                                0.00  
+    0:05:33  458608.2      0.00       0.0       0.0                                0.00  
+    0:05:35  457445.7      0.00       0.0       0.0                                0.00  
+    0:05:37  456577.0      0.00       0.0       0.0                                0.00  
+    0:05:40  456039.6      0.00       0.0       0.0                                0.00  
+    0:05:41  455749.0      0.00       0.0       0.0                                0.00  
+    0:05:42  455664.6      0.00       0.0       0.0                                0.00  
+    0:05:44  455627.1      0.00       0.0       0.0                                0.00  
+    0:05:46  455492.7      0.00       0.0       0.0                                0.00  
+    0:05:48  455395.9      0.00       0.0       0.0                                0.00  
+    0:05:49  455377.1      0.00       0.0       0.0                                0.00  
+    0:05:50  455364.6      0.00       0.0       0.0                                0.00  
+    0:05:51  455364.6      0.00       0.0       0.0                                0.00  
+    0:05:54  453358.5      0.41       2.7       0.0                                0.00  
+    0:05:54  452924.1      0.41       2.7       0.0                                0.00  
+    0:05:55  452880.4      0.41       2.6       0.0                                0.00  
+    0:05:55  452874.1      0.41       2.6       0.0                                0.00  
+    0:05:55  452874.1      0.41       2.6       0.0                                0.00  
+    0:05:55  452874.1      0.41       2.6       0.0                                0.00  
+    0:05:55  452874.1      0.41       2.6       0.0                                0.00  
+    0:05:55  452874.1      0.41       2.6       0.0                                0.00  
+    0:05:57  453446.0      0.09       0.8       0.0 mac/pe0_r/acc_reg_reg[26]/D      0.00  
+    0:05:59  453852.2      0.06       0.4       0.0 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:06:00  454008.4      0.04       0.3       0.0 mac/pe1_i/acc_reg_reg[26]/D      0.00  
+    0:06:02  454170.9      0.02       0.2       0.0 mac/pe1_r/acc_reg_reg[26]/D      0.00  
+    0:06:02  454295.9      0.02       0.1       0.0                                0.00  
+    0:06:03  454380.3      0.02       0.1       0.0                                0.00  
+    0:06:03  454470.9      0.01       0.1       0.0                                0.00  
+    0:06:04  454508.4      0.01       0.1       0.0                                0.00  
+    0:06:04  454545.9      0.00       0.0       0.0                                0.00  
+    0:06:05  454624.0      0.00       0.0       0.0                                0.00  
+    0:06:05  454636.5      0.00       0.0       0.0                                0.00  
+    0:07:20  454045.9      0.04       0.1       0.0                                0.00  
+    0:07:53  453696.0      0.06       0.1       0.0                                0.00  
+    0:08:07  453471.0      0.06       0.1       0.0                                0.00  
+    0:08:13  453336.6      0.05       0.1       0.0                                0.00  
+    0:08:16  453286.6      0.05       0.1       0.0                                0.00  
+    0:08:17  453246.0      0.05       0.1       0.0                                0.00  
+    0:08:17  453227.2      0.05       0.1       0.0                                0.00  
+    0:08:18  453189.7      0.05       0.1       0.0                                0.00  
+    0:08:19  453174.1      0.05       0.1       0.0                                0.00  
+    0:08:20  453149.1      0.05       0.1       0.0                                0.00  
+    0:08:24  453142.9      0.05       0.1       0.0                                0.00  
+    0:08:24  453142.9      0.05       0.1       0.0                                0.00  
+    0:08:24  453142.9      0.05       0.1       0.0                                0.00  
+    0:08:27  452214.8      0.33       2.4       0.0                                0.00  
+    0:08:28  452077.3      0.35       2.4       0.0                                0.00  
+    0:08:28  452077.3      0.35       2.4       0.0                                0.00  
+    0:08:28  452077.3      0.35       2.4       0.0                                0.00  
+    0:08:28  452077.3      0.35       2.4       0.0                                0.00  
+    0:08:28  452077.3      0.35       2.4       0.0                                0.00  
+    0:08:28  452077.3      0.35       2.4       0.0                                0.00  
+    0:08:31  452586.7      0.05       0.4       0.0 mac/pe2_r/acc_reg_reg[26]/D      0.00  
+    0:08:33  452858.5      0.03       0.3       0.0 mac/pe0_r/acc_reg_reg[26]/D      0.00  
+    0:08:35  452999.1      0.01       0.0       0.0 mac/pe0_r/acc_reg_reg[26]/D      0.00  
+    0:08:36  453089.8      0.00       0.0       0.0                                0.00  
+    0:08:37  453167.9      0.00       0.0       0.0                                0.00  
+    0:08:38  453174.1      0.00       0.0       0.0                                0.00  
+    0:08:39  452408.5      0.00       0.0       0.0                                0.00  
 Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_generic_core_tt1p8v25c.db'
 Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_t33_generic_io_tt1p8v25c.db'
 Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_t33_generic_io_ss1p62v125c.db'
@@ -4395,17 +4431,17 @@ Warning: Ignoring compile_fix_multiple_port_nets = TRUE. (UIO-60)
 | Design Information                                      | Value                                  |
 ====================================================================================================
 | Number of Scenarios                                     | 0                                      |
-| Leaf Cell Count                                         | 18894                                  |
-| Number of User Hierarchies                              | 213                                    |
-| Sequential Cell Count                                   | 2831                                   |
+| Leaf Cell Count                                         | 18650                                  |
+| Number of User Hierarchies                              | 214                                    |
+| Sequential Cell Count                                   | 2843                                   |
 | Macro Count                                             | 0                                      |
 | Number of Power Domains                                 | 0                                      |
 | Number of Path Groups                                   | 2                                      |
 | Number of VT Class                                      | 0                                      |
 | Number of Clocks                                        | 1                                      |
-| Number of Dont Touch Cells                              | 129                                    |
-| Number of Dont Touch Nets                               | 405                                    |
-| Number of Size Only Cells                               | 129                                    |
+| Number of Dont Touch Cells                              | 130                                    |
+| Number of Dont Touch Nets                               | 408                                    |
+| Number of Size Only Cells                               | 130                                    |
 | Design with UPF Data                                    | false                                  |
 ----------------------------------------------------------------------------------------------------
 | Variables                                               | Value                                  |
@@ -4455,26 +4491,27 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG   SETUP    DESIGN                              MIN DELAY 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT             COST    
   --------- --------- --------- --------- --------- ------------------------- -----------
-    0:00:23  451674.2      0.00       0.0       0.0                                0.00  
-    0:00:23  451674.2      0.00       0.0       0.0                                0.00  
-    0:00:23  451674.2      0.00       0.0       0.0                                0.00  
-    0:00:24  451674.2      0.00       0.0       0.0                                0.00  
-    0:00:24  451674.2      0.00       0.0       0.0                                0.00  
-    0:00:26  450580.5      0.23       1.0       0.0                                0.00  
-    0:00:26  450439.9      0.23       1.1       0.0                                0.00  
-    0:00:26  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:26  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:26  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:27  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:27  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:27  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:27  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:27  450427.4      0.23       1.2       0.0                                0.00  
-    0:00:29  450877.4      0.05       0.3       0.0 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:00:31  451114.9      0.02       0.1       0.0 mac/pe2_r/acc_reg_reg[26]/D      0.00  
-    0:00:32  451289.9      0.01       0.0       0.0                                0.00  
-    0:00:32  451358.6      0.00       0.0       0.0                                0.00  
-    0:00:32  451364.9      0.00       0.0       0.0                                0.00  
+    0:00:28  452408.5      0.00       0.0       0.0                                0.00  
+    0:00:28  452408.5      0.00       0.0       0.0                                0.00  
+    0:00:28  452408.5      0.00       0.0       0.0                                0.00  
+    0:00:28  452408.5      0.00       0.0       0.0                                0.00  
+    0:00:29  452408.5      0.00       0.0       0.0                                0.00  
+    0:00:31  451274.2      0.27       1.7       0.0                                0.00  
+    0:00:31  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:31  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:31  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:32  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:32  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:32  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:32  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:32  451193.0      0.27       1.6       0.0                                0.00  
+    0:00:33  451633.6      0.05       0.3       0.0 mac/pe1_r/acc_reg_reg[26]/D      0.00  
+    0:00:34  451846.1      0.02       0.1       0.0 mac/pe3_i/acc_reg_reg[26]/D      0.00  
+    0:00:35  451968.0      0.01       0.0       0.0                                0.00  
+    0:00:35  452017.9      0.00       0.0       0.0                                0.00  
+    0:00:36  452067.9      0.00       0.0       0.0                                0.00  
+    0:00:36  452158.6      0.00       0.0       0.0                                0.00  
+    0:00:36  452149.2      0.00       0.0       0.0                                0.00  
 
 
 
@@ -4485,9 +4522,9 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG   SETUP    DESIGN                              MIN DELAY 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT             COST    
   --------- --------- --------- --------- --------- ------------------------- -----------
-    0:00:32  451364.9      0.00       0.0       0.0                                0.00  
-    0:00:32  451364.9      0.00       0.0       0.0                                0.00  
-    0:00:36  451361.7      0.00       0.0       0.0                                0.00  
+    0:00:36  452149.2      0.00       0.0       0.0                                0.00  
+    0:00:36  452149.2      0.00       0.0       0.0                                0.00  
+    0:00:38  452146.1      0.00       0.0       0.0                                0.00  
 
 
   Beginning Area-Recovery Phase  (max_area 0)
@@ -4497,39 +4534,37 @@ Information: Updating design information... (UID-85)
    ELAPSED            WORST NEG   SETUP    DESIGN                              MIN DELAY 
     TIME      AREA      SLACK     COST    RULE COST         ENDPOINT             COST    
   --------- --------- --------- --------- --------- ------------------------- -----------
-    0:00:39  451361.7      0.00       0.0       0.0                                0.00  
-    0:00:40  451361.7      0.00       0.0       0.0                                0.00  
-    0:00:43  451236.7      0.05       0.1       0.0                                0.00  
-    0:00:43  451208.6      0.05       0.1       0.0                                0.00  
-    0:00:43  451208.6      0.05       0.1       0.0                                0.00  
-    0:00:43  451208.6      0.05       0.1       0.0                                0.00  
-    0:00:46  451408.6      0.00       0.0       0.0 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:00:47  451527.4      0.00       0.0       0.0                                0.00  
-    0:00:48  451439.9      0.00       0.0       0.0                                0.00  
-    0:00:49  451421.1      0.00       0.0       0.0                                0.00  
-    0:00:49  451377.4      0.00       0.0       0.0                                0.00  
-    0:00:50  451355.5      0.00       0.0       0.0                                0.00  
-    0:00:51  451224.2      0.00       0.0       0.0                                0.00  
-    0:00:57  451211.7      0.00       0.0       0.0                                0.00  
-    0:01:01  451211.7      0.00       0.0       0.0                                0.00  
-    0:02:44  450824.3      0.01       0.0       0.0                                0.00  
-    0:03:03  450649.3      0.01       0.0       0.0                                0.00  
-    0:03:06  450546.2      0.03       0.0       0.0                                0.00  
-    0:03:07  450514.9      0.03       0.0       0.0                                0.00  
-    0:03:08  450505.5      0.03       0.0       0.0                                0.00  
-    0:03:08  450505.5      0.03       0.0       0.0                                0.00  
-    0:03:08  450505.5      0.03       0.0       0.0                                0.00  
-    0:03:10  449821.2      0.27       1.1       0.0                                0.00  
-    0:03:11  449752.5      0.27       1.1       0.0                                0.00  
-    0:03:11  449752.5      0.27       1.1       0.0                                0.00  
-    0:03:11  449752.5      0.27       1.1       0.0                                0.00  
-    0:03:11  449752.5      0.27       1.1       0.0                                0.00  
-    0:03:11  449752.5      0.27       1.1       0.0                                0.00  
-    0:03:11  449752.5      0.27       1.1       0.0                                0.00  
-    0:03:13  450171.2      0.02       0.2       0.0 mac/pe0_i/acc_reg_reg[26]/D      0.00  
-    0:03:15  450280.6      0.01       0.1       0.0                                0.00  
-    0:03:15  450411.8      0.01       0.0       0.0                                0.00  
-    0:03:16  450533.7      0.00       0.0       0.0                                0.00  
+    0:00:42  452146.1      0.00       0.0       0.0                                0.00  
+    0:00:42  452146.1      0.00       0.0       0.0                                0.00  
+    0:00:46  451986.7      0.01       0.0       0.0                                0.00  
+    0:00:47  451977.3      0.01       0.0       0.0                                0.00  
+    0:00:47  451977.3      0.01       0.0       0.0                                0.00  
+    0:00:47  451977.3      0.01       0.0       0.0                                0.00  
+    0:00:48  452021.1      0.00       0.0       0.0                                0.00  
+    0:00:49  451908.6      0.00       0.0       0.0                                0.00  
+    0:00:50  451871.1      0.00       0.0       0.0                                0.00  
+    0:00:51  451846.1      0.00       0.0       0.0                                0.00  
+    0:00:53  451833.6      0.00       0.0       0.0                                0.00  
+    0:00:56  451758.6      0.00       0.0       0.0                                0.00  
+    0:01:04  451758.6      0.00       0.0       0.0                                0.00  
+    0:02:48  451489.9      0.13       0.2       0.0                                0.00  
+    0:03:11  451374.2      0.13       0.2       0.0                                0.00  
+    0:03:13  451343.0      0.13       0.2       0.0                                0.00  
+    0:03:15  451311.7      0.13       0.2       0.0                                0.00  
+    0:03:15  451296.1      0.13       0.2       0.0                                0.00  
+    0:03:15  451296.1      0.13       0.2       0.0                                0.00  
+    0:03:15  451296.1      0.13       0.2       0.0                                0.00  
+    0:03:18  450743.0      0.19       1.2       0.0                                0.00  
+    0:03:18  450696.2      0.19       1.2       0.0                                0.00  
+    0:03:18  450696.2      0.19       1.2       0.0                                0.00  
+    0:03:18  450696.2      0.19       1.2       0.0                                0.00  
+    0:03:18  450696.2      0.19       1.2       0.0                                0.00  
+    0:03:18  450696.2      0.19       1.2       0.0                                0.00  
+    0:03:18  450696.2      0.19       1.2       0.0                                0.00  
+    0:03:21  451077.4      0.01       0.1       0.0 mac/pe2_r/acc_reg_reg[26]/D      0.00  
+    0:03:22  451189.9      0.00       0.0       0.0                                0.00  
+    0:03:23  451268.0      0.00       0.0       0.0                                0.00  
+    0:03:24  451308.6      0.00       0.0       0.0                                0.00  
 Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_generic_core_ss1p62v125c.db'
 Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_generic_core_ff1p98vm40c.db'
 Loading db file '/home/raid7_2/userb12/b12166/chip_v2/05_APR/Verilog/fsa0m_a_generic_core_tt1p8v25c.db'
@@ -4555,17 +4590,17 @@ Warning: Ignoring compile_fix_multiple_port_nets = TRUE. (UIO-60)
 | Design Information                                      | Value                                  |
 ====================================================================================================
 | Number of Scenarios                                     | 0                                      |
-| Leaf Cell Count                                         | 18838                                  |
-| Number of User Hierarchies                              | 213                                    |
-| Sequential Cell Count                                   | 2831                                   |
+| Leaf Cell Count                                         | 18598                                  |
+| Number of User Hierarchies                              | 214                                    |
+| Sequential Cell Count                                   | 2843                                   |
 | Macro Count                                             | 0                                      |
 | Number of Power Domains                                 | 0                                      |
 | Number of Path Groups                                   | 2                                      |
 | Number of VT Class                                      | 0                                      |
 | Number of Clocks                                        | 1                                      |
-| Number of Dont Touch Cells                              | 129                                    |
-| Number of Dont Touch Nets                               | 405                                    |
-| Number of Size Only Cells                               | 129                                    |
+| Number of Dont Touch Cells                              | 130                                    |
+| Number of Dont Touch Nets                               | 408                                    |
+| Number of Size Only Cells                               | 130                                    |
 | Design with UPF Data                                    | false                                  |
 ----------------------------------------------------------------------------------------------------
 | Variables                                               | Value                                  |
@@ -4621,9 +4656,9 @@ write_sdc   -version 1.8                ./Netlist/${DESIGN}_syn.sdc1
 1
 dc_shell> exit
 
-Memory usage for this session 434 Mbytes.
-Memory usage for this session including child processes 434 Mbytes.
-CPU usage for this session 744 seconds ( 0.21 hours ).
-Elapsed time for this session 826 seconds ( 0.23 hours ).
+Memory usage for this session 433 Mbytes.
+Memory usage for this session including child processes 433 Mbytes.
+CPU usage for this session 760 seconds ( 0.21 hours ).
+Elapsed time for this session 870 seconds ( 0.24 hours ).
 
 Thank you...

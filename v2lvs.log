@@ -1,0 +1,26 @@
+//  v2lvs v2022.3_33.19    Tue Sep 6 12:09:54 PDT 2022
+//
+//  Copyright (c) 1992, 1993 Regents of the University of California
+//         All rights reserved.
+//
+//                   Copyright Siemens 1996-2022
+//                       All Rights Reserved.
+//   THIS WORK CONTAINS TRADE SECRET AND PROPRIETARY INFORMATION
+//      WHICH IS THE PROPERTY OF MENTOR GRAPHICS CORPORATION
+//        OR ITS LICENSORS AND IS SUBJECT TO LICENSE TERMS.
+//
+//  The registered trademark Linux is used pursuant to a sublicense from LMI, the
+//  exclusive licensee of Linus Torvalds, owner of the mark on a world-wide basis.
+//
+//  Mentor Graphics software executing under x86-64 Linux
+//
+//
+//  Starting time: Thu May 28 22:11:43 2026
+//
+Running /usr/mentor/calibre/cur/pkgs/icv/pvt/v2lvs -l core.v -l umc18_io_lvs.v -s core.spi -s umc18_io_lvs.spi -v CHIP.v -o CHIP.spi
+
+
+Info: Creating Verilog Library Database ...
+Error: Fail to open file core.v
+
+TOTAL CPU TIME = 0  REAL TIME = 0  MALLOC = 4/4/4  ELAPSED TIME = 0 
