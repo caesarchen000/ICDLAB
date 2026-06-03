@@ -1,6 +1,6 @@
 ###################################################################
 
-# Created by write_sdc on Thu May 28 16:35:57 2026
+# Created by write_sdc on Wed Jun  3 03:13:01 2026
 
 ###################################################################
 set sdc_version 1.8
@@ -26,7 +26,7 @@ set_load -pin_load 1 [get_ports {o_data[3]}]
 set_load -pin_load 1 [get_ports {o_data[2]}]
 set_load -pin_load 1 [get_ports {o_data[1]}]
 set_load -pin_load 1 [get_ports {o_data[0]}]
-create_clock [get_ports clk]  -name CLK  -period 11  -waveform {0 5.5}
+create_clock [get_ports clk]  -name CLK  -period 10  -waveform {0 5}
 set_clock_latency 0.5  [get_clocks CLK]
 set_clock_uncertainty 0.1  [get_clocks CLK]
 set_input_delay -clock CLK  -max 1  [get_ports clk]

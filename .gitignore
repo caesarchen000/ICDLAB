@@ -1,5 +1,43 @@
-# APR directory - selective ignore
+# Python
+__pycache__/
+*.py[cod]
+
+# VCS / Verdi (all dirs)
+**/simv
+**/simv.daidir/
+**/csrc/
+**/ucli.key
+**/*.fsdb
+**/*.vcd
+**/novas_dump.log
+**/DVEfiles/
+**/AN.DB/
+**/vc_hdrs.h
+**/urgReport/
+
+# Design Compiler (02_SYN)
+02_SYN/command.log
+02_SYN/syn.log
+02_SYN/*.mr
+02_SYN/*-verilog.pvl
+02_SYN/*-verilog.syn
+02_SYN/default.svf
+
+# Innovus / APR scratch (05_APR)
 05_APR/.DS_Store
+05_APR/scheduling_file.cts.*
+05_APR/rc_model.bin
+05_APR/crte_*
+05_APR/Synopsys_stack_trace_*
+05_APR/.timing_file_*
+05_APR/preferred_layer_short_segment.rpt
+05_APR/postsim.log
+05_APR/CHIP_post.vcd
+05_APR/primetime_px.fsdb
+05_APR/pt_shell_command.log
+05_APR/pt_*.log
+05_APR/innovus.cmd
+05_APR/.cadence/
 05_APR/**/*.log*
 05_APR/**/*.logv*
 05_APR/**/*.cshrc

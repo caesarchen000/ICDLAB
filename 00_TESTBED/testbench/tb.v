@@ -1,5 +1,5 @@
 `timescale 1ns/10ps
-`define CYCLE      11.0
+`define CYCLE      10.0
 `define MAX_CYCLE  2000
 `define SDFFILE    "../02_SYN/Netlist/CHIP_syn.sdf"
 

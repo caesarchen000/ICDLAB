@@ -1,7 +1,7 @@
 `timescale 1ns/10ps
-`define CYCLE      11.0
+`define CYCLE      10.0
 `define MAX_CYCLE  2000
-`define SDFFILE    "../02_SYN/Netlist/CHIP_syn.sdf"
+`define SDFFILE    "CHIP.sdf"
 
 module tb;
 
@@ -177,11 +177,11 @@ module tb;
         $finish;
     end
     
-    // FSDB needs Verdi PLI; omit for gate sim (use +define+FSDB + Verdi tab if needed)
-`ifdef FSDB
+    // VCD (no Verdi PLI): compile with +define+VCD
+`ifdef VCD
     initial begin
-        $fsdbDumpfile("DFrFT.fsdb");
-        $fsdbDumpvars(0, tb, "+mda");
+        $dumpfile("CHIP_post.vcd");
+        $dumpvars(0, tb);
     end
 `endif
 

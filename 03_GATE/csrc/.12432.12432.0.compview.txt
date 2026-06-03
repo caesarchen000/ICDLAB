@@ -1,9 +1,0 @@
-{"vcs1":{"timestamp_begin":1779957678.354464928, "rt":54.63, "ut":16.41, "st":2.94}}
-{"vcselab":{"timestamp_begin":1779957733.768406794, "rt":12.41, "ut":2.86, "st":0.19}}
-{"link":{"timestamp_begin":1779957746.817813620, "rt":8.56, "ut":0.89, "st":0.87}}
-{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1779957673.746022345}
-{"VCS_COMP_START_TIME": 1779957673.746022345}
-{"VCS_COMP_END_TIME": 1779957761.707902941}
-{"VCS_USER_OPTIONS": "../00_TESTBED/testbench/tb.v -f gate.f ../05_APR/Verilog/fsa0m_a_generic_core_21.lib.src -full64 -R +v2k +neg_tchk -debug_access+all +define+SDF +notimingcheck"}
-{"vcs1": {"peak_mem": 387264}}
-{"stitch_vcselab": {"peak_mem": 240216}}

@@ -1,6 +1,0 @@
-{"vcs1":{"timestamp_begin":1779641942.346098852, "rt":0.44, "ut":0.17, "st":0.10}}
-{"SNPS_VCS_INTERNAL_ROOT_START_TIME": 1779641941.363010224}
-{"VCS_COMP_START_TIME": 1779641941.363010224}
-{"VCS_COMP_END_TIME": 1779641942.958543042}
-{"VCS_USER_OPTIONS": "../00_TESTBED/testbench/tb_2d_rgb_11.v -f rtl.f -full64 -R +v2k -debug_access+all +define+CH_R"}
-{"vcs1": {"peak_mem": 313404}}

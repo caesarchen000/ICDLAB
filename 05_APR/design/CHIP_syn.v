@@ -1,12 +1,12 @@
 /////////////////////////////////////////////////////////////
 // APR netlist: CHIP_syn.v (CHIP_core) + IO pad shell (11-bit in)
-// Regenerate: python3 mk_apr_netlist.py [../../02_SYN/Netlist/CHIP_syn.v]
+// Regenerate: python3 mk_apr_netlist.py [/home/raid7_2/userb12/b12166/chip_v2/02_SYN/Netlist/CHIP_syn.v]
 /////////////////////////////////////////////////////////////
 
 /////////////////////////////////////////////////////////////
 // Created by: Synopsys DC Expert(TM) in wire load mode
 // Version   : U-2022.12
-// Date      : Thu May 28 16:35:23 2026
+// Date      : Wed Jun  3 03:12:26 2026
 /////////////////////////////////////////////////////////////
 
 

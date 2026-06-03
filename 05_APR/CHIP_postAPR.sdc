@@ -5,7 +5,7 @@
 #  Design:            CHIP
 ###############################################################
 current_design CHIP
-create_clock [get_ports {clk}]  -name CLK -period 11.000000 -waveform {0.000000 5.500000}
+create_clock [get_ports {clk}]  -name CLK -period 10.000000 -waveform {0.000000 5.000000}
 set_clock_latency 0.5  [get_clocks {CLK}]
 set_propagated_clock  [get_ports {clk}]
 set_drive 1  [get_ports {clk}]
