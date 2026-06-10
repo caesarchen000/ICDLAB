@@ -9,9 +9,11 @@ AUTO_UNITY_GAIN = False
 N = 32
 V_BITS = 14       # 矩陣 V 的小數點位數 (Q14)
 S1_SHIFT = 10     # Stage 1 算完後的右移量
-OUTPUT_SHIFT = 5  # CORDIC Stage 算完後的右移量 (原 S2_SHIFT)
+OUTPUT_SHIFT_1 = 3  # CORDIC Stage 算完後的右移量 (原 S2_SHIFT)
+OUTPUT_SHIFT_2 = 5  # Hyperbolic Stage 算完後的右移量
 S3_SHIFT = 14     # Stage 3 算完後的最終右移量 (從 17 改為 14 以符合 gen_test)
-V_SCALE = 1.103153 #np.sqrt(2/1.64676)
+# V_SCALE = 1.103153 #np.sqrt(2/1.64676)
+V_SCALE = np.sqrt(2 / (1.64676 * 0.82823))
 
 # Shift-and-Add 限制
 MAX_TERMS = 3     # 硬體限制：每個常數最多由幾個 2 的次方相加減組成
@@ -27,8 +29,8 @@ if AUTO_UNITY_GAIN:
     HW_GAIN = 1.0
 else:
     HW_GAIN = (
-        1.64676
-        * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT)
+        1.64676 * 0.82823
+        * 2**(2*V_BITS - S1_SHIFT - S3_SHIFT - OUTPUT_SHIFT_1 - OUTPUT_SHIFT_2)
         * (V_SCALE**2)
     )
 
@@ -36,6 +38,8 @@ print(f"HW_GAIN:{HW_GAIN}")
 
 ATAN_TABLE_FULL = [8192, 4836, 2555, 1297, 651, 326, 163, 81, 41, 20, 10, 5]
 ATAN_TABLE = ATAN_TABLE_FULL[:STAGES]
+
+ATANH_TABLE = [0, 5712, 2731, 1343, 669, 334, 167, 83, 42, 21, 10]
 
 # Hardware bit design:
 INPUT_PORT = 9   # 8-bit chip default; 9-bit sim for wider inter-pass storage

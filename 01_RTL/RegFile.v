@@ -77,11 +77,11 @@ module RegFileDual #(
     always @(*) begin
         // Bank 0 的 Address 選擇
         if      (p_raddr_1[4] == 1'd0) bank_raddr[0] = p_raddr_1[3:0];
-        // else                           bank_raddr[0] = p_raddr_2[3:0]; 
+        else                           bank_raddr[0] = 4'd0; 
 
         // Bank 1 的 Address 選擇
         if      (p_raddr_1[4] == 1'd1) bank_raddr[1] = p_raddr_1[3:0];
-        // else                           bank_raddr[1] = p_raddr_2[3:0];
+        else                           bank_raddr[1] = 4'd0;
 
     end
 

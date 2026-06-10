@@ -18,7 +18,7 @@ S2_SHIFT = 10     # Stage 2 (CORDIC 旋轉) 算完後的右移量
 S3_SHIFT = 14
 
 # Shift-and-Add 限制
-MAX_TERMS = 2     # 👉 硬體限制：每個常數最多由幾個 2 的次方相加減組成 (決定 Adder 數量)
+MAX_TERMS = 3     # 👉 硬體限制：每個常數最多由幾個 2 的次方相加減組成 (決定 Adder 數量)
 
 # CORDIC 參數
 STAGES = 11
